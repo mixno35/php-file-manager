@@ -1,0 +1,114 @@
+html, body {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    width: 250px;
+    max-width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+form input {
+    width: 100%;
+    height: 40px;
+
+    padding: 0 12px;
+
+    font-weight: 400;
+    font-size: 13px;
+
+    border-radius: var(--radius-02);
+    border: 1px solid var(--fm-color-divider);
+    outline: none;
+}
+form input::placeholder {
+    color: var(--fm-color-hint);
+}
+form input:hover {
+    border-color: var(--fm-color-primary);
+}
+form input:focus {
+    border-color: var(--fm-color-primary);
+
+    box-shadow: 0 0 0 var(--radius-02) var(--fm-color-primary-20);
+}
+
+form button {
+    background-color: var(--fm-color-primary);
+    color: var(--fm-color-text-invert);
+    cursor: pointer;
+
+    border-radius: var(--radius-02);
+    border: none;
+    outline: none;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    padding: 0;
+
+    width: 100%;
+    height: 40px;
+}
+form button:hover {
+    box-shadow: 0 0 0 var(--radius-02) var(--fm-color-primary-20);
+}
+form button:active {
+    background-color: var(--fm-color-primary-hover);
+}
+
+form h1 {
+    font-weight: 600;
+    font-size: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+
+    user-select: none;
+    pointer-events: none;
+
+    margin-bottom: 18px;
+}
+form h1 span {
+    border-radius: var(--radius-01);
+    border: 1px solid var(--fm-color-divider);
+
+    font-weight: 400;
+    font-size: 16px;
+
+    color: var(--fm-color-hint);
+
+    padding: 2px 6px;
+
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+form h4 {
+    text-align: center;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    color: var(--fm-color-hint);
+
+    margin-top: 12px;
+
+    user-select: none;
+    pointer-events: none;
+}

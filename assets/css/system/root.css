@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+    font-family: "Inter", -apple-system, system-ui, sans-serif;
+    font-weight: 400;
+
+    letter-spacing: -.02em;
+
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --fm-color-body: rgb(255, 255, 255);
+    --fm-color-body-gray: rgb(247, 248, 250);
+    --fm-color-header: rgb(255, 255, 255);
+    --fm-color-divider: rgb(230, 235, 238);
+    --fm-color-header-text: rgb(0, 0, 0);
+    --fm-color-text: rgb(0, 0, 0);
+    --fm-color-text-invert: rgb(255, 255, 255);
+    --fm-color-text-sub: rgb(67, 69, 70);
+    --fm-color-text-sub-40: rgb(125, 128, 129);
+    --fm-color-hint: rgb(142, 148, 150);
+    --fm-color-primary: rgb(30, 144, 255);
+    --fm-color-primary-20: rgba(30, 144, 255, 0.2);
+    --fm-color-primary-hover: rgb(25, 136, 241);
+    --fm-color-shadow: rgba(23, 24, 24, 0.2);
+    --fm-color-toast: rgba(0, 0, 0, 0.9);
+    --fm-color-toast-text: rgb(255, 255, 255);
+    --fm-color-toast-border: rgba(0, 0, 0, 0);
+    --fm-color-progress-background: rgba(255, 255, 255, 0.7);
+    --fm-color-progress-item: rgb(0, 0, 0);
+
+    --fm-color-scroll-1: rgb(111, 114, 117);
+    --fm-color-scroll-2: rgb(215, 219, 222);
+
+    --radius-01: 2px;
+    --radius-02: 4px;
+    --radius-03: 6px;
+    --radius-04: 8px;
+    --radius-05: 10px;
+    --radius-06: 12px;
+}

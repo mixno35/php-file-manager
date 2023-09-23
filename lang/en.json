@@ -1,0 +1,47 @@
+{
+  "language_tag": "en-US",
+
+  "document_name_short": "StormGuardian",
+  "document_name": "StormGuardian Files",
+  "document_name_2": "StormGuardian <span>Files</span>",
+  "document_file_manager": "File manager",
+  "document_copyright": "&copy; Alexander Mikhno 2023",
+
+  "text_details_manager": "Server details",
+  "text_php_version": "PHP Version: %1s",
+  "text_php_server": "Server: %1s",
+  "text_php_total_size": "Total size: %1s",
+  "text_about_file": "About file",
+  "text_about_dir": "About directory",
+  "text_about_file_name": "File name",
+  "text_about_dir_name": "Directory name",
+  "text_about_path": "Path",
+  "text_about_size": "Size",
+  "text_about_date_modified": "Date modified",
+
+  "tooltip_close": "Close",
+
+  "action_dir_home": "Home",
+  "action_dir_back": "..",
+  "action_remove": "Delete",
+  "action_auth_submit": "Submit",
+
+  "hint_auth_enter_login": "Enter login",
+  "hint_auth_enter_password": "Enter password",
+
+  "message_auth_login_incorrect": "The login must not be shorter than 3 characters or be more than 16 characters",
+  "message_auth_password_incorrect": "The password must not be shorter than 3 characters or be more than 64 characters",
+
+  "message_dir_empty": "This directory empty",
+  "message_dir_empty_short": "Directory empty",
+
+  "message_are_remove": "You will not be able to recover deleted content. Are you sure you want to delete this?",
+  "message_file_detail_limit_window": "You have already opened the maximum number of windows.",
+
+  "api_unknown_command": "Unknown command",
+  "api_remove_dir_success": "The directory was successfully deleted.",
+  "api_remove_dir_error": "Failed to delete the directory.",
+  "api_remove_file_success": "The file was successfully deleted.",
+  "api_remove_file_error": "The file could not be deleted.",
+  "api_remove_skip": "The contents of the path were not identified, perhaps the path is incorrect."
+}
