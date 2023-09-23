@@ -50,6 +50,6 @@ if (is_file($path) && file_exists($path)) {
 }
 
 echo json_encode([
-    "type" => "success",
-    "message_id" => "api_remove_skip"
+    "type" => "error",
+    "message_id" => "api_command_path_skip"
 ], 128);
