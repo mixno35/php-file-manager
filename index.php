@@ -16,6 +16,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
 <head>
     <title><?= str_get_string("document_name") ?></title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="assets/css/system/root.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/default.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/progress.css?v=<?= $resource_v ?>">
@@ -34,7 +35,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
 </head>
 <body>
     <div class="progress" id="progress" style="display: none">
-        <div class="lds-facebook"><div></div><div></div><div></div></div>
+        <div class="progress-item"><div></div><div></div><div></div></div>
     </div>
 
     <header>
@@ -63,6 +64,11 @@ $resource_v = time(); // Устанавливаем версию для ресу
                     <!-- Общий размер сервера -->
                     <li><?= str_replace("%1s", $file_manager->format_size($file_manager->get_directory_size($main_path["server"])), str_get_string("text_php_total_size")) ?></li>
                 </ul>
+            </section>
+            <section class="dev-menu">
+                <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_info') ?>">info</span>
+                <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_paid') ?>">paid</span>
+                <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_settings') ?>">settings</span>
             </section>
         </nav>
         <div id="resize-divider" class="resize-divider"></div>
@@ -201,6 +207,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 success: function (result) {
                     progress();
 
+                    openFileDetail(_path); // Открываем информацию о директории при ее открытии
+
                     openedDirectory = _path;
                     document.getElementById("main-file-manager").innerHTML = result;
                 }
@@ -208,9 +216,6 @@ $resource_v = time(); // Устанавливаем версию для ресу
         }
 
         function updateMainFileManager() {
-            if (document.getElementById("file-detail"))
-                document.getElementById("file-detail").remove()
-
             loadMainFileManager(openedDirectory);
         }
 
@@ -254,16 +259,17 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
     <script>
         let isDragging = false;
-        let draggingPath = "";
-        let draggingPathStart = "";
         let draggedIsDir = 0;
+
+        let movePath = "";
+        let movePathStart = "";
 
         const drag = () => {
             return {
                 start: () => {
                     isDragging = true;
                     event.dataTransfer.setData("text/plain", "");
-                    draggingPathStart = event.target.getAttribute("data-path");
+                    movePathStart = event.target.getAttribute("data-path");
                 },
                 end: () => {
                     isDragging = false;
@@ -271,11 +277,11 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 enter: () => {
                     if (isDragging) {
                         draggedIsDir = Number(event.target.getAttribute("data-isdir"));
-                        draggingPath = event.target.getAttribute("data-path");
+                        movePath = event.target.getAttribute("data-path");
                     }
 
                     if (Boolean(draggedIsDir))
-                        if (draggingPathStart !== draggingPath)
+                        if (movePathStart !== movePath)
                             document.getElementById(event.target.id).classList.add("drag-in");
                 },
                 leave: () => {
@@ -285,13 +291,13 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 },
                 drop: () => {
                     if (Boolean(draggedIsDir)) {
-                        if (draggingPathStart !== draggingPath) {
-                            toast().show(draggingPathStart + " перемещено в " + draggingPath);
-                        }
+                        if (movePathStart !== movePath)
+                            run_command().move(movePathStart, movePath);
                     }
 
-                    draggingPath = "";
-                    draggingPathStart = "";
+                    movePath = "";
+                    movePathStart = "";
+
                     draggedIsDir = 0;
 
                     try {
@@ -303,7 +309,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 },
                 over: () => {
                     if (Boolean(draggedIsDir))
-                        if (draggingPathStart !== draggingPath)
+                        if (movePathStart !== movePath)
                             event.preventDefault();
                 }
             }
@@ -318,7 +324,75 @@ $resource_v = time(); // Устанавливаем версию для ресу
             return {
                 remove: (path = "") => {
                     if (confirm(stringOBJ["message_are_remove"]))
-                        command("remove", {path: path}, updateMainFileManager);
+                        command("remove", {path: path}, (() => {
+                            if (document.getElementById("file-detail"))
+                                document.getElementById("file-detail").remove();
+
+                            updateMainFileManager();
+                        }));
+                },
+                rename: (path = "") => {
+                    const name_path = path.replace(/^.*[\\\/]/, "").trim();
+                    const renamed = prompt(stringOBJ["hint_rename_enter_new_name"].replace("%1s", path), name_path);
+
+                    if (renamed !== null) {
+                        if (renamed.length >= 1) {
+                            if (isValidFName(renamed)) {
+                                if (name_path.trim() !== renamed.trim()) {
+                                    const new_path = path.replace(/[^\\\/]*$/, renamed.trim());
+
+                                    command("rename", {path: path, new_path: new_path}, updateMainFileManager);
+                                } else {
+                                    toast().show(stringOBJ["api_rename_different_from_old"]);
+                                }
+                            } else {
+                                toast().show(stringOBJ["api_rename_forbidden_chars"]);
+                            }
+                        } else {
+                            toast().show(stringOBJ["api_rename_short_char"]);
+                        }
+                    }
+                },
+                move: (path = "", path_in = "") => {
+                    /**
+                     * String|Array path - Что перемещаем
+                     * String path_in - Куда перемещаем
+                     */
+                    toast().show(path + " перемещено в " + path_in);
+                },
+                create: (path = "") => {
+                    const name = prompt(stringOBJ["text_enter_a_name"]);
+
+                    return {
+                        dir: () => {
+                            if (name === null)
+                                return;
+
+                            if (name.trim().length < 1) {
+                                toast().show(stringOBJ["api_create_short_char"]);
+                                return;
+                            } if (!isValidFName(name)) {
+                                toast().show(stringOBJ["api_create_forbidden_chars"]);
+                                return;
+                            }
+
+                            command("create-dir", {path: path, name: name}, updateMainFileManager);
+                        },
+                        file: () => {
+                            if (name === null)
+                                return;
+
+                            if (name.trim().length < 1) {
+                                toast().show(stringOBJ["api_create_short_char"]);
+                                return;
+                            } if (!isValidFName(name)) {
+                                toast().show(stringOBJ["api_create_forbidden_chars"]);
+                                return;
+                            }
+
+                            command("create-file", {path: path, name: name}, updateMainFileManager);
+                        }
+                    }
                 }
             }
         }
@@ -340,14 +414,14 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 data: query,
                 success: function (result) {
                     progress();
-                    // console.log(result);
+                    console.log(result);
 
                     try {
                         let json = JSON.parse(result);
 
                         if (json["type"] === "success") {
                             if (callback !== null)
-                                callback();
+                                callback(); // Вызываем функцию, если выполнение функции прошло успешно
                         }
 
                         toast().show(stringOBJ[json["message_id"]] ?? json["message_id"]);
@@ -358,6 +432,15 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 }
             });
         };
+    </script>
+
+    <script>
+        const contextmenu = (actions = []) => {
+            if (actions.length < 1)
+                return;
+
+            event.preventDefault();
+        }
     </script>
 </body>
 </html>
