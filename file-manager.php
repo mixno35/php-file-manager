@@ -49,6 +49,15 @@ $uniID = uniqid();
             <?php } ?>
         <?php } ?>
     </ul>
+
+    <div class="manager-content">
+        <span class="item" title="<?= str_get_string('tooltip_create_file') ?>" onclick="run_command().create('<?= addslashes($path) ?>').file()">
+            <span class="material-symbols-outlined">note_add</span>
+        </span>
+        <span class="item" title="<?= str_get_string('tooltip_create_dir') ?>" onclick="run_command().create('<?= addslashes($path) ?>').dir()">
+            <span class="material-symbols-outlined">create_new_folder</span>
+        </span>
+    </div>
 </nav>
 
 <?php
@@ -78,7 +87,7 @@ $result = array_merge($directories, $files);
 
                 $li_uniID = uniqid();
                 ?>
-                <li draggable="true" ondragstart="drag().start()" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToFile('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ?>)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>">
+                <li draggable="true" oncontextmenu="contextmenu([])" ondragstart="drag().start()" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToFile('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ?>)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>">
                     <span class="first">
                         <img src="<?= $file_parse->get_icon($f_path) ?>" alt="Image">
                         <?= $item ?>
