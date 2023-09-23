@@ -18,16 +18,24 @@
   "text_about_path": "Path",
   "text_about_size": "Size",
   "text_about_date_modified": "Date modified",
+  "text_enter_a_name": "Enter a name",
 
   "tooltip_close": "Close",
+  "tooltip_create_dir": "Create new directory",
+  "tooltip_create_file": "Create new file",
+  "tooltip_dev_info": "Information",
+  "tooltip_dev_paid": "Support financially",
+  "tooltip_dev_settings": "Settings",
 
   "action_dir_home": "Home",
   "action_dir_back": "..",
   "action_remove": "Delete",
+  "action_rename": "Rename",
   "action_auth_submit": "Submit",
 
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
+  "hint_rename_enter_new_name": "Enter a new name for %1s",
 
   "message_auth_login_incorrect": "The login must not be shorter than 3 characters or be more than 16 characters",
   "message_auth_password_incorrect": "The password must not be shorter than 3 characters or be more than 64 characters",
@@ -36,12 +44,29 @@
   "message_dir_empty_short": "Directory empty",
 
   "message_are_remove": "You will not be able to recover deleted content. Are you sure you want to delete this?",
+
   "message_file_detail_limit_window": "You have already opened the maximum number of windows.",
 
-  "api_unknown_command": "Unknown command",
+  "api_command_unknown": "Unknown command.",
+  "api_command_path_skip": "The contents of the path were not identified, perhaps the path is incorrect.",
   "api_remove_dir_success": "The directory was successfully deleted.",
   "api_remove_dir_error": "Failed to delete the directory.",
   "api_remove_file_success": "The file was successfully deleted.",
   "api_remove_file_error": "The file could not be deleted.",
-  "api_remove_skip": "The contents of the path were not identified, perhaps the path is incorrect."
+  "api_rename_short_char": "The new name cannot be shorter than 1 character.",
+  "api_rename_forbidden_chars": "The new name contains forbidden characters.",
+  "api_rename_different_from_old": "The new name must be different from the old one.",
+  "api_rename_dir_error": "It was not possible to rename this directory.",
+  "api_rename_dir_success": "The directory was successfully renamed.",
+  "api_rename_file_error": "The file could not be renamed.",
+  "api_rename_file_success": "The file was successfully renamed.",
+  "api_create_forbidden_chars": "The name must not contain forbidden characters.",
+  "api_create_short_char": "The name must not be shorter than 1 character.",
+  "api_create_is_not_dir": "You specified an incorrect path. The path should lead to the directory.",
+  "api_create_dir_dir_exist": "A directory with this name already exists.",
+  "api_create_dir_error": "Failed to create a new directory.",
+  "api_create_dir_success": "The new directory has been successfully created.",
+  "api_create_file_file_exist": "A file with that name already exists.",
+  "api_create_file_error": "Failed to create a new file.",
+  "api_create_file_success": "The new file has been created successfully."
 }
