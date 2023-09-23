@@ -16,13 +16,13 @@ div.progress {
     z-index: 1000;
 }
 
-.lds-facebook {
+div.progress div.progress-item {
     display: inline-block;
     position: relative;
     width: 40px;
     height: 40px;
 }
-.lds-facebook div {
+div.progress div.progress-item div {
     display: inline-block;
     position: absolute;
     left: 8px;
@@ -30,15 +30,15 @@ div.progress {
     background: var(--fm-color-progress-item);
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
-.lds-facebook div:nth-child(1) {
+div.progress div.progress-item div:nth-child(1) {
     left: 8px;
     animation-delay: -0.24s;
 }
-.lds-facebook div:nth-child(2) {
+div.progress div.progress-item div:nth-child(2) {
     left: 16px;
     animation-delay: -0.12s;
 }
-.lds-facebook div:nth-child(3) {
+div.progress div.progress-item div:nth-child(3) {
     left: 24px;
     animation-delay: unset;
 }
