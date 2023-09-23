@@ -44,3 +44,9 @@ function progress() {
     else
         document.getElementById("progress").style.display = "flex";
 }
+
+function isValidFName(name = "") {
+    // Запрещенные символы в именах файлов и папок
+    const forbidden_chars = /[\/:*?"<>|\\]/;
+    return !forbidden_chars.test(name);
+}
