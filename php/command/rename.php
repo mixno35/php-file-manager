@@ -15,7 +15,7 @@ if ((basename($path["old"]) ?? "NaN") === (basename($path["new"]) ?? "NaN")) { /
     exit();
 }
 
-if ($path_manager->chmod_change($path["old"])) {
+if ($path_manager->chmod_detect($path["old"])) {
     if (is_dir($path["old"])) {
         if (rename($path["old"], $path["new"])) {
             echo json_encode([

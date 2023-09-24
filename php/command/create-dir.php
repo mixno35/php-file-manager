@@ -33,7 +33,7 @@ if (is_dir($f_path)) {
     exit();
 }
 
-if ($path_manager->chmod_change($path)) {
+if ($path_manager->chmod_detect($path)) {
     if (mkdir($f_path)) {
         echo json_encode([
             "type" => "success",

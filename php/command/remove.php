@@ -23,7 +23,7 @@ function delete_directory($dirPath):void {
     }
 }
 
-if ($path_manager->chmod_change($path)) {
+if ($path_manager->chmod_detect($path)) {
     if (is_dir($path)) {
         delete_directory($path);
 

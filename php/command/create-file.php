@@ -33,7 +33,7 @@ if (file_exists($f_path)) {
     exit();
 }
 
-if ($path_manager->chmod_change($path)) {
+if ($path_manager->chmod_detect($path)) {
     $file = fopen($f_path, "w");
 
     if ($file) {
