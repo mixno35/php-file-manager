@@ -49,6 +49,10 @@ $id = trim($_GET["id"]) ?? "";
                 <label><?= str_get_string("text_about_date_modified") ?></label>
                 <?= date("Y-m-d H:i:s", $file_manager->get_date_modified($path)) ?>
             </span>
+            <span>
+                <label><?= str_get_string("text_about_permissions") ?></label>
+                <?= $file_manager->get_permissions_string($path) . " (" . $file_manager->get_permissions_int($path) . ")" ?>
+            </span>
         </div>
     </div>
 

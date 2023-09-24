@@ -50,4 +50,33 @@ class FileManager {
             return is_file($_path . DIRECTORY_SEPARATOR . $item) && $item != "." && $item != "..";
         });
     }
+
+    public function get_permissions_string(string $path = ""):string {
+        $perms = fileperms($path);
+        if ($perms === false) {
+            return "NaN";
+        }
+
+        $symbolic = is_dir($path) ? "d" : "-";
+        $symbolic .= ($perms & 0x0100) ? "r" : "-";
+        $symbolic .= ($perms & 0x0080) ? "w" : "-";
+        $symbolic .= ($perms & 0x0040) ? (($perms & 0x0800) ? "s" : "x") : (($perms & 0x0800) ? "S" : "-");
+        $symbolic .= ($perms & 0x0020) ? "r" : "-";
+        $symbolic .= ($perms & 0x0010) ? "w" : "-";
+        $symbolic .= ($perms & 0x0008) ? (($perms & 0x0400) ? "s" : "x") : (($perms & 0x0400) ? "S" : "-");
+        $symbolic .= ($perms & 0x0004) ? "r" : "-";
+        $symbolic .= ($perms & 0x0002) ? "w" : "-";
+        $symbolic .= ($perms & 0x0001) ? (($perms & 0x0200) ? "t" : "x") : (($perms & 0x0200) ? "T" : "-");
+
+        return $symbolic;
+    }
+
+    public function get_permissions_int(string $path = ""):string {
+        $perms = fileperms($path);
+        if ($perms === false) {
+            return "0";
+        }
+
+        return sprintf("%04o", $perms & 0777);
+    }
 }

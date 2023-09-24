@@ -18,6 +18,7 @@
   "text_about_path": "Path",
   "text_about_size": "Size",
   "text_about_date_modified": "Date modified",
+  "text_about_permissions": "Permissions",
   "text_enter_a_name": "Enter a name",
 
   "tooltip_close": "Close",
