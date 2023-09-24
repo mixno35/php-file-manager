@@ -1,5 +1,5 @@
 <?php
-global $data;
+global $data, $path_manager;
 
 $path = $data["path"] ?? "";
 $name = $data["name"] ?? "";
@@ -33,18 +33,41 @@ if (file_exists($f_path)) {
     exit();
 }
 
-if (file_put_contents($f_path, "") !== false) {
-    echo json_encode([
-        "type" => "success",
-        "message_id" => "api_create_file_success"
-    ], 128);
+if ($path_manager->chmod_change($path)) {
+    $file = fopen($f_path, "w");
 
-    exit();
+    if ($file) {
+        if (fwrite($file, "") !== false) {
+            echo json_encode([
+                "type" => "success",
+                "message_id" => "api_create_file_success"
+            ], 128);
+
+            fclose($file);
+        } else {
+            echo json_encode([
+                "type" => "error",
+                "message_id" => "api_create_file_error"
+            ], 128);
+        }
+
+        exit();
+    } else {
+        echo json_encode([
+            "type" => "error",
+            "message_id" => "api_create_file_not_exist"
+        ], 128);
+    }
 } else {
     echo json_encode([
         "type" => "error",
-        "message_id" => "api_create_file_error"
+        "message_id" => "api_create_not_permission_777"
     ], 128);
 
     exit();
 }
+
+echo json_encode([
+    "type" => "error",
+    "message_id" => "api_command_path_skip"
+], 128);

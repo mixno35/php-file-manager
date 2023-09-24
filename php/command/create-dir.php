@@ -1,5 +1,5 @@
 <?php
-global $data;
+global $data, $path_manager;
 
 $path = $data["path"] ?? "";
 $name = $data["name"] ?? "";
@@ -33,17 +33,24 @@ if (is_dir($f_path)) {
     exit();
 }
 
-if (mkdir($f_path)) {
-    echo json_encode([
-        "type" => "success",
-        "message_id" => "api_create_dir_success"
-    ], 128);
+if ($path_manager->chmod_change($path)) {
+    if (mkdir($f_path)) {
+        echo json_encode([
+            "type" => "success",
+            "message_id" => "api_create_dir_success"
+        ], 128);
+    } else {
+        echo json_encode([
+            "type" => "error",
+            "message_id" => "api_create_dir_error"
+        ], 128);
+    }
 
     exit();
 } else {
     echo json_encode([
         "type" => "error",
-        "message_id" => "api_create_dir_error"
+        "message_id" => "api_create_not_permission_777"
     ], 128);
 
     exit();

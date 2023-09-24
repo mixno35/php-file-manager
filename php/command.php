@@ -1,18 +1,22 @@
 <?php
+include_once "class/PathManager.php";
+
+$path_manager = new PathManager();
+
 $data = $_POST;
 
 $command = $data["command"] ?? ""; // Извлекаем название команды, которую надо выполнить
 
-if (str_starts_with("remove", $command)) { // Удаление файла/папки
+if ($command === "remove") { // Удаление файла/папки
     include_once "command/remove.php";
     exit();
-} if (str_starts_with("rename", $command)) { // Переименование файла/папки
+} if ($command === "rename") { // Переименование файла/папки
     include_once "command/rename.php";
     exit();
-} if (str_starts_with("create-dir", $command)) { // Создание папки
+} if ($command === "create-dir") { // Создание папки
     include_once "command/create-dir.php";
     exit();
-} if (str_starts_with("create-file", $command)) { // Создание файла
+} if ($command === "create-file") { // Создание файла
     include_once "command/create-file.php";
     exit();
 }

@@ -63,10 +63,12 @@
   "api_create_forbidden_chars": "The name must not contain forbidden characters.",
   "api_create_short_char": "The name must not be shorter than 1 character.",
   "api_create_is_not_dir": "You specified an incorrect path. The path should lead to the directory.",
+  "api_create_not_permission_777": "It was not possible to grant permissions to change the directory.",
   "api_create_dir_dir_exist": "A directory with this name already exists.",
   "api_create_dir_error": "Failed to create a new directory.",
   "api_create_dir_success": "The new directory has been successfully created.",
   "api_create_file_file_exist": "A file with that name already exists.",
   "api_create_file_error": "Failed to create a new file.",
-  "api_create_file_success": "The new file has been created successfully."
+  "api_create_file_success": "The new file has been created successfully.",
+  "api_create_file_not_exist": "The file could not be opened for writing."
 }
