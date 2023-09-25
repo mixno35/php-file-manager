@@ -74,11 +74,13 @@ $result = array_merge($directories, $files);
 ?>
 
 <article class="custom-scroll" data-path="<?= $path ?>">
-    <ul class="file-manager">
+    <ul class="file-manager <?= (sizeof($result) > 0) ? 'grid' : '' ?>">
         <?php if ($path !== $rootDirectory) { ?>
             <li ondblclick="loadMainFileManager('<?= addslashes(dirname($path)) ?>')" class="dir-back">
                 <span class="first">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADXklEQVR4nO2ZSUwTYRiGv8QoLriBuOCGbC4IIrjhbowaNGqMMWqMMRoXvHn0YgTcUBRRAS2lbSgXY6JRowh6QEE2FXFnEWRpbWkpbVGicYHXTJvRaFt/kWk7JH2TJ+lhJpknzz9zKZFnnnnmmWdCTptDa7RKUmuVhO6iyaYurZJqNNm0g9y1JjmpmuWEntIko3i3CNRJCELxVkJJLheoSicITMorKfm4TOBFKkFIWm5FA1X7gOq4nlEVp0J1XCxToCKZIBSaG9zD7xWQPc1MgdITBCFQXYsC3uwWHGKtMJHQE0qSvKC+MQd4s9MpEGvfKrcAr3eIFmINr7ZDzBBbYBvEDDEFXm6FmCG2wGaIGWIKvNgEMUNMgecbIWaILbABYoaYAs/WQ8wQU6ByLcQMsQXWQMwQa11PYyFmiC2wCmKGmAIVKyBmiCnwZDnEDLEFlkHMEFPg8RK4g+/lS9BRtMgC99vRdWyBRwvhar6VLYDm3gIckGfgoCIF5oIYh9f+g8B8uJKvpTFouLMY6yS5GJGigd8ZFfR3Zzu8ni1QPg+u4kvxXNTeXoqVmfcx6lwL/M5qLRK6/GiH97AFyubAFXwunI2Km6sRk1kJ/zQdRp9vwchULfzOaqDLm+nwvn8QmAVn86kwGkXXNyBKWoNxGa0Ym67HmAu6nxW0uZHQ59uHLVAaBWfSURCJ61d3ISxLjYmSNoy/aLBI+KfpMfq87mcF3zPvMTxZjWGnVBiS1Azv400YdKwRA440wCvhHfrF16PPodoiOwKRcBafH8zA5av7MVnWisAsEwIy2zDhksGmAifBvQs+p60SQ0+qMPhEE7yPN2Lg0Qb0T7QK9D1cZ1ukszhC1VUSAWdgyAtDjLIOwXKzRWCS1Gi3gvUoWSv4nP57BRsBFIXHdj4MU3UVT4fQGPKmYn5OPUIU7QiSWSUCMo2WCuMv/qrAv9C2FawSfAWvBDsCzl5o9of1IQrzF65CkOxXBf4o/V5Ba1OBO0p8BU6C3LEpSvOKYEX7B/4ocRX4o2SvAv9CcxX4ozTwKCfxrpDctcnyj+HBCvN7exWotyxUaZoULDPV/FmBetOmZLf7BspMJVwF/rNKvW3T0nTegVJjvvUoGTrd/Tz/tWlX0C9QakyeKGnr1t+zPwBsd5Gb7hztLAAAAABJRU5ErkJggg==" alt="Image">
+                    <span class="image-preview">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADXklEQVR4nO2ZSUwTYRiGv8QoLriBuOCGbC4IIrjhbowaNGqMMWqMMRoXvHn0YgTcUBRRAS2lbSgXY6JRowh6QEE2FXFnEWRpbWkpbVGicYHXTJvRaFt/kWk7JH2TJ+lhJpknzz9zKZFnnnnmmWdCTptDa7RKUmuVhO6iyaYurZJqNNm0g9y1JjmpmuWEntIko3i3CNRJCELxVkJJLheoSicITMorKfm4TOBFKkFIWm5FA1X7gOq4nlEVp0J1XCxToCKZIBSaG9zD7xWQPc1MgdITBCFQXYsC3uwWHGKtMJHQE0qSvKC+MQd4s9MpEGvfKrcAr3eIFmINr7ZDzBBbYBvEDDEFXm6FmCG2wGaIGWIKvNgEMUNMgecbIWaILbABYoaYAs/WQ8wQU6ByLcQMsQXWQMwQa11PYyFmiC2wCmKGmAIVKyBmiCnwZDnEDLEFlkHMEFPg8RK4g+/lS9BRtMgC99vRdWyBRwvhar6VLYDm3gIckGfgoCIF5oIYh9f+g8B8uJKvpTFouLMY6yS5GJGigd8ZFfR3Zzu8ni1QPg+u4kvxXNTeXoqVmfcx6lwL/M5qLRK6/GiH97AFyubAFXwunI2Km6sRk1kJ/zQdRp9vwchULfzOaqDLm+nwvn8QmAVn86kwGkXXNyBKWoNxGa0Ym67HmAu6nxW0uZHQ59uHLVAaBWfSURCJ61d3ISxLjYmSNoy/aLBI+KfpMfq87mcF3zPvMTxZjWGnVBiS1Azv400YdKwRA440wCvhHfrF16PPodoiOwKRcBafH8zA5av7MVnWisAsEwIy2zDhksGmAifBvQs+p60SQ0+qMPhEE7yPN2Lg0Qb0T7QK9D1cZ1ukszhC1VUSAWdgyAtDjLIOwXKzRWCS1Gi3gvUoWSv4nP57BRsBFIXHdj4MU3UVT4fQGPKmYn5OPUIU7QiSWSUCMo2WCuMv/qrAv9C2FawSfAWvBDsCzl5o9of1IQrzF65CkOxXBf4o/V5Ba1OBO0p8BU6C3LEpSvOKYEX7B/4ocRX4o2SvAv9CcxX4ozTwKCfxrpDctcnyj+HBCvN7exWotyxUaZoULDPV/FmBetOmZLf7BspMJVwF/rNKvW3T0nTegVJjvvUoGTrd/Tz/tWlX0C9QakyeKGnr1t+zPwBsd5Gb7hztLAAAAABJRU5ErkJggg==" alt="Image">
+                    </span>
                     <?= str_get_string("action_dir_back") ?>
                 </span>
             </li>
@@ -90,9 +92,14 @@ $result = array_merge($directories, $files);
 
                 $li_uniID = uniqid();
                 ?>
-                <li draggable="true" oncontextmenu="contextmenu([])" ondragstart="drag().start()" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToFile('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ?>)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>">
+                <li draggable="true" oncontextmenu="contextmenu([
+                    {'name': 'Context 1', 'callback': alert('Hello')},
+                    {'name': 'Context 2', 'callback': alert('Hello 2')}
+                ])" ondragstart="drag().start()" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToFile('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ?>)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>">
                     <span class="first">
-                        <img src="<?= $file_parse->get_icon($f_path) ?>" alt="Image">
+                        <span class="image-preview">
+                            <img src="<?= $file_parse->get_icon($f_path) ?>" alt="Image">
+                        </span>
                         <?= $item ?>
                     </span>
                     <span class="other">
