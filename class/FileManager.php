@@ -80,6 +80,13 @@ class FileManager {
         return sprintf("%04o", $perms & 0777);
     }
 
+    public function get_mime_type(string $path = ""):string {
+        if (is_file($path) and file_exists($path))
+            return mime_content_type($path) ?? "NaN";
+
+        return "NaN";
+    }
+
     public function check_path(string $path = "", string $string = "", string $main_path = ""):void {
         if (!is_dir($path)) {
             if (!is_file($path)) {
