@@ -79,4 +79,13 @@ class FileManager {
 
         return sprintf("%04o", $perms & 0777);
     }
+
+    public function check_path(string $path = "", string $string = "", string $main_path = ""):void {
+        if (!is_dir($path)) {
+            if (!is_file($path)) {
+                echo "<div class='unknown-path'><button onclick='loadMainFileManager(`$main_path`)'>$string</button></div>";
+                exit();
+            }
+        }
+    }
 }

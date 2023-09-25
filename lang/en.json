@@ -33,6 +33,7 @@
   "action_remove": "Delete",
   "action_rename": "Rename",
   "action_auth_submit": "Submit",
+  "action_go_to_home": "Go to home",
 
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",

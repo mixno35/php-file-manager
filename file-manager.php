@@ -11,6 +11,9 @@ $file_parse = new FileParseManager();
 
 $path = trim($_GET["path"]) ?? "";
 
+
+$file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes($main_path["server"]));
+
 if (!is_dir($path))
     exit();
 

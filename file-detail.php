@@ -13,6 +13,10 @@ $path = trim($_GET["path"]) ?? "";
 $id = trim($_GET["id"]) ?? "";
 ?>
 
+<?php
+$file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes($main_path["server"]));
+?>
+
 <header class="header">
     <h4>
         <?= is_dir($path) ? str_get_string("text_about_dir") : str_get_string("text_about_file") ?>
