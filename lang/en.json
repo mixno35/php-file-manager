@@ -19,11 +19,18 @@
   "text_about_size": "Size",
   "text_about_date_modified": "Date modified",
   "text_about_permissions": "Permissions",
+  "text_about_mime_type": "Mime Type",
   "text_enter_a_name": "Enter a name",
+  "text_enter_a_name_dir": "Enter a name directory",
+  "text_enter_a_name_file": "Enter a name file",
+  "text_file_not_exists": "This file does not exist.",
 
   "tooltip_close": "Close",
-  "tooltip_create_dir": "Create new directory",
-  "tooltip_create_file": "Create new file",
+  "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",
+  "tooltip_create_file": "Create new file (Ctrl + Alt + F)",
+  "tooltip_delete": "Delete (Ctrl + Delete)",
+  "tooltip_rename": "Rename (Ctrl + Alt + R)",
+  "tooltip_open_view": "Open this file",
   "tooltip_dev_info": "Information",
   "tooltip_dev_paid": "Support financially",
   "tooltip_dev_settings": "Settings",
@@ -34,6 +41,7 @@
   "action_rename": "Rename",
   "action_auth_submit": "Submit",
   "action_go_to_home": "Go to home",
+  "action_open_view": "Open file",
 
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
@@ -45,7 +53,7 @@
   "message_dir_empty": "This directory empty",
   "message_dir_empty_short": "Directory empty",
 
-  "message_are_remove": "You will not be able to recover deleted content. Are you sure you want to delete this?",
+  "message_are_remove": "You will not be able to recover deleted content. Are you sure you want to delete \"%1s\"?",
 
   "message_file_detail_limit_window": "You have already opened the maximum number of windows.",
 
