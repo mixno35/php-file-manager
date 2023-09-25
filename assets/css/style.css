@@ -581,6 +581,46 @@ main article.main-file-manager article ul.file-manager li span.other {
     user-select: none;
 }
 
+/*main article.main-file-manager article ul.file-manager.grid {*/
+/*    background-color: transparent;*/
+/*    display: grid;*/
+/*    grid-template-columns: auto auto auto auto auto;*/
+/*    gap: 12px;*/
+
+/*    border: none;*/
+/*}*/
+/*main article.main-file-manager article ul.file-manager.grid li {*/
+/*    background-color: var(--fm-color-body);*/
+/*    flex-direction: column;*/
+
+/*    border: 1px solid var(--fm-color-divider);*/
+/*    border-radius: var(--radius-02);*/
+
+/*    height: 180px;*/
+/*}*/
+/*main article.main-file-manager article ul.file-manager.grid li:hover {*/
+/*    background-color: var(--fm-color-body-gray);*/
+/*}*/
+/*main article.main-file-manager article ul.file-manager.grid li span.other {*/
+/*    display: none;*/
+/*}*/
+/*main article.main-file-manager article ul.file-manager.grid li span.first {*/
+/*    flex-direction: column;*/
+/*    position: relative;*/
+/*    justify-content: center;*/
+/*}*/
+/*main article.main-file-manager article ul.file-manager.grid li span.first span.image-preview {*/
+/*    height: 120px;*/
+/*    width: 100%;*/
+
+/*    border-radius: var(--radius-01);*/
+
+/*    background-color: var(--fm-color-body-gray);*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
 main nav.file-detail {
     width: 260px;
     max-width: 260px;
