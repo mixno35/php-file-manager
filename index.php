@@ -187,7 +187,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         if (_is_dir)
                             loadMainFileManager(_path);
                         else
-                            alert("Двойной клик");
+                            window.open("view.php?p=" + _path, "_blank");
                     }
                     clickCount = 0;
                 }, 170); // Задержка для определения двойного клика
@@ -223,6 +223,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
     </script>
 
     <script>
+        let pathFileDetail = "";
+
         function openFileDetail(_path = "") {
             // if (document.querySelectorAll(".file-detail").length >= 3) {
             //     toast().show(stringOBJ["message_file_detail_limit_window"]);
@@ -245,6 +247,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 },
                 success: function (result) {
                     progress();
+
+                    pathFileDetail = _path;
 
                     let container = document.createElement("nav");
                         container.setAttribute("id", make_id);
@@ -322,8 +326,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
              * Это обработчик всех команд, через него проходят все команды перед их выполнением. Можно конечно напрямую, но зачем изобретать велосипед...
              */
             return {
-                remove: (path = "") => {
-                    if (confirm(stringOBJ["message_are_remove"]))
+                delete: (path = "") => {
+                    if (confirm(stringOBJ["message_are_remove"].replace("%1s", path)))
                         command("remove", {path: path}, (() => {
                             if (document.getElementById("file-detail"))
                                 document.getElementById("file-detail").remove();
@@ -361,10 +365,10 @@ $resource_v = time(); // Устанавливаем версию для ресу
                     toast().show(path + " перемещено в " + path_in);
                 },
                 create: (path = "") => {
-                    const name = prompt(stringOBJ["text_enter_a_name"]);
-
                     return {
                         dir: () => {
+                            const name = prompt(stringOBJ["text_enter_a_name_dir"]);
+
                             if (name === null)
                                 return;
 
@@ -379,6 +383,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
                             command("create-dir", {path: path, name: name}, updateMainFileManager);
                         },
                         file: () => {
+                            const name = prompt(stringOBJ["text_enter_a_name_file"]);
+
                             if (name === null)
                                 return;
 
@@ -441,6 +447,19 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
             event.preventDefault();
         }
+    </script>
+
+    <script>
+        document.addEventListener("keydown", (event) => {
+            if (event.ctrlKey && event.altKey && event.keyCode === 70) // Комбинация клавиш для создания файла
+                run_command().create(openedDirectory).file();
+            if (event.ctrlKey && event.altKey && event.keyCode === 68) // Комбинация клавиш для создания директории
+                run_command().create(openedDirectory).dir();
+            if (event.ctrlKey && event.altKey && event.keyCode === 82) // Комбинация клавиш для переименования файла/директории
+                run_command().rename(pathFileDetail);
+            if (event.ctrlKey && event.keyCode === 46) // Комбинация клавиш для удаления файла/директории
+                run_command().remove(pathFileDetail);
+        });
     </script>
 </body>
 </html>
