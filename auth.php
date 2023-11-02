@@ -54,11 +54,13 @@ $resource_v = time(); // Устанавливаем версию для ресу
             return;
         }
 
-        setCookie("<?= $session_name ?>", `${login}:${passwordMD5}`, 0)
+        //setCookie("<?php //= $session_name ?>//", `${login}:${passwordMD5}`, 0)
+
+        window.open("secure/auth.php?sdsdg=" + `${login}:${passwordMD5}`)
 
         setTimeout(() => {
             window.location.reload();
-        }, 200);
+        }, 1000);
     });
 </script>
 <script>
