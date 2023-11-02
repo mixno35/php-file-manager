@@ -1,8 +1,9 @@
 <?php
-global $main_path;
+global $main_path, $privileges;
 
 include_once "php/data.php";
 include_once "lang/lang.php";
+include_once "php/user-privileges.php"; // Загружаем привилегии пользователя
 include_once "class/FileManager.php";
 include_once "class/FileParseManager.php";
 
@@ -25,6 +26,13 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
         <span>&#215;</span>
     </button>
 </header>
+
+<?php if (!$privileges["preview_detail"]["file"] && is_file($path)) { ?>
+    <h4 class="message-cont"><?= str_get_string("text_privileges_forbidden") ?></h4>
+<?php exit(); } ?>
+<?php if (!$privileges["preview_detail"]["dir"] && is_dir($path)) { ?>
+    <h4 class="message-cont"><?= str_get_string("text_privileges_forbidden") ?></h4>
+<?php exit(); } ?>
 
 <div class="container">
     <div class="content">

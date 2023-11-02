@@ -40,13 +40,12 @@ $content = json_encode($string); // Для JS списка
 
 /**
  * Функция выводит необходимый текст по его ключу, если текста под этим ключом нет, будет выведен этот ключ
- * @param string $name
- * @param bool $html (не обязательно) обрабатывает html теги
+ * @param string $key
+ * @param bool $html (необязательно) обрабатывает html теги
  * @return string
  */
-function str_get_string(string $name = "", bool $html = false):string {
+function str_get_string(string $key = "", bool $html = false):string {
     global $string;
-    $str = array_key_exists($name, $string) ? $string[$name] : $name;
+    $str = array_key_exists($key, $string) ? $string[$key] : $key;
     return $html ? $str : htmlspecialchars($str);
 }
-?>

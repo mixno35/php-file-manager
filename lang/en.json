@@ -4,6 +4,8 @@
   "document_name_short": "StormGuardian",
   "document_name": "StormGuardian Files",
   "document_name_2": "StormGuardian <span>Files</span>",
+  "document_name_view": "StormGuardian Viewer",
+  "document_name_view_2": "StormGuardian <span>Viewer</span>",
   "document_file_manager": "File manager",
   "document_copyright": "&copy; Alexander Mikhno 2023",
 
@@ -24,6 +26,8 @@
   "text_enter_a_name_dir": "Enter a name directory",
   "text_enter_a_name_file": "Enter a name file",
   "text_file_not_exists": "This file does not exist.",
+  "text_unknown_type_file": "Unknown type file",
+  "text_privileges_forbidden": "Forbidden",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",
@@ -34,6 +38,12 @@
   "tooltip_dev_info": "Information",
   "tooltip_dev_paid": "Support financially",
   "tooltip_dev_settings": "Settings",
+  "tooltip_go_to_path_back": "Back",
+  "tooltip_go_to_path_forward": "Forward",
+  "tooltip_go_to_path_refresh": "Refresh",
+  "tooltip_create_new_fd": "Create new",
+  "tooltip_toggle_linear": "Linear",
+  "tooltip_toggle_grid": "Grid",
 
   "action_dir_home": "Home",
   "action_dir_back": "..",
@@ -42,6 +52,7 @@
   "action_auth_submit": "Submit",
   "action_go_to_home": "Go to home",
   "action_open_view": "Open file",
+  "action_add_new_ff": "Create",
 
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
@@ -56,6 +67,10 @@
   "message_are_remove": "You will not be able to recover deleted content. Are you sure you want to delete \"%1s\"?",
 
   "message_file_detail_limit_window": "You have already opened the maximum number of windows.",
+
+  "message_unknown_progress_type": "Unknown progress type.",
+
+  "message_enter_tab_size_view": "Enter an indent from 1 to 12.",
 
   "api_command_unknown": "Unknown command.",
   "api_command_path_skip": "The contents of the path were not identified, perhaps the path is incorrect.",

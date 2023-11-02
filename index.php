@@ -21,12 +21,14 @@ $resource_v = time(); // Устанавливаем версию для ресу
     <link rel="stylesheet" href="assets/css/system/default.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/progress.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= $resource_v ?>">
+    <link rel="stylesheet" href="assets/custom/fontawesome-free/css/all.css">
 
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico?v=2">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
+    <script src="assets/js/m35/parse-url.js"></script>
     <script src="assets/js/system.js?v=<?= $resource_v ?>"></script>
 
     <script>
@@ -35,7 +37,9 @@ $resource_v = time(); // Устанавливаем версию для ресу
 </head>
 <body>
     <div class="progress" id="progress" style="display: none">
-        <div class="progress-item"><div></div><div></div><div></div></div>
+        <div class="progress-item">
+            <div></div><div></div><div></div>
+        </div>
     </div>
 
     <header>
@@ -54,17 +58,14 @@ $resource_v = time(); // Устанавливаем версию для ресу
             <section class="list-manager custom-scroll" id="list-directory-manager">
 
             </section>
-            <section class="details-manager">
-                <h2><?= str_get_string("text_details_manager") ?></h2>
-                <ul>
-                    <!-- Версия PHP -->
-                    <li><?= str_replace("%1s", (PHP_VERSION ?? "NaN"), str_get_string("text_php_version")) ?></li>
-                    <!-- Тип сервера -->
-                    <li><?= str_replace("%1s", ($_SERVER["SERVER_SOFTWARE"] ?? "NaN"), str_get_string("text_php_server")) ?></li>
-                    <!-- Общий размер сервера -->
-                    <li><?= str_replace("%1s", $file_manager->format_size($file_manager->get_directory_size($main_path["server"])), str_get_string("text_php_total_size")) ?></li>
-                </ul>
-            </section>
+<!--            <section class="details-manager">-->
+<!--                <h2>--><?php //= str_get_string("text_details_manager") ?><!--</h2>-->
+<!--                <ul>-->
+<!--                    <li>--><?php //= str_replace("%1s", (PHP_VERSION ?? "NaN"), str_get_string("text_php_version")) ?><!--</li>-->
+<!--                    <li>--><?php //= str_replace("%1s", ($_SERVER["SERVER_SOFTWARE"] ?? "NaN"), str_get_string("text_php_server")) ?><!--</li>-->
+<!--                    <li>--><?php //= str_replace("%1s", $file_manager->format_size($file_manager->get_directory_size($main_path["server"])), str_get_string("text_php_total_size")) ?><!--</li>-->
+<!--                </ul>-->
+<!--            </section>-->
             <section class="dev-menu">
                 <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_info') ?>">info</span>
                 <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_paid') ?>">paid</span>
@@ -83,6 +84,15 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
     <script>
         let openedDirectory = "<?= addslashes($main_path["server"]) ?>";
+        let historyPath = [];
+        let historyPathIndex = 0;
+        let isGrid = false;
+
+        const
+            COMMAND_CREATE_FILE = "create-file",
+            COMMAND_CREATE_DIRECTORY = "create-dir",
+            COMMAND_CREATE_RENAME = "rename",
+            COMMAND_CREATE_REMOVE = "remove";
     </script>
 
     <script>
@@ -165,14 +175,16 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         }
                     } else {
                         // Двойной клик
-                        loadMainFileManager(document.getElementById(_element_id).getAttribute("data-path"));
+                        loadMainFileManager(document.getElementById(_element_id).getAttribute("data-path"), true);
                     }
                     clickCount = 0;
                 }, 170); // Задержка для определения двойного клика
             }
         }
 
-        function clickToFile(_path = "", _is_dir = false) {
+        let selectPaths = [];
+
+        function clickToPath(_path = "", _is_dir = false, _element_id = null) {
             event.stopPropagation();
             event.preventDefault();
 
@@ -181,36 +193,63 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 setTimeout(function () {
                     if (clickCount === 1) {
                         // Одиночный клик
-                        openFileDetail(_path);
+                        // openFileDetail(_path);
+                        const index = selectPaths.indexOf(_path);
+                        if (index === -1) {
+                            selectPaths.push(_path);
+                            document.getElementById(_element_id).classList.add("selected");
+                        } else {
+                            selectPaths.splice(index, 1);
+                            document.getElementById(_element_id).classList.remove("selected");
+                        }
+                        setTimeout(() => { updateSelectPathsContainer(); }, 100);
                     } else {
                         // Двойной клик
-                        if (_is_dir)
-                            loadMainFileManager(_path);
-                        else
+                        if (_is_dir) {
+                            loadMainFileManager(_path, true);
+                        } else {
                             window.open("view.php?p=" + _path, "_blank");
+                        }
                     }
                     clickCount = 0;
-                }, 170); // Задержка для определения двойного клика
+                }, 200); // Задержка для определения двойного клика
             }
+        }
+
+        function updateSelectPathsContainer() {
+
         }
     </script>
 
     <script>
-        function loadMainFileManager(_path = "") {
+        document.addEventListener("DOMContentLoaded", () => {
+            window.addEventListener("popstate", () => {
+                const currentURL = window.location.href;
+                loadMainFileManager(url_param(currentURL).get("p"));
+            });
+        });
+    </script>
+
+    <script>
+        function loadMainFileManager(_path = "", _update = false) {
             progress();
 
             $.ajax({
                 url: "file-manager.php",
                 data: {
-                    path: _path
+                    path: _path,
+                    grid: isGrid
                 },
                 success: function (result) {
                     progress();
 
-                    openFileDetail(_path); // Открываем информацию о директории при ее открытии
+                    // openFileDetail(_path); // Открываем информацию о директории при ее открытии
 
                     openedDirectory = _path;
                     document.getElementById("main-file-manager").innerHTML = result;
+
+                    if (_update)
+                        url_param().set("p", _path);
                 }
             });
         }
@@ -219,7 +258,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
             loadMainFileManager(openedDirectory);
         }
 
-        loadMainFileManager("<?= addslashes($main_path["server"]) ?>");
+        loadMainFileManager("<?= addslashes($_GET['p'] ?? $main_path["server"]) ?>", <?= empty($_GET["p"] ?? "") ?>);
     </script>
 
     <script>
@@ -328,7 +367,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
             return {
                 delete: (path = "") => {
                     if (confirm(stringOBJ["message_are_remove"].replace("%1s", path)))
-                        command("remove", {path: path}, (() => {
+                        command(COMMAND_CREATE_REMOVE, {path: path}, (() => {
                             if (document.getElementById("file-detail"))
                                 document.getElementById("file-detail").remove();
 
@@ -345,7 +384,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                                 if (name_path.trim() !== renamed.trim()) {
                                     const new_path = path.replace(/[^\\\/]*$/, renamed.trim());
 
-                                    command("rename", {path: path, new_path: new_path}, updateMainFileManager);
+                                    command(COMMAND_CREATE_RENAME, {path: path, new_path: new_path}, updateMainFileManager);
                                 } else {
                                     toast().show(stringOBJ["api_rename_different_from_old"]);
                                 }
@@ -380,7 +419,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                                 return;
                             }
 
-                            command("create-dir", {path: path, name: name}, updateMainFileManager);
+                            command(COMMAND_CREATE_DIRECTORY, {path: path, name: name}, updateMainFileManager);
                         },
                         file: () => {
                             const name = prompt(stringOBJ["text_enter_a_name_file"]);
@@ -396,7 +435,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                                 return;
                             }
 
-                            command("create-file", {path: path, name: name}, updateMainFileManager);
+                            command(COMMAND_CREATE_FILE, {path: path, name: name}, updateMainFileManager);
                         }
                     }
                 }
@@ -426,8 +465,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         let json = JSON.parse(result);
 
                         if (json["type"] === "success") {
-                            if (callback !== null)
-                                callback(); // Вызываем функцию, если выполнение функции прошло успешно
+                            if (callback !== null) callback(); // Вызываем функцию, если выполнение функции прошло успешно
                         }
 
                         toast().show(stringOBJ[json["message_id"]] ?? json["message_id"]);
@@ -441,7 +479,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
     </script>
 
     <script>
-        const contextmenu = (actions = []) => {
+        const popup_window = (actions = []) => {
             if (actions.length < 1)
                 return;
 
@@ -460,6 +498,29 @@ $resource_v = time(); // Устанавливаем версию для ресу
             if (event.ctrlKey && event.keyCode === 46) // Комбинация клавиш для удаления файла/директории
                 run_command().remove(pathFileDetail);
         });
+    </script>
+
+    <script>
+        const toggle_grid_linear = () => {
+            const container = document.getElementById("file-manager-list");
+            const container_toggle = document.getElementById("file-manager-list-toggle");
+            const container_toggle_icon = document.getElementById("file-manager-list-toggle-icon");
+
+            container_toggle_icon.classList.remove("fa-border-all");
+            container_toggle_icon.classList.remove("fa-bars");
+
+            if (!isGrid) {
+                container_toggle.setAttribute("title", stringOBJ["tooltip_toggle_grid"]);
+                container_toggle_icon.classList.add("fa-border-all");
+                container.classList.remove("grid");
+            } else {
+                container_toggle.setAttribute("title", stringOBJ["tooltip_toggle_linear"]);
+                container_toggle_icon.classList.add("fa-bars");
+                container.classList.add("grid");
+            }
+
+            isGrid = !isGrid;
+        }
     </script>
 </body>
 </html>

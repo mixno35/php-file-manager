@@ -1,3 +1,5 @@
+const PROGRESS_TYPE_FM = 2, PROGRESS_TYPE_NAV = 1, PROGRESS_TYPE_ALL = 0;
+
 const generate_text = (length = 6) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomText = '';
@@ -38,11 +40,19 @@ const toast = () => {
     }
 }
 
-function progress() {
-    if (document.getElementById("progress").style.display === "flex")
-        document.getElementById("progress").style.display = "none";
-    else
-        document.getElementById("progress").style.display = "flex";
+function progress(type = PROGRESS_TYPE_ALL) {
+    if (type === PROGRESS_TYPE_ALL) {
+        if (document.getElementById("progress").style.display === "flex")
+            document.getElementById("progress").style.display = "none";
+        else
+            document.getElementById("progress").style.display = "flex";
+    } else if (type === PROGRESS_TYPE_NAV) {
+
+    } else if (type === PROGRESS_TYPE_FM) {
+
+    } else {
+        toast().show(stringOBJ["message_unknown_progress_type"]);
+    }
 }
 
 function isValidFName(name = "") {
