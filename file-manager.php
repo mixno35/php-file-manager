@@ -41,7 +41,7 @@ $uniID = uniqid();
 ?>
 <nav class="header">
     <div class="manager-content">
-        <button class="item-nav-button" <?php if ($path !== $main_path['server']) { ?> onclick="window.history.back()" <?php } else { echo 'disabled'; } ?> title="<?= str_get_string("tooltip_go_to_path_back") ?>">
+        <button class="item-nav-button" onclick="window.history.back()" title="<?= str_get_string("tooltip_go_to_path_back") ?>">
             <i class="fa fa-arrow-left"></i>
         </button>
         <button class="item-nav-button" onclick="window.history.forward()" title="<?= str_get_string("tooltip_go_to_path_forward") ?>">
@@ -109,7 +109,7 @@ $result = array_merge($directories, $files);
                 <li draggable="true" oncontextmenu="popup_window([
                     {'name': 'Context 1'},
                     {'name': 'Context 2'}
-                ])" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ?>, this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>">
+                ])" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ? 1 : 0 ?>, this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>">
                     <span class="first">
                         <span class="image-preview">
                             <img src="<?= $file_parse->get_icon($f_path) ?>" alt="Image">
