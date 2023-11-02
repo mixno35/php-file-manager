@@ -84,8 +84,6 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
     <script>
         let openedDirectory = "<?= addslashes($main_path["server"]) ?>";
-        let historyPath = [];
-        let historyPathIndex = 0;
         let isGrid = false;
 
         const
@@ -217,7 +215,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
         }
 
         function updateSelectPathsContainer() {
-
+            console.log(selectPaths);
         }
     </script>
 
