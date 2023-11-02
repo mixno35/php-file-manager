@@ -54,23 +54,6 @@ $resource_v = time(); // Устанавливаем версию для ресу
             return;
         }
 
-        //setCookie("<?php //= $session_name ?>//", `${login}:${passwordMD5}`, 0)
-
-        window.open("secure/auth.php?sdsdg=" + `${login}:${passwordMD5}`)
-
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
+        window.location.replace("secure/auth.php?sdsdg=" + `${login}:${passwordMD5}`);
     });
-</script>
-<script>
-    function setCookie(name = "", value = "", days = 0) {
-        let expires = "";
-        if (days) {
-            let date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-    }
 </script>
