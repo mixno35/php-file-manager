@@ -95,6 +95,14 @@ header div.container-user h4 {
 header div.container-user:hover {
     background-color: var(--fm-color-body-gray);
 }
+@media (max-width: 500px) {
+    header div.container-user {
+        border: none;
+    }
+    header div.container-user h4 {
+        display: none;
+    }
+}
 
 main {
     width: calc(100% + var(--size-divider-resize-2));
@@ -116,6 +124,20 @@ main nav.left-directory-manager {
     resize: horizontal;
 
     z-index: 2;
+}
+@media (max-width: 800px) {
+    main nav.left-directory-manager {
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-shadow: 0 0 40px var(--fm-color-shadow);
+
+        border-right: 1px solid var(--fm-color-divider);
+    }
+
+    main div.resize-divider {
+        display: none;
+    }
 }
 
 main nav.left-directory-manager section.list-manager {
@@ -563,10 +585,10 @@ main article.main-file-manager article ul.file-manager li:hover {
 main article.main-file-manager article ul.file-manager li:not(:last-child) {
     border-bottom: 1px solid var(--fm-color-divider);
 }
-main article.main-file-manager article ul.file-manager li:first-child {
+/* main article.main-file-manager article ul.file-manager li:first-child {
     border-top-left-radius: var(--radius-02);
     border-top-right-radius: var(--radius-02);
-}
+} */
 main article.main-file-manager article ul.file-manager li:last-child {
     border-bottom-left-radius: var(--radius-02);
     border-bottom-right-radius: var(--radius-02);

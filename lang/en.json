@@ -28,6 +28,7 @@
   "text_file_not_exists": "This file does not exist.",
   "text_unknown_type_file": "Unknown type file",
   "text_privileges_forbidden": "Forbidden",
+  "text_access_denied": "Access denied",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",

@@ -12,5 +12,6 @@
     <orderEntry type="library" name="quill.snow" level="application" />
     <orderEntry type="library" name="simplemde" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="codemirror" level="application" />
   </component>
 </module>

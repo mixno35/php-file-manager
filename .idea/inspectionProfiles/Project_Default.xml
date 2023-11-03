@@ -14,7 +14,7 @@
     </inspection_tool>
     <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <Languages>
-        <language minSize="16" name="HTML" />
+        <language minSize="21" name="HTML" />
         <language minSize="159" name="PHP" />
       </Languages>
     </inspection_tool>

@@ -4,10 +4,11 @@ class FileParseManager {
     public function get_icon(string $path = "", bool $preview = false):string {
         $imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "ico", "webp"]; // Изображение
         $textCodeExtensions = ["html", "php", "js", "py", "xml", "svg"]; // Код
-        $textExtensions = ["txt", "csv", "log", "json", "css", "scss", "md", "htaccess"]; // Текст
+        $textExtensions = ["txt", "csv", "log", "json", "css", "scss", "md", "htaccess", "less"]; // Текст
         $videoExtensions = ["mp4", "3gp", "wav"]; // Видео
         $databaseExtensions = ["sql", "sqlite", "sqlite3", "sqlitedb"]; // Базы данных
         $archiveExtensions = ["zip", "rar", "7z"]; // Архивы
+        $imageDExtensions = ["img", "iso"]; // Образы
 
         if (is_file($path)) {
             if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), $imageExtensions))
@@ -22,6 +23,8 @@ class FileParseManager {
                 return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADuElEQVR4nO2Zb0wbZQDG+eLH5e5gDFqQZX/cbGErGXEKyt291+yDZkskhA3K5hJ1xhg1UyesQGKyxSm0dxi6TCQDR++YMZtGszIFx6KSqBGctDCVLGSRzKXS3lH6aR+2PObKxp8O/dIeNdk9yS+5T2+eX94n75fLyjJjxsyDFWfvXA7xz1UQJeYS5FiT4I91EXl2UPDHRgV5dpz4tSni18KCX9OIrN0hinpHkFX9O0xkdUpQtHFBVkeJog4KcrRLkKNNRIm4nH1quX62IaX53jhH/HOdRI5NCvIcFoklMXs/irYCahLRBYgSnSRy9EOizLBpKS/4432CHF9S2lgBYYEIiDyjpCzw5MkwMiVQfmoaKQuUun/DY8enUNFxE1y3argA2xPGE74/4TjxB2wtofQI6DjuUtryO8qOX8PO96/jcXEaFb6/UNkZBtsVAXs6Aq47Av5jFeSMCiLPgigaSG8UfG8UXM8M2O6/wZ4O46nOmyj3TWNn+3XsaL2G0ncnUfLOVdhbQgn08oYIONxX4WiaZ3sS2xJMLKOkOZlxFCdhv0eLjimwPOYNNJsTSi3mhJozPCFH40TmntHmNAhsemEI2xvGV11gq3sMRYe+T13g4boLKHIFsPnQt7C9/jO2NYQME7C5g3jk8AjWvzQMy/4hWOovpUdgnkCCwroA1h8YwMbnL2Pzy8PY8uqPsB0ege3NX2A/cgX2t8dQ3BhEydEQStwTKG6aQLE7BPvRIGwNY3j0yBVsfWsUW94YwabXfsKGV35A0YvfofC5IVjrv4FlgUvGCRTW9S/i0rm4QIHrqyS+XobVNbCEQVjrl2IK3B/zBlzmhFKLOSFXhidUUHMuY89o3t5A6gLZggjLs32rLrCu6jwY0pG6AMO3QSfH+QHydvfAUn0OBUsl0iRgqR9Afs0XyN0tg3GeBM21J0ibwDyeBNnEi7W7fMh9ugvr9pxBftVZWKrPw7r3c1j3XYC1NoCC2v5FgdqLsNb2w7ovgPyaL5FX/Rnyqj5F7p4+rH2mB9m7ToHh9cLSXdqNFVgZ74rQnPgvSP+BKbAY8wY4c0IP+oS4trGMCbDSrykLrHGeyKH51k8YrvX2qgmw0m2Klc6ucfrS98uJcr63keE9jQzfNsxwbbfSLsCKtyhWGqZYqYGq7NiQZWjKPnqIIt4ymvccZHjPMYb3yAzvucxw3iDNeW4wvFejeW/8ngDFiXGaEzWK9d6gODFIc+IQxUoyxYrH6ErpIFUp7dDPNLa0GTNmsv6P+QdWCmw63bKziAAAAABJRU5ErkJggg==";
             if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), $archiveExtensions))
                 return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADzElEQVR4nO2Z2W9MYRjG+yeIhjkz7UyHmVGSiaWVjC2q0UEtsYUoQ9CIxFRLY21rvVCklMZWqQZBCVGaao3W0FhatVQYy5i2qj1drrjk7pH3cMSF1PteHHExb/JLznznfc7z/e6aNCYmOtGJTnT+y+lNy5vV6y1Q+7wF+BtvpuTiW5NZBGX6GN/uS8vv6vHmpYsFKMgq+CnwtdEsgi3gJYmCTrkA9+M/Bb7UmkWIBLwFEAu0p2wGl+cT/Oi9rIigTLugQyzQMt4PLsGxq9FeqoigTIugQyzQkLQaXKpGLsXbg4oIyjQIOsQCVe4McLkwYgGe55t+sMOED0cS0HXOhb4rwzXoOVycoL3T9yhTJegQC1QMmw8upY6ZeOQ3oSnXjI4yF3orhv+RT2VObYd2KVMh6BALlNnTweWINQ3B5Sa0HXdCPZ/YL7RDu5QpE3SIBUrip4LLPstkNG6wobM8kUVTjk3LlAg6xAJF5hRw2W2agLeFDnScHsbiTaFDyxQJOgwXiJQ40XbCxYJ2DRdIvfgZXCadjCBS4hJBmVRBh+EC4UNOEf+dwLuDDhGGC0ws7QKH7BsqQm0qnu4aitA+Bwvafd2qIqtSZXUQYoGxB0LgQBfp6elBw7YEvNo7lAXtUuZVq8rqIMQC7u2PwYEuQtzbbMPLXUNY0K6eczN7xAKudbXgoF/k7kYrXuTbWdCunnMxe8QCtuXXwEG/SN16K55ttf+ieYsdwRybBj3//o529ZyN2SMWUOadAwf9IgG/Fc2bEn5Rn2XFx2cBtD+t1Z5/f0e7ek5h9ogFYqedBAf9IrVr47W/h3ToN+ddLLNHLDAg5Sg4hCMd6O7uRt3GJDzw2/Ao6we3MuO1c4Ke9XPaqctN1s7DrZ9YHYRhAmcrm6GqKsL3ryKQPQbVK+M0bq6I084JetbP7+QkIdxwTTsvv/7EOIHkh3vAYXZTMVrehxCJRES0hEOY1XiY1UEYJkBMvrUT9WcKEQzUIBgM9k+gBvXl+zG1hv/9ZKMFRlVvRfUyC25mmFG5pH9oh3Ypk2ykwOjb28DFfSUb9b44EZQZLegQC7grssBlRGkm6jIsIijjFnSIBRJPrQIXZ1EGAostIiiTKOgQCzj2LwYX+465uL3QLIIyDkGHWMCeNwdcrBum4cYcRQRl7IIOsYA1Ow1c4tak4NL0wSIoYxV0iAUsmZPARVnmwZnUQSIoYxF0iAVMPk+X4vOAw+BFSTg2MVYEZRTm900+j/wfHMpSTzpXgi5TPG6gCK6AyefpVHzjZogFohOd6EQn5l/Md/K44Gfvs1xrAAAAAElFTkSuQmCC";
+            if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), $imageDExtensions))
+                return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFfklEQVR4nO2Z209cVRTGh3qpRvESojyIwJy91rfOzAgkndRKy60tVCxYKnSg99ICYlqJ9qEPxgcf+uglMV6IrSYaE1+ML/6F5oN1zDgF5pyZQzWRnRACM2ef395nrW99e51C4WAcjIORx+goFovdqjoUQpgws3dVdd7MFgDMAZhW1VF+bmb9ZtZZ+C+Mcrn8fBzHwyJyBcCKqt4AcFVVL5pZTVXfM7NzqnrWzN4GcNrMJgCMhBCqItJTLpeffuzgPT09z5rZSTP7QFXfbwF+WFXfDCEcMbOBEMLr1Wr1qccCDyBW1TUAt9uFj+P4Df7m36p6LIqiV/eT/ZCqTqrqRh7wzIf+/v4hAEfN7LiIjPO7pVKpwpzKlZyPF8D5POEJCuAoc0hVxwCc4jWqOsP/1Wq1J/LiP5Q3fAihUqlUhkTkLaoT4UXkDOGpWiJygTnGe7dNn3fYEF5VS4QHMEJQEZnitQ6/wHk5P6/NI2FzheecAAYdfoLwAN7xOeYBLJnZFVVdpliUy2VpCb6vr+8ZAKt5w0dRpABOMGlVdZLwIrJV+AAsOjzvs+oyvUbZzrwAPtq84UMIQt1PFAfAtIjM+lw1Ebns91kREcJ/COAuv5u5wuZRpBrhK5VKSJKW14nILAXC57ykqtfN7JaqrgO4A+BjVb1nZusicjj1AlzacoUHUHTp/IfimNkFwgO45vC87x0z+4h/M0d8vtfS8ne06G224PnDuHaolRDCWqlUoqJQ4ycd/hHFEZGbSYUPIVzzHBlKKjW9Uyp6uso2dv4krwshrHInGceeRxshhE9E5HPuKuchPIAlv8cyk5aJHMdx1aW2Hn7YVau5i+WFrcKLyK2d4BnLhFfV78zsoSfnluIwdDhvFEUDHm67wdOm96dVn8xhs9vOM5ZV9VNV/VZVHwL4RVV/DSEwYQllniN7wvO+/KzpAuI4ns2asIz5engqGH1OV1dXJxUthDANYBPAz4QH8AM3CUAxLbz7pNE0ITSfVW1cAv/eecI3zhtCOA/ga1X9kk8DwP2M8Ez86TQhtJBVKkVkpT5suru7n2ucV0ReqIN/4OEUp4UnD5Wr6QJcm7Pq/Gp9zDNsGuft7e19OYFnHjCcQgZ439SFNAuYzlqkqPOJ2gD4LIqimcZ5PQQS+N88qYcywG+FddMF8HCRtcJy0QT3HWaCbtKgRVH0Yl9f30sOv5nAi8gf9DghG/xFCkyaBQxl2Hk6yxE3Yd8TnrGtqj+q6lf1Md8A/zuv0wzwXq3Hmy7A+zbN4CulUom24KoXo0URue1F6icuAMAXu8D/SauQFV63i+tgmgV07gYfx/ERhoaX/WXX8iXaAr/pmog88PjecefbgF8RkVcKaQaNUwP8cAhh0ZWGkDeTau2eZo43p1GL4/iMm8H7SeUVkW/c14+0AX85dbeCHTPCs03InaY00uKyWNGMuX+5RCvs8DOEd6tcbqHCnt0Lnvdl3ygVvC/gsB9o7rk0En7d/fp1h6/xMMJDiavWKZb6gYGBKG94M1vfqbbsOfy8epfO0avslsXmo0w02U9UlNDTVAhvE+YKj+2wHSu0eqh3Y8akvZEoDv2SJzMPLpN+xj1RLLIk5A6/RpZCK4MtDU7geUD4JTd757ybMJVIrrdK8obfYK0ptDMcYCfFmfKzw4h32Ep5w9t2dy6Xpu4Y232NisOkJSTbhHnDY9t5tt9a5GCj1TsVM3WKM8b/0fuz25A3/Pj4+JOFnEeHa3yiOMcJzxb5PoTNocJ+Db6ESM7BjS8p2oEHsNp2wqYdfLx8LeS6326FXWc4tiyV7Qy+oHPbUW3F26jqscHBwUeOn//KoIulFfdD/qhX6Dk/Y89TAOitWC/cVeb7GulgHIz/6fgLVGuzcyIKLc0AAAAASUVORK5CYII=";
 
             return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA3ElEQVR4nO2ZOwrCUBBF33r8FqJbULHIZDuJrbtQcDGB9JpUFtEo4wJcwEjQXsIMY5R74PZzeKd7IQAA/p/4LitiuRGLaDfdVpm7QMRytTi+WW998Jcgo+Ob9dPjS2J3zn9WwF2CDAUGaeEvQYYCw6TwlyBjAXcJMhQYJaW/BBkKjJPSX4IMBSab00eJ2f6SdVZgnj/8JchQoM0CBN7gBRgJ6UBCjIR0ICFGQjqQECMhHUiIkZAOJMRISAcSYiSkAwnxlxOKDL+YWqw2EyCWpbNEHbMszAQAAKGzPAFFG2HgXOT3rgAAAABJRU5ErkJggg==";
         } if (is_dir($path)) {
@@ -33,27 +36,20 @@ class FileParseManager {
 
     private function generate_image(string $path = ""):string {
         if (file_exists($path)) {
-            // Открываем файл для чтения
-            $file = fopen($path, 'rb');
+            $file = fopen($path, "rb");
 
             if ($file) {
-                // Читаем содержимое файла
                 $fileContents = fread($file, filesize($path));
-
-                // Закрываем файл
                 fclose($file);
 
-                // Определение MIME-типа файла
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
                 $mimeType = finfo_buffer($finfo, $fileContents);
                 finfo_close($finfo);
 
-                // Генерация Blob URL
-                // Вывод Blob URL
                 return "data:" . $mimeType . ";base64," . base64_encode($fileContents);
             }
         }
 
-        return $path;
+        return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA3ElEQVR4nO2ZOwrCUBBF33r8FqJbULHIZDuJrbtQcDGB9JpUFtEo4wJcwEjQXsIMY5R74PZzeKd7IQAA/p/4LitiuRGLaDfdVpm7QMRytTi+WW998Jcgo+Ob9dPjS2J3zn9WwF2CDAUGaeEvQYYCw6TwlyBjAXcJMhQYJaW/BBkKjJPSX4IMBSab00eJ2f6SdVZgnj/8JchQoM0CBN7gBRgJ6UBCjIR0ICFGQjqQECMhHUiIkZAOJMRISAcSYiSkAwnxlxOKDL+YWqw2EyCWpbNEHbMszAQAAKGzPAFFG2HgXOT3rgAAAABJRU5ErkJggg==";
     }
 }

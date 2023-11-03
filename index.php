@@ -16,6 +16,11 @@ $resource_v = time(); // Устанавливаем версию для ресу
 <head>
     <title><?= str_get_string("document_name") ?></title>
 
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="assets/css/system/root.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/default.css?v=<?= $resource_v ?>">
@@ -200,7 +205,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                             selectPaths.splice(index, 1);
                             document.getElementById(_element_id).classList.remove("selected");
                         }
-                        setTimeout(() => { updateSelectPathsContainer(); }, 100);
+                        setTimeout(() => { updateSelectPathsContainer() }, 100);
                     } else {
                         // Двойной клик
                         if (_is_dir) {

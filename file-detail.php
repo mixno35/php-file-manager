@@ -33,6 +33,9 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
 <?php if (!$privileges["preview_detail"]["dir"] && is_dir($path)) { ?>
     <h4 class="message-cont"><?= str_get_string("text_privileges_forbidden") ?></h4>
 <?php exit(); } ?>
+<?php //if (!is_readable($path)) { ?>
+<!--    <h4 class="message-cont">--><?php //= str_get_string("text_access_denied") ?><!--</h4>-->
+<?php //exit(); } ?>
 
 <div class="container">
     <div class="content">

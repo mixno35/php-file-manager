@@ -1,21 +1,29 @@
 <?php
 class FileManager {
     public function get_directory_size(string $path = ""):int {
-        $totalSize = 0;
+        if (!is_readable($path)) return 0;
 
-        $dir = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
-        foreach (new RecursiveIteratorIterator($dir) as $file) {
-            $totalSize += $file->getSize();
+        $totalSize = 0;
+        $dir = new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
+        try {
+            $iterator = new RecursiveIteratorIterator($dir);
+            foreach ($iterator as $file) {
+                $totalSize += $file->getSize();
+            }
+        } catch (Exception $e) {
+            $totalSize = 0;
         }
 
         return $totalSize;
     }
 
     public function get_file_size(string $path = ""):int {
+        if (!is_readable($path)) return 0;
         return file_exists($path) ? filesize($path) : 0;
     }
 
     public function get_date_modified(string $path = ""):int {
+        if (!is_readable($path)) return 0;
         if (is_file($path))
             return file_exists($path) ? filemtime($path) : 0;
         else if (is_dir($path))
@@ -25,6 +33,7 @@ class FileManager {
     }
 
     public function get_file_format(string $path = ""):string {
+        if (!is_readable($path)) return "Access denied";
         return file_exists($path) ? strtolower(pathinfo($path, PATHINFO_EXTENSION)) : "NaN";
     }
 
@@ -40,18 +49,22 @@ class FileManager {
     }
 
     public function get_folders($_path = ""):array {
+        if (!is_readable($_path)) return [];
         return array_filter(scandir($_path), function($item) use ($_path) {
             return is_dir($_path . DIRECTORY_SEPARATOR . $item) && $item != "." && $item != "..";
         });
     }
 
     public function get_files($_path = ""):array {
+        if (!is_readable($_path)) return [];
         return array_filter(scandir($_path), function($item) use ($_path) {
             return is_file($_path . DIRECTORY_SEPARATOR . $item) && $item != "." && $item != "..";
         });
     }
 
     public function get_permissions_string(string $path = ""):string {
+        if (!is_readable($path)) return "Access denied";
+
         $perms = fileperms($path);
         if ($perms === false) {
             return "NaN";
@@ -72,6 +85,8 @@ class FileManager {
     }
 
     public function get_permissions_int(string $path = ""):string {
+        if (!is_readable($path)) return "Access denied";
+
         $perms = fileperms($path);
         if ($perms === false) {
             return "0";

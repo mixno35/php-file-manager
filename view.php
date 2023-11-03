@@ -23,7 +23,7 @@ if (!file_exists($path)) {
 $file_type = explode("/", $file_manager->get_mime_type($path))[0];
 $file_type_2 = explode("/", $file_manager->get_mime_type($path))[1];
 
-function get_module_codemirror(string $path = ""):string {
+function get_mode_codemirror(string $path = ""):string {
     $plain = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
     switch ($plain) {
@@ -80,20 +80,36 @@ function get_module_codemirror(string $path = ""):string {
     <?php if (!$privileges["view_file"]) { ?>
         <h4 class="file-viewer-unknown-file"><?= str_get_string("text_privileges_forbidden") ?></h4>
     <?php exit(); } ?>
-    <?php if ($file_type === "text" or $file_type_2 === "json") { ?>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/clike/clike.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/javascript/javascript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/php/php.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/css/css.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/htmlmixed/htmlmixed.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/xml/xml.min.js"></script>
+
+    <?php if ($file_type === "ttf" or $file_type_2 === "json" or $file_type_2 === "log") { ?>
+
+    <?php } ?>
+
+    <?php if ($file_type === "text" or $file_type_2 === "json" or $file_type === "log") { ?>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js" integrity="sha512-8RnEqURPUc5aqFEN04aQEiPlSAdE0jlFS/9iGgUyNtwFnSKCXhmB6ZTNl7LnDtDWKabJIASzXrzD0K+LYexU9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/clike/clike.min.js" integrity="sha512-l8ZIWnQ3XHPRG3MQ8+hT1OffRSTrFwrph1j1oc1Fzc9UKVGef5XN9fdO0vm3nW0PRgQ9LJgck6ciG59m69rvfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js" integrity="sha512-I6CdJdruzGtvDyvdO4YsiAq+pkWf2efgd1ZUSK2FnM/u2VuRASPC7GowWQrWyjxCZn6CT89s3ddGI+be0Ak9Fg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/sql/sql.min.js" integrity="sha512-JOURLWZEM9blfKvYn1pKWvUZJeFwrkn77cQLJOS6M/7MVIRdPacZGNm2ij5xtDV/fpuhorOswIiJF3x/woe5fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/php/php.min.js" integrity="sha512-jZGz5n9AVTuQGhKTL0QzOm6bxxIQjaSbins+vD3OIdI7mtnmYE6h/L+UBGIp/SssLggbkxRzp9XkQNA4AyjFBw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/css/css.min.js" integrity="sha512-rQImvJlBa8MV1Tl1SXR5zD2bWfmgCEIzTieFegGg89AAt7j/NBEe50M5CqYQJnRwtkjKMmuYgHBqtD1Ubbk5ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/sass/sass.min.js" integrity="sha512-KX6urL7liHg1q4mBDqbaX4WGbiTlW0a4L6gwr6iBl2AUmf3n+/L0ho5mf7zJzX8wHCv6IpDbcwVQ7pKysReD8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/nginx/nginx.min.js" integrity="sha512-kgLrmRot2x/yBR/HMHKt1S1Q0gIFOt6JGwAqrowCFxtal0MLUrqwzOu1YUA59Uds85K/1dnw9xZrXCs/5FAFJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js" integrity="sha512-2M0GdbU5OxkGYMhakED69bw0c1pW3Nb0PeF3+9d+SnwN1ryPx3wiDdNqK3gSM7KAU/pEV+2tFJFbMKjKAahOkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/htmlmixed/htmlmixed.min.js" integrity="sha512-HN6cn6mIWeFJFwRN9yetDAMSh+AK9myHF1X9GlSlKmThaat65342Yw8wL7ITuaJnPioG0SYG09gy0qd5+s777w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/xml/xml.min.js" integrity="sha512-LarNmzVokUmcA7aUDtqZ6oTS+YXmUKzpGdm8DxC46A6AHu+PQiYCUlwEGWidjVYMo/QXZMFMIadZtrkfApYp/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/yaml/yaml.min.js" integrity="sha512-+aXDZ93WyextRiAZpsRuJyiAZ38ztttUyO/H3FZx4gOAOv4/k9C6Um1CvHVtaowHZ2h7kH0d+orWvdBLPVwb4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/html-hint.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/css-hint.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/javascript-hint.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/sql-hint.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/comment/continuecomment.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/keymap/emacs.min.js" integrity="sha512-vkAJFl6fSbUY4MDhe50ATyWN/8jLYZPtxqELsXbbxA+bSxk8n/0iVBeGQqCJJYv2mn1bhBKs7du3A0HbtgrLEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/comment/comment.min.js" integrity="sha512-UaJ8Lcadz5cc5mkWmdU8cJr0wMn7d8AZX5A24IqVGUd1MZzPJTq9dLLW6I102iljTcdB39YvVcCgBhM0raGAZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/comment/continuecomment.min.js" integrity="sha512-bPfnPUeDAbKU71b0+CKJBuYLXujAOrzS3bjB1GLr5lgmPEjvWYnmjOG8cioWf7YdSj/SaXMCnYr44C/E0XGzTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <header>
             <h1 class="title">
@@ -140,15 +156,40 @@ function get_module_codemirror(string $path = ""):string {
         <script>
             const isReadOnly = <?= intval($_GET["read-only"] ?? 0) ?>;
 
+            let sublimeKeyMap = {
+                'Ctrl-L': 'goLineRight',
+                'Ctrl-Alt-L': 'goLineLeft',
+                'Ctrl-D': 'selectNextOccurrence',
+                'Ctrl-U': 'undoSelection',
+                'Ctrl-Shift-U': 'redoSelection',
+                'Ctrl-Enter': 'insertLineAfter',
+                'Ctrl-Shift-Enter': 'insertLineBefore',
+                'Ctrl-Shift-D': 'duplicateLine',
+                'Ctrl-J': 'autoIndent',
+                'Ctrl-/': 'toggleComment',
+                'Ctrl-Shift-K': 'deleteLine',
+                'F9': 'sortLines',
+                'F5': 'refresh',
+                'Ctrl-F': 'find',
+                'F3': 'findNext',
+                'Shift-F3': 'findPrev',
+                'Ctrl-H': 'replace',
+                'Ctrl-Shift-H': 'replaceAll',
+                'Ctrl-S': 'save',
+            };
+
             let tab_size = <?= intval($_GET["spaces"] ?? 4) ?>;
             let editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-                mode: "<?= get_module_codemirror($path) ?>",
+                mode: "<?= get_mode_codemirror($path) ?>",
+                main: "codemirror",
                 theme: "neo",
                 lineNumbers: true,
                 indentWithTabs: true,
                 tabSize: tab_size,
                 moveOnDrag: true,
                 readOnly: false,
+                continueComments: true,
+                toggleComment: true,
                 extraKeys: {"Ctrl-Space": "autocomplete"}
             });
 
