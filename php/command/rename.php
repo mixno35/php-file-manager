@@ -6,6 +6,15 @@ $path = array(
     "new" => $data["new_path"] ?? "" // Новое имя (путь)
 );
 
+if (!is_readable($path["old"])) {
+    echo json_encode([
+        "type" => "error",
+        "message_id" => "api_is_readable"
+    ], 128);
+
+    exit();
+}
+
 if ((basename($path["old"]) ?? "NaN") === (basename($path["new"]) ?? "NaN")) { // Если новое имя такое же как и старое
     echo json_encode([
         "type" => "error",

@@ -22,6 +22,15 @@ if (!is_dir($path)) {
     exit();
 }
 
+if (!is_readable($path)) {
+    echo json_encode([
+        "type" => "error",
+        "message_id" => "api_is_readable"
+    ], 128);
+
+    exit();
+}
+
 $f_path = $path . DIRECTORY_SEPARATOR . $name;
 
 if (file_exists($f_path)) {

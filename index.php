@@ -1,5 +1,5 @@
 <?php
-global $language_tag, $content, $login, $main_path;
+global $language_tag, $content, $login, $main_path, $server_encoding;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
@@ -16,7 +16,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
 <head>
     <title><?= str_get_string("document_name") ?></title>
 
-    <meta charset="UTF-8">
+    <meta charset="<?= $server_encoding ?? 'UTF-8' ?>">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -196,16 +196,16 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 setTimeout(function () {
                     if (clickCount === 1) {
                         // Одиночный клик
-                        // openFileDetail(_path);
-                        const index = selectPaths.indexOf(_path);
-                        if (index === -1) {
-                            selectPaths.push(_path);
-                            document.getElementById(_element_id).classList.add("selected");
-                        } else {
-                            selectPaths.splice(index, 1);
-                            document.getElementById(_element_id).classList.remove("selected");
-                        }
-                        setTimeout(() => { updateSelectPathsContainer() }, 100);
+                        openFileDetail(_path);
+                        // const index = selectPaths.indexOf(_path);
+                        // if (index === -1) {
+                        //     selectPaths.push(_path);
+                        //     document.getElementById(_element_id).classList.add("selected");
+                        // } else {
+                        //     selectPaths.splice(index, 1);
+                        //     document.getElementById(_element_id).classList.remove("selected");
+                        // }
+                        // setTimeout(() => { updateSelectPathsContainer() }, 100);
                     } else {
                         // Двойной клик
                         if (_is_dir) {

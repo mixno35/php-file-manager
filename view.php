@@ -1,5 +1,5 @@
 <?php
-global $language_tag, $content, $login, $main_path, $privileges;
+global $language_tag, $content, $login, $main_path, $privileges, $server_encoding;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
@@ -48,12 +48,16 @@ function get_mode_codemirror(string $path = ""):string {
     }
 }
 ?>
-
 <html lang="<?= $language_tag ?? "en-US" ?>">
 <head>
     <title><?= str_get_string("document_name_view") ?> | <?= basename($path) ?></title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+    <meta charset="<?= $server_encoding ?? 'UTF-8' ?>">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
     <link rel="stylesheet" href="https://codemirror.net/5/theme/neo.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -81,9 +85,49 @@ function get_mode_codemirror(string $path = ""):string {
         <h4 class="file-viewer-unknown-file"><?= str_get_string("text_privileges_forbidden") ?></h4>
     <?php exit(); } ?>
 
-    <?php if ($file_type === "ttf" or $file_type_2 === "json" or $file_type_2 === "log") { ?>
+    <?php if ($file_type === "font") { ?>
+        <header>
+            <h1 class="title">
+                <?= str_get_string("document_name_view_2", true) ?>
+            </h1>
+        </header>
 
-    <?php } ?>
+        <?php
+        $font_name = "font_" . uniqid();
+
+        function get_font_format(string $path):string {
+            global $file_manager;
+
+            $format = $file_manager->get_file_format($path);
+
+            switch ($format) {
+                case "ttf":
+                    return "truetype";
+                case "otf":
+                    return "opentype";
+                case "woff":
+                    return "woff";
+                case "woff2":
+                    return "woff2";
+                case "eot":
+                    return "embedded-opentype";
+                default:
+                    return $format;
+            }
+        }
+        ?>
+
+        <style>
+            @font-face {
+                font-family: <?= $font_name ?>;
+                src: url("<?= $file_manager->get_current_url($path, true); ?>") format("<?= get_font_format($path) ?>");
+            }
+
+            .font {
+                font-family: <?= $font_name ?>, "<?= $font_name ?>", serif;
+            }
+        </style>
+    <?php exit(); } ?>
 
     <?php if ($file_type === "text" or $file_type_2 === "json" or $file_type === "log") { ?>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js" integrity="sha512-8RnEqURPUc5aqFEN04aQEiPlSAdE0jlFS/9iGgUyNtwFnSKCXhmB6ZTNl7LnDtDWKabJIASzXrzD0K+LYexU9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -118,10 +162,10 @@ function get_mode_codemirror(string $path = ""):string {
         </header>
 
         <?php
-        $encoding = $_GET["from_encode"] ?? "UTF-8";
+        $encoding = $_GET["from_encode"] ?? ($server_encoding ?? "UTF-8");
 
         $content = file_get_contents($path);
-        $content = mb_convert_encoding($content, "UTF-8", $encoding);
+        $content = mb_convert_encoding($content, $server_encoding ?? "UTF-8", $encoding);
 
         $array_encoding = array(
             "UCS-4", "UCS-2", "UTF-32", "UTF-16", "UTF-7", "UTF-8", "ASCII", "EUC-JP", "CP932", "CP51932", "JIS",

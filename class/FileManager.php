@@ -110,4 +110,16 @@ class FileManager {
             }
         }
     }
+
+    public function get_current_url(string $absolute_path, bool $show_scheme = false):string {
+        $currentPageUrl = ($show_scheme ? ((isset($_SERVER["HTTPS"]) ? "https" : "http") . "://") : "") . ($_SERVER["HTTP_HOST"] ?? "NaN");
+        $currentDirectory = dirname($currentPageUrl);
+        $relativePath = str_replace(getcwd() ?? "", "", $absolute_path);
+
+        return $this->parse_separator($currentDirectory . DIRECTORY_SEPARATOR . $relativePath, "/");
+    }
+
+    public function parse_separator(string $path, string $separator = DIRECTORY_SEPARATOR, string $pattern = "/\\\\+/"):string {
+        return preg_replace($pattern, $separator, $path);
+    }
 }

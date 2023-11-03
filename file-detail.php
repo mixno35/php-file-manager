@@ -57,6 +57,10 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
                 <?= $path ?>
             </span>
             <span>
+                <label><?= str_get_string("text_about_url") ?></label>
+                <?= $file_manager->get_current_url($path, true) ?>
+            </span>
+            <span>
                 <label><?= str_get_string("text_about_size") ?></label>
                 <?= is_dir($path) ? $file_manager->format_size($file_manager->get_directory_size($path)) : $file_manager->format_size($file_manager->get_file_size($path)) ?>
             </span>

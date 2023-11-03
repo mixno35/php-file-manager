@@ -23,6 +23,15 @@ function delete_directory($dirPath):void {
     }
 }
 
+if (!is_readable($path)) {
+    echo json_encode([
+        "type" => "error",
+        "message_id" => "api_is_readable"
+    ], 128);
+
+    exit();
+}
+
 if ($path_manager->chmod_detect($path)) {
     if (is_dir($path)) {
         delete_directory($path);

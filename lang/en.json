@@ -22,6 +22,7 @@
   "text_about_date_modified": "Date modified",
   "text_about_permissions": "Permissions",
   "text_about_mime_type": "Mime Type",
+  "text_about_url": "URL",
   "text_enter_a_name": "Enter a name",
   "text_enter_a_name_dir": "Enter a name directory",
   "text_enter_a_name_file": "Enter a name file",
@@ -96,5 +97,6 @@
   "api_create_file_file_exist": "A file with that name already exists.",
   "api_create_file_error": "Failed to create a new file.",
   "api_create_file_success": "The new file has been created successfully.",
-  "api_create_file_not_exist": "The file could not be opened for writing."
+  "api_create_file_not_exist": "The file could not be opened for writing.",
+  "api_is_readable": "Access denied."
 }
