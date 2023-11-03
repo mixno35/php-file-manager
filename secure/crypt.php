@@ -7,9 +7,8 @@ if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
     $ip = $_SERVER["REMOTE_ADDR"];
 }
 
-$userAgent = $_SERVER["HTTP_USER_AGENT"] ?? ($ip ?? "sdfsdfdfgdfgdfhsdhdfhf");
-
-$key = md5($userAgent);
+$userAgent = ($_SERVER["HTTP_USER_AGENT"] ?? "sdfsdfdfgdfgdfhsdhdfhf");
+$key = md5($userAgent . ($ip ?? "0.0.0.0"));
 
 
 function str_encrypt($text = ""):string {
