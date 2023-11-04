@@ -1,8 +1,10 @@
 <?php
+global $session_name, $host;
+
+include_once "../php/data.php";
 include_once "crypt.php";
 
 $auth_info = $_GET["sdsdg"];
-$session_name = "OKpgfxYTMR";
 
 echo "Authorize protection...";
 ?>

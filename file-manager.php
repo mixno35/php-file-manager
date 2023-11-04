@@ -9,8 +9,7 @@ include_once "class/FileParseManager.php";
 $file_manager = new FileManager();
 $file_parse = new FileParseManager();
 
-$path = trim($_GET["path"]) ?? "";
-
+$path = $file_manager->parse_separator(trim($_GET["path"]) ?? "");
 
 $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes($main_path["server"]));
 
@@ -109,7 +108,7 @@ $result = array_merge($directories, $files);
                 <li draggable="true" oncontextmenu="popup_window([
                     {'name': 'Context 1'},
                     {'name': 'Context 2'}
-                ])" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ? 1 : 0 ?>, this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>">
+                ])" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ? 1 : 0 ?>, this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>" data-href="<?= $file_manager->get_current_url($f_path, true) ?>">
                     <span class="first">
                         <span class="image-preview">
                             <img src="<?= $file_parse->get_icon($f_path) ?>" alt="Image">

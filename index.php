@@ -78,8 +78,27 @@ $resource_v = time(); // Устанавливаем версию для ресу
             </section>
         </nav>
         <div id="resize-divider" class="resize-divider"></div>
-        <article class="main-file-manager" id="main-file-manager">
+        <article class="main-file-manager">
+            <div id="main-file-manager">
 
+            </div>
+
+            <div class="menu-selected-fd" id="menu-selected-fd" style="display: none">
+                <ul class="list-menu-selected">
+                    <li data-type="single" id="menu-selected-open">
+                        <i class="fa fa-arrow-up-right-from-square"></i>
+                        <span><?= str_get_string("tooltip_open_view_w") ?></span>
+                    </li>
+                    <li data-type="single" id="menu-selected-rename">
+                        <i class="fa fa-pencil"></i>
+                        <span><?= str_get_string("tooltip_rename_w") ?></span>
+                    </li>
+                    <li data-type="single" id="menu-selected-info">
+                        <i class="fa fa-info-circle"></i>
+                        <span><?= str_get_string("tooltip_details_w") ?></span>
+                    </li>
+                </ul>
+            </div>
         </article>
     </main>
 
@@ -196,32 +215,59 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 setTimeout(function () {
                     if (clickCount === 1) {
                         // Одиночный клик
-                        openFileDetail(_path);
-                        // const index = selectPaths.indexOf(_path);
-                        // if (index === -1) {
-                        //     selectPaths.push(_path);
-                        //     document.getElementById(_element_id).classList.add("selected");
-                        // } else {
-                        //     selectPaths.splice(index, 1);
-                        //     document.getElementById(_element_id).classList.remove("selected");
-                        // }
-                        // setTimeout(() => { updateSelectPathsContainer() }, 100);
+                        clickToPathSingle(_path, _is_dir, _element_id);
                     } else {
                         // Двойной клик
-                        if (_is_dir) {
-                            loadMainFileManager(_path, true);
-                        } else {
-                            window.open("view.php?p=" + _path, "_blank");
-                        }
+                        clickToPathDuo(_path, _is_dir, _element_id);
                     }
                     clickCount = 0;
                 }, 200); // Задержка для определения двойного клика
             }
         }
 
+        function clickToPathSingle(_path = "", _is_dir = false, _element_id = null) {
+            const index = selectPaths.indexOf(_path);
+            if (index === -1) {
+                selectPaths.push(_path);
+                document.getElementById(_element_id).classList.add("selected");
+            } else {
+                selectPaths.splice(index, 1);
+                document.getElementById(_element_id).classList.remove("selected");
+            }
+            setTimeout(() => { updateSelectPathsContainer() }, 100);
+        }
+
+        function clickToPathDuo(_path = "", _is_dir = false, _element_id = null) {
+            if (_is_dir) loadMainFileManager(_path, true);
+            else window.open("view.php?p=" + _path, "_blank");
+        }
+
         function updateSelectPathsContainer() {
             console.log(selectPaths);
+            const isSelected = selectPaths.length > 0;
+
+            document.getElementById("menu-selected-fd").style.display = isSelected ? "flex" : "none";
+
+            const elements_single = document.querySelectorAll("div#menu-selected-fd ul.list-menu-selected li[data-type='single']");
+
+            for(let i = 0; i < elements_single.length; i++) {
+                elements_single[i].style.display = (selectPaths.length > 1) ? "none" : "flex";
+            }
+
+            if (isSelected) document.getElementById("main-file-manager").classList.add("selected");
+            else document.getElementById("main-file-manager").classList.remove("selected");
         }
+
+        document.getElementById("menu-selected-open").addEventListener("click", () => {
+            const container = document.querySelector("ul#file-manager-list li.item-fm.selected");
+            clickToPathDuo(container.getAttribute("data-path"), Boolean(Number(container.getAttribute("data-isdir"))), container.id);
+        });
+        document.getElementById("menu-selected-rename").addEventListener("click", () => {
+            run_command().rename(selectPaths[0]);
+        });
+        document.getElementById("menu-selected-info").addEventListener("click", () => {
+            openFileDetail(selectPaths[0]);
+        });
     </script>
 
     <script>
@@ -251,8 +297,10 @@ $resource_v = time(); // Устанавливаем версию для ресу
                     openedDirectory = _path;
                     document.getElementById("main-file-manager").innerHTML = result;
 
-                    if (_update)
-                        url_param().set("p", _path);
+                    if (_update) url_param().set("p", _path);
+
+                    selectPaths = [];
+                    setTimeout(() => { updateSelectPathsContainer() }, 100);
                 }
             });
         }
@@ -337,8 +385,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 },
                 drop: () => {
                     if (Boolean(draggedIsDir)) {
-                        if (movePathStart !== movePath)
-                            run_command().move(movePathStart, movePath);
+                        if (movePathStart !== movePath) run_command().move(movePathStart, movePath);
                     }
 
                     movePath = "";
@@ -355,8 +402,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 },
                 over: () => {
                     if (Boolean(draggedIsDir))
-                        if (movePathStart !== movePath)
-                            event.preventDefault();
+                        if (movePathStart !== movePath) event.preventDefault();
                 }
             }
         }

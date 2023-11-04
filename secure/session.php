@@ -1,4 +1,7 @@
 <?php
+global $session_name;
+
+include_once "./php/data.php";
 include_once "crypt.php";
 
 /* HINT^ - Используем эту функцию, если пользователь не авторизован */
@@ -11,9 +14,6 @@ function without_auth():void {
 $users = array(
     "admin" => "admin"
 );
-
-/* HINT^ - Название сессии в которой будет храниться сессия */
-$session_name = "OKpgfxYTMR";
 
 /* HINT^ - Небольшая проверка на авторизацию */
 if (empty(trim($_COOKIE[$session_name] ?? ""))) {

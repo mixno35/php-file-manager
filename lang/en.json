@@ -36,7 +36,10 @@
   "tooltip_create_file": "Create new file (Ctrl + Alt + F)",
   "tooltip_delete": "Delete (Ctrl + Delete)",
   "tooltip_rename": "Rename (Ctrl + Alt + R)",
+  "tooltip_rename_w": "Rename",
   "tooltip_open_view": "Open this file",
+  "tooltip_open_view_w": "Open",
+  "tooltip_details_w": "Info",
   "tooltip_dev_info": "Information",
   "tooltip_dev_paid": "Support financially",
   "tooltip_dev_settings": "Settings",
@@ -73,6 +76,7 @@
   "message_unknown_progress_type": "Unknown progress type.",
 
   "message_enter_tab_size_view": "Enter an indent from 1 to 12.",
+  "message_test_font": "Each person is born with a unique set of abilities, explore this world and unlock your potential to create your own unique destiny.",
 
   "api_command_unknown": "Unknown command.",
   "api_command_path_skip": "The contents of the path were not identified, perhaps the path is incorrect.",

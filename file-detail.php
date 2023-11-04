@@ -80,23 +80,5 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
             <?php } ?>
         </div>
     </div>
-
-    <nav class="bottom-actions">
-        <?php $ex_path = addslashes($path); ?>
-        <span class="item" onclick="run_command().delete('<?= $ex_path ?>')" title="<?= str_get_string('tooltip_delete') ?>">
-            <span class="material-symbols-outlined">delete</span>
-            <label><?= str_get_string("action_remove") ?></label>
-        </span>
-        <span class="item" onclick="run_command().rename('<?= $ex_path ?>')" title="<?= str_get_string('tooltip_rename') ?>">
-            <span class="material-symbols-outlined">edit</span>
-            <label><?= str_get_string("action_rename") ?></label>
-        </span>
-        <?php if (is_file($path) and file_exists($path)) { ?>
-            <span class="item" onclick="window.open('view.php?p=<?= addslashes($path) ?>', '_blank')" title="<?= str_get_string('tooltip_open_view') ?>">
-                <span class="material-symbols-outlined">open_in_new</span>
-                <label><?= str_get_string("action_open_view") ?></label>
-            </span>
-        <?php } ?>
-    </nav>
 </div>
 

@@ -20,8 +20,9 @@ if (!file_exists($path)) {
     die(str_get_string("text_file_not_exists"));
 }
 
-$file_type = explode("/", $file_manager->get_mime_type($path))[0];
-$file_type_2 = explode("/", $file_manager->get_mime_type($path))[1];
+$mime_type = $file_manager->get_mime_type($path);
+$file_type = explode("/", $mime_type)[0];
+$file_type_2 = explode("/", $mime_type)[1];
 
 function get_mode_codemirror(string $path = ""):string {
     $plain = strtolower(pathinfo($path, PATHINFO_EXTENSION));
@@ -85,7 +86,7 @@ function get_mode_codemirror(string $path = ""):string {
         <h4 class="file-viewer-unknown-file"><?= str_get_string("text_privileges_forbidden") ?></h4>
     <?php exit(); } ?>
 
-    <?php if ($file_type === "font") { ?>
+    <?php if ($file_type === "font" or $file_type_2 === "x-font-ttf") { ?>
         <header>
             <h1 class="title">
                 <?= str_get_string("document_name_view_2", true) ?>
@@ -125,8 +126,50 @@ function get_mode_codemirror(string $path = ""):string {
 
             .font {
                 font-family: <?= $font_name ?>, "<?= $font_name ?>", serif;
+                line-height: 90%;
             }
         </style>
+
+        <label>
+            <input value="" class="input-text-preview" placeholder="<?= str_get_string('message_test_font') ?>">
+        </label>
+
+        <div class="fonts-container"></div>
+
+        <script>
+            const set_text_test = (_text = "") => {
+                const font_elements = document.getElementsByClassName("font");
+
+                for(let i = 0; i < font_elements.length; i++) {
+                    font_elements[i].innerText = _text;
+                }
+            }
+
+            document.body.style.overflow = "auto";
+
+            const create_font_preview = (_tag, _font_size = 12) => {
+                let elm = document.createElement(_tag);
+                    elm.classList.add("font");
+                    elm.classList.add("font-preview");
+                    elm.style.fontSize = _font_size + "px";
+                    elm.setAttribute("data-name", "<?= basename($path) ?> - " + _font_size + "px");
+
+                document.querySelector("div.fonts-container").appendChild(elm);
+            }
+
+            create_font_preview("h1", 48);
+            create_font_preview("h2", 36);
+            create_font_preview("h3", 32);
+            create_font_preview("h4", 21);
+            create_font_preview("h5", 16);
+            create_font_preview("h6", 14);
+
+            document.querySelector("input.input-text-preview").addEventListener("input", (event) => {
+                set_text_test(((event.currentTarget.value !== "") ? event.currentTarget.value : stringOBJ["message_test_font"]));
+            });
+
+            setTimeout(() => { set_text_test(stringOBJ["message_test_font"]) }, 200);
+        </script>
     <?php exit(); } ?>
 
     <?php if ($file_type === "text" or $file_type_2 === "json" or $file_type === "log") { ?>
@@ -365,6 +408,9 @@ function get_mode_codemirror(string $path = ""):string {
         </script>
     <?php exit(); } ?>
 
-    <h4 class="file-viewer-unknown-file"><?= str_get_string("text_unknown_type_file") ?></h4>
+    <h4 class="file-viewer-unknown-file">
+        <?= str_get_string("text_unknown_type_file") ?>
+        <span class="message"><?= $mime_type ?></span>
+    </h4>
 </body>
 </html>

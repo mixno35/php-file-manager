@@ -397,7 +397,9 @@ main article.main-file-manager {
     flex-direction: column;
     left: var(--size-divider-resize-3);
 }
-
+main article.main-file-manager div#main-file-manager {
+    overflow-y: auto;
+}
 main article.main-file-manager nav.header {
     width: 100%;
     height: var(--size-header);
@@ -468,6 +470,7 @@ main article.main-file-manager nav.header div.manager-content {
 
     padding: 12px 12px;
 }
+
 main article.main-file-manager nav.header div.manager-content button.item-nav-button {
     background-color: transparent;
     display: flex;
@@ -534,9 +537,16 @@ main article.main-file-manager h5.message {
 
 main article.main-file-manager article {
     width: 100%;
-    height: calc(100% - var(--size-header));
+    height: calc(100% - var(--size-header) - 1px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 
     overflow-y: auto;
+}
+main article.main-file-manager.selected article {
+    padding-bottom: calc(var(--size-header) + 12px);
 }
 
 main article.main-file-manager article ul.file-manager {
@@ -562,6 +572,13 @@ main article.main-file-manager article ul.file-manager li {
     align-items: center;
     position: relative;
 }
+main article.main-file-manager article ul.file-manager li.selected {
+    background-image: linear-gradient(90deg, var(--fm-color-body) -10%, var(--fm-color-primary-20) 100%);
+
+    outline: 1px solid var(--fm-color-primary);
+
+    z-index: 1;
+}
 main article.main-file-manager article ul.file-manager li.drag-in {
     border-radius: 0;
     border-color: transparent;
@@ -570,7 +587,7 @@ main article.main-file-manager article ul.file-manager li.drag-in {
     background-image: linear-gradient(var(--fm-color-body), var(--fm-color-body-gray));
     box-shadow: 0 0 0 var(--radius-02) var(--fm-color-primary-20);
 
-    z-index: 1;
+    z-index: 2;
 }
 main article.main-file-manager article ul.file-manager li.dir-back {
     position: sticky;
@@ -629,6 +646,9 @@ main article.main-file-manager article ul.file-manager li span.other {
 
     pointer-events: none;
     user-select: none;
+}
+main article.main-file-manager article ul.file-manager li.selected span.other {
+    color: var(--fm-color-text);
 }
 
 main article.main-file-manager article ul.file-manager.grid {
@@ -1033,6 +1053,90 @@ h4.file-viewer-unknown-file {
     padding: 0 12px;
 
     text-transform: uppercase;
+    letter-spacing: .04em;
+}
+h4.file-viewer-unknown-file span.message {
+    position: relative;
+    top: 6px;
+    color: var(--fm-color-text-sub-40);
+
+    font-weight: 400;
+
+    padding: 4px 8px;
+
+    text-transform: none;
+    letter-spacing: .02em;
+
+    border-radius: var(--radius-02);
+    border: 1px solid var(--fm-color-divider);
+}
+
+main div.menu-selected-fd {
+    position: relative;
+    background-color: var(--fm-color-body);
+
+    overflow: auto;
+
+    width: calc(100% - 24px);
+    height: var(--size-header);
+    max-height: var(--size-header);
+    min-height: var(--size-header);
+
+    margin: 12px;
+
+    border-radius: var(--radius-02);
+    border: 1px solid var(--fm-color-divider);
+
+    z-index: 2;
+
+    /*     box-shadow: 0 0 10px rgba(0,0,0,.05); */
+}
+
+main div.menu-selected-fd ul.list-menu-selected {
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+
+    width: 100%;
+}
+main div.menu-selected-fd ul.list-menu-selected li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+
+    width: 80px;
+    height: 100%
+}
+main div.menu-selected-fd ul.list-menu-selected li {
+    border-right: 1px solid var(--fm-color-divider);
+}
+main div.menu-selected-fd ul.list-menu-selected li:hover {
+    /*     background: linear-gradient(180deg, transparent, var(--fm-color-body-gray)); */
+    background-color: var(--fm-color-body-gray);
+}
+main div.menu-selected-fd ul.list-menu-selected li i.fa {
+    font-size: 14px;
+
+    color: var(--fm-color-text-sub);
+}
+main div.menu-selected-fd ul.list-menu-selected li:hover i.fa {
+    color: var(--fm-color-text);
+}
+main div.menu-selected-fd ul.list-menu-selected li span {
+    font-size: 10px;
+    font-weight: 500;
+
+    color: var(--fm-color-text-sub);
+
+    /*text-transform: uppercase;*/
     letter-spacing: .04em;
 }
 

@@ -1,4 +1,8 @@
 <?php
+global $host, $main_path;
+
+include_once "./php/data.php";
+
 class FileManager {
     public function get_directory_size(string $path = ""):int {
         if (!is_readable($path)) return 0;
@@ -111,12 +115,13 @@ class FileManager {
         }
     }
 
-    public function get_current_url(string $absolute_path, bool $show_scheme = false):string {
-        $currentPageUrl = ($show_scheme ? ((isset($_SERVER["HTTPS"]) ? "https" : "http") . "://") : "") . ($_SERVER["HTTP_HOST"] ?? "NaN");
-        $currentDirectory = dirname($currentPageUrl);
-        $relativePath = str_replace(getcwd() ?? "", "", $absolute_path);
+    public function get_current_url(string $path, bool $show_scheme = false):string {
+        global $host, $main_path;
 
-        return $this->parse_separator($currentDirectory . DIRECTORY_SEPARATOR . $relativePath, "/");
+        $currentPageUrl = ($show_scheme ? ((isset($_SERVER["HTTPS"]) ? "https" : "http") . "://") : "") . $host;
+        $relativePath = str_replace($main_path["server"], "", $path);
+
+        return $this->parse_separator($currentPageUrl . $relativePath, "/");
     }
 
     public function parse_separator(string $path, string $separator = DIRECTORY_SEPARATOR, string $pattern = "/\\\\+/"):string {
