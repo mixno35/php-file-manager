@@ -95,6 +95,9 @@ function get_mode_codemirror(string $path = ""):string {
 
         <?php
         $font_name = "font_" . uniqid();
+        $font_content = file_get_contents($path);
+        $font_mime_type = mime_content_type($path);
+        $font_blob = "data:" . $font_mime_type . ";base64," . base64_encode($font_content);
 
         function get_font_format(string $path):string {
             global $file_manager;
@@ -121,7 +124,7 @@ function get_mode_codemirror(string $path = ""):string {
         <style>
             @font-face {
                 font-family: <?= $font_name ?>;
-                src: url("<?= $file_manager->get_current_url($path, true); ?>") format("<?= get_font_format($path) ?>");
+                src: url("<?= $font_blob ?>") format("<?= get_font_format($path) ?>");
             }
 
             .font {
