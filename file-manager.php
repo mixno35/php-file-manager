@@ -131,11 +131,12 @@ $result = array_merge($directories, $files);
                 const array_paths = document.querySelectorAll("ul#file-manager-list li");
                 console.log(array_paths);
 
+                count_file_manager_items = <?= sizeof($result) ?>;
+
                 for(let i = 0; i < array_paths.length; i++) {
                     console.log(array_paths[0].getAttribute("data-path"));
                     const index = selectPaths.indexOf(array_paths[0].getAttribute("data-path"));
-                    if (index !== -1)
-                        array_paths[i].classList.add("selected");
+                    if (index !== -1) array_paths[i].classList.add("selected");
                 }
             </script>
         <?php } else { ?>

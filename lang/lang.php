@@ -42,10 +42,14 @@ $content = json_encode($string); // Для JS списка
  * Функция выводит необходимый текст по его ключу, если текста под этим ключом нет, будет выведен этот ключ
  * @param string $key
  * @param bool $html (необязательно) обрабатывает html теги
+ * @param array $replace
  * @return string
  */
-function str_get_string(string $key = "", bool $html = false):string {
+function str_get_string(string $key = "", bool $html = false, array $replace = []):string {
     global $string;
     $str = array_key_exists($key, $string) ? $string[$key] : $key;
+    if (sizeof($replace) > 0)
+        for($i = 0; $i < sizeof($replace); $i++) $str = str_replace("%" . ($i + 1) . "s", $replace[$i], $str);
+
     return $html ? $str : htmlspecialchars($str);
 }

@@ -23,6 +23,7 @@
     --fm-color-hint: rgb(142, 148, 150);
     --fm-color-primary: rgb(30, 144, 255);
     --fm-color-primary-20: rgba(30, 144, 255, 0.2);
+    --fm-color-primary-30: rgba(30, 144, 255, 0.3);
     --fm-color-primary-hover: rgb(25, 136, 241);
     --fm-color-shadow: rgba(23, 24, 24, 0.2);
     --fm-color-toast: rgba(0, 0, 0, 0.9);

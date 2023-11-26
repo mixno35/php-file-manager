@@ -25,6 +25,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
     <link rel="stylesheet" href="assets/css/system/root.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/default.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/progress.css?v=<?= $resource_v ?>">
+    <link rel="stylesheet" href="assets/css/system/alert.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/custom/fontawesome-free/css/all.css">
 
@@ -34,10 +35,11 @@ $resource_v = time(); // Устанавливаем версию для ресу
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
     <script src="assets/js/m35/parse-url.js"></script>
+    <script src="assets/js/m35/alert.js"></script>
     <script src="assets/js/system.js?v=<?= $resource_v ?>"></script>
 
     <script>
-        const stringOBJ = JSON.parse(JSON.stringify(<?= $content ?>));
+        const stringOBJ = <?= $content ?>;
     </script>
 </head>
 <body>
@@ -72,9 +74,9 @@ $resource_v = time(); // Устанавливаем версию для ресу
 <!--                </ul>-->
 <!--            </section>-->
             <section class="dev-menu">
-                <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_info') ?>">info</span>
-                <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_paid') ?>">paid</span>
-                <span class="material-symbols-outlined" title="<?= str_get_string('tooltip_dev_settings') ?>">settings</span>
+                <i class="fa fa-flag" title="<?= str_get_string('tooltip_dev_report') ?>" id="action-dev-report"></i>
+                <i class="fa fa-circle-dollar-to-slot" title="<?= str_get_string('tooltip_dev_paid') ?>" id="action-dev-paid"></i>
+                <i class="fa fa-gear" title="<?= str_get_string('tooltip_dev_settings') ?>" id="action-dev-settings"></i>
             </section>
         </nav>
         <div id="resize-divider" class="resize-divider"></div>
@@ -97,6 +99,14 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         <i class="fa fa-info-circle"></i>
                         <span><?= str_get_string("tooltip_details_w") ?></span>
                     </li>
+                    <li data-type="single" id="menu-selected-delete">
+                        <i class="fa fa-trash-can"></i>
+                        <span><?= str_get_string("tooltip_delete_w") ?></span>
+                    </li>
+                    <li data-type="multiple" id="menu-selected-select-all">
+                        <i class="fa fa-check-double"></i>
+                        <span><?= str_get_string("tooltip_select_all") ?></span>
+                    </li>
                 </ul>
             </div>
         </article>
@@ -107,8 +117,24 @@ $resource_v = time(); // Устанавливаем версию для ресу
     </section>
 
     <script>
+        document.getElementById("action-dev-report").addEventListener("click", () => {
+            window.open("//linkbox.su/r/mixno35");
+        });
+        document.getElementById("action-dev-paid").addEventListener("click", () => {
+            window.open("//www.donationalerts.com/r/mixno35");
+        });
+        document.getElementById("action-dev-settings").addEventListener("click", () => {
+            // ----------------------------------------
+            // ----------------------------------------
+            // ----------------------------------------
+            // ----------------------------------------
+        });
+    </script>
+
+    <script>
         let openedDirectory = "<?= addslashes($main_path["server"]) ?>";
         let isGrid = false;
+        let count_file_manager_items = 0;
 
         const
             COMMAND_CREATE_FILE = "create-file",
@@ -121,8 +147,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
         const resizableElement = document.getElementById("left-directory-manager");
         const resizeHandle = document.getElementById("resize-divider");
         let isResizing = false;
-        let startX;
-        let startWidth;
+        let startX, startWidth;
 
         resizeHandle.addEventListener("mousedown", (e) => {
             isResizing = true;
@@ -161,9 +186,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 },
                 success: function (result) {
                     progress();
-
-                    if (_container_id !== null)
-                        document.getElementById(_container_id).innerHTML = result;
+                    if (_container_id !== null) document.getElementById(_container_id).innerHTML = result;
                 }
             });
         }
@@ -181,10 +204,12 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         // Одиночный клик
                         if (_count > 0) {
                             if (document.getElementById(_element_id).classList.contains("open")) {
-                                if (_container_id !== null)
-                                    document.getElementById(_container_id).innerHTML = "";
+                                if (_container_id !== null) document.getElementById(_container_id).innerHTML = "";
                             } else {
-                                loadNavDirectoryManager(document.getElementById(_element_id).getAttribute("data-path"), _container_id);
+                                loadNavDirectoryManager(
+                                    document.getElementById(_element_id).getAttribute("data-path"),
+                                    _container_id
+                                );
                             }
 
                             document.getElementById(_element_id).classList.toggle("open");
@@ -213,15 +238,10 @@ $resource_v = time(); // Устанавливаем версию для ресу
             clickCount++;
             if (clickCount === 1) {
                 setTimeout(function () {
-                    if (clickCount === 1) {
-                        // Одиночный клик
-                        clickToPathSingle(_path, _is_dir, _element_id);
-                    } else {
-                        // Двойной клик
-                        clickToPathDuo(_path, _is_dir, _element_id);
-                    }
+                    if (clickCount === 1) clickToPathSingle(_path, _is_dir, _element_id); // Одиночный клик
+                    else clickToPathDuo(_path, _is_dir, _element_id); // Двойной клик
                     clickCount = 0;
-                }, 200); // Задержка для определения двойного клика
+                }, 200);
             }
         }
 
@@ -267,6 +287,9 @@ $resource_v = time(); // Устанавливаем версию для ресу
         });
         document.getElementById("menu-selected-info").addEventListener("click", () => {
             openFileDetail(selectPaths[0]);
+        });
+        document.getElementById("menu-selected-delete").addEventListener("click", () => {
+            run_command().delete(selectPaths[0]);
         });
     </script>
 
@@ -529,8 +552,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
     <script>
         const popup_window = (actions = []) => {
-            if (actions.length < 1)
-                return;
+            if (actions.length < 1) return;
 
             event.preventDefault();
         }

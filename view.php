@@ -86,6 +86,159 @@ function get_mode_codemirror(string $path = ""):string {
         <h4 class="file-viewer-unknown-file"><?= str_get_string("text_privileges_forbidden") ?></h4>
     <?php exit(); } ?>
 
+    <?php if ($file_type === "video") { ?>
+        <div class="video-preview">
+            <video id="video-player">
+                <source src="view-content/blob.php?p=<?= urlencode($path) ?>">
+            </video>
+            <div class="controls" id="video-controls">
+                <section class="progress">
+                    <div class="seek" style="width: 0"></div>
+                </section>
+                <div class="left">
+                    <p>
+                        <span class="current">00:00</span> / <span class="duration">00:00</span>
+                    </p>
+                </div>
+                <i class="fa fa-play" id="action-play-pause"></i>
+                <div class="right">
+                    <i class="fa fa-repeat small no-active" id="action-repeat"></i>
+                    <i class="fa fa-expand small" id="action-fullscreen"></i>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const videoPlayer = document.querySelector("#video-player");
+            const videoControls = document.querySelector("#video-controls");
+
+            const timeDuration = document.querySelector(".duration");
+            const timeCurrent = document.querySelector(".current");
+
+            let timer,
+                isHoveredVideoControls = false,
+                isSeeking = false;
+
+            document.getElementById("action-play-pause").addEventListener("click", () => {
+                if (videoPlayer.paused) videoPlayer.play();
+                else videoPlayer.pause();
+            });
+            document.getElementById("action-fullscreen").addEventListener("click", () => {
+                const element = document.querySelector(".video-preview");
+                if (!isFullscreen()) {
+                    if (element.requestFullscreen) element.requestFullscreen();
+                    else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
+                    else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
+                    else if (element.msRequestFullscreen) element.msRequestFullscreen();
+
+                    document.getElementById("action-fullscreen").classList.remove("fa-expand");
+                    document.getElementById("action-fullscreen").classList.add("fa-compress");
+                } else {
+                    if (document.exitFullscreen) document.exitFullscreen();
+                    else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                    else if (document.msExitFullscreen) document.msExitFullscreen();
+
+                    document.getElementById("action-fullscreen").classList.add("fa-expand");
+                    document.getElementById("action-fullscreen").classList.remove("fa-compress");
+                }
+            });
+            document.getElementById("action-repeat").addEventListener("click", (event) => {
+                videoPlayer.loop = !videoPlayer.loop;
+                event.currentTarget.classList.toggle("no-active");
+            });
+
+            document.querySelector(".progress").addEventListener("click", (event) => {
+                const seek = document.querySelector(".seek");
+                const progress = document.querySelector(".progress");
+
+                const clickPosition = event.clientX - progress.getBoundingClientRect().left;
+                const progressWidth = progress.offsetWidth;
+
+                if (clickPosition >= 0 && clickPosition <= progressWidth) {
+                    const percentage = (clickPosition / progressWidth);
+
+                    videoPlayer.currentTime = (percentage * videoPlayer.duration);
+                    seek.style.width = (percentage * 100) + "%";
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.keyCode === 32) document.getElementById("action-play-pause").click();
+                if (event.keyCode === 70) document.getElementById("action-fullscreen").click();
+            });
+
+            videoPlayer.addEventListener("pause", () => {
+                document.getElementById("action-play-pause").classList.remove("fa-pause");
+                document.getElementById("action-play-pause").classList.add("fa-play");
+                showVideoControls();
+            });
+            videoPlayer.addEventListener("play", (event) => {
+                document.getElementById("action-play-pause").classList.add("fa-pause");
+                document.getElementById("action-play-pause").classList.remove("fa-play");
+                hideVideoControls();
+            });
+            videoPlayer.addEventListener("ended", () => {
+                showVideoControls();
+            });
+            videoPlayer.addEventListener("loadedmetadata", (event) => {
+                timeDuration.innerText = formatTime(event.currentTarget.duration);
+            });
+            videoPlayer.ontimeupdate = (event) => {
+                timeCurrent.innerText = formatTime(event.currentTarget.currentTime);
+                updatingProgressSeek();
+            };
+
+            document.addEventListener("mousemove", function() {
+                showVideoControls();
+            });
+
+            videoControls.addEventListener('mouseenter', function() {
+                isHoveredVideoControls = true;
+            });
+            videoControls.addEventListener('mouseleave', function() {
+                isHoveredVideoControls = false;
+            });
+
+            function showVideoControls() {
+                clearTimeout(timer);
+                videoControls.style.transform = "translateY(0)";
+                document.body.style.cursor = "unset";
+                timer = setTimeout(() => { hideVideoControls() }, 2000);
+            }
+
+            function hideVideoControls() {
+                if (!isHoveredVideoControls && !videoPlayer.paused) {
+                    videoControls.style.transform = "translateY(100%)";
+                    document.body.style.cursor = "none";
+                }
+            }
+
+            function updatingProgressSeek() {
+                document.querySelector(".seek").style.width =
+                    ((event.currentTarget.currentTime / event.currentTarget.duration) * 100) + "%";
+            }
+
+            showVideoControls();
+
+            function isFullscreen() {
+                return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+            }
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = Math.floor(seconds % 60);
+
+                const formattedMinutes = padZero(minutes);
+                const formattedSeconds = padZero(remainingSeconds);
+
+                return formattedMinutes + ":" + formattedSeconds;
+            }
+            function padZero(number) {
+                return (number < 10 ? "0" : "") + number;
+            }
+        </script>
+    <?php exit(); } ?>
+
     <?php if ($file_type === "font" or $file_type_2 === "x-font-ttf") { ?>
         <header>
             <h1 class="title">
@@ -95,9 +248,6 @@ function get_mode_codemirror(string $path = ""):string {
 
         <?php
         $font_name = "font_" . uniqid();
-        $font_content = file_get_contents($path);
-        $font_mime_type = mime_content_type($path);
-        $font_blob = "data:" . $font_mime_type . ";base64," . base64_encode($font_content);
 
         function get_font_format(string $path):string {
             global $file_manager;
@@ -124,12 +274,12 @@ function get_mode_codemirror(string $path = ""):string {
         <style>
             @font-face {
                 font-family: <?= $font_name ?>;
-                src: url("<?= $font_blob ?>") format("<?= get_font_format($path) ?>");
+                src: url("view-content/blob.php?p=<?= addslashes($path) ?>") format("<?= get_font_format($path) ?>");
             }
 
             .font {
                 font-family: <?= $font_name ?>, "<?= $font_name ?>", serif;
-                line-height: 90%;
+                line-height: 100%;
             }
         </style>
 
