@@ -27,5 +27,6 @@ __StormGuardian Files__ (название не окончательное) - э�
 - :white_circle: Управление MySQL (аналог phpMyAdmin)
 - :white_circle: Редактор пользователей __StormGuardian Files__
 - :white_circle: Загрузка файлов
+- :white_circle: Мобильная версия
 
 [Предложить идею](https://linkbox.su/mixno35)
