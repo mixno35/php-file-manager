@@ -99,7 +99,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         <i class="fa fa-info-circle"></i>
                         <span><?= str_get_string("tooltip_details_w") ?></span>
                     </li>
-                    <li data-type="single" id="menu-selected-delete">
+                    <li data-type="multiple" id="menu-selected-delete">
                         <i class="fa fa-trash-can"></i>
                         <span><?= str_get_string("tooltip_delete_w") ?></span>
                     </li>
@@ -289,7 +289,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
             openFileDetail(selectPaths[0]);
         });
         document.getElementById("menu-selected-delete").addEventListener("click", () => {
-            run_command().delete(selectPaths[0]);
+            run_command().delete(selectPaths);
         });
     </script>
 
@@ -310,7 +310,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 url: "file-manager.php",
                 data: {
                     path: _path,
-                    grid: isGrid
+                    grid: (isGrid ? 1 : 0)
                 },
                 success: function (result) {
                     progress();
@@ -437,16 +437,17 @@ $resource_v = time(); // Устанавливаем версию для ресу
              * Это обработчик всех команд, через него проходят все команды перед их выполнением. Можно конечно напрямую, но зачем изобретать велосипед...
              */
             return {
-                delete: (path = "") => {
-                    if (confirm(stringOBJ["message_are_remove"].replace("%1s", path)))
-                        command(COMMAND_CREATE_REMOVE, {path: path}, (() => {
-                            if (document.getElementById("file-detail"))
-                                document.getElementById("file-detail").remove();
+                delete: (object) => {
+                    if (!Array.isArray(object)) return toast().show(getStringBy("message_object_invalid"));
+                    if (object.length < 1) return toast().show(getStringBy("message_object_remove_empty"));
 
+                    let paths = object.join(", ");
+                    if (confirm(stringOBJ["message_are_remove"].replace("%1s", paths)))
+                        command(COMMAND_CREATE_REMOVE, {path: paths}, (() => {
                             updateMainFileManager();
                         }));
                 },
-                rename: (path = "") => {
+                rename: (path) => {
                     const name_path = path.replace(/^.*[\\\/]/, "").trim();
                     const renamed = prompt(stringOBJ["hint_rename_enter_new_name"].replace("%1s", path), name_path);
 
@@ -468,14 +469,14 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         }
                     }
                 },
-                move: (path = "", path_in = "") => {
+                move: (path, path_in) => {
                     /**
-                     * String|Array path - Что перемещаем
-                     * String path_in - Куда перемещаем
+                     * String|Array path - что перемещаем
+                     * String path_in - куда перемещаем
                      */
                     toast().show(path + " перемещено в " + path_in);
                 },
-                create: (path = "") => {
+                create: (path) => {
                     return {
                         dir: () => {
                             const name = prompt(stringOBJ["text_enter_a_name_dir"]);
@@ -514,7 +515,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
             }
         }
 
-        const command = (command = "", data = {}, callback = null) => {
+        const command = (command, data = {}, callback = null) => {
             /**
              * String command - Название команды, которую нужно выполнить
              * Array data - Все параметры, которые потребуются для выполнения команды
@@ -540,7 +541,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                             if (callback !== null) callback(); // Вызываем функцию, если выполнение функции прошло успешно
                         }
 
-                        toast().show(stringOBJ[json["message_id"]] ?? json["message_id"]);
+                        toast().show(getStringBy(json["message_id"], json["return"]));
                     } catch (e) {
                         toast().show(e);
                         console.error(e);
