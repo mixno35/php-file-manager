@@ -13,8 +13,7 @@ $path = $file_manager->parse_separator(trim($_GET["path"]) ?? "");
 
 $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes($main_path["server"]));
 
-if (!is_dir($path))
-    exit();
+if (!is_dir($path)) exit();
 
 $pathComponents = explode(DIRECTORY_SEPARATOR, $path);
 $rootDirectory = $main_path["server"];
@@ -23,18 +22,13 @@ $branch = [];
 $tree_pre = [];
 $tree = [];
 
-// Построение ветки и полных путей
 foreach ($pathComponents as $index => $component) {
     $branch[] = $component;
     $fullPath = implode(DIRECTORY_SEPARATOR, $branch);
     $tree_pre[] = $fullPath;
 }
 
-// Фильтруем список ветки
-foreach ($tree_pre as $item) {
-    if (strpos($item, $rootDirectory) === 0)
-        $tree[] = $item;
-}
+foreach ($tree_pre as $item) if (strpos($item, $rootDirectory) === 0) $tree[] = $item;
 
 $uniID = uniqid();
 ?>

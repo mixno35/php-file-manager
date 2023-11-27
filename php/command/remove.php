@@ -1,7 +1,9 @@
 <?php
 global $data, $path_manager;
 
-$path = $data["path"] ?? "";
+$paths = explode(", ", $data["path"]) ?? [];
+
+//die(print_r($path, true));
 
 function delete_directory($dirPath):void {
     if (is_dir($dirPath)) {
@@ -23,51 +25,21 @@ function delete_directory($dirPath):void {
     }
 }
 
-if (!is_readable($path)) {
-    echo json_encode([
-        "type" => "error",
-        "message_id" => "api_is_readable"
-    ], 128);
+$removed_count = 0;
 
-    exit();
-}
-
-if ($path_manager->chmod_detect($path)) {
-    if (is_dir($path)) {
-        delete_directory($path);
-
-        echo json_encode([
-            "type" => "success",
-            "message_id" => "api_remove_dir_success"
-        ], 128);
-
-        exit();
-    }
-
-    if (is_file($path) && file_exists($path)) {
-        if (unlink($path)) {
-            echo json_encode([
-                "type" => "success",
-                "message_id" => "api_remove_file_success"
-            ], 128);
-        } else {
-            echo json_encode([
-                "type" => "success",
-                "message_id" => "api_remove_file_error"
-            ], 128);
-        }
-        exit();
-    }
-} else {
-    echo json_encode([
-        "type" => "error",
-        "message_id" => "api_create_not_permission_777"
-    ], 128);
-
-    exit();
+foreach ($paths as $path) {
+    if (is_readable($path))
+        if ($path_manager->chmod_detect($path))
+            if (is_dir($path)) {
+                delete_directory($path);
+                $removed_count++;
+            } else if (is_file($path) && file_exists($path)) {
+                if (unlink($path)) $removed_count++;
+            }
 }
 
 echo json_encode([
-    "type" => "error",
-    "message_id" => "api_command_path_skip"
+    "type" => "success",
+    "message_id" => "api_remove_success",
+    "return" => [$removed_count]
 ], 128);
