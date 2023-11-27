@@ -54,6 +54,14 @@
   "tooltip_create_new_fd": "Create new",
   "tooltip_toggle_linear": "Linear",
   "tooltip_toggle_grid": "Grid",
+  "tooltip_media_play": "Play (Space)",
+  "tooltip_media_pause": "Pause (Space)",
+  "tooltip_media_fullscreen_enter": "Fullscreen mode (F)",
+  "tooltip_media_fullscreen_exit": "Exit fullscreen mode (F, Esc)",
+  "tooltip_media_loop": "Loop (L, R)",
+  "tooltip_media_forward": "Fast forward (Arrow Right)",
+  "tooltip_media_backward": "Fast backward (Arrow Left)",
+  "tooltip_media_playback_rate": "Playback speed (S)",
 
   "title_information": "Information",
 

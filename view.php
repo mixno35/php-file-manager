@@ -87,6 +87,12 @@ function get_mode_codemirror(string $path = ""):string {
     <?php exit(); } ?>
 
     <?php if ($file_type === "video" or $file_type === "audio") { ?>
+        <?php
+        $title = basename($path) ?? str_get_string("text_media_unknown");
+        $artist = "";
+        $album = "";
+        $artwork = "";
+        ?>
         <div class="media-preview">
             <<?= $file_type ?> id="media-player">
                 <source src="view-content/blob.php?p=<?= urlencode($path) ?>">
@@ -118,10 +124,13 @@ function get_mode_codemirror(string $path = ""):string {
                         <span class="current">00:00</span> / <span class="duration">00:00</span>
                     </p>
                 </div>
-                <i class="fa fa-play" id="action-play-pause"></i>
+                <i class="fa fa-backward small" id="action-backward" title="<?= str_get_string('tooltip_media_backward') ?>"></i>
+                <i class="fa fa-play" id="action-play-pause" title="<?= str_get_string('tooltip_media_play') ?>"></i>
+                <i class="fa fa-forward small" id="action-forward" title="<?= str_get_string('tooltip_media_forward') ?>"></i>
                 <div class="right">
-                    <i class="fa fa-repeat small no-active" id="action-repeat"></i>
-                    <i class="fa fa-expand small" id="action-fullscreen"></i>
+                    <i class="fa small" id="action-pb-rate" title="<?= str_get_string('tooltip_media_playback_rate') ?>">1x</i>
+                    <i class="fa fa-repeat small no-active" id="action-loop" title="<?= str_get_string('tooltip_media_loop') ?>"></i>
+                    <i class="fa fa-expand small" id="action-fullscreen" title="<?= str_get_string('tooltip_media_fullscreen_enter') ?>"></i>
                 </div>
             </div>
         </div>
@@ -133,6 +142,28 @@ function get_mode_codemirror(string $path = ""):string {
             const timeDuration = document.querySelector(".duration");
             const timeCurrent = document.querySelector(".current");
 
+            const array_playbackRate = [1, 1.5, 2, 3, 4, 5];
+            let currentPlaybackRateIndex = 0;
+
+            if ("mediaSession" in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: "<?= $title ?>",
+                    artist: "<?= $artist ?>",
+                    album: "<?= $album ?>",
+                    artwork: [{ src: "<?= $artwork ?>" }]
+                });
+
+                navigator.mediaSession.setActionHandler("seekbackward", () => {
+                    document.getElementById("action-backward").click();
+                });
+                navigator.mediaSession.setActionHandler("seekforward", () => {
+                    document.getElementById("action-forward").click();
+                });
+                navigator.mediaSession.setActionHandler("seekto", () => {
+                    /* Code excerpted. */
+                });
+            }
+
             let timer,
                 isHoveredMediaControls = false,
                 isAudio = Boolean(<?= $file_type === "audio" ? 1 : 0 ?>);
@@ -143,7 +174,7 @@ function get_mode_codemirror(string $path = ""):string {
                 if (mediaPlayer.paused) mediaPlayer.play();
                 else mediaPlayer.pause();
             });
-            document.getElementById("action-fullscreen").addEventListener("click", () => {
+            document.getElementById("action-fullscreen").addEventListener("click", (event) => {
                 const element = document.querySelector(".media-preview");
                 if (!isFullscreen()) {
                     if (element.requestFullscreen) element.requestFullscreen();
@@ -151,56 +182,67 @@ function get_mode_codemirror(string $path = ""):string {
                     else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
                     else if (element.msRequestFullscreen) element.msRequestFullscreen();
 
-                    document.getElementById("action-fullscreen").classList.remove("fa-expand");
-                    document.getElementById("action-fullscreen").classList.add("fa-compress");
+                    event.currentTarget.classList.remove("fa-expand");
+                    event.currentTarget.classList.add("fa-compress");
+                    event.currentTarget.setAttribute("title", getStringBy("tooltip_media_fullscreen_exit"));
                 } else {
                     if (document.exitFullscreen) document.exitFullscreen();
                     else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
                     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
                     else if (document.msExitFullscreen) document.msExitFullscreen();
 
-                    document.getElementById("action-fullscreen").classList.add("fa-expand");
-                    document.getElementById("action-fullscreen").classList.remove("fa-compress");
+                    event.currentTarget.classList.add("fa-expand");
+                    event.currentTarget.classList.remove("fa-compress");
+                    event.currentTarget.setAttribute("title", getStringBy("tooltip_media_fullscreen_enter"));
                 }
             });
-            document.getElementById("action-repeat").addEventListener("click", (event) => {
+            document.getElementById("action-loop").addEventListener("click", (event) => {
                 mediaPlayer.loop = !mediaPlayer.loop;
                 event.currentTarget.classList.toggle("no-active");
             });
+            document.getElementById("action-pb-rate").addEventListener("click", (event) => {
+                currentPlaybackRateIndex++;
+                if (currentPlaybackRateIndex >= array_playbackRate.length) currentPlaybackRateIndex = 0;
+                const current = array_playbackRate[currentPlaybackRateIndex];
+
+                mediaPlayer.playbackRate = current;
+                event.currentTarget.innerText = `${current}x`;
+            });
+            document.getElementById("action-forward").addEventListener("click", () => { mediaPlayer.currentTime += 10 });
+            document.getElementById("action-backward").addEventListener("click", () => { mediaPlayer.currentTime -= 10 });
 
             document.querySelector(".progress").addEventListener("click", (event) => {
-                const seek = document.querySelector(".seek");
                 const progress = document.querySelector(".progress");
 
                 const clickPosition = event.clientX - progress.getBoundingClientRect().left;
                 const progressWidth = progress.offsetWidth;
+                const percentage = Number(clickPosition / progressWidth);
 
-                if (clickPosition >= 0 && clickPosition <= progressWidth) {
-                    const percentage = (clickPosition / progressWidth);
-
-                    mediaPlayer.currentTime = (percentage * mediaPlayer.duration);
-                    seek.style.width = (percentage * 100) + "%";
-                }
+                mediaPlayer.currentTime = Number(percentage * mediaPlayer.duration);
             });
 
             document.addEventListener("keydown", (event) => {
-                if (event.keyCode === 32) document.getElementById("action-play-pause").click();
-                if (event.keyCode === 70 && !isAudio) document.getElementById("action-fullscreen").click();
+                if (event.code === "Space") document.getElementById("action-play-pause").click();
+                if (event.code === "ArrowLeft") document.getElementById("action-backward").click();
+                if (event.code === "ArrowRight") document.getElementById("action-forward").click();
+                if (event.code === "KeyF" && !isAudio) document.getElementById("action-fullscreen").click();
+                if (event.code === "KeyR" || event.code === "KeyL") document.getElementById("action-loop").click();
+                if (event.code === "KeyS") document.getElementById("action-pb-rate").click();
             });
 
             mediaPlayer.addEventListener("pause", () => {
                 document.getElementById("action-play-pause").classList.remove("fa-pause");
                 document.getElementById("action-play-pause").classList.add("fa-play");
+                document.getElementById("action-play-pause").setAttribute("title", getStringBy("tooltip_media_play"));
                 showMediaControls();
             });
             mediaPlayer.addEventListener("play", () => {
                 document.getElementById("action-play-pause").classList.add("fa-pause");
                 document.getElementById("action-play-pause").classList.remove("fa-play");
+                document.getElementById("action-play-pause").setAttribute("title", getStringBy("tooltip_media_pause"));
                 hideMediaControls();
             });
-            mediaPlayer.addEventListener("ended", () => {
-                showMediaControls();
-            });
+            mediaPlayer.addEventListener("ended", () => { showMediaControls() });
             mediaPlayer.addEventListener("loadedmetadata", (event) => {
                 timeDuration.innerText = formatTime(event.currentTarget.duration);
             });
@@ -209,16 +251,10 @@ function get_mode_codemirror(string $path = ""):string {
                 updatingProgressSeek();
             };
 
-            document.addEventListener("mousemove", () => {
-                showMediaControls();
-            });
+            document.addEventListener("mousemove", () => { showMediaControls() });
 
-            mediaControls.addEventListener("mouseenter", () => {
-                isHoveredMediaControls = true;
-            });
-            mediaControls.addEventListener("mouseleave", () => {
-                isHoveredMediaControls = false;
-            });
+            mediaControls.addEventListener("mouseenter", () => { isHoveredMediaControls = true });
+            mediaControls.addEventListener("mouseleave", () => { isHoveredMediaControls = false });
 
             function showMediaControls() {
                 clearTimeout(timer);
