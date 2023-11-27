@@ -259,7 +259,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
         function clickToPathDuo(_path = "", _is_dir = false, _element_id = null) {
             if (_is_dir) loadMainFileManager(_path, true);
-            else window.open("view.php?p=" + _path, "_blank");
+            else window.open("view.php?p=" + encodeURIComponent(_path), "_blank");
         }
 
         function updateSelectPathsContainer() {

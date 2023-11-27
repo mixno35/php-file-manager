@@ -30,6 +30,7 @@
   "text_unknown_type_file": "Unknown type file",
   "text_privileges_forbidden": "Forbidden",
   "text_access_denied": "Access denied",
+  "text_media_unknown": "Unknown",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",

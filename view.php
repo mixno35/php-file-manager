@@ -86,12 +86,30 @@ function get_mode_codemirror(string $path = ""):string {
         <h4 class="file-viewer-unknown-file"><?= str_get_string("text_privileges_forbidden") ?></h4>
     <?php exit(); } ?>
 
-    <?php if ($file_type === "video") { ?>
-        <div class="video-preview">
-            <video id="video-player">
+    <?php if ($file_type === "video" or $file_type === "audio") { ?>
+        <div class="media-preview">
+            <<?= $file_type ?> id="media-player">
                 <source src="view-content/blob.php?p=<?= urlencode($path) ?>">
-            </video>
-            <div class="controls" id="video-controls">
+            </<?= $file_type ?>>
+            <?php if ($file_type === "audio") { ?>
+                <?php
+                include_once "class/getid3/getid3.php";
+                $getID3 = new getID3();
+                $fileInfo = $getID3->analyze($path);
+
+//                print_r($fileInfo);
+
+                $title = $fileInfo["tags"]["id3v2"]["title"][0] ?? ($fileInfo["filename"] ?? str_get_string("text_media_unknown"));
+                $artist = $fileInfo["tags"]["id3v2"]["artist"][0] ?? "";
+                $album = $fileInfo["tags"]["id3v2"]["album"][0] ?? "";
+                ?>
+                <div class="audio-container">
+                    <h1><?= $title ?></h1>
+                    <h2 <?php if (strlen($artist) < 1) { ?>style="display: none"<?php } ?>><?= $artist ?></h2>
+                    <h3 <?php if (strlen($album) < 1) { ?>style="display: none"<?php } ?>><?= $album ?></h3>
+                </div>
+            <?php } ?>
+            <div class="controls" id="media-controls">
                 <section class="progress">
                     <div class="seek" style="width: 0"></div>
                 </section>
@@ -109,22 +127,24 @@ function get_mode_codemirror(string $path = ""):string {
         </div>
 
         <script>
-            const videoPlayer = document.querySelector("#video-player");
-            const videoControls = document.querySelector("#video-controls");
+            const mediaPlayer = document.querySelector("#media-player");
+            const mediaControls = document.querySelector("#media-controls");
 
             const timeDuration = document.querySelector(".duration");
             const timeCurrent = document.querySelector(".current");
 
             let timer,
-                isHoveredVideoControls = false,
-                isSeeking = false;
+                isHoveredMediaControls = false,
+                isAudio = Boolean(<?= $file_type === "audio" ? 1 : 0 ?>);
+
+            if (isAudio) document.getElementById("action-fullscreen").style.display = "none";
 
             document.getElementById("action-play-pause").addEventListener("click", () => {
-                if (videoPlayer.paused) videoPlayer.play();
-                else videoPlayer.pause();
+                if (mediaPlayer.paused) mediaPlayer.play();
+                else mediaPlayer.pause();
             });
             document.getElementById("action-fullscreen").addEventListener("click", () => {
-                const element = document.querySelector(".video-preview");
+                const element = document.querySelector(".media-preview");
                 if (!isFullscreen()) {
                     if (element.requestFullscreen) element.requestFullscreen();
                     else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
@@ -144,7 +164,7 @@ function get_mode_codemirror(string $path = ""):string {
                 }
             });
             document.getElementById("action-repeat").addEventListener("click", (event) => {
-                videoPlayer.loop = !videoPlayer.loop;
+                mediaPlayer.loop = !mediaPlayer.loop;
                 event.currentTarget.classList.toggle("no-active");
             });
 
@@ -158,58 +178,58 @@ function get_mode_codemirror(string $path = ""):string {
                 if (clickPosition >= 0 && clickPosition <= progressWidth) {
                     const percentage = (clickPosition / progressWidth);
 
-                    videoPlayer.currentTime = (percentage * videoPlayer.duration);
+                    mediaPlayer.currentTime = (percentage * mediaPlayer.duration);
                     seek.style.width = (percentage * 100) + "%";
                 }
             });
 
             document.addEventListener("keydown", (event) => {
                 if (event.keyCode === 32) document.getElementById("action-play-pause").click();
-                if (event.keyCode === 70) document.getElementById("action-fullscreen").click();
+                if (event.keyCode === 70 && !isAudio) document.getElementById("action-fullscreen").click();
             });
 
-            videoPlayer.addEventListener("pause", () => {
+            mediaPlayer.addEventListener("pause", () => {
                 document.getElementById("action-play-pause").classList.remove("fa-pause");
                 document.getElementById("action-play-pause").classList.add("fa-play");
-                showVideoControls();
+                showMediaControls();
             });
-            videoPlayer.addEventListener("play", (event) => {
+            mediaPlayer.addEventListener("play", () => {
                 document.getElementById("action-play-pause").classList.add("fa-pause");
                 document.getElementById("action-play-pause").classList.remove("fa-play");
-                hideVideoControls();
+                hideMediaControls();
             });
-            videoPlayer.addEventListener("ended", () => {
-                showVideoControls();
+            mediaPlayer.addEventListener("ended", () => {
+                showMediaControls();
             });
-            videoPlayer.addEventListener("loadedmetadata", (event) => {
+            mediaPlayer.addEventListener("loadedmetadata", (event) => {
                 timeDuration.innerText = formatTime(event.currentTarget.duration);
             });
-            videoPlayer.ontimeupdate = (event) => {
+            mediaPlayer.ontimeupdate = (event) => {
                 timeCurrent.innerText = formatTime(event.currentTarget.currentTime);
                 updatingProgressSeek();
             };
 
-            document.addEventListener("mousemove", function() {
-                showVideoControls();
+            document.addEventListener("mousemove", () => {
+                showMediaControls();
             });
 
-            videoControls.addEventListener('mouseenter', function() {
-                isHoveredVideoControls = true;
+            mediaControls.addEventListener("mouseenter", () => {
+                isHoveredMediaControls = true;
             });
-            videoControls.addEventListener('mouseleave', function() {
-                isHoveredVideoControls = false;
+            mediaControls.addEventListener("mouseleave", () => {
+                isHoveredMediaControls = false;
             });
 
-            function showVideoControls() {
+            function showMediaControls() {
                 clearTimeout(timer);
-                videoControls.style.transform = "translateY(0)";
+                mediaControls.style.transform = "translateY(0)";
                 document.body.style.cursor = "unset";
-                timer = setTimeout(() => { hideVideoControls() }, 2000);
+                timer = setTimeout(() => { hideMediaControls() }, 2000);
             }
 
-            function hideVideoControls() {
-                if (!isHoveredVideoControls && !videoPlayer.paused) {
-                    videoControls.style.transform = "translateY(100%)";
+            function hideMediaControls() {
+                if (!isHoveredMediaControls && !mediaPlayer.paused && !isAudio) {
+                    mediaControls.style.transform = "translateY(100%)";
                     document.body.style.cursor = "none";
                 }
             }
@@ -219,7 +239,7 @@ function get_mode_codemirror(string $path = ""):string {
                     ((event.currentTarget.currentTime / event.currentTarget.duration) * 100) + "%";
             }
 
-            showVideoControls();
+            showMediaControls();
 
             function isFullscreen() {
                 return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
@@ -274,7 +294,7 @@ function get_mode_codemirror(string $path = ""):string {
         <style>
             @font-face {
                 font-family: <?= $font_name ?>;
-                src: url("view-content/blob.php?p=<?= addslashes($path) ?>") format("<?= get_font_format($path) ?>");
+                src: url("view-content/blob.php?p=<?= urlencode($path) ?>") format("<?= get_font_format($path) ?>");
             }
 
             .font {
