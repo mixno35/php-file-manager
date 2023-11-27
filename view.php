@@ -95,7 +95,7 @@ function get_mode_codemirror(string $path = ""):string {
         ?>
         <div class="media-preview">
             <<?= $file_type ?> id="media-player">
-                <source src="view-content/blob?p=<?= urlencode($path) ?>">
+                <source src="view-content/blob.php?p=<?= urlencode($path) ?>">
             </<?= $file_type ?>>
             <?php if ($file_type === "audio") { ?>
                 <?php
