@@ -1,5 +1,5 @@
 <?php
-include_once "class/PathManager.php";
+include_once "../class/PathManager.php";
 
 $path_manager = new PathManager();
 
