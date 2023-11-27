@@ -2,7 +2,7 @@
 $blob_path = $_GET["p"] ?? "";
 
 if (!file_exists($blob_path)) {
-    http_response_code(404); // Отправляем код 404 Not Found, если файл не найден
+    http_response_code(404);
     exit();
 }
 
@@ -27,9 +27,9 @@ if ($blob_mime_type === false) {
 $filename = basename($blob_path);
 
 // Отправляем правильные заголовки
-header("Content-Type: " . $blob_mime_type);
+header("Content-Type: $blob_mime_type");
 header("Content-Length: " . filesize($blob_path));
-header("Content-Disposition: inline; filename=\"" . $filename . "\"");
+header("Content-Disposition: inline; filename=\"$filename\"");
 header("Cache-Control: public, max-age=0");
 header("Pragma: no-cache");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s", $last_modified_time) . " GMT");
