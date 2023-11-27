@@ -1075,6 +1075,9 @@ h4.file-viewer-unknown-file span.message {
 main div.menu-selected-fd {
     position: relative;
     background-color: var(--fm-color-body);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     overflow: auto;
 
@@ -1092,6 +1095,14 @@ main div.menu-selected-fd {
 
     /*     box-shadow: 0 0 10px rgba(0,0,0,.05); */
 }
+main div.menu-selected-fd span.count {
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 12px;
+
+    position: relative;
+    right: 12px;
+}
 
 main div.menu-selected-fd ul.list-menu-selected {
     list-style: none;
@@ -1103,6 +1114,7 @@ main div.menu-selected-fd ul.list-menu-selected {
     position: relative;
 
     width: 100%;
+    height: 100%;
 }
 main div.menu-selected-fd ul.list-menu-selected li {
     display: flex;

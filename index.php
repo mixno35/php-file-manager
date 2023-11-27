@@ -27,7 +27,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
     <link rel="stylesheet" href="assets/css/system/progress.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/alert.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= $resource_v ?>">
-    <link rel="stylesheet" href="assets/custom/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico?v=2">
 
@@ -108,6 +108,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         <span><?= str_get_string("tooltip_select_all") ?></span>
                     </li>
                 </ul>
+                <span class="count" id="text-selected-count"><?= str_get_string("text_selected_count", false, [0]) ?></span>
             </div>
         </article>
     </main>
@@ -263,8 +264,12 @@ $resource_v = time(); // Устанавливаем версию для ресу
         }
 
         function updateSelectPathsContainer() {
-            console.log(selectPaths);
+            // console.log(selectPaths);
             const isSelected = selectPaths.length > 0;
+
+            try {
+                document.getElementById("text-selected-count").innerText = getStringBy("text_selected_count", [selectPaths.length]);
+            } catch (exx) {}
 
             document.getElementById("menu-selected-fd").style.display = isSelected ? "flex" : "none";
 
@@ -324,6 +329,9 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
                     selectPaths = [];
                     setTimeout(() => { updateSelectPathsContainer() }, 100);
+                    setTimeout(() => {
+                        count_file_manager_items = document.querySelectorAll("ul#file-manager-list li.item-fm").length;
+                    }, 400);
                 }
             });
         }
@@ -469,12 +477,14 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         }
                     }
                 },
-                move: (path, path_in) => {
+                move: (object, path) => {
                     /**
-                     * String|Array path - что перемещаем
-                     * String path_in - куда перемещаем
+                     * Array object - что перемещаем
+                     * String path - куда перемещаем
                      */
-                    toast().show(path + " перемещено в " + path_in);
+                    if (!Array.isArray(object)) return toast().show(getStringBy("message_object_invalid"));
+
+                    toast().show(object + " перемещено в " + path);
                 },
                 create: (path) => {
                     return {

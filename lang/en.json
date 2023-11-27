@@ -31,6 +31,7 @@
   "text_privileges_forbidden": "Forbidden",
   "text_access_denied": "Access denied",
   "text_media_unknown": "Unknown",
+  "text_selected_count": "Selected: %1s",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",
