@@ -91,6 +91,8 @@
 
   "message_unknown_progress_type": "Unknown progress type.",
 
+  "message_object_remove_empty": "Select at least one file or directory to delete.",
+  "message_object_invalid": "Invalid array format.",
   "message_enter_tab_size_view": "Enter an indent from 1 to 12.",
   "message_test_font": "Each person is born with a unique set of abilities, explore this world and unlock your potential to create your own unique destiny.",
 
@@ -99,6 +101,7 @@
   "api_remove_dir_success": "The directory was successfully deleted.",
   "api_remove_dir_error": "Failed to delete the directory.",
   "api_remove_file_success": "The file was successfully deleted.",
+  "api_remove_success": "The selected components have been removed. Successfully deleted: %1s.",
   "api_remove_file_error": "The file could not be deleted.",
   "api_rename_short_char": "The new name cannot be shorter than 1 character.",
   "api_rename_forbidden_chars": "The new name contains forbidden characters.",
