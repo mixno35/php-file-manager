@@ -138,6 +138,7 @@ function get_mode_codemirror(string $path = ""):string {
         <script>
             const mediaPlayer = document.querySelector("#media-player");
             const mediaControls = document.querySelector("#media-controls");
+            const seek = document.querySelector(".seek");
 
             const timeDuration = document.querySelector(".duration");
             const timeCurrent = document.querySelector(".current");
@@ -166,7 +167,8 @@ function get_mode_codemirror(string $path = ""):string {
 
             let timer,
                 isHoveredMediaControls = false,
-                isAudio = Boolean(<?= $file_type === "audio" ? 1 : 0 ?>);
+                isAudio = Boolean(<?= $file_type === "audio" ? 1 : 0 ?>),
+                isDraggingSeek = false;
 
             if (isAudio) document.getElementById("action-fullscreen").style.display = "none";
 
@@ -181,19 +183,11 @@ function get_mode_codemirror(string $path = ""):string {
                     else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
                     else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
                     else if (element.msRequestFullscreen) element.msRequestFullscreen();
-
-                    event.currentTarget.classList.remove("fa-expand");
-                    event.currentTarget.classList.add("fa-compress");
-                    event.currentTarget.setAttribute("title", getStringBy("tooltip_media_fullscreen_exit"));
                 } else {
                     if (document.exitFullscreen) document.exitFullscreen();
                     else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
                     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
                     else if (document.msExitFullscreen) document.msExitFullscreen();
-
-                    event.currentTarget.classList.add("fa-expand");
-                    event.currentTarget.classList.remove("fa-compress");
-                    event.currentTarget.setAttribute("title", getStringBy("tooltip_media_fullscreen_enter"));
                 }
             });
             document.getElementById("action-loop").addEventListener("click", (event) => {
@@ -219,6 +213,20 @@ function get_mode_codemirror(string $path = ""):string {
                 const percentage = Number(clickPosition / progressWidth);
 
                 mediaPlayer.currentTime = Number(percentage * mediaPlayer.duration);
+            });
+
+            window.matchMedia("(display-mode: fullscreen)").addEventListener("change", ({ matches }) => {
+                const action_fullscreen = document.getElementById("action-fullscreen");
+
+                if (matches) {
+                    action_fullscreen.classList.remove("fa-expand");
+                    action_fullscreen.classList.add("fa-compress");
+                    action_fullscreen.setAttribute("title", getStringBy("tooltip_media_fullscreen_exit"));
+                } else {
+                    action_fullscreen.classList.add("fa-expand");
+                    action_fullscreen.classList.remove("fa-compress");
+                    action_fullscreen.setAttribute("title", getStringBy("tooltip_media_fullscreen_enter"));
+                }
             });
 
             document.addEventListener("keydown", (event) => {
@@ -248,10 +256,22 @@ function get_mode_codemirror(string $path = ""):string {
             });
             mediaPlayer.ontimeupdate = (event) => {
                 timeCurrent.innerText = formatTime(event.currentTarget.currentTime);
-                updatingProgressSeek();
+                if (!isDraggingSeek) updatingProgressSeek();
             };
 
-            document.addEventListener("mousemove", () => { showMediaControls() });
+            seek.addEventListener("mousedown", (event) => {
+                isDraggingSeek = true;
+                updateProgressSeek(event);
+                document.querySelector(".progress").classList.add("dragging");
+            });
+            document.addEventListener("mouseup", () => {
+                isDraggingSeek = false;
+                document.querySelector(".progress").classList.remove("dragging");
+            });
+            document.addEventListener("mousemove", (event) => {
+                showMediaControls();
+                if (isDraggingSeek) updateProgressSeek(event);
+            });
 
             mediaControls.addEventListener("mouseenter", () => { isHoveredMediaControls = true });
             mediaControls.addEventListener("mouseleave", () => { isHoveredMediaControls = false });
@@ -291,6 +311,18 @@ function get_mode_codemirror(string $path = ""):string {
             }
             function padZero(number) {
                 return (number < 10 ? "0" : "") + number;
+            }
+
+            function updateProgressSeek(event) {
+                const progressSection = document.querySelector(".progress");
+                const progressWidth = progressSection.clientWidth;
+                let seekWidth = event.clientX - progressSection.getBoundingClientRect().left;
+
+                if (seekWidth < 0) seekWidth = 0;
+                else if (seekWidth > progressWidth) seekWidth = progressWidth;
+
+                const percentage = (seekWidth / progressWidth) * 100;
+                seek.style.width = percentage + "%";
             }
         </script>
     <?php exit(); } ?>

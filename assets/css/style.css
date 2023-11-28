@@ -1263,7 +1263,7 @@ div.media-preview div.controls section.progress {
 
     z-index: 1;
 }
-div.media-preview div.controls section.progress:hover {
+div.media-preview div.controls section.progress:hover, div.media-preview div.controls section.progress.dragging {
     height: 6px;
 
     top: -6px;
@@ -1280,7 +1280,7 @@ div.media-preview div.controls section.progress div.seek {
     width: auto;
     height: 100%;
 }
-div.media-preview div.controls section.progress:hover div.seek::after {
+div.media-preview div.controls section.progress:hover div.seek::after, div.media-preview div.controls section.progress.dragging div.seek::after {
     content: "";
     position: absolute;
     right: -7px;
