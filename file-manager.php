@@ -62,9 +62,12 @@ $uniID = uniqid();
         <button style="display: none" class="item-nav-button" id="file-manager-list-toggle" title="<?= str_get_string('tooltip_toggle_linear') ?>" onclick="toggle_grid_linear(!isGrid)">
             <i class="fa fa-border-all" id="file-manager-list-toggle-icon"></i>
         </button>
-        <button class="item-nav-button" title="<?= str_get_string('tooltip_create_new_fd') ?>" onclick="popup_window([
-            {'name': 'Create file'},
-            {'name': 'Create directory'}
+        <button class="item-nav-button" title="<?= str_get_string('tooltip_create_new_fd') ?>" onclick="event.stopPropagation(); event.preventDefault(); popup_window([
+            {name: getStringBy('action_create_new_file'), icon: 'fa-file-lines'},
+            {name: getStringBy('action_create_new_dir'), icon: 'fa-folder'}
+        ], [
+            () => run_command().create(openedDirectory).file(),
+            () => run_command().create(openedDirectory).dir()
         ])">
             <i class="fa fa-add"></i>
         </button>
@@ -81,7 +84,7 @@ asort($files);
 $result = array_merge($directories, $files);
 ?>
 
-<article class="custom-scroll" data-path="<?= $path ?>">
+<article class="custom-scroll" id="article-file-manager-container" data-path="<?= $path ?>">
     <ul class="file-manager <?php // if (sizeof($result) > 0 and ($_GET['grid'] ?? false)) { echo 'grid'; } ?>" id="file-manager-list">
         <?php if ($path !== $rootDirectory) { ?>
             <li ondblclick="loadMainFileManager('<?= addslashes(dirname($path)) ?>')" class="dir-back" style="display: none">
@@ -100,9 +103,14 @@ $result = array_merge($directories, $files);
                 $li_uniID = uniqid();
                 ?>
                 <li draggable="true" oncontextmenu="popup_window([
-                    {'name': 'Context 1'},
-                    {'name': 'Context 2'}
-                ])" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath('<?= addslashes($f_path) ?>', <?= is_dir($f_path) ? 1 : 0 ?>, this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>" data-href="<?= $file_manager->get_current_url($f_path, true) ?>">
+                    {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square'},
+                    {name: getStringBy('tooltip_rename_w'), icon: 'fa-pencil'},
+                    {name: getStringBy('tooltip_delete_w'), icon: 'fa-trash-can'}
+                ], [
+                    () => clickToPathDuo(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id),
+                    () => run_command().rename(this.getAttribute('data-path')),
+                    () => run_command().delete([this.getAttribute('data-path')])
+                ])" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>" data-href="<?= $file_manager->get_current_url($f_path, true) ?>">
                     <span class="first">
                         <span class="image-preview">
                             <img src="<?= $file_parse->get_icon($f_path) ?>" alt="Image">

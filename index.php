@@ -36,6 +36,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
     <script src="assets/js/m35/parse-url.js"></script>
     <script src="assets/js/m35/alert.js"></script>
+    <script src="assets/js/m35/popup-window.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/system.js?v=<?= $resource_v ?>"></script>
 
     <script>
@@ -118,6 +119,12 @@ $resource_v = time(); // Устанавливаем версию для ресу
     </section>
 
     <script>
+        document.body.addEventListener("click", (event) => {
+            popup_close();
+        });
+    </script>
+
+    <script>
         document.getElementById("action-dev-report").addEventListener("click", () => {
             window.open("//linkbox.su/r/mixno35");
         });
@@ -198,6 +205,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
             event.stopPropagation();
             event.preventDefault();
 
+            popup_close();
+
             clickCount++;
             if (clickCount === 1) {
                 setTimeout(function() {
@@ -236,6 +245,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
             event.stopPropagation();
             event.preventDefault();
 
+            popup_close();
+
             clickCount++;
             if (clickCount === 1) {
                 setTimeout(function () {
@@ -247,15 +258,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
         }
 
         function clickToPathSingle(_path = "", _is_dir = false, _element_id = null) {
-            const index = selectPaths.indexOf(_path);
-            if (index === -1) {
-                selectPaths.push(_path);
-                document.getElementById(_element_id).classList.add("selected");
-            } else {
-                selectPaths.splice(index, 1);
-                document.getElementById(_element_id).classList.remove("selected");
-            }
-            setTimeout(() => { updateSelectPathsContainer() }, 100);
+            selectPathSolo(_path, _element_id);
         }
 
         function clickToPathDuo(_path = "", _is_dir = false, _element_id = null) {
@@ -281,6 +284,18 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
             if (isSelected) document.getElementById("main-file-manager").classList.add("selected");
             else document.getElementById("main-file-manager").classList.remove("selected");
+        }
+
+        function selectPathSolo(_path, _element_id) {
+            const index = selectPaths.indexOf(_path);
+            if (index === -1) {
+                selectPaths.push(_path);
+                document.getElementById(_element_id).classList.add("selected");
+            } else {
+                selectPaths.splice(index, 1);
+                document.getElementById(_element_id).classList.remove("selected");
+            }
+            setTimeout(() => { updateSelectPathsContainer() }, 100);
         }
 
         document.getElementById("menu-selected-open").addEventListener("click", () => {
@@ -320,7 +335,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 success: function (result) {
                     progress();
 
-                    // openFileDetail(_path); // Открываем информацию о директории при ее открытии
+                    // openFileDetail(_path);
 
                     openedDirectory = _path;
                     document.getElementById("main-file-manager").innerHTML = result;
@@ -559,14 +574,6 @@ $resource_v = time(); // Устанавливаем версию для ресу
                 }
             });
         };
-    </script>
-
-    <script>
-        const popup_window = (actions = []) => {
-            if (actions.length < 1) return;
-
-            event.preventDefault();
-        }
     </script>
 
     <script>

@@ -75,6 +75,8 @@
   "action_open_view": "Open file",
   "action_add_new_ff": "Create",
   "action_close_dialog": "Close",
+  "action_create_new_file": "Create file",
+  "action_create_new_dir": "Create directory",
 
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
