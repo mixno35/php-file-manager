@@ -333,6 +333,8 @@ main nav.left-directory-manager section.dev-menu i.fa:hover {
 main div.resize-divider {
     height: 100%;
     width: var(--size-divider-resize);
+    max-width: var(--size-divider-resize);
+    min-width: var(--size-divider-resize);
 
     border-left: 1px solid var(--fm-color-divider);
 
@@ -342,48 +344,11 @@ main div.resize-divider {
     justify-content: center;
     gap: 4px;
     position: relative;
+    background-color: transparent;
 
     transition: width .2s, border-left-width .2s;
 
     z-index: 1;
-}
-main div.resize-divider:hover {
-    border-left-width: var(--size-divider-resize);
-
-    width: 0;
-}
-main div.resize-divider::after {
-    content: "";
-
-    position: absolute;
-    left: -5px;
-    background-color: transparent;
-    opacity: .5;
-
-    border-radius: 100px;
-
-    width: 1px;
-    height: 30px;
-
-    transition: background-color .2s;
-}
-main div.resize-divider::before {
-    content: "";
-
-    position: absolute;
-    left: -8px;
-    background-color: transparent;
-    opacity: .5;
-
-    border-radius: 100px;
-
-    width: 1px;
-    height: 30px;
-
-    transition: background-color .2s;
-}
-main div.resize-divider:hover::after, main div.resize-divider:hover::before {
-    background-color: var(--fm-color-text-sub);
 }
 
 main article.main-file-manager {
@@ -393,7 +358,7 @@ main article.main-file-manager {
     position: relative;
     display: flex;
     flex-direction: column;
-    left: var(--size-divider-resize-3);
+    left: -12px;
 }
 main article.main-file-manager div#main-file-manager {
     overflow-y: auto;
@@ -719,7 +684,7 @@ main nav.file-detail {
     display: flex;
     flex-direction: column;
     position: relative;
-    left: var(--size-divider-resize-3);
+    left: -12px;
     background-color: var(--fm-color-body);
 
     border-left: 1px solid var(--fm-color-divider);
@@ -1081,19 +1046,14 @@ main div.menu-selected-fd {
 
     overflow: auto;
 
-    width: calc(100% - 24px);
+    width: 100%;
     height: var(--size-header);
     max-height: var(--size-header);
     min-height: var(--size-header);
 
-    margin: 12px;
-
-    border-radius: var(--radius-02);
-    border: 1px solid var(--fm-color-divider);
+    border-top: 1px solid var(--fm-color-divider);
 
     z-index: 2;
-
-    /*     box-shadow: 0 0 10px rgba(0,0,0,.05); */
 }
 main div.menu-selected-fd span.count {
     white-space: nowrap;

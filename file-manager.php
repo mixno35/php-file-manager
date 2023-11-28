@@ -104,7 +104,7 @@ $result = array_merge($directories, $files);
                 ?>
                 <li draggable="true" oncontextmenu="popup_window([
                     {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square'},
-                    {name: getStringBy('tooltip_rename_w'), icon: 'fa-pencil'},
+                    {name: getStringBy('tooltip_rename_w'), icon: 'fa-pen'},
                     {name: getStringBy('tooltip_delete_w'), icon: 'fa-trash-can'}
                 ], [
                     () => clickToPathDuo(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id),
