@@ -63,8 +63,8 @@ $uniID = uniqid();
             <i class="fa fa-border-all" id="file-manager-list-toggle-icon"></i>
         </button>
         <button class="item-nav-button" title="<?= str_get_string('tooltip_create_new_fd') ?>" onclick="event.stopPropagation(); event.preventDefault(); popup_window([
-            {name: getStringBy('action_create_new_file'), icon: 'fa-file-lines'},
-            {name: getStringBy('action_create_new_dir'), icon: 'fa-folder'}
+            {name: getStringBy('action_create_new_file'), icon: 'fa-file-lines', for_dir: true, for_file: true},
+            {name: getStringBy('action_create_new_dir'), icon: 'fa-folder', for_dir: true, for_file: true}
         ], [
             () => run_command().create(openedDirectory).file(),
             () => run_command().create(openedDirectory).dir()
@@ -103,14 +103,18 @@ $result = array_merge($directories, $files);
                 $li_uniID = uniqid();
                 ?>
                 <li draggable="true" oncontextmenu="popup_window([
-                    {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square'},
-                    {name: getStringBy('tooltip_rename_w'), icon: 'fa-pen'},
-                    {name: getStringBy('tooltip_delete_w'), icon: 'fa-trash-can'}
+                    {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square', for_dir: true, for_file: true},
+                    {name: getStringBy('tooltip_rename_w'), icon: 'fa-pen', for_dir: true, for_file: true},
+                    {name: getStringBy('tooltip_download_w'), icon: 'fa-download', for_dir: false, for_file: true},
+                    {name: getStringBy('tooltip_details_w'), icon: 'fa-info-circle', for_dir: true, for_file: true},
+                    {name: getStringBy('tooltip_delete_w'), icon: 'fa-trash-can', for_dir: true, for_file: true}
                 ], [
                     () => clickToPathDuo(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id),
                     () => run_command().rename(this.getAttribute('data-path')),
+                    () => download('view-content/blob.php?p=' + encodeURIComponent(this.getAttribute('data-path')), '<?= $item ?>'),
+                    () => openFileDetail(this.getAttribute('data-path')),
                     () => run_command().delete([this.getAttribute('data-path')])
-                ])" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>" data-href="<?= $file_manager->get_current_url($f_path, true) ?>">
+                ], this.getAttribute('data-isdir'))" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $li_uniID ?>" data-path="<?= addslashes($f_path) ?>" data-isdir="<?= is_dir($f_path) ?>" data-href="<?= $file_manager->get_current_url($f_path, true) ?>">
                     <span class="first">
                         <span class="image-preview">
                             <img src="<?= $file_parse->get_icon($f_path) ?>" alt="Image">

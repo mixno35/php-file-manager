@@ -1,4 +1,4 @@
-const popup_window = (actions = [], callback = [], insert_element = document.body) => {
+const popup_window = (actions = [], callback = [], is_dir = false, insert_element = document.body) => {
     popup_close();
 
     if (actions.length < 1) return;
@@ -8,22 +8,27 @@ const popup_window = (actions = [], callback = [], insert_element = document.bod
         popup_container.classList.add("popup");
 
     for (let i = 0; i < actions.length; i++) {
-        const item = document.createElement("li");
+        const for_dir = actions[i]["for_dir"] ?? false;
+        const for_file = actions[i]["for_file"] ?? false;
 
-        const item_text = document.createElement("span");
+        if ((for_dir && is_dir) || (for_file && !is_dir)) {
+            const item = document.createElement("li");
+
+            const item_text = document.createElement("span");
             item_text.innerText = actions[i]["name"];
 
-        if (typeof callback[i] === "function") item.addEventListener("click", callback[i]);
+            if (typeof callback[i] === "function") item.addEventListener("click", callback[i]);
 
-        const icon = document.createElement("i");
-        icon.classList.add("fa");
+            const icon = document.createElement("i");
+            icon.classList.add("fa");
 
-        if (String(actions[i]["icon"] ?? "").length > 0)
-            icon.classList.add(actions[i]["icon"] ?? "fa-font-awesome");
+            if (String(actions[i]["icon"] ?? "").length > 0)
+                icon.classList.add(actions[i]["icon"] ?? "fa-font-awesome");
 
-        item.appendChild(icon);
-        item.appendChild(item_text);
-        popup_container.appendChild(item);
+            item.appendChild(icon);
+            item.appendChild(item_text);
+            popup_container.appendChild(item);
+        }
     }
 
     insert_element.appendChild(popup_container);

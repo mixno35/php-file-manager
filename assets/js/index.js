@@ -55,3 +55,26 @@ document.getElementById("menu-selected-info").addEventListener("click", () => {
 document.getElementById("menu-selected-delete").addEventListener("click", () => {
     run_command().delete(selectPaths);
 });
+document.getElementById("menu-selected-select-all").addEventListener("click", (event) => {
+    const item_text = event.currentTarget.childNodes[3];
+    const items = document.querySelectorAll("ul#file-manager-list li.item-fm");
+    if (items.length === selectPaths.length) {
+        items.forEach((element) => {
+            element.classList.remove("selected");
+            remove_selectPaths(element.getAttribute("data-path"));
+        });
+        item_text.innerText = getStringBy("tooltip_select_all");
+    } else {
+        items.forEach((element) => {
+            element.classList.add("selected");
+            add_selectPaths(element.getAttribute("data-path"));
+        });
+        item_text.innerText = getStringBy("tooltip_unselect");
+    }
+
+    updateSelectPathsContainer();
+});
+
+document.getElementById("action-directory-menu").addEventListener("click", () => {
+    document.getElementById("left-directory-manager").classList.toggle("show");
+});

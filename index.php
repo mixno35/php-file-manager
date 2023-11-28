@@ -51,6 +51,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
     </div>
 
     <header>
+        <i class="fa fa-bars directory-menu" id="action-directory-menu"></i>
+
         <h1 class="title">
             <?= str_get_string("document_name_2", true) ?>
         </h1>
@@ -82,9 +84,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
         </nav>
         <div id="resize-divider" class="resize-divider"></div>
         <article class="main-file-manager">
-            <div id="main-file-manager">
-
-            </div>
+            <div id="main-file-manager"></div>
 
             <div class="menu-selected-fd" id="menu-selected-fd" style="display: none">
                 <ul class="list-menu-selected">

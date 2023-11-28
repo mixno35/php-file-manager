@@ -99,13 +99,22 @@ function updateSelectPathsContainer() {
 function selectPathSolo(_path, _element_id) {
     const index = selectPaths.indexOf(_path);
     if (index === -1) {
-        selectPaths.push(_path);
+        add_selectPaths(_path);
         document.getElementById(_element_id).classList.add("selected");
     } else {
-        selectPaths.splice(index, 1);
+        remove_selectPaths(_path);
         document.getElementById(_element_id).classList.remove("selected");
     }
     setTimeout(() => { updateSelectPathsContainer() }, 100);
+}
+
+function add_selectPaths(path) {
+    const index = selectPaths.indexOf(path);
+    if (index === -1) selectPaths.push(path);
+}
+function remove_selectPaths(path) {
+    const index = selectPaths.indexOf(path);
+    if (index !== -1) selectPaths.splice(index, 1);
 }
 
 function loadMainFileManager(_path = "", _update = false) {
@@ -188,4 +197,16 @@ const toggle_grid_linear = () => {
     }
 
     isGrid = !isGrid;
+}
+
+function download(url, filename) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        })
+        .catch(console.error);
 }

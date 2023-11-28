@@ -106,7 +106,7 @@ const command = (command, data = {}, callback = null) => {
                 let json = JSON.parse(result);
 
                 if (json["type"] === "success") {
-                    if (callback !== null) callback(); // Вызываем функцию, если выполнение функции прошло успешно
+                    if (callback !== null && typeof callback === "function") callback();
                 }
 
                 toast().show(getStringBy(json["message_id"], json["return"]));
