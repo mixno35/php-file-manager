@@ -34,6 +34,9 @@ const popup_window = (actions = [], callback = [], is_dir = false, insert_elemen
     insert_element.appendChild(popup_container);
 
     if (!isMobileDevice()) {
+        element_popup_dom = event.currentTarget;
+        element_popup_sticky = popup_container;
+
         const mouseX = event.clientX;
         const mouseY = event.clientY;
 
@@ -47,12 +50,16 @@ const popup_window = (actions = [], callback = [], is_dir = false, insert_elemen
         popup_container.style.top = top + "px";
     }
 
-    console.log(actions);
+    // console.log(actions);
 }
 
 const popup_close = (stopped = true) => {
     if (document.querySelector(".popup")) {
         document.querySelector(".popup").remove();
+
+        element_popup_dom = null;
+        element_popup_sticky = null;
+
         if (stopped) {
             event.stopPropagation();
             event.preventDefault();

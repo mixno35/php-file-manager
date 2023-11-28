@@ -1,19 +1,28 @@
 div.dialog-container {
-    width: 500px;
-    max-width: 100%;
+    width: 400px;
+    max-width: 400px;
     min-height: 200px;
+    max-height: 60vh;
 
     background-color: var(--fm-color-body);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 10vh;
+    left: 36%;
+    box-shadow: 0 0 4px var(--fm-color-shadow);
 
     border: 1px solid var(--fm-color-divider);
     border-radius: 6px;
+
+    z-index: 21;
 }
 
 p.dialog-title {
     width: calc(100% - 24px);
     height: auto;
 
-    padding: 18px 12px;
+    padding: 12px 12px;
 
     display: flex;
     align-items: center;
@@ -21,16 +30,19 @@ p.dialog-title {
     justify-content: space-between;
     color: var(--fm-color-text);
     position: relative;
-    background-color: var(--fm-color-body-gray);
+    background-color: transparent;
+    cursor: move;
 
+    border-bottom: 1px solid var(--fm-color-divider);
+}
+p.dialog-title span {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 13px;
     font-style: normal;
 
-    letter-spacing: .04em;
+    letter-spacing: -.04em;
     text-decoration: none;
-
-    /*border-bottom: 1px solid var(--color-border);*/
+    text-transform: uppercase;
 }
 p.dialog-message {
     display: inline-block;

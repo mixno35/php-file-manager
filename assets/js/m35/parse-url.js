@@ -13,10 +13,8 @@ const url_param = (url = "", pushState = true) => {
         set: (key = "", value = "", reload = false) => {
             params.set(key, value);
             let newUrl = addr + "?" + params.toString();
-            if (pushState)
-                window.history.pushState({ path: newUrl }, "", newUrl);
-            else
-                return newUrl;
+            if (pushState) window.history.pushState({ path: newUrl }, "", newUrl);
+            else return newUrl;
 
             if (reload) window.location.reload();
         },
@@ -28,21 +26,27 @@ const url_param = (url = "", pushState = true) => {
         delete: (key = "", reload = false) => {
             params.delete(key);
             let newUrl = addr + "?" + params.toString();
-            if (pushState)
-                window.history.pushState({ path: newUrl }, "", newUrl);
-            else
-                return newUrl;
+            if (pushState) window.history.pushState({ path: newUrl }, "", newUrl);
+            else return newUrl;
 
             if (reload) window.location.reload();
         },
 
         deleteAll: (reload = false) => {
-            if (pushState)
-                window.history.pushState({ path: addr }, "", addr);
-            else
-                return addr;
+            if (pushState) window.history.pushState({ path: addr }, "", addr);
+            else return addr;
 
             if (reload) window.location.reload();
+        },
+
+        encode: () => {
+            if (pattern.test(addr)) return encodeURI(addr);
+            else return encodeURIComponent(addr);
+        },
+
+        decode: () => {
+            if (pattern.test(addr)) return decodeURI(addr);
+            else return decodeURIComponent(addr);
         }
     }
 }

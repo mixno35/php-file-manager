@@ -10,14 +10,18 @@ const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
 
     if ((style === DIALOG_STYLE_MESSAGE || style === DIALOG_STYLE_PATH) && content_value.length < 1) return;
 
-    if (document.querySelector("div.dialog-overlay"))
-        document.querySelector("div.dialog-overlay").remove();
+    if (document.querySelector("div.dialog-container"))
+        document.querySelector("div.dialog-container").remove();
+
+    const id_element = "dialog-" + generate_text(10);
 
     const container = document.createElement("div");
     container.classList.add("dialog-container");
+    container.setAttribute("id", id_element);
 
     const container_title = document.createElement("p");
     container_title.classList.add("dialog-title");
+    container_title.setAttribute("id", id_element + "header");
 
     const container_title_span = document.createElement("span");
     container_title_span.innerText = content_title;
@@ -34,7 +38,7 @@ const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
             event.stopPropagation();
             event.preventDefault();
 
-            event.currentTarget.offsetParent.parentElement.offsetParent.remove();
+            event.currentTarget.offsetParent.parentElement.remove();
         })
 
         container_title.appendChild(container_close);
@@ -52,7 +56,7 @@ const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
     } else if (style === DIALOG_STYLE_PATH) {
         container_content.classList.add("loading-content");
 
-        jQuery.ajax(`../dialog/${content_value}`, {
+        $.ajax(`../dialog/${content_value}`, {
             type: METHOD_POST,
             cache: true,
             data: content_data,
@@ -72,4 +76,6 @@ const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
     container.appendChild(container_content);
 
     document.body.appendChild(container);
+
+    dragElement(container);
 }

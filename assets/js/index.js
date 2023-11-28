@@ -4,6 +4,9 @@ const
     COMMAND_CREATE_RENAME = "rename",
     COMMAND_CREATE_REMOVE = "remove";
 
+let element_popup_dom = null;
+let element_popup_sticky = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("popstate", () => {
         const currentURL = window.location.href;
@@ -36,10 +39,7 @@ document.getElementById("action-dev-paid").addEventListener("click", () => {
     window.open("//www.donationalerts.com/r/mixno35");
 });
 document.getElementById("action-dev-settings").addEventListener("click", () => {
-    // ----------------------------------------
-    // ----------------------------------------
-    // ----------------------------------------
-    // ----------------------------------------
+    dialog(DIALOG_STYLE_PATH, [getStringBy("tooltip_dev_settings"), "settings.php"]);
 });
 
 document.getElementById("menu-selected-open").addEventListener("click", () => {
