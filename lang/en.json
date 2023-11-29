@@ -41,7 +41,7 @@
   "tooltip_rename_w": "Rename",
   "tooltip_open_view": "Open this file",
   "tooltip_open_view_w": "Open",
-  "tooltip_details_w": "Info",
+  "tooltip_details_w": "Get info",
   "tooltip_select_all": "Select all",
   "tooltip_unselect": "Unselect",
   "tooltip_unselect_all": "Unselect all",
@@ -83,6 +83,7 @@
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
   "hint_rename_enter_new_name": "Enter a new name for %1s",
+  "hint_search": "Search...",
 
   "message_auth_login_incorrect": "The login must not be shorter than 3 characters or be more than 16 characters",
   "message_auth_password_incorrect": "The password must not be shorter than 3 characters or be more than 64 characters",

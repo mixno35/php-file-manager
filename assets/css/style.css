@@ -35,6 +35,39 @@ header {
 
     border-bottom: 1px solid var(--fm-color-divider);
 }
+header label.search-container {
+    height: calc(100% - 24px);
+    width: fit-content;
+
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
+
+    padding: 12px;
+}
+header label.search-container input[type="search"] {
+    background-color: var(--fm-color-body-gray);
+    color: var(--fm-color-text);
+
+    height: 100%;
+
+    padding: 0 8px;
+
+    border: 1px solid var(--fm-color-divider);
+    outline: none;
+    border-radius: var(--radius-02);
+
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: -.02em;
+}
+header label.search-container input[type="search"]::placeholder {
+    color: var(--fm-color-text-sub-40);
+}
+header label.search-container input[type="search"]:focus {
+    border-color: var(--fm-color-text-sub);
+}
 header i.directory-menu {
     padding: 12px;
 
@@ -1337,7 +1370,7 @@ ol.popup {
     box-shadow: 0 2px 4px var(--fm-color-shadow);
 
     border: 1px solid var(--fm-color-divider);
-    border-radius: 4px;
+    border-radius: var(--radius-02);
 
     z-index: 2;
 

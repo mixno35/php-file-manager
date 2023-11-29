@@ -39,11 +39,13 @@ $resource_v = time(); // Устанавливаем версию для ресу
     <script src="assets/js/m35/popup-window.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/system.js?v=<?= $resource_v ?>"></script>
 
+    <script src="assets/js/index-drag-upload.js?v=<?= $resource_v ?>"></script>
+
     <script>
         const stringOBJ = <?= $content ?>;
     </script>
 </head>
-<body>
+<body ondragover="drag_upload().over()" ondrop="drag_upload().drop()">
     <div class="progress" id="progress" style="display: none">
         <div class="progress-item">
             <div></div><div></div><div></div>
@@ -56,6 +58,10 @@ $resource_v = time(); // Устанавливаем версию для ресу
         <h1 class="title">
             <?= str_get_string("document_name_2", true) ?>
         </h1>
+
+        <label class="search-container">
+            <input type="search" placeholder="<?= str_get_string('hint_search') ?>">
+        </label>
 
         <div class="container-user">
             <img src="assets/icons/avatar.png" alt="Avatar image">
