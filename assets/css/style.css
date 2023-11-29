@@ -338,6 +338,8 @@ main nav.left-directory-manager section.details-manager ul li:last-child {
 main nav.left-directory-manager section.dev-menu {
     width: 100%;
     height: var(--size-header);
+    max-height: var(--size-header);
+    min-height: var(--size-header);
 
     display: flex;
     align-items: center;
@@ -352,7 +354,7 @@ main nav.left-directory-manager section.dev-menu i.fa {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--fm-color-text);
+    color: var(--fm-color-text-sub);
     cursor: pointer;
 
     font-size: 14px;
@@ -362,6 +364,7 @@ main nav.left-directory-manager section.dev-menu i.fa:not(:last-child) {
 }
 main nav.left-directory-manager section.dev-menu i.fa:hover {
     background-color: var(--fm-color-body-gray);
+    color: var(--fm-color-text);
 }
 
 main div.resize-divider {
@@ -396,6 +399,8 @@ main article.main-file-manager {
 }
 main article.main-file-manager div#main-file-manager {
     overflow-y: auto;
+
+    height: 100%;
 }
 main article.main-file-manager nav.header {
     width: 100%;
@@ -1129,12 +1134,12 @@ main div.menu-selected-fd ul.list-menu-selected li:hover {
     /*     background: linear-gradient(180deg, transparent, var(--fm-color-body-gray)); */
     background-color: var(--fm-color-body-gray);
 }
-main div.menu-selected-fd ul.list-menu-selected li i.fa {
+main div.menu-selected-fd ul.list-menu-selected li i {
     font-size: 14px;
 
     color: var(--fm-color-text-sub);
 }
-main div.menu-selected-fd ul.list-menu-selected li:hover i.fa {
+main div.menu-selected-fd ul.list-menu-selected li:hover i {
     color: var(--fm-color-text);
 }
 main div.menu-selected-fd ul.list-menu-selected li span {

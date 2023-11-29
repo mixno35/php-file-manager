@@ -105,7 +105,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
                         <span><?= str_get_string("tooltip_delete_w") ?></span>
                     </li>
                     <li data-type="multiple" id="menu-selected-select-all">
-                        <i class="fa fa-check-double"></i>
+                        <i class="fa-regular fa-square-check"></i>
                         <span><?= str_get_string("tooltip_select_all") ?></span>
                     </li>
                 </ul>

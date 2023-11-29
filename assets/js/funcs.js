@@ -79,6 +79,7 @@ function clickToPathDuo(_path = "", _is_dir = false, _element_id = null) {
 function updateSelectPathsContainer() {
     // console.log(selectPaths);
     const isSelected = selectPaths.length > 0;
+    const action_select_all = document.getElementById("menu-selected-select-all");
 
     try {
         document.getElementById("text-selected-count").innerText = getStringBy("text_selected_count", [selectPaths.length]);
@@ -90,6 +91,16 @@ function updateSelectPathsContainer() {
 
     for(let i = 0; i < elements_single.length; i++) {
         elements_single[i].style.display = (selectPaths.length > 1) ? "none" : "flex";
+    }
+
+    if (selectPaths.length === count_file_manager_items) {
+        action_select_all.childNodes[3].innerText = getStringBy("tooltip_unselect");
+        action_select_all.childNodes[1].classList.remove("fa-square-check");
+        action_select_all.childNodes[1].classList.add("fa-square-minus");
+    } else {
+        action_select_all.childNodes[3].innerText = getStringBy("tooltip_select_all");
+        action_select_all.childNodes[1].classList.add("fa-square-check");
+        action_select_all.childNodes[1].classList.remove("fa-square-minus");
     }
 
     if (isSelected) document.getElementById("main-file-manager").classList.add("selected");
