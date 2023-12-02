@@ -52,6 +52,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
         </div>
     </div>
 
+    <input type="file" id="input-upload-content" multiple style="display: none">
+
     <header>
         <i class="fa fa-bars directory-menu" id="action-directory-menu"></i>
 

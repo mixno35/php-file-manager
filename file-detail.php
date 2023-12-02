@@ -54,11 +54,11 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
             </span>
             <span>
                 <label><?= str_get_string("text_about_path") ?></label>
-                <?= $path ?>
+                <?= $file_manager->parse_separator($path) ?>
             </span>
             <span>
                 <label><?= str_get_string("text_about_url") ?></label>
-                <?= $file_manager->get_current_url($path, true) ?>
+                <?= $file_manager->get_current_url($file_manager->parse_separator($path), true) ?>
             </span>
             <span>
                 <label><?= str_get_string("text_about_size") ?></label>

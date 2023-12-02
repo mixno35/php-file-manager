@@ -13,6 +13,7 @@
 :root {
     --fm-color-body: rgb(255, 255, 255);
     --fm-color-body-gray: rgb(247, 248, 250);
+    --fm-color-body-gray-50: rgb(249, 249, 250);
     --fm-color-header: rgb(255, 255, 255);
     --fm-color-divider: rgb(230, 235, 238);
     --fm-color-header-text: rgb(0, 0, 0);

@@ -3,8 +3,7 @@ const drag_upload = () => {
         drop: () => {
             event.preventDefault();
             event.stopPropagation();
-            const files = event.dataTransfer.files;
-            console.log(files);
+            uploadNewFiles(event.dataTransfer.files);
         },
         over: () => {
             event.preventDefault();

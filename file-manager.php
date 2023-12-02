@@ -10,6 +10,7 @@ $file_manager = new FileManager();
 $file_parse = new FileParseManager();
 
 $path = $file_manager->parse_separator(trim($_GET["path"]) ?? "");
+$isGrid = intval($_GET["grid"]);
 
 $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes($main_path["server"]));
 
@@ -59,8 +60,11 @@ $uniID = uniqid();
     </ul>
 
     <div class="manager-content">
-        <button style="display: none" class="item-nav-button" id="file-manager-list-toggle" title="<?= str_get_string('tooltip_toggle_linear') ?>" onclick="toggle_grid_linear(!isGrid)">
-            <i class="fa fa-border-all" id="file-manager-list-toggle-icon"></i>
+        <button class="item-nav-button" id="file-manager-upload-content" title="<?= str_get_string('tooltip_upload_content') ?>" onclick="document.getElementById('input-upload-content').click()">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        </button>
+        <button class="item-nav-button" id="file-manager-list-toggle" title="<?= $isGrid === 1 ? str_get_string('tooltip_toggle_linear') : str_get_string('tooltip_toggle_grid') ?>" onclick="toggle_grid_linear(!isGrid)">
+            <i class="fa <?= $isGrid === 1 ? 'fa-bars' : 'fa-border-all' ?>" id="file-manager-list-toggle-icon"></i>
         </button>
         <button class="item-nav-button" title="<?= str_get_string('tooltip_create_new_fd') ?>" onclick="event.stopPropagation(); event.preventDefault(); popup_window([
             {name: getStringBy('action_create_new_file'), icon: 'fa-file-lines', for_dir: true, for_file: true},
@@ -85,7 +89,7 @@ $result = array_merge($directories, $files);
 ?>
 
 <article class="custom-scroll" id="article-file-manager-container" data-path="<?= $path ?>">
-    <ul class="file-manager <?php // if (sizeof($result) > 0 and ($_GET['grid'] ?? false)) { echo 'grid'; } ?>" id="file-manager-list">
+    <ul class="file-manager <?= $isGrid === 1 ? 'grid' : '' ?>" id="file-manager-list">
         <?php if ($path !== $rootDirectory) { ?>
             <li ondblclick="loadMainFileManager('<?= addslashes(dirname($path)) ?>')" class="dir-back" style="display: none">
                 <span class="first">
@@ -133,18 +137,6 @@ $result = array_merge($directories, $files);
                     </span>
                 </li>
             <?php } ?>
-            <script>
-                const array_paths = document.querySelectorAll("ul#file-manager-list li");
-                console.log(array_paths);
-
-                count_file_manager_items = <?= sizeof($result) ?>;
-
-                for(let i = 0; i < array_paths.length; i++) {
-                    console.log(array_paths[0].getAttribute("data-path"));
-                    const index = selectPaths.indexOf(array_paths[0].getAttribute("data-path"));
-                    if (index !== -1) array_paths[i].classList.add("selected");
-                }
-            </script>
         <?php } else { ?>
             <h5 class="message"><?= str_get_string("message_dir_empty") ?></h5>
         <?php } ?>

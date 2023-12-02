@@ -267,6 +267,14 @@ main nav.left-directory-manager section.list-manager ul li span {
 
     cursor: pointer;
 }
+main nav.left-directory-manager section.list-manager ul li span i {
+    display: none;
+    color: var(--fm-color-text-sub);
+
+    padding: 4px;
+
+    transform: rotate(-90deg);
+}
 main nav.left-directory-manager section.list-manager ul li span img {
     --size-folder-span: 24px;
 
@@ -309,6 +317,15 @@ main nav.left-directory-manager section.list-manager ul li span span.count {
 }
 main nav.left-directory-manager section.list-manager ul li.empty span span.count {
     display: none;
+}
+@media screen and (max-width: 800px) {
+    main nav.left-directory-manager section.list-manager ul li span i {
+        display: block;
+    }
+
+    main nav.left-directory-manager section.list-manager ul li span span.count {
+        display: none;
+    }
 }
 
 main nav.left-directory-manager section.details-manager {
@@ -652,11 +669,23 @@ main article.main-file-manager article ul.file-manager li span.first {
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+
+    width: 100%;
 
     white-space: nowrap;
 
     pointer-events: none;
     user-select: none;
+}
+main article.main-file-manager article ul.file-manager li span.first span.name {
+    text-overflow: ellipsis;
+    white-space: unset;
+
+    display: block;
+    overflow: hidden;
+
+    width: 100%;
 }
 main article.main-file-manager article ul.file-manager li span.first img {
     --size-f-image-f: 30px;
@@ -922,6 +951,8 @@ main nav.file-detail div.container div.content div.info span {
     font-size: 13px;
 
     user-select: text;
+
+    line-break: anywhere;
 }
 main nav.file-detail div.container div.content div.info span label {
     font-weight: 600;
