@@ -1,5 +1,5 @@
 <?php
-global $language_tag, $content, $login, $main_path, $server_encoding;
+global $language_tag, $content, $login, $main_path, $server_encoding, $default_avatar;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
@@ -10,6 +10,14 @@ include_once "class/FileManager.php";
 $file_manager = new FileManager();
 
 $resource_v = time(); // Устанавливаем версию для ресурсов
+
+$perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4));
+
+//if ($perms == 0777) {
+//    echo "Разрешение 777 выдано.";
+//} else {
+//    echo "Разрешение 777 не выдано.";
+//}
 ?>
 
 <html lang="<?= $language_tag ?? "en-US" ?>">
@@ -66,7 +74,7 @@ $resource_v = time(); // Устанавливаем версию для ресу
         </label>
 
         <div class="container-user">
-            <img src="assets/icons/avatar.png" alt="Avatar image">
+            <img src="<?= $default_avatar ?>" alt="Avatar image">
             <h4><?= $login ?></h4>
         </div>
     </header>

@@ -66,6 +66,7 @@
   "tooltip_media_backward": "Fast backward (Arrow Left)",
   "tooltip_media_playback_rate": "Playback speed (S)",
   "tooltip_upload_content": "Upload",
+  "tooltip_logout": "Log-out",
 
   "title_information": "Information",
 
@@ -101,6 +102,7 @@
   "message_object_remove_empty": "Select at least one file or directory to delete.",
   "message_object_invalid": "Invalid array format.",
   "message_enter_tab_size_view": "Enter an indent from 1 to 12.",
+  "message_welcome_back_user": "Welcome, <b>%1s</b>",
   "message_test_font": "Each person is born with a unique set of abilities, explore this world and unlock your potential to create your own unique destiny.",
 
   "api_command_unknown": "Unknown command.",

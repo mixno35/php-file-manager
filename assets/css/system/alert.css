@@ -10,7 +10,7 @@ div.dialog-container {
     position: fixed;
     top: 10vh;
     left: 36%;
-    box-shadow: 0 0 4px var(--fm-color-shadow);
+    box-shadow: var(--shadow-04);
 
     border: 1px solid var(--fm-color-divider);
     border-radius: 6px;
@@ -40,9 +40,11 @@ p.dialog-title span {
     font-size: 13px;
     font-style: normal;
 
+    /*     margin: auto; */
+
     letter-spacing: -.04em;
     text-decoration: none;
-    text-transform: uppercase;
+    text-transform: none;
 }
 p.dialog-message {
     display: inline-block;
@@ -58,11 +60,11 @@ p.dialog-message {
 }
 
 div.dialog-content {
-    width: calc(100% - 24px);
+    width: 100%;
     height: auto;
     max-height: 60vh;
 
-    padding: 12px;
+    padding: 0;
 
     overflow-y: auto;
     display: flex;
@@ -75,7 +77,9 @@ div.dialog-content body {
 
     display: flex;
     flex-direction: column;
+    background-color: transparent;
     gap: 12px;
+    inset: auto;
 }
 
 i.dialog-action-close {
@@ -91,5 +95,58 @@ i.dialog-action-close {
     justify-content: center;
 }
 i.dialog-action-close:hover {
+    color: var(--fm-color-text);
+}
+
+div.user-container {
+    width: calc(100% - 24px);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--fm-color-body-gray);
+
+    padding: 12px;
+
+    border-bottom: 1px solid var(--fm-color-divider);
+}
+div.user-container section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+div.user-container section img {
+    width: 36px;
+
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 100%;
+}
+div.user-container section span {
+    width: 100%;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+}
+div.user-container section span b {
+    font-weight: 600;
+}
+div.user-container section i {
+    font-size: 14px;
+
+    color: var(--fm-color-text-sub);
+    cursor: pointer;
+
+    padding: 4px;
+}
+div.user-container section i:hover {
     color: var(--fm-color-text);
 }

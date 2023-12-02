@@ -30,8 +30,9 @@ loadMainFileManager((url_param().get("p") ?? serverDirectory));
 
 document.getElementById("action-dev-report")
     .addEventListener("click", () => { window.open("//linkbox.su/r/mixno35") });
-document.getElementById("action-dev-paid")
-    .addEventListener("click", () => { window.open("//www.donationalerts.com/r/mixno35") });
+document.getElementById("action-dev-paid").addEventListener("click", () => {
+    dialog(DIALOG_STYLE_PATH, [getStringBy("tooltip_dev_paid"), "paid.php"]);
+});
 document.getElementById("action-dev-settings").addEventListener("click", () => {
     dialog(DIALOG_STYLE_PATH, [getStringBy("tooltip_dev_settings"), "settings.php"]);
 });

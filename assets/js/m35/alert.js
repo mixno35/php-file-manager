@@ -56,9 +56,9 @@ const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
     } else if (style === DIALOG_STYLE_PATH) {
         container_content.classList.add("loading-content");
 
-        $.ajax(`../dialog/${content_value}`, {
+        $.ajax(`./dialog/${content_value}`, {
             type: METHOD_POST,
-            cache: true,
+            cache: false,
             data: content_data,
             dataType: "html",
             success: (response) => {

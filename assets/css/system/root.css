@@ -15,7 +15,7 @@
     --fm-color-body-gray: rgb(247, 248, 250);
     --fm-color-body-gray-50: rgb(249, 249, 250);
     --fm-color-header: rgb(255, 255, 255);
-    --fm-color-divider: rgb(230, 235, 238);
+    --fm-color-divider: #D0D5DD;
     --fm-color-header-text: rgb(0, 0, 0);
     --fm-color-text: rgb(0, 0, 0);
     --fm-color-text-invert: rgb(255, 255, 255);
@@ -27,6 +27,12 @@
     --fm-color-primary-30: rgba(30, 144, 255, 0.3);
     --fm-color-primary-hover: rgb(25, 136, 241);
     --fm-color-shadow: rgba(23, 24, 24, 0.2);
+    --fm-color-shadow-04: rgba(16, 24, 40, 0.04);
+    --fm-color-shadow-05: rgba(16, 24, 40, 0.05);
+    --fm-color-shadow-06: rgba(16, 24, 40, 0.06);
+    --fm-color-shadow-10: rgba(16, 24, 40, 0.10);
+    --fm-color-shadow-20: rgba(16, 24, 40, 0.20);
+    --fm-color-shadow-25: rgba(16, 24, 40, 0.25);
     --fm-color-toast: rgba(0, 0, 0, 0.9);
     --fm-color-toast-text: rgb(255, 255, 255);
     --fm-color-toast-border: rgba(0, 0, 0, 0);
@@ -42,4 +48,12 @@
     --radius-04: 8px;
     --radius-05: 10px;
     --radius-06: 12px;
+
+    --shadow-01: 0px 1px 2px 0px var(--fm-color-shadow-05);
+    --shadow-02: 0px 1px 2px 0px var(--fm-color-shadow-06), 0px 1px 3px 0px var(--fm-color-shadow-10);
+    --shadow-03: 0px 2px 4px -2px var(--fm-color-shadow-06), 0px 4px 8px -2px var(--fm-color-shadow-10);
+    --shadow-04: 0px 4px 6px -2px var(--fm-color-shadow-05), 0px 12px 16px -4px var(--fm-color-shadow-10);
+    --shadow-05: 0px 8px 8px -4px var(--fm-color-shadow-04), 0px 20px 24px -4px var(--fm-color-shadow-10);
+    --shadow-06: 0px 24px 48px -12px var(--fm-color-shadow-25);
+    --shadow-07: 0px 32px 64px -12px var(--fm-color-shadow-20);
 }

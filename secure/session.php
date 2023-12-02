@@ -1,7 +1,7 @@
 <?php
 global $session_name;
 
-include_once "./php/data.php";
+include_once dirname(__FILE__, 2) . "/php/data.php";
 include_once "crypt.php";
 
 /* HINT^ - Используем эту функцию, если пользователь не авторизован */

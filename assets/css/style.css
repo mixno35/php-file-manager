@@ -542,7 +542,7 @@ main article.main-file-manager nav.header div.manager-content button.item-nav-bu
     font-size: 12px;
 }
 main article.main-file-manager nav.header div.manager-content button.item-nav-button:not(:disabled):hover {
-    box-shadow: 0 1px 1px var(--fm-color-shadow);
+    box-shadow: var(--shadow-01);
 }
 main article.main-file-manager nav.header div.manager-content button.item-nav-button:disabled {
     cursor: default;
@@ -761,8 +761,9 @@ main article.main-file-manager article ul.file-manager.grid li span.first {
 main article.main-file-manager article ul.file-manager.grid li span.first span.name {
     width: 100%;
 
-    display: flex;
-    align-items: start;
+    text-overflow: ellipsis;
+
+    display: block;
 }
 main article.main-file-manager article ul.file-manager.grid li span.first span.image-preview {
     height: 120px;
