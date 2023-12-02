@@ -83,7 +83,7 @@ const run_command = () => {
     }
 }
 
-const command = (command, data = {}, callback = null) => {
+const command = (command, data = {}, callback = () => {}, xhr = () => {}) => {
     /**
      * String command - Название команды, которую нужно выполнить
      * Array data - Все параметры, которые потребуются для выполнения команды
@@ -91,10 +91,11 @@ const command = (command, data = {}, callback = null) => {
      */
     progress();
 
-    let query = data;
+    const query = data;
     query["command"] = command; // Добавляем команду в запрос
 
     $.ajax({
+        xhr: xhr(),
         url: "php/command.php",
         method: "POST",
         data: query,

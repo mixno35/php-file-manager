@@ -228,5 +228,52 @@ function uploadNewFiles(object) {
     for(let i = 0; i < object.length; i++) { uploadNewFile(object[i]) }
 }
 function uploadNewFile(file) {
-    console.log(file);
+    const url = window.URL.createObjectURL(file);
+    const form_data = new FormData();
+
+    form_data.append("file", file);
+
+    const container_upload = document.getElementById("container-upload-content");
+
+    const upload_content_name = (file.name ?? "unknown");
+    const upload_content_id = "ucid_" + generate_text(12);
+
+    const container_item = document.createElement("li");
+    container_item.setAttribute("id", upload_content_id);
+    container_item.setAttribute("data-file", upload_content_name);
+
+    const container_div = document.createElement("div");
+
+    const item_progress = document.createElement("article");
+    item_progress.classList.add("progress");
+
+    const text_name = document.createElement("p");
+    text_name.innerText = upload_content_name;
+
+    const text_progress = document.createElement("span");
+    text_progress.innerText = "0%";
+
+    container_div.appendChild(text_name);
+    container_div.appendChild(text_progress);
+
+    container_item.appendChild(container_div);
+    container_item.appendChild(item_progress);
+
+    container_upload.appendChild(container_item);
+
+    setTimeout(() => {
+        command(COMMAND_UPLOAD_FILE, {blob: url, file: form_data}, () => {
+
+        }, () => {
+            const xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener("progress", (event) => {
+                if (event.lengthComputable) {
+                    const percentComplete = ((event.loaded / event.total) * 100);
+                    item_progress.style.width = `${percentComplete}%`;
+                    text_progress.innerText = `${percentComplete}%`;
+                }
+            }, false);
+            return xhr;
+        });
+    }, 100);
 }

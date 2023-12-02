@@ -38,6 +38,8 @@
     --fm-color-toast-border: rgba(0, 0, 0, 0);
     --fm-color-progress-background: rgba(255, 255, 255, 0.7);
     --fm-color-progress-item: rgb(0, 0, 0);
+    --fm-color-progress-upload: rgba(45, 220, 45, 0.2);
+    --fm-color-progress-upload-40: rgba(45, 220, 45, 0.4);
 
     --fm-color-scroll-1: rgb(111, 114, 117);
     --fm-color-scroll-2: rgb(215, 219, 222);

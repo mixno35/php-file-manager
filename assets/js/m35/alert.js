@@ -10,8 +10,10 @@ const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
 
     if ((style === DIALOG_STYLE_MESSAGE || style === DIALOG_STYLE_PATH) && content_value.length < 1) return;
 
-    if (document.querySelector("div.dialog-container"))
-        document.querySelector("div.dialog-container").remove();
+    if (isMobileDevice()) {
+        if (document.querySelector("div.dialog-container"))
+            document.querySelector("div.dialog-container").remove();
+    }
 
     const id_element = "dialog-" + generate_text(10);
 
@@ -77,5 +79,5 @@ const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
 
     document.body.appendChild(container);
 
-    dragElement(container);
+    if (!isMobileDevice()) dragElement(container);
 }

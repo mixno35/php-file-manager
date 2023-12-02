@@ -92,6 +92,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
 <!--                    <li>--><?php //= str_replace("%1s", $file_manager->format_size($file_manager->get_directory_size($main_path["server"])), str_get_string("text_php_total_size")) ?><!--</li>-->
 <!--                </ul>-->
 <!--            </section>-->
+            <ul class="container-upload-content custom-scroll" id="container-upload-content"></ul>
             <section class="dev-menu">
                 <i class="fa fa-flag" title="<?= str_get_string('tooltip_dev_report') ?>" id="action-dev-report"></i>
                 <i class="fa fa-circle-dollar-to-slot" title="<?= str_get_string('tooltip_dev_paid') ?>" id="action-dev-paid"></i>

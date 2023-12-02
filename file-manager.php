@@ -34,7 +34,7 @@ foreach ($tree_pre as $item) if (strpos($item, $rootDirectory) === 0) $tree[] = 
 $uniID = uniqid();
 ?>
 <nav class="header">
-    <div class="manager-content">
+    <div class="manager-content left">
         <button class="item-nav-button" onclick="window.history.back()" title="<?= str_get_string("tooltip_go_to_path_back") ?>">
             <i class="fa fa-arrow-left"></i>
         </button>
@@ -59,7 +59,7 @@ $uniID = uniqid();
         <?php } ?>
     </ul>
 
-    <div class="manager-content">
+    <div class="manager-content right">
         <button class="item-nav-button" id="file-manager-upload-content" title="<?= str_get_string('tooltip_upload_content') ?>" onclick="document.getElementById('input-upload-content').click()">
             <i class="fa-solid fa-arrow-up-from-bracket"></i>
         </button>
@@ -129,9 +129,28 @@ $result = array_merge($directories, $files);
                     </span>
                     <span class="other">
                         <?php if (is_dir($f_path)) { ?>
+                            <?php
+                            $count_dirs = sizeof($file_manager->get_folders($f_path));
+                            $count_files = sizeof($file_manager->get_files($f_path));
+                            ?>
+                            <?php if (($count_dirs + $count_files) > 0) { ?>
+                                <span class="count">
+                                    <span class="itm">
+                                        <?= $count_dirs ?>
+                                        <i class="fa-solid fa-folder"></i>
+                                    </span>
+                                    <span class="itm">
+                                        <?= $count_files ?>
+                                        <i class="fa-solid fa-file"></i>
+                                    </span>
+                                </span>
+                            <?php } else { ?>
+                                <span class="count"><?= str_get_string("message_dir_empty_short") ?></span>
+                            <?php } ?>
+                        <?php } ?>
+                        <?php if (is_file($f_path)) { ?>
                             <span class="count">
-                                <?php $count = (sizeof($file_manager->get_files($f_path)) + sizeof($file_manager->get_folders($f_path))); ?>
-                                <?= $count === 0 ? str_get_string("message_dir_empty_short") : $count ?>
+                                <?= $file_manager->format_size($file_manager->get_file_size($f_path)) ?>
                             </span>
                         <?php } ?>
                     </span>
