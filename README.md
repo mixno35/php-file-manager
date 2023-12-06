@@ -14,8 +14,8 @@ __StormGuardian Files__ (название не окончательное) - э�
 - :ballot_box_with_check::white_check_mark: Предпросмотр директорий
 - :ballot_box_with_check::white_check_mark: Просмотр файлов и директорий
 - :ballot_box_with_check::white_check_mark: Удаление файлов и директорий - <kbd>CTRL</kbd> <kbd>Delete</kbd>
-- :ballot_box_with_check::white_check_mark: Создание файла - <kbd>CTRL</kbd> <kbd>ALT</kbd> <kbd>F</kbd>
-- :ballot_box_with_check::white_check_mark: Создание директории - <kbd>CTRL</kbd> <kbd>ALT</kbd> <kbd>D</kbd>
+- :ballot_box_with_check::white_check_mark: Создание файла - <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>F</kbd>
+- :ballot_box_with_check::white_check_mark: Создание директории - <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>D</kbd>
 - :ballot_box_with_check: Мультивыделение
 - :ballot_box_with_check::white_check_mark: Просмотр информации о файле и директории
 - :ballot_box_with_check::white_check_mark: Поиск
