@@ -13,7 +13,7 @@ __StormGuardian Files__ (название не окончательное) - э�
 Здесь будут функции, которые уже готовы на стороне клиента(готово - :ballot_box_with_check:, не готово - :blue_square:) и/или на строне бекенда(готово - :white_check_mark:, не готово - :green_square:).
 - :ballot_box_with_check::white_check_mark: Предпросмотр директорий
 - :ballot_box_with_check::white_check_mark: Просмотр файлов и директорий
-- :ballot_box_with_check::white_check_mark: Удаление файлов и директорий - <kbd>CTRL</kbd> <kbd>Delete</kbd>
+- :ballot_box_with_check::white_check_mark: Удаление файлов и директорий - <kbd>Ctrl</kbd> <kbd>Delete</kbd>
 - :ballot_box_with_check::white_check_mark: Создание файла - <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>F</kbd>
 - :ballot_box_with_check::white_check_mark: Создание директории - <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>D</kbd>
 - :ballot_box_with_check: Мультивыделение
