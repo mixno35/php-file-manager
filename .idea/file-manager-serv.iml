@@ -16,5 +16,7 @@
     <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="codemirror" level="application" />
     <orderEntry type="library" name="neo" level="application" />
+    <orderEntry type="library" name="typescript" level="application" />
+    <orderEntry type="library" name="jqueryui" level="application" />
   </component>
 </module>

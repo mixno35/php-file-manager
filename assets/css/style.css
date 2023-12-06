@@ -169,7 +169,7 @@ header div.container-user:hover {
 }
 
 main {
-    width: calc(100% + var(--size-divider-resize-2));
+    width: calc(100% + var(--size-divider-resize-2) + 2px);
     height: calc(100% - var(--size-header));
 
     position: relative;
@@ -596,7 +596,8 @@ main article.main-file-manager h5.message {
     justify-content: center;
 
     width: 100%;
-    height: 80%;
+    height: 80vh;
+
 
     font-weight: 400;
     font-size: 13px;
@@ -711,13 +712,21 @@ main article.main-file-manager article ul.file-manager li span.first img {
     width: var(--size-f-image-f);
     max-width: var(--size-f-image-f);
     min-width: var(--size-f-image-f);
-    height: var(--size-f-image-f);
-    max-height: var(--size-f-image-f);
-    min-height: var(--size-f-image-f);
+    height: auto;
 
     user-select: none;
     pointer-events: none;
 }
+/* main article.main-file-manager article ul.file-manager li span.first img.preview {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+
+    object-fit: cover;
+} */
 main article.main-file-manager article ul.file-manager li span.other {
     padding: 0 12px;
 
@@ -744,12 +753,11 @@ main article.main-file-manager article ul.file-manager.grid li span.other .count
     gap: 14px;
 }
 main article.main-file-manager article ul.file-manager.grid li span.other .count .itm {
-    flex-direction: row-reverse;
     gap: 4px;
 }
 main article.main-file-manager article ul.file-manager li span.other .count .itm {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     gap: 6px;
 }
@@ -1004,6 +1012,14 @@ main nav.file-detail div.container div.content div.info span label {
     color: var(--fm-color-text);
 
     user-select: none;
+}
+main nav.file-detail div.container div.content div.info span var {
+    width: 100%;
+
+    font-weight: 500;
+    font-style: normal;
+
+    color: var(--fm-color-text-sub);
 }
 
 main nav.file-detail nav.bottom-actions {
@@ -1438,7 +1454,7 @@ ol.popup {
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: 0 2px 4px var(--fm-color-shadow);
+    box-shadow: var(--shadow-03);
 
     border: 1px solid var(--fm-color-divider);
     border-radius: var(--radius-02);
@@ -1617,4 +1633,69 @@ ul.container-upload-content li .progress {
 
     border-top: 1px solid var(--fm-color-progress-upload-40);
     border-bottom: 1px solid var(--fm-color-progress-upload-40);
+}
+
+input[type="checkbox"].switch {
+    --size-switch-h: 22px;
+    --size-switch-w: 36px;
+
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    background-color: var(--fm-color-body-gray);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    height: var(--size-switch-h);
+    min-height: var(--size-switch-h);
+    max-height: var(--size-switch-h);
+    width: var(--size-switch-w);
+    min-width: var(--size-switch-w);
+    max-width: var(--size-switch-w);
+
+    padding: var(--radius-01);
+
+    border: 1px solid var(--fm-color-divider);
+    border-radius: 999px;
+
+    transition: background-color .2s;
+}
+input[type="checkbox"].switch:hover {
+    border-color: var(--fm-color-text-sub-40);
+}
+input[type="checkbox"].switch:active {
+    border-color: var(--fm-color-primary);
+
+    box-shadow: 0 0 0 4px var(--fm-color-primary-20);
+}
+input[type="checkbox"].switch::before {
+    content: "";
+
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+
+    aspect-ratio: 1 / 1;
+    background-color: var(--fm-color-text-sub-40);
+    box-sizing: content-box;
+
+    border-radius: 100%;
+
+    transition: background-color .2s, all .2s;
+}
+input[type="checkbox"]:checked.switch {
+    background-color: var(--fm-color-primary);
+
+    border-color: var(--fm-color-primary-hover);
+}
+input[type="checkbox"]:checked.switch:hover {
+    border-color: var(--fm-color-primary-hover);
+}
+input[type="checkbox"]:checked.switch::before {
+    background-color: var(--fm-color-text-invert);
+
+    margin-left: auto;
 }

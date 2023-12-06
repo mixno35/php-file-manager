@@ -3,8 +3,10 @@ global $host, $main_path;
 
 include_once "./php/data.php";
 
+const SEARCH_SORT_DIR_FILE = 2, SEARCH_SORT_FILE_DIR = 1, SEARCH_SORT_NONE = 0;
+
 class FileManager {
-    public function get_directory_size(string $path = ""):int {
+    public function get_directory_size(string $path):int {
         if (!is_readable($path)) return 0;
 
         $totalSize = 0;
@@ -21,12 +23,12 @@ class FileManager {
         return $totalSize;
     }
 
-    public function get_file_size(string $path = ""):int {
+    public function get_file_size(string $path):int {
         if (!is_readable($path)) return 0;
         return file_exists($path) ? filesize($path) : 0;
     }
 
-    public function get_date_modified(string $path = ""):int {
+    public function get_date_modified(string $path):int {
         if (!is_readable($path)) return 0;
         if (is_file($path))
             return file_exists($path) ? filemtime($path) : 0;
@@ -36,7 +38,7 @@ class FileManager {
         return 0;
     }
 
-    public function get_file_format(string $path = ""):string {
+    public function get_file_format(string $path):string {
         if (!is_readable($path)) return "Access denied";
         return file_exists($path) ? strtolower(pathinfo($path, PATHINFO_EXTENSION)) : "NaN";
     }
@@ -52,21 +54,35 @@ class FileManager {
         return round($size, 2) . " " . $units[$unit];
     }
 
-    public function get_folders($_path = ""):array {
+    public function get_folders($_path):array {
+        $_path = realpath($_path);
+
         if (!is_readable($_path)) return [];
-        return array_filter(scandir($_path), function($item) use ($_path) {
-            return is_dir($_path . DIRECTORY_SEPARATOR . $item) && $item != "." && $item != "..";
+        $folders = array_filter(scandir($_path), function($item) use ($_path) {
+            $fullPath = $_path . DIRECTORY_SEPARATOR . $item;
+            return is_dir($fullPath) && $item != "." && $item != "..";
         });
+
+        return array_map(function($folder) use ($_path) {
+            return $_path . DIRECTORY_SEPARATOR . $folder;
+        }, $folders);
     }
 
-    public function get_files($_path = ""):array {
+    public function get_files($_path):array {
+        $_path = realpath($_path);
+
         if (!is_readable($_path)) return [];
-        return array_filter(scandir($_path), function($item) use ($_path) {
-            return is_file($_path . DIRECTORY_SEPARATOR . $item) && $item != "." && $item != "..";
+        $files = array_filter(scandir($_path), function($item) use ($_path) {
+            $fullPath = $_path . DIRECTORY_SEPARATOR . $item;
+            return is_file($fullPath) && $item != "." && $item != "..";
         });
+
+        return array_map(function($file) use ($_path) {
+            return $_path . DIRECTORY_SEPARATOR . $file;
+        }, $files);
     }
 
-    public function get_permissions_string(string $path = ""):string {
+    public function get_permissions_string(string $path):string {
         if (!is_readable($path)) return "Access denied";
 
         $perms = fileperms($path);
@@ -88,7 +104,7 @@ class FileManager {
         return $symbolic;
     }
 
-    public function get_permissions_int(string $path = ""):string {
+    public function get_permissions_int(string $path):string {
         if (!is_readable($path)) return "Access denied";
 
         $perms = fileperms($path);
@@ -99,7 +115,7 @@ class FileManager {
         return sprintf("%04o", $perms & 0777);
     }
 
-    public function get_mime_type(string $path = ""):string {
+    public function get_mime_type(string $path):string {
         if (is_file($path) and file_exists($path))
             return mime_content_type($path) ?? "NaN";
 
@@ -126,5 +142,32 @@ class FileManager {
 
     public function parse_separator(string $path, string $separator = DIRECTORY_SEPARATOR, string $pattern = "/\\\\+/"):string {
         return preg_replace($pattern, $separator, $path);
+    }
+
+    public function search(string $dir, string $search, &$result, int $sort = SEARCH_SORT_NONE):void {
+        $files = scandir($dir);
+
+        $compareFunction = function ($a, $b) use ($dir, $sort) {
+            $pathA = $dir . DIRECTORY_SEPARATOR . $a;
+            $pathB = $dir . DIRECTORY_SEPARATOR . $b;
+
+            $typeComparison = is_dir($pathB) - is_dir($pathA);
+
+            if ($typeComparison != 0) return $sort === SEARCH_SORT_DIR_FILE ? -$typeComparison : $typeComparison;
+
+            $nameComparison = strcasecmp($a, $b);
+
+            return $sort === SEARCH_SORT_FILE_DIR ? -$nameComparison : $nameComparison;
+        };
+
+        usort($files, $compareFunction);
+
+        foreach ($files as $file) {
+            if ($file != "." && $file != "..") {
+                $current = $dir . DIRECTORY_SEPARATOR . $file;
+                if (empty($search) || stripos($file, $search) !== false) $result[] = $current;
+                if (is_dir($current)) $this->search($current, $search, $result);
+            }
+        }
     }
 }

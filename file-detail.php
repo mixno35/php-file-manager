@@ -50,32 +50,32 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
         <div class="info">
             <span>
                 <label><?= is_dir($path) ? str_get_string("text_about_dir_name") : str_get_string("text_about_file_name") ?></label>
-                <?= basename($path) ?>
+                <var><?= basename($path) ?></var>
             </span>
             <span>
                 <label><?= str_get_string("text_about_path") ?></label>
-                <?= $file_manager->parse_separator($path) ?>
+                <var><?= $file_manager->parse_separator($path) ?></var>
             </span>
             <span>
                 <label><?= str_get_string("text_about_url") ?></label>
-                <?= $file_manager->get_current_url($file_manager->parse_separator($path), true) ?>
+                <var><?= $file_manager->get_current_url($file_manager->parse_separator($path), true) ?></var>
             </span>
             <span>
                 <label><?= str_get_string("text_about_size") ?></label>
-                <?= is_dir($path) ? $file_manager->format_size($file_manager->get_directory_size($path)) : $file_manager->format_size($file_manager->get_file_size($path)) ?>
+                <var><?= is_dir($path) ? $file_manager->format_size($file_manager->get_directory_size($path)) : $file_manager->format_size($file_manager->get_file_size($path)) ?></var>
             </span>
             <span>
                 <label><?= str_get_string("text_about_date_modified") ?></label>
-                <?= date("Y-m-d H:i:s", $file_manager->get_date_modified($path)) ?>
+                <var><?= date("Y-m-d H:i:s", $file_manager->get_date_modified($path)) ?></var>
             </span>
             <span>
                 <label><?= str_get_string("text_about_permissions") ?></label>
-                <?= $file_manager->get_permissions_string($path) . " (" . $file_manager->get_permissions_int($path) . ")" ?>
+                <var><?= $file_manager->get_permissions_string($path) . " (" . $file_manager->get_permissions_int($path) . ")" ?></var>
             </span>
             <?php if (is_file($path) and file_exists($path)) { ?>
                 <span>
                     <label><?= str_get_string("text_about_mime_type") ?></label>
-                    <?= $file_manager->get_mime_type($path) ?>
+                    <var><?= $file_manager->get_mime_type($path) ?></var>
                 </span>
             <?php } ?>
         </div>

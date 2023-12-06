@@ -32,6 +32,8 @@
   "text_access_denied": "Access denied",
   "text_media_unknown": "Unknown",
   "text_selected_count": "Selected: %1s",
+  "text_list_preview_image": "Preview images",
+  "text_server_details": "Server details",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",
@@ -81,6 +83,7 @@
   "action_close_dialog": "Close",
   "action_create_new_file": "Create file",
   "action_create_new_dir": "Create directory",
+  "action_copy_name": "Copy name",
 
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
@@ -92,6 +95,7 @@
 
   "message_dir_empty": "This directory empty",
   "message_dir_empty_short": "Directory empty",
+  "message_search_no_result": "No result",
 
   "message_are_remove": "You will not be able to recover deleted content. Are you sure you want to delete \"%1s\"?",
 
@@ -104,6 +108,8 @@
   "message_enter_tab_size_view": "Enter an indent from 1 to 12.",
   "message_welcome_back_user": "Hello, <b>%1s</b>",
   "message_test_font": "Each person is born with a unique set of abilities, explore this world and unlock your potential to create your own unique destiny.",
+  "message_list_preview_image": "Preview images directly in the file list. If enabled, the list may take longer to load than usual",
+  "message_server_details": "Brief information about the server on the main page",
 
   "api_command_unknown": "Unknown command.",
   "api_command_path_skip": "The contents of the path were not identified, perhaps the path is incorrect.",

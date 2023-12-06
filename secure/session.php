@@ -4,6 +4,8 @@ global $session_name;
 include_once dirname(__FILE__, 2) . "/php/data.php";
 include_once "crypt.php";
 
+session_start();
+
 /* HINT^ - Используем эту функцию, если пользователь не авторизован */
 function without_auth():void {
     include_once "auth.php";
@@ -32,3 +34,5 @@ if (array_key_exists($login, $users)) {
 } else {
     without_auth();
 }
+
+$_SESSION["_USER_LOGIN_"] = $login;

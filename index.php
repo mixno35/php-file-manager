@@ -1,8 +1,9 @@
 <?php
-global $language_tag, $content, $login, $main_path, $server_encoding, $default_avatar;
+global $language_tag, $content, $login, $main_path, $server_encoding, $default_avatar, $settings;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
+include_once "php/settings.php"; // Загружаем системные настройки
 include_once "secure/session.php"; // Проверка на авторизацию
 
 include_once "class/FileManager.php";
@@ -39,8 +40,9 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
 
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico?v=2">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="assets/js/m35/parse-url.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/m35/alert.js?v=<?= $resource_v ?>"></script>
@@ -70,7 +72,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
         </h1>
 
         <label class="search-container">
-            <input type="search" placeholder="<?= str_get_string('hint_search') ?>">
+            <input type="search" id="main-search" value="<?= ($_GET['s'] ?? '') ?>" placeholder="<?= str_get_string('hint_search') ?>">
         </label>
 
         <div class="container-user">
@@ -84,15 +86,20 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
             <section class="list-manager custom-scroll" id="list-directory-manager">
 
             </section>
-<!--            <section class="details-manager">-->
-<!--                <h2>--><?php //= str_get_string("text_details_manager") ?><!--</h2>-->
-<!--                <ul>-->
-<!--                    <li>--><?php //= str_replace("%1s", (PHP_VERSION ?? "NaN"), str_get_string("text_php_version")) ?><!--</li>-->
-<!--                    <li>--><?php //= str_replace("%1s", ($_SERVER["SERVER_SOFTWARE"] ?? "NaN"), str_get_string("text_php_server")) ?><!--</li>-->
-<!--                    <li>--><?php //= str_replace("%1s", $file_manager->format_size($file_manager->get_directory_size($main_path["server"])), str_get_string("text_php_total_size")) ?><!--</li>-->
-<!--                </ul>-->
-<!--            </section>-->
+
             <ul class="container-upload-content custom-scroll" id="container-upload-content"></ul>
+
+            <?php if ($settings["server_details"]) { ?>
+                <section class="details-manager">
+                    <h2><?= str_get_string("text_details_manager") ?></h2>
+                    <ul>
+                        <li><?= str_get_string("text_php_version", false, [(PHP_VERSION ?? "NaN")]) ?></li>
+                        <li><?= str_get_string("text_php_server", false, [($_SERVER["SERVER_SOFTWARE"] ?? "NaN")]) ?></li>
+                        <li><?= str_get_string("text_php_total_size", false, [$file_manager->format_size($file_manager->get_directory_size($main_path["server"]))]) ?></li>
+                    </ul>
+                </section>
+            <?php } ?>
+
             <section class="dev-menu">
                 <i class="fa fa-flag" title="<?= str_get_string('tooltip_dev_report') ?>" id="action-dev-report"></i>
                 <i class="fa fa-circle-dollar-to-slot" title="<?= str_get_string('tooltip_dev_paid') ?>" id="action-dev-paid"></i>

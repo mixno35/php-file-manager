@@ -8,6 +8,8 @@ const
 let element_popup_dom = null;
 let element_popup_sticky = null;
 
+let timer_search_main;
+
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("popstate", () => {
         const currentURL = window.location.href;
@@ -18,7 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.altKey && event.code === "KeyF") run_command().create(openedDirectory).file();
     if (event.ctrlKey && event.altKey && event.code === "KeyD") run_command().create(openedDirectory).dir();
-    if (event.ctrlKey && event.keyCode === 46) run_command().remove(pathFileDetail);
+    if (event.ctrlKey && event.code === "Delete" && selectPaths.length > 0) run_command().delete(selectPaths);
+});
+
+document.querySelector("input[type='search']#main-search").addEventListener("input", (event) => {
+    clearTimeout(timer_search_main);
+    timer_search_main = setTimeout(() => {
+        const value = event.target.value;
+        if (value.length > 0) url_param().set("s", encodeURIComponent(value));
+        else url_param().delete("s");
+        updateMainFileManager();
+    }, 1000);
 });
 
 document.body.addEventListener("click", () => { popup_close() });

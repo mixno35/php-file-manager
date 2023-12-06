@@ -1,0 +1,16 @@
+[
+  {
+    "title": "text_list_preview_image",
+    "message": "message_list_preview_image",
+    "type": "switch",
+    "id": "lip_%s",
+    "param": "list_image_preview"
+  },
+  {
+    "title": "text_server_details",
+    "message": "message_server_details",
+    "type": "switch",
+    "id": "sd_%s",
+    "param": "server_details"
+  }
+]

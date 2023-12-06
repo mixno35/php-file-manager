@@ -74,8 +74,13 @@ function clickToPathSingle(_path = "", _is_dir = false, _element_id = null) {
 }
 
 function clickToPathDuo(_path = "", _is_dir = false, _element_id = null) {
-    if (_is_dir) loadMainFileManager(_path, true);
-    else window.open("view.php?p=" + encodeURIComponent(_path), "_blank");
+    if (_is_dir) {
+        url_param().delete("s");
+        try {
+            // document.querySelector("input[type='search']#main-search").value = "";
+        } catch (e) {}
+        loadMainFileManager(_path, true);
+    } else window.open("view.php?p=" + encodeURIComponent(_path), "_blank");
 }
 
 function updateSelectPathsContainer() {
@@ -137,7 +142,8 @@ function loadMainFileManager(_path = "", _update = false) {
         url: "file-manager.php",
         data: {
             path: _path,
-            grid: (isGrid ? 1 : 0)
+            grid: (isGrid ? 1 : 0),
+            search: (url_param().get("s") ?? "")
         },
         success: function (result) {
             progress();
@@ -261,19 +267,21 @@ function uploadNewFile(file) {
 
     container_upload.appendChild(container_item);
 
-    setTimeout(() => {
-        command(COMMAND_UPLOAD_FILE, {blob: url, file: form_data}, () => {
+    command(COMMAND_UPLOAD_FILE, {blob: url}, () => {
 
-        }, () => {
-            const xhr = new window.XMLHttpRequest();
-            xhr.upload.addEventListener("progress", (event) => {
-                if (event.lengthComputable) {
-                    const percentComplete = ((event.loaded / event.total) * 100);
-                    item_progress.style.width = `${percentComplete}%`;
-                    text_progress.innerText = `${percentComplete}%`;
-                }
-            }, false);
-            return xhr;
-        });
-    }, 100);
+    }, () => {
+        const xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", (event) => {
+            if (event.lengthComputable) {
+                const percentComplete = ((event.loaded / event.total) * 100);
+                item_progress.style.width = `${percentComplete}%`;
+                text_progress.innerText = `${percentComplete}%`;
+            }
+        }, false);
+        return xhr;
+    });
+}
+
+function setSetting(name, value) {
+    setCookie(name, value, 360);
 }

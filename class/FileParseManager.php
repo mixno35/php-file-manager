@@ -1,8 +1,8 @@
 <?php
 class FileParseManager {
 
-    public function get_icon(string $path = "", bool $preview = false):string {
-        $imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "ico", "webp"]; // Изображение
+    public function get_icon(string $path, bool $preview = false, int $size = 0):string {
+        $imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"]; // Изображение
         $textCodeExtensions = ["html", "php", "js", "py", "xml", "svg"]; // Код
         $textExtensions = ["txt", "csv", "log", "json", "css", "scss", "md", "htaccess", "less"]; // Текст
         $videoExtensions = ["mp4", "3gp", "wav"]; // Видео
@@ -14,7 +14,7 @@ class FileParseManager {
 
         if (is_file($path)) {
             if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), $imageExtensions))
-                return $preview ? $this->generate_image($path) : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB9klEQVR4nO3Z30uTURwG8PM/uOmrbYF4p1kXoTfbaGNua870jMIuuvJigy66itC24Y+5SRQ10CvBqJsguunK6wqECRJoOoYs+mFyCqcjUJBw8MjLdKAR893Oe3wX54Hn/nz4ft9zLl5CZGRk/v8EfyJAGTYpA2pt19zXBeGAAYYfPA6vtj32STyCcjq82o7oagnx/Fu6bgHCEZQj4FJ0TTyCcgR0RtbEIyhngHAE5Qi4HMmIR1COgCuRjHgE5Qi4msxVRHS//L5gWIAvvSseQTkCtJRIwFHkBJhcodoiV4idXKHJHWC7WGp8pw5vIfXgx8kXJUD8BNS1UaeQLwITRlmhG1/+oD05D2VwGm33X8O3XKifl7jv8z5a775AgydRrnIrBe9S3viAQHYPF4dm0dAT/6vKzafwLm1hIHcA37MceoZX0Pv2l3EA/tXfsN6Zgck9/s82B5/AMbII972P5fpfbZ4/wL9cgOV2CibXaMUqniRs4feaEURPwAX6CGZn7Mxt8SRgD3/QhCB6AszXoprb7I7DFnp3ZgTRE9DoeFhVW1zjsJ9C9L5h4gHW/ik02YerqsU1Bkfo5DdBRQOc81lY+xNosj2oqhbnaBnhfbx+vg+ZXiUScBQ5ASZXyDi/mDR0g/AKZfALRmwEGa5zA8jIyBDD5hDLfr1cDkhKoQAAAABJRU5ErkJggg==";
+                return $preview ? $this->generate_image($path, $size) : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB9klEQVR4nO3Z30uTURwG8PM/uOmrbYF4p1kXoTfbaGNua870jMIuuvJigy66itC24Y+5SRQ10CvBqJsguunK6wqECRJoOoYs+mFyCqcjUJBw8MjLdKAR893Oe3wX54Hn/nz4ft9zLl5CZGRk/v8EfyJAGTYpA2pt19zXBeGAAYYfPA6vtj32STyCcjq82o7oagnx/Fu6bgHCEZQj4FJ0TTyCcgR0RtbEIyhngHAE5Qi4HMmIR1COgCuRjHgE5Qi4msxVRHS//L5gWIAvvSseQTkCtJRIwFHkBJhcodoiV4idXKHJHWC7WGp8pw5vIfXgx8kXJUD8BNS1UaeQLwITRlmhG1/+oD05D2VwGm33X8O3XKifl7jv8z5a775AgydRrnIrBe9S3viAQHYPF4dm0dAT/6vKzafwLm1hIHcA37MceoZX0Pv2l3EA/tXfsN6Zgck9/s82B5/AMbII972P5fpfbZ4/wL9cgOV2CibXaMUqniRs4feaEURPwAX6CGZn7Mxt8SRgD3/QhCB6AszXoprb7I7DFnp3ZgTRE9DoeFhVW1zjsJ9C9L5h4gHW/ik02YerqsU1Bkfo5DdBRQOc81lY+xNosj2oqhbnaBnhfbx+vg+ZXiUScBQ5ASZXyDi/mDR0g/AKZfALRmwEGa5zA8jIyBDD5hDLfr1cDkhKoQAAAABJRU5ErkJggg==";
             if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), $textCodeExtensions))
                 return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACWUlEQVR4nO3Zz0sUURwA8CHtEgZKQakIBnXZ0qiliMqEOlQsNV//G9vdqVORh/BQB0sFPeShTnqpQ3YyjCQPOrtRZrvuTmP0S8jMDrbf+H4nJ8cd2bTn2xl5X3iX7/fN8v3w3rzHsJqmQoWKrR9tsxgDGy2wEf93HOvJjEgH6DbmRTRPI5KckI8AQc3TOJiYdBC92dHQAqQjQCDgUMKUjwCBgKa4KR8BggHSESAQ0BxPyUeAQMDheEo+AgQCotenSiKO982MBBZwfnRePgIEAtYzNAX4E2oF7BBvoRPPvuH2a6+wpnM6nID9D2ZRazexrjsXTsCu2+8YEBn6FD6AbhWw0kgz4NSL78EF6FYBW14uFOXPTixy89oVE2PZJTdPc+kZCAKAGqnvzXOT0adzntqRJ18ZsLNjys1Fh+d4Lj2jl0BsOsBtvt3EyqtpbB3/4ak33n/PtYZ+y83RHJpL+foSiE0FXM79wtruGW6kwkhjy1jxFqq+9ZbrzY+/ePJnxhdcxJ6uLP+WdMCOG6+d5pMpbmh1/VK+gNsSKZ6zemWWERVJp06/VT6A4Q+gHNUJQRhfgFFGAC07XU7LW+j0mPeYbHr0mWvVPjfwyi20926ZtlCpl7ihz+L8vgHb80xgXmLwO0aH/x6jVTffcJNHV+QCd4zCGhdZLLPETRLg3OTPovmBusjAZ5x8Pu9sKyP9T41C0ACRwY8M2H0ns+HmoZyA2nvOBXfg4YdwAmo6p/kjhj5mQgkAQUNTgK2yArrAv5jWMXLCAGDjRcmIXJuNF4QBVKhQoQU2fgPLARVKM1KO1gAAAABJRU5ErkJggg==";
             if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), $textExtensions))
@@ -40,13 +40,32 @@ class FileParseManager {
         return "";
     }
 
-    private function generate_image(string $path = ""):string {
+    private function generate_image(string $path, int $size = 0):string {
         if (file_exists($path)) {
             $file = fopen($path, "rb");
 
             if ($file) {
                 $fileContents = fread($file, filesize($path));
                 fclose($file);
+
+                if ($size > 0) {
+                    // Изменение размера изображения
+                    $image = imagecreatefromstring($fileContents);
+                    $originalWidth = imagesx($image);
+                    $originalHeight = imagesy($image);
+
+                    $aspectRatio = $originalWidth / $originalHeight;
+                    $newWidth = $size;
+                    $newHeight = round($newWidth / $aspectRatio);
+
+                    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+                    imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight);
+
+                    ob_start();
+                    imagepng($resizedImage); // Используйте другую функцию в зависимости от формата
+                    $fileContents = ob_get_clean();
+                    imagedestroy($resizedImage);
+                }
 
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
                 $mimeType = finfo_buffer($finfo, $fileContents);

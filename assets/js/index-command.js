@@ -83,7 +83,7 @@ const run_command = () => {
     }
 }
 
-const command = (command, data = {}, callback = () => {}, xhr = () => {}) => {
+const command = (command, data = {}, callback = () => {}, xhr_callback = null) => {
     /**
      * String command - Название команды, которую нужно выполнить
      * Array data - Все параметры, которые потребуются для выполнения команды
@@ -94,8 +94,10 @@ const command = (command, data = {}, callback = () => {}, xhr = () => {}) => {
     const query = data;
     query["command"] = command; // Добавляем команду в запрос
 
+    const xhr = typeof xhr_callback === "function" ? xhr_callback() : new window.XMLHttpRequest();
+
     $.ajax({
-        xhr: xhr(),
+        xhr: () => { return xhr },
         url: "php/command.php",
         method: "POST",
         data: query,
