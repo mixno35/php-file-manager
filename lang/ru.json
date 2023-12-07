@@ -108,7 +108,7 @@
   "message_default_list_type": "Выберите, как будет отображаться список по умолчанию",
 
   "api_command_unknown": "Неизвестная команда.",
-  "api_command_path_skip": "The contents of the path were not identified, perhaps the path is incorrect.",
+  "api_command_path_skip": "Содержимое пути не было идентифицировано, возможно, путь указан неверно.",
   "api_command_invalid_data_session": "Неверный токен. Доступ запрещен.",
   "api_command_unknown_user": "Прежде чем продолжить, необходимо войти в систему.",
   "api_remove_success": "Выбранные элементы успешно удалены. Всего удалено: %1s.",

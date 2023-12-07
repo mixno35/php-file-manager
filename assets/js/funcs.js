@@ -19,36 +19,34 @@ function itemLoadNavDirMng(_element_id = null, _container_id = null, _count = 0)
 
     popup_close();
 
-    if (!isMobileDevice()) {
-        clickCount++;
-        if (clickCount === 1) {
-            setTimeout(function() {
-                if (clickCount === 1) {
-                    // Одиночный клик
-                    if (_count > 0) {
-                        if (document.getElementById(_element_id).classList.contains("open")) {
-                            if (_container_id !== null) document.getElementById(_container_id).innerHTML = "";
-                        } else {
-                            loadNavDirectoryManager(
-                                document.getElementById(_element_id).getAttribute("data-path"),
-                                _container_id
-                            );
-                        }
-
-                        document.getElementById(_element_id).classList.toggle("open");
-
-                        setTimeout(() => {
-                            document.getElementById("status-icon-" + _element_id).src = document.getElementById(_element_id).classList.contains("open") ?
-                                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACCUlEQVR4nO3Wz0vTcRzH8dc9ukTXkC6xvt8RWghaeBHWsKjEwA5BHhLWXyGDICSiCLEo1w9Su4RJdfFW0vc7N+baZi5tEcY2kQlBdSv4fF7e/BbffSnsu803fF/wuL+ffOH7/QLBggULFsyvbT7F6do0qpvT4E7UpqBrU/hYm8QQWrGNJ6hsTII+iTc9YP0x6KfqI4w2NaD8EGyAm+UJ7GtKwJcEuJutJVBZe4A+z4DP98Fd7x7KngGlu6AE8NrqOCgBvFYcAyWA197fBiWA1/K3QAngtXc3QAngtcx1sJHWXxwjV2Lk6pX/sxIrsBQzXAHpUbBRqrNHyQ/Dfpp1BSSvgY1Qed5OFod8dslyBVhXQb+Vnx0hly82wsz24VwaLHHpAmUZvOMEFAaWWThPUfIDI05A7swc82cpSu5c7LeAvgRzpyhLX/92gMpG4jp7kpIwG+12nkCm97Je7KUkTEUOOgGLPVGd6aEkzEf2OAHpE6ZOd1MKle768ccHjNbxvTrVSSlUqvOT6yusku3f9UIHJVALHe7fCGWHi9oOUwJlh2fcAZYxp22TEijLGK/zBIxEqw/T/4iWMVInwIyLCUgazm+E8yYyh8UE2If73QG2GRUT8DbU5Q6YNw9oq/XH6b9QlkG+PrQf9fbtVdvEr/mQavWR2sPPNyH19WXbWN3jgwULFiwYdrAt2QA1nS4z4bcAAAAASUVORK5CYII=" :
-                                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABg0lEQVR4nO3YzyvDcRzH8dfN3Un+gbWShJZEkiQtSRJaLCX8EVYODlKUww7IDr4H5SJyU3Pxa34Nm18HhzH7pty/4dte8ge8D+y72bs+r3rc38/rGzAzMzMz82q2haBtIWtb4F/k1pG3LTzmLITxH8vE8PIcA72QWcNMyQOeVkBPLWOupAEPUdBr91EspldRWZKA1BLotbfdBvJ+knyYKtjn1aj7vtcaEQMuF0Av2Ts/x0946iMZcsWAxBzolexWPXk3XhSQdjALFupkvoKv2wHybqxoIO0rOUTehssepDE9Qg0gB4SoAcSA1DA1gBwwSA0gBtwMUAOIAdf91AByQB81gBhw1UsNIAYke6gB5IAgNYC0/GU3NYAc0EUNIAZcdFIDiAHnHdQAckA7NYAYcNZGDSAGnLZQA8gBzdQAYkCiiRpADDgJUAPIAY3UAGLAcT01gBxQRw0gzdn3u/mjWpYzJ+6XX4u5jeqIE/e5+cMaliMn7nOzm1XTYoCZmZmZGX65b1fjrzHebGEuAAAAAElFTkSuQmCC";
-                        }, 100);
+    clickCount++;
+    if (clickCount === 1) {
+        setTimeout(function() {
+            if (clickCount === 1) {
+                // Одиночный клик
+                if (_count > 0) {
+                    if (document.getElementById(_element_id).classList.contains("open")) {
+                        if (_container_id !== null) document.getElementById(_container_id).innerHTML = "";
+                    } else {
+                        loadNavDirectoryManager(
+                            document.getElementById(_element_id).getAttribute("data-path"),
+                            _container_id
+                        );
                     }
-                } else {
-                    loadMainFileManager(document.getElementById(_element_id).getAttribute("data-path"), true);
+
+                    document.getElementById(_element_id).classList.toggle("open");
+
+                    setTimeout(() => {
+                        document.getElementById("status-icon-" + _element_id).src = document.getElementById(_element_id).classList.contains("open") ?
+                            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACCUlEQVR4nO3Wz0vTcRzH8dc9ukTXkC6xvt8RWghaeBHWsKjEwA5BHhLWXyGDICSiCLEo1w9Su4RJdfFW0vc7N+baZi5tEcY2kQlBdSv4fF7e/BbffSnsu803fF/wuL+ffOH7/QLBggULFsyvbT7F6do0qpvT4E7UpqBrU/hYm8QQWrGNJ6hsTII+iTc9YP0x6KfqI4w2NaD8EGyAm+UJ7GtKwJcEuJutJVBZe4A+z4DP98Fd7x7KngGlu6AE8NrqOCgBvFYcAyWA197fBiWA1/K3QAngtXc3QAngtcx1sJHWXxwjV2Lk6pX/sxIrsBQzXAHpUbBRqrNHyQ/Dfpp1BSSvgY1Qed5OFod8dslyBVhXQb+Vnx0hly82wsz24VwaLHHpAmUZvOMEFAaWWThPUfIDI05A7swc82cpSu5c7LeAvgRzpyhLX/92gMpG4jp7kpIwG+12nkCm97Je7KUkTEUOOgGLPVGd6aEkzEf2OAHpE6ZOd1MKle768ccHjNbxvTrVSSlUqvOT6yusku3f9UIHJVALHe7fCGWHi9oOUwJlh2fcAZYxp22TEijLGK/zBIxEqw/T/4iWMVInwIyLCUgazm+E8yYyh8UE2If73QG2GRUT8DbU5Q6YNw9oq/XH6b9QlkG+PrQf9fbtVdvEr/mQavWR2sPPNyH19WXbWN3jgwULFiwYdrAt2QA1nS4z4bcAAAAASUVORK5CYII=" :
+                            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABg0lEQVR4nO3YzyvDcRzH8dfN3Un+gbWShJZEkiQtSRJaLCX8EVYODlKUww7IDr4H5SJyU3Pxa34Nm18HhzH7pty/4dte8ge8D+y72bs+r3rc38/rGzAzMzMz82q2haBtIWtb4F/k1pG3LTzmLITxH8vE8PIcA72QWcNMyQOeVkBPLWOupAEPUdBr91EspldRWZKA1BLotbfdBvJ+knyYKtjn1aj7vtcaEQMuF0Av2Ts/x0946iMZcsWAxBzolexWPXk3XhSQdjALFupkvoKv2wHybqxoIO0rOUTehssepDE9Qg0gB4SoAcSA1DA1gBwwSA0gBtwMUAOIAdf91AByQB81gBhw1UsNIAYke6gB5IAgNYC0/GU3NYAc0EUNIAZcdFIDiAHnHdQAckA7NYAYcNZGDSAGnLZQA8gBzdQAYkCiiRpADDgJUAPIAY3UAGLAcT01gBxQRw0gzdn3u/mjWpYzJ+6XX4u5jeqIE/e5+cMaliMn7nOzm1XTYoCZmZmZGX65b1fjrzHebGEuAAAAAElFTkSuQmCC";
+                    }, 100);
                 }
-                clickCount = 0;
-            }, 170); // Задержка для определения двойного клика
-        }
+            } else {
+                loadMainFileManager(document.getElementById(_element_id).getAttribute("data-path"), true);
+            }
+            clickCount = 0;
+        }, 170); // Задержка для определения двойного клика
     }
 }
 

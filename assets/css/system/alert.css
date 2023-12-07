@@ -18,6 +18,32 @@ div.dialog-container {
     z-index: 21;
 }
 
+@media screen and (max-width: 900px) {
+    div.dialog-container {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: unset;
+
+        width: 100%;
+        max-width: 500px;
+
+        border-left-width: 0;
+        border-right-width: 0;
+        border-bottom-width: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+        margin: 0 auto;
+    }
+}
+@media screen and (min-width: 500px) {
+    div.dialog-container {
+        border-left-width: 1px;
+        border-right-width: 1px;
+    }
+}
+
 p.dialog-title {
     width: calc(100% - 24px);
     height: auto;
@@ -79,6 +105,8 @@ div.dialog-content body {
     flex-direction: column;
     background-color: transparent;
     inset: auto;
+
+    overflow-y: auto;
 }
 
 i.dialog-action-close {

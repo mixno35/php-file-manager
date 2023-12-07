@@ -1,7 +1,16 @@
 <?php
 include_once "secure/check-token.php";
 
-global $data, $path_manager;
+global $data, $path_manager, $privileges;
+
+if (!$privileges["upload"]) {
+    echo json_encode([
+        "type" => "error",
+        "message_id" => "text_privileges_forbidden"
+    ], 128);
+
+    exit();
+}
 
 include_once dirname(__FILE__, 3) . "/class/URLParse.php";
 

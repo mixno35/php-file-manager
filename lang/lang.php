@@ -37,13 +37,21 @@ function str_get_string(string $key = "", bool $html = false, array $replace = [
     return $html ? $str : htmlspecialchars($str);
 }
 
-function parse_json_decode($json, bool $associative = null) {
-    $json = preg_replace('/,\s*([\]}])/', '$1', $json);
+/**
+ * Функция помогает избежать ошибок в json файле возникших из-за лишней запятой
+ * @param string $json Декодируемая строка json. Эта функция работает только со строками, закодированными в UTF-8. PHP реализует надмножество JSON - оно также будет кодировать и декодировать скалярные типы и NULL. Стандарт JSON поддерживает эти значения только в том случае, если они вложены внутри массива или объекта.
+ * @param bool|null $associative При значении TRUE возвращаемые объекты будут преобразованы в ассоциативные массивы.
+ * @param int $depth [необязательно] Указанная пользователем глубина рекурсии.
+ * @param int $flags [необязательно] Битовая маска параметров декодирования JSON: JSON_BIGINT_AS_STRING декодирует большие целые числа как их исходное строковое значение. JSON_INVALID_UTF8_IGNORE игнорирует недопустимые символы UTF-8, JSON_INVALID_UTF8_SUBSTITUTE преобразует недопустимые символы UTF-8 в \0xfffd, JSON_OBJECT_AS_ARRAY декодирует объекты JSON как массив PHP, начиная с версии 7.2.0, используемой по умолчанию, если параметр $assoc равен null, JSON_THROW_ON_ERROR при передаче этого флага поведение ошибок этих функций изменяется. Состояние глобальной ошибки остается нетронутым, и если возникает ошибка, которая в противном случае установила бы его, эти функции вместо этого генерируют исключение JSONException
+ * @return mixed
+ */
+function parse_json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) {
+    $json = preg_replace("/,\s*([\]}])/", "$1", $json);
 
-    $decodedData = json_decode($json, $associative);
+    $decodedData = json_decode($json, $associative, $depth, $flags);
 
     if ($decodedData === null && json_last_error() !== JSON_ERROR_NONE) {
-        return json_decode($json, $associative);
+        return json_decode($json, $associative, $depth, $flags);
     }
 
     return $decodedData;

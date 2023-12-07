@@ -107,7 +107,7 @@ header i.directory-menu {
 
     font-size: 14px;
 
-    z-index: 3;
+    z-index: 4;
 }
 header h1.title {
     font-size: 16px;
@@ -190,12 +190,18 @@ header div.container-user:hover {
 }
 
 main {
-    width: calc(100% + var(--size-divider-resize-2) + 2px);
+    width: 100%;
     height: calc(100% - var(--size-header));
 
     position: relative;
     display: flex;
 }
+/* @media screen and (max-width: 450px) {
+    main {
+        width: calc(100% + 12px);
+    }
+} */
+
 main nav.left-directory-manager {
     width: 260px;
     min-width: 260px;
@@ -206,9 +212,11 @@ main nav.left-directory-manager {
     display: flex;
     flex-direction: column;
 
+    border-right: 1px solid var(--fm-color-divider);
+
     resize: horizontal;
 
-    z-index: 2;
+    z-index: 3;
 }
 @media (max-width: 800px) {
     main nav.left-directory-manager {
@@ -216,6 +224,8 @@ main nav.left-directory-manager {
         top: 0;
         left: 0;
         box-shadow: var(--shadow-07);
+
+        height: calc(100% - var(--size-header));
 
         padding-top: var(--size-header);
 
@@ -471,28 +481,31 @@ main article.main-file-manager {
     position: relative;
     display: flex;
     flex-direction: column;
-    left: -12px;
 }
 main article.main-file-manager div#main-file-manager {
     overflow-y: auto;
 
     height: 100%;
+    width: 100%;
 }
 main article.main-file-manager nav.header {
-    width: 100%;
     height: var(--size-header);
     max-height: var(--size-header);
     min-height: var(--size-header);
 
-    background-color: var(--fm-color-header);
+    background-color: var(--fm-color-header-90);
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+
+    z-index: 2;
 
     border-bottom: 1px solid var(--fm-color-divider);
 }
 main article.main-file-manager nav.header ul.tree {
     width: 100%;
-    max-width: 100%;
     height: 100%;
 
     display: flex;
@@ -544,6 +557,15 @@ main article.main-file-manager nav.header ul.tree i.divider {
     color: var(--fm-color-text-sub);
 }
 
+@media screen and (max-width: 800px) {
+    main article.main-file-manager nav.header {
+        justify-content: space-between;
+    }
+    main article.main-file-manager nav.header ul.tree {
+        display: none;
+    }
+}
+
 main article.main-file-manager nav.header div.manager-content {
     display: flex;
     align-items: center;
@@ -563,7 +585,7 @@ main article.main-file-manager nav.header div.manager-content.right {
 }
 
 main article.main-file-manager nav.header div.manager-content button.item-nav-button {
-    background-color: transparent;
+    background-color: var(--fm-color-body);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -631,23 +653,19 @@ main article.main-file-manager h5.message {
 }
 
 main article.main-file-manager article {
-    width: 100%;
-    height: calc(100% - var(--size-header) - 1px);
+    padding: 12px;
 
     display: flex;
     flex-direction: column;
     gap: 12px;
-
-    overflow-y: auto;
 }
 main article.main-file-manager.selected article {
     padding-bottom: calc(var(--size-header) + 12px);
 }
 
 main article.main-file-manager article ul.file-manager {
-    margin: 12px;
-
     height: fit-content;
+    width: calc(100% - 2px);
 
     background-color: var(--fm-color-header);
 
@@ -655,6 +673,9 @@ main article.main-file-manager article ul.file-manager {
     border: 1px solid var(--fm-color-divider);
 
     list-style: none;
+}
+main article.main-file-manager article ul.file-manager.grid {
+    width: 100%;
 }
 main article.main-file-manager article ul.file-manager li {
     font-weight: 500;
@@ -754,7 +775,7 @@ main article.main-file-manager article ul.file-manager li span.first img {
 main article.main-file-manager article ul.file-manager li span.other {
     padding: 0 12px;
 
-    width: 100%;
+    width: fit-content;
     height: 100%;
 
     display: flex;
@@ -818,6 +839,12 @@ main article.main-file-manager article ul.file-manager.grid li:hover {
 
     transform: translateY(-2px);
 }
+@media screen and (max-width: 495px) {
+    main article.main-file-manager article ul.file-manager.grid li {
+        flex: 1;
+    }
+}
+
 main article.main-file-manager article ul.file-manager.grid li span.other {
     display: flex;
     align-content: center;
@@ -867,7 +894,6 @@ main nav.file-detail {
     display: flex;
     flex-direction: column;
     position: relative;
-    left: -12px;
     background-color: var(--fm-color-body);
 
     border-left: 1px solid var(--fm-color-divider);

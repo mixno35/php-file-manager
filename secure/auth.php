@@ -22,6 +22,4 @@ $auth_session = $crypt->encrypt($auth_info);
 
 $_SESSION[$session_name] = $auth_session;
 
-echo "Authorize: $auth_session";
-
 header("Location: ../");

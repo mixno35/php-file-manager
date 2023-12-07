@@ -19,7 +19,7 @@ class CheckSession {
     public function check():bool {
         global $session_name, $crypt;
 
-        if (empty(trim($_COOKIE[$session_name] ?? ""))) return false;
+        if (empty(trim($_SESSION[$session_name] ?? ""))) return false;
 
         $session_str = $crypt->decrypt($_SESSION[$session_name] ?? "xx:xx");
         $session_user = explode(":", $session_str);

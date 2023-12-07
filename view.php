@@ -1,10 +1,11 @@
 <?php
+include_once "secure/session.php"; // Проверка на авторизацию
+
 global $language_tag, $content, $login, $main_path, $privileges, $server_encoding;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
-include_once "secure/session.php"; // Проверка на авторизацию
-include_once "php/user-privileges.php"; // Загружаем привилегии пользователя
+include_once "secure/user-privileges.php"; // Загружаем привилегии пользователя
 
 include_once "class/FileManager.php";
 include_once "class/FileParseManager.php";
@@ -584,29 +585,26 @@ function get_mode_codemirror(string $path = ""):string {
             const image_preview = document.getElementById("image-preview");
 
             let isDragging = false;
+            let isPinching = false;
             let startX, startY, translateX, translateY;
+            let initialDistance, initialScale;
 
             let scale = 1;
             let offsetX = 0;
             let offsetY = 0;
 
-            // document.addEventListener("click", () => {
-            //     setTimeout(() => {
-            //         if (isDragging) return;
-            //
-            //         if (document.getElementById("header").style.display === "none")
-            //             document.getElementById("header").style.display = "flex";
-            //         else
-            //             document.getElementById("header").style.display = "none";
-            //     }, 100);
-            // });
+            image_preview.addEventListener("dblclick", (e) => {
+                e.preventDefault();
+                const clickX = e.clientX;
+                const clickY = e.clientY;
 
-            document.addEventListener("dblclick", () => {
                 scale = scale > 1 ? 1 : 3;
-                offsetX = 0;
-                offsetY = 0;
+                const newScale = scale;
 
-                image.style.transform = `scale(${scale}) translate(${offsetX}px, ${offsetY}px)`;
+                offsetX = clickX - (clickX - offsetX) * (newScale / scale);
+                offsetY = clickY - (clickY - offsetY) * (newScale / scale);
+
+                updateTransform();
             });
 
             image_preview.addEventListener("wheel", (e) => {
@@ -616,7 +614,7 @@ function get_mode_codemirror(string $path = ""):string {
                 scale += wheelDelta * -0.004;
                 scale = Math.min(Math.max(1, scale), 6);
 
-                image.style.transform = `scale(${scale}) translate(${offsetX}px, ${offsetY}px)`;
+                updateTransform();
             });
 
             image_preview.addEventListener("mousedown", (e) => {
@@ -644,8 +642,59 @@ function get_mode_codemirror(string $path = ""):string {
                 offsetX = e.clientX - startX;
                 offsetY = e.clientY - startY;
 
-                image.style.transform = `scale(${scale}) translate(${offsetX}px, ${offsetY}px)`;
+                updateTransform();
             });
+
+            image_preview.addEventListener("touchstart", (e) => {
+                if (e.touches.length === 2) {
+                    isPinching = true;
+                    const x1 = e.touches[0].clientX;
+                    const y1 = e.touches[0].clientY;
+                    const x2 = e.touches[1].clientX;
+                    const y2 = e.touches[1].clientY;
+
+                    initialDistance = Math.hypot(x2 - x1, y2 - y1);
+                    initialScale = scale;
+                } else if (e.touches.length === 1) {
+                    isDragging = true;
+                    startX = e.touches[0].clientX - offsetX;
+                    startY = e.touches[0].clientY - offsetY;
+                }
+            });
+
+            document.addEventListener("touchmove", (e) => {
+                if (isPinching && e.touches.length === 2) {
+                    const x1 = e.touches[0].clientX;
+                    const y1 = e.touches[0].clientY;
+                    const x2 = e.touches[1].clientX;
+                    const y2 = e.touches[1].clientY;
+
+                    const distance = Math.hypot(x2 - x1, y2 - y1);
+
+                    scale = initialScale * (distance / initialDistance);
+                    scale = Math.min(Math.max(1, scale), 6);
+
+                    updateTransform();
+                } else if (isDragging && e.touches.length === 1) {
+                    offsetX = e.touches[0].clientX - startX;
+                    offsetY = e.touches[0].clientY - startY;
+
+                    updateTransform();
+                }
+            });
+
+            document.addEventListener("touchend", (e) => {
+                isDragging = false;
+                isPinching = false;
+            });
+
+            function updateTransform() {
+                const scaledOffsetX = offsetX / scale;
+                const scaledOffsetY = offsetY / scale;
+
+                image.style.transform = `scale(${scale}) translate(${scaledOffsetX}px, ${scaledOffsetY}px)`;
+            }
+
         </script>
     <?php exit(); } ?>
 

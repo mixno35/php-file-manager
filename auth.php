@@ -10,7 +10,11 @@ $resource_v = time(); // Устанавливаем версию для ресу
 <link rel="stylesheet" type="text/css" href="assets/css/system/root.css?v=<?= $resource_v ?>">
 <link rel="stylesheet" type="text/css" href="assets/css/auth.css?v=<?= $resource_v ?>">
 
-<form id="form-auth" method="post" action="secure/auth.php" autocomplete="off" autocapitalize="off">
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<form id="form-auth" method="post" action="secure/auth.php" target="_top" autocomplete="off" autocapitalize="off">
     <h1>
         <?= str_get_string("document_name_short") ?>
         <span><?= str_get_string("document_file_manager") ?></span>

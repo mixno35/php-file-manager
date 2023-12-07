@@ -15,6 +15,8 @@
     --fm-color-body-gray: rgb(247, 248, 250);
     --fm-color-body-gray-50: rgb(249, 249, 250);
     --fm-color-header: rgb(255, 255, 255);
+    --fm-color-header-80: rgba(255, 255, 255, .8);
+    --fm-color-header-90: rgba(255, 255, 255, .9);
     --fm-color-divider: #D0D5DD;
     --fm-color-header-text: rgb(0, 0, 0);
     --fm-color-text: rgb(0, 0, 0);

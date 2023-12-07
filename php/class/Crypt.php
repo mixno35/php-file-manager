@@ -1,14 +1,6 @@
 <?php
-if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
-    $ip = $_SERVER["HTTP_CLIENT_IP"];
-} else if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-    $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-} else {
-    $ip = $_SERVER["REMOTE_ADDR"] ?? "0.0.0.0";
-}
-
 $userAgent = ($_SERVER["HTTP_USER_AGENT"] ?? "StormGuardian/1.0 (Windows NT 10.0; Win64; x64)");
-$key = md5($userAgent . ($ip ?? "0.0.0.0"));
+$key = md5($userAgent);
 
 class Crypt {
 

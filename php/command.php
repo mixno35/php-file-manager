@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if (($_SERVER["REQUEST_METHOD"] ?? "GET") !== "POST") {
     http_response_code(502);
     exit();
@@ -17,13 +19,15 @@ if (!$check_session->check()) {
     exit();
 }
 
+global $privileges;
+
+include_once dirname(__FILE__, 2) . "/secure/user-privileges.php"; // Загружаем привилегии пользователя
+
 include_once dirname(__FILE__, 2) . "/class/PathManager.php";
 
 $path_manager = new PathManager();
 
 $data = $_POST;
-
-session_start();
 
 $token = md5(uniqid());
 

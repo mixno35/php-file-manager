@@ -99,7 +99,7 @@ if (strlen(trim($search)) > 0) {
 }
 ?>
 
-<article class="custom-scroll" id="article-file-manager-container" data-path="<?= $path ?>">
+<article class="" id="article-file-manager-container" data-path="<?= $path ?>">
     <ul class="file-manager <?= ($isGrid === 1 && sizeof($result) > 0) ? 'grid' : '' ?>" id="file-manager-list">
         <?php if (sizeof($result) > 0) { ?>
             <?php foreach ($result as $item) { ?>
@@ -107,7 +107,7 @@ if (strlen(trim($search)) > 0) {
                 $liUniID = uniqid();
                 $name = basename($item);
                 ?>
-                <li title="<?= $name ?>" draggable="true" oncontextmenu="popup_window([
+                <li title="<?= $name ?>" draggable="true" oncontextmenu="if ('vibrate' in navigator) navigator.vibrate(200); popup_window([
                     {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square', for_dir: true, for_file: true},
                     {name: getStringBy('tooltip_rename_w'), icon: 'fa-pen', for_dir: true, for_file: true},
                     {name: getStringBy('tooltip_download_w'), icon: 'fa-download', for_dir: false, for_file: true},

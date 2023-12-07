@@ -1,8 +1,6 @@
 <?php
 global $data;
 
-session_start();
-
 $uni_token_data = $data["uni_token"] ?? "n1";
 $uni_token_session = $_SESSION["uni_token"] ?? "n2";
 

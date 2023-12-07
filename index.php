@@ -1,10 +1,11 @@
 <?php
+include_once "secure/session.php"; // Проверка на авторизацию
+
 global $language_tag, $content, $main_path, $server_encoding, $default_avatar, $settings;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
 include_once "php/settings.php"; // Загружаем системные настройки
-include_once "secure/session.php"; // Проверка на авторизацию
 
 include_once "class/FileManager.php";
 
@@ -84,9 +85,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
 
     <main id="main">
         <nav class="left-directory-manager" id="left-directory-manager">
-            <section class="list-manager custom-scroll" id="list-directory-manager">
-
-            </section>
+            <section class="list-manager" id="list-directory-manager"></section>
 
             <ul class="container-upload-content custom-scroll" id="container-upload-content"></ul>
 
@@ -107,7 +106,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
                 <i class="fa fa-gear" title="<?= str_get_string('tooltip_dev_settings') ?>" id="action-dev-settings"></i>
             </section>
         </nav>
-        <div id="resize-divider" class="resize-divider"></div>
+
         <article class="main-file-manager">
             <div id="main-file-manager"></div>
 

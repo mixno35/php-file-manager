@@ -1,4 +1,13 @@
 <?php
+//include_once dirname(__FILE__, 2) . "/php/class/CheckSession.php";
+//
+//$check_session = new CheckSession();
+//
+//if (!$check_session->check()) {
+//    http_response_code(404);
+//    exit();
+//}
+
 $blob_path = $_GET["p"] ?? "";
 
 if (!file_exists($blob_path)) {
