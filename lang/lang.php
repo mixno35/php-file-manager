@@ -12,8 +12,8 @@ if (file_exists("$path_main_lang/$content_user_lang.json")) {
     $content_setting = file_get_contents("$path_main_lang/$content_user_lang.json");
 }
 
-$string_default = json_decode($content_default, true);
-$string_setting = json_decode($content_setting, true);
+$string_default = parse_json_decode($content_default, true);
+$string_setting = parse_json_decode($content_setting, true);
 
 $string = array_merge($string_default, $string_setting);
 
@@ -35,4 +35,16 @@ function str_get_string(string $key = "", bool $html = false, array $replace = [
         for($i = 0; $i < sizeof($replace); $i++) $str = str_replace("%" . ($i + 1) . "s", $replace[$i], $str);
 
     return $html ? $str : htmlspecialchars($str);
+}
+
+function parse_json_decode($json, bool $associative = null) {
+    $json = preg_replace('/,\s*([\]}])/', '$1', $json);
+
+    $decodedData = json_decode($json, $associative);
+
+    if ($decodedData === null && json_last_error() !== JSON_ERROR_NONE) {
+        return json_decode($json, $associative);
+    }
+
+    return $decodedData;
 }

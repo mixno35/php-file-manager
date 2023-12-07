@@ -1,21 +1,20 @@
 <?php
-global $language_tag, $content, $login, $main_path, $server_encoding,
-       $default_avatar, $session_name, $settings, $uni_id;
+global $language_tag, $content, $main_path, $server_encoding, $default_avatar, $session_name, $settings, $uni_id;
 
-include_once "../lang/lang.php";
+include_once dirname(__FILE__, 2) . "/lang/lang.php";
 
-include_once "../secure/session.php";
+include_once dirname(__FILE__, 2) . "/secure/session.php";
 
-include_once "../php/data.php";
-include_once "../php/settings.php";
+include_once dirname(__FILE__, 2) . "/php/data.php";
+include_once dirname(__FILE__, 2) . "/php/settings.php";
 
 $content = json_decode(file_get_contents(dirname(__FILE__, 2) . "/assets/settings.json"), true);
 ?>
 <div class="user-container">
     <section>
         <img src="<?= $default_avatar ?>" alt="Avatar">
-        <span><?= str_get_string("message_welcome_back_user", true, [$login]) ?></span>
-        <i class="fa-solid fa-arrow-right-from-bracket" title="<?= str_get_string('tooltip_logout') ?>" onclick="setCookie('<?= $session_name ?>', '', 0); window.location.reload()"></i>
+        <span><?= str_get_string("message_welcome_back_user", true, [(USER_LOGIN ?? "NaN")]) ?></span>
+        <i class="fa-solid fa-arrow-right-from-bracket" title="<?= str_get_string('tooltip_logout') ?>" onclick="window.location.href = 'secure/log-out.php'"></i>
     </section>
 </div>
 

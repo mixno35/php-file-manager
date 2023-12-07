@@ -1,9 +1,34 @@
 <?php
-include_once "../class/PathManager.php";
+if (($_SERVER["REQUEST_METHOD"] ?? "GET") !== "POST") {
+    http_response_code(502);
+    exit();
+}
+
+include_once dirname(__FILE__, 2) . "/php/class/CheckSession.php";
+
+$check_session = new CheckSession();
+
+if (!$check_session->check()) {
+    echo json_encode([
+        "type" => "error",
+        "message_id" => "api_command_unknown_user"
+    ], 128);
+
+    exit();
+}
+
+include_once dirname(__FILE__, 2) . "/class/PathManager.php";
 
 $path_manager = new PathManager();
 
 $data = $_POST;
+
+session_start();
+
+$token = md5(uniqid());
+
+$_SESSION["uni_token"] = $token;
+$data["uni_token"] = $token;
 
 $command = $data["command"] ?? ""; // Извлекаем название команды, которую надо выполнить
 

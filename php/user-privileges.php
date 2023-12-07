@@ -1,11 +1,14 @@
 <?php
-include_once "./secure/crypt.php";
-
 global $session_name;
 
-$str_dec = str_decrypt($_COOKIE[$session_name] ?? "xx:xx");
-$user = explode(":", $str_dec); // Сессия должна быть в формате user:password, чтобы проверка прошла успешно
-$login = $user[0] ?? ""; // Здесь должен быть логин
+include_once dirname(__FILE__, 2) . "/php/data.php";
+include_once dirname(__FILE__, 2) . "/php/class/Crypt.php";
+
+$crypt = new Crypt();
+
+$str_dec = $crypt->decrypt($_COOKIE[$session_name] ?? "xx:xx");
+$user = explode(":", $str_dec);
+$login = $user[0] ?? "";
 
 $array_privileges = array(
     "admin" => array(

@@ -1,19 +1,27 @@
 <?php
+if (($_SERVER["REQUEST_METHOD"] ?? "GET") !== "POST") {
+    http_response_code(502);
+    exit();
+}
+
 global $session_name, $host;
 
-include_once "../php/data.php";
-include_once "crypt.php";
+session_start();
 
-$auth_info = $_GET["sdsdg"];
+include_once dirname(__FILE__, 2) . "/php/data.php";
+include_once dirname(__FILE__, 2) . "/php/class/Crypt.php";
 
-echo "Authorize protection...";
-?>
+$crypt = new Crypt();
 
-<script src="../assets/js/system.js"></script>
+$auth_login = $_POST["login"] ?? "xx";
+$auth_password = md5($_POST["password"] ?? "xx");
 
-<script>
-    setCookie("<?= $session_name ?>", "<?= str_encrypt($auth_info) ?>", 0);
-    setTimeout(() => {
-        window.location.replace("../");
-    }, 200);
-</script>
+$auth_info = "$auth_login:$auth_password";
+
+$auth_session = $crypt->encrypt($auth_info);
+
+$_SESSION[$session_name] = $auth_session;
+
+echo "Authorize: $auth_session";
+
+header("Location: ../");

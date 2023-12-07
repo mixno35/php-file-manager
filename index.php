@@ -1,5 +1,5 @@
 <?php
-global $language_tag, $content, $login, $main_path, $server_encoding, $default_avatar, $settings;
+global $language_tag, $content, $main_path, $server_encoding, $default_avatar, $settings;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
@@ -78,7 +78,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
 
         <div class="container-user">
             <img src="<?= $default_avatar ?>" alt="Avatar image">
-            <h4><?= $login ?></h4>
+            <h4><?= (USER_LOGIN ?? "NaN") ?></h4>
         </div>
     </header>
 

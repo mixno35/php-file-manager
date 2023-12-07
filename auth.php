@@ -7,10 +7,10 @@ include_once "php/data.php"; // Загружаем системные настр
 $resource_v = time(); // Устанавливаем версию для ресурсов
 ?>
 
-<link rel="stylesheet" type="text/css" href="assets/css/system/root.css?v=<?= time() ?>">
-<link rel="stylesheet" type="text/css" href="assets/css/auth.css?v=<?= time() ?>">
+<link rel="stylesheet" type="text/css" href="assets/css/system/root.css?v=<?= $resource_v ?>">
+<link rel="stylesheet" type="text/css" href="assets/css/auth.css?v=<?= $resource_v ?>">
 
-<form id="form-auth" method="post" autocomplete="off" autocapitalize="off">
+<form id="form-auth" method="post" action="secure/auth.php" autocomplete="off" autocapitalize="off">
     <h1>
         <?= str_get_string("document_name_short") ?>
         <span><?= str_get_string("document_file_manager") ?></span>
@@ -28,32 +28,6 @@ $resource_v = time(); // Устанавливаем версию для ресу
     <h4><?= str_get_string("document_copyright", true) ?></h4>
 </form>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
-
 <script>
     document.title = "<?= str_get_string('document_name') ?>";
-
-    document.getElementById("form-auth").addEventListener("submit", (ev) => {
-        ev.preventDefault();
-        ev.stopPropagation();
-
-        const serializeParams = new URLSearchParams(Array.from(
-            new FormData(document.getElementById("form-auth"))
-        ));
-
-        let login = serializeParams.get("login");
-        let password = serializeParams.get("password");
-        let passwordMD5 = CryptoJS.MD5(password).toString();
-
-        if (login.length < 3 || login.length > 16) {
-            alert("<?= str_get_string('message_auth_login_incorrect') ?>")
-            return;
-        } if (password.length < 3 || password.length > 64) {
-            alert("<?= str_get_string('message_auth_password_incorrect') ?>")
-            return;
-        }
-
-        window.location.replace("secure/auth.php?sdsdg=" + `${login}:${passwordMD5}`);
-    });
 </script>

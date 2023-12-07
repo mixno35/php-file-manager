@@ -1,4 +1,6 @@
 <?php
+include_once "secure/check-token.php";
+
 global $data, $path_manager;
 
 $path = array(

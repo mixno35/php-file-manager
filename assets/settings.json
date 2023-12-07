@@ -32,11 +32,8 @@
     "callback": "window.location.reload()",
     "list": [
       { "key": "en", "title": "English" },
-      { "key": "de", "title": "Deutsch" },
-      { "key": "pl", "title": "Polski" },
       { "key": "ru", "title": "Русский" },
-      { "key": "by", "title": "Беларуская" },
-      { "key": "ua", "title": "Українська" }
+      { "key": "by", "title": "Беларуская" }
     ]
   }
 ]

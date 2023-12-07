@@ -90,7 +90,7 @@
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
   "hint_rename_enter_new_name": "Enter a new name for %1s",
-  "hint_search": "Search...",
+  "hint_search": "What will be find?",
 
   "message_auth_login_incorrect": "The login must not be shorter than 3 characters or be more than 16 characters",
   "message_auth_password_incorrect": "The password must not be shorter than 3 characters or be more than 64 characters",
@@ -116,6 +116,8 @@
 
   "api_command_unknown": "Unknown command.",
   "api_command_path_skip": "The contents of the path were not identified, perhaps the path is incorrect.",
+  "api_command_invalid_data_session": "Invalid token. Access denied.",
+  "api_command_unknown_user": "Before proceeding, you need to log in.",
   "api_remove_dir_success": "The directory was successfully deleted.",
   "api_remove_dir_error": "Failed to delete the directory.",
   "api_remove_file_success": "The file was successfully deleted.",
