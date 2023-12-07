@@ -46,7 +46,8 @@ if ($path_manager->chmod_detect($path)) {
     if (mkdir($f_path)) {
         echo json_encode([
             "type" => "success",
-            "message_id" => "api_create_dir_success"
+            "message_id" => "api_create_dir_success",
+            "return" => [$name]
         ], 128);
     } else {
         echo json_encode([

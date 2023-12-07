@@ -43,6 +43,7 @@ class FileParseManager {
     private function generate_image(string $path, int $size = 0):string {
         if (file_exists($path)) {
             $file = fopen($path, "rb");
+            $format = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
             if ($file) {
                 $fileContents = fread($file, filesize($path));
@@ -62,7 +63,10 @@ class FileParseManager {
                     imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight);
 
                     ob_start();
-                    imagepng($resizedImage); // Используйте другую функцию в зависимости от формата
+                    if ($format === "webp") imagewebp($resizedImage);
+                    else if ($format === "jpg" || $format === "jpeg") imagejpeg($resizedImage);
+                    else if ($format === "gif") imagegif($resizedImage);
+                    else imagepng($resizedImage);
                     $fileContents = ob_get_clean();
                     imagedestroy($resizedImage);
                 }

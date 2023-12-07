@@ -49,7 +49,8 @@ if ($path_manager->chmod_detect($path)) {
         if (fwrite($file, "") !== false) {
             echo json_encode([
                 "type" => "success",
-                "message_id" => "api_create_file_success"
+                "message_id" => "api_create_file_success",
+                "return" => [$name]
             ], 128);
 
             fclose($file);

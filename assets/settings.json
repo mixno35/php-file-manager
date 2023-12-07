@@ -12,5 +12,31 @@
     "type": "switch",
     "id": "sd_%s",
     "param": "server_details"
+  },
+  {
+    "title": "text_default_list_type",
+    "message": "message_default_list_type",
+    "type": "dropdown",
+    "id": "dlt_%s",
+    "param": "default_list_type",
+    "list": [
+      { "key": "linear", "title": "tooltip_toggle_linear" },
+      { "key": "grid", "title": "tooltip_toggle_grid" }
+    ]
+  },
+  {
+    "title": "text_language",
+    "type": "dropdown",
+    "id": "lang",
+    "param": "language",
+    "callback": "window.location.reload()",
+    "list": [
+      { "key": "en", "title": "English" },
+      { "key": "de", "title": "Deutsch" },
+      { "key": "pl", "title": "Polski" },
+      { "key": "ru", "title": "Русский" },
+      { "key": "by", "title": "Беларуская" },
+      { "key": "ua", "title": "Українська" }
+    ]
   }
 ]

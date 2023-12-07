@@ -98,16 +98,19 @@ i.dialog-action-close:hover {
 }
 
 div.user-container {
-    width: calc(100% - 24px);
+    width: calc(100% - 24px - 24px - 2px);
 
     display: flex;
     flex-direction: row;
     align-items: center;
     background-color: var(--fm-color-body-gray);
+    /* box-shadow: var(--shadow-03); */
 
     padding: 12px;
+    margin: 12px;
 
-    border-bottom: 1px solid var(--fm-color-divider);
+    border: 1px solid var(--fm-color-divider);
+    border-radius: var(--radius-03);
 }
 div.user-container section {
     width: 100%;

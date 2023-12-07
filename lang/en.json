@@ -4,7 +4,7 @@
   "document_name_short": "StormGuardian",
   "document_name": "StormGuardian Files",
   "document_name_2": "StormGuardian <span>Files</span>",
-  "document_name_view": "StormGuardian Viewer",
+  "document_name_view": "StormGuardian View",
   "document_name_view_2": "StormGuardian <span>View</span>",
   "document_file_manager": "File manager",
   "document_copyright": "&copy; Alexander Mikhno 2023",
@@ -34,6 +34,8 @@
   "text_selected_count": "Selected: %1s",
   "text_list_preview_image": "Preview images",
   "text_server_details": "Server details",
+  "text_default_list_type": "Default list type",
+  "text_language": "Language",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",
@@ -110,6 +112,7 @@
   "message_test_font": "Each person is born with a unique set of abilities, explore this world and unlock your potential to create your own unique destiny.",
   "message_list_preview_image": "Preview images directly in the file list. If enabled, the list may take longer to load than usual",
   "message_server_details": "Brief information about the server on the main page",
+  "message_default_list_type": "Select the default list type",
 
   "api_command_unknown": "Unknown command.",
   "api_command_path_skip": "The contents of the path were not identified, perhaps the path is incorrect.",
@@ -122,9 +125,9 @@
   "api_rename_forbidden_chars": "The new name contains forbidden characters.",
   "api_rename_different_from_old": "The new name must be different from the old one.",
   "api_rename_dir_error": "It was not possible to rename this directory.",
-  "api_rename_dir_success": "The directory was successfully renamed.",
+  "api_rename_dir_success": "The directory was successfully renamed. New name: %1s.",
   "api_rename_file_error": "The file could not be renamed.",
-  "api_rename_file_success": "The file was successfully renamed.",
+  "api_rename_file_success": "The file was successfully renamed. New name: %1s.",
   "api_create_forbidden_chars": "The name must not contain forbidden characters.",
   "api_create_short_char": "The name must not be shorter than 1 character.",
   "api_create_is_not_dir": "You specified an incorrect path. The path should lead to the directory.",
@@ -136,5 +139,6 @@
   "api_create_file_error": "Failed to create a new file.",
   "api_create_file_success": "The new file has been created successfully.",
   "api_create_file_not_exist": "The file could not be opened for writing.",
-  "api_is_readable": "Access denied."
+  "api_is_readable": "Access denied.",
+  "api_upload_file_blob_incorrect": "The blob link is incorrect."
 }

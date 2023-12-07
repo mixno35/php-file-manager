@@ -73,6 +73,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
 
         <label class="search-container">
             <input type="search" id="main-search" value="<?= ($_GET['s'] ?? '') ?>" placeholder="<?= str_get_string('hint_search') ?>">
+            <i class="fa-solid fa-magnifying-glass action-search"></i>
         </label>
 
         <div class="container-user">
@@ -145,7 +146,8 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
     <script>
         let serverDirectory = "<?= addslashes($main_path["server"]) ?>";
         let openedDirectory = serverDirectory;
-        let isGrid = false;
+        let isGrid = Boolean(<?= ($settings["default_list_type"] === "grid") ?>);
+        let isGlobalSearch = true;
         let count_file_manager_items = 0;
         let clickCount = 0;
         let selectPaths = [];

@@ -16,7 +16,7 @@ $path = trim($_GET["path"]) ?? "";
 <?php } ?>
 
 <?php
-$folders = $file_manager->get_folders($path);
+$folders = $file_manager->get_dirs($path);
 
 asort($folders);
 ?>
@@ -29,7 +29,7 @@ asort($folders);
     <?php foreach ($folders as $folder) { ?>
         <?php
         $name = basename($folder);
-        $count = $file_manager->get_folders($folder);
+        $count = $file_manager->get_dirs($folder);
 
         $uniID = uniqid();
         ?>

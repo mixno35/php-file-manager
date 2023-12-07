@@ -29,7 +29,8 @@ if ($path_manager->chmod_detect($path["old"])) {
         if (rename($path["old"], $path["new"])) {
             echo json_encode([
                 "type" => "success",
-                "message_id" => "api_rename_dir_success"
+                "message_id" => "api_rename_dir_success",
+                "return" => [basename($path["new"]), basename($path["old"])]
             ], 128);
         } else {
             echo json_encode([
@@ -45,7 +46,8 @@ if ($path_manager->chmod_detect($path["old"])) {
         if (rename($path["old"], $path["new"])) {
             echo json_encode([
                 "type" => "success",
-                "message_id" => "api_rename_file_success"
+                "message_id" => "api_rename_file_success",
+                "return" => [basename($path["new"]), basename($path["old"])]
             ], 128);
         } else {
             echo json_encode([

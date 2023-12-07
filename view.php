@@ -576,7 +576,7 @@ function get_mode_codemirror(string $path = ""):string {
                 </h1>
             </header>
 
-            <img class="preview" draggable="false" id="preview" src="<?= $file_parse->get_icon($path, true) ?>" alt="Image">
+            <img class="preview" draggable="false" id="preview" loading="eager" src="view-content/blob.php?p=<?= urlencode($path) ?>" alt="Image">
         </div>
 
         <script>

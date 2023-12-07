@@ -54,7 +54,7 @@ class FileManager {
         return round($size, 2) . " " . $units[$unit];
     }
 
-    public function get_folders($_path):array {
+    public function get_dirs($_path):array {
         $_path = realpath($_path);
 
         if (!is_readable($_path)) return [];

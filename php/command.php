@@ -19,6 +19,9 @@ if ($command === "remove") { // Удаление файла/папки
 } if ($command === "create-file") { // Создание файла
     include_once "command/create-file.php";
     exit();
+} if ($command === "upload-file") { // Загрузка файла
+    include_once "command/upload-file.php";
+    exit();
 }
 
 echo json_encode([
