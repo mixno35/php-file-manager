@@ -14,7 +14,7 @@ $up_login = $up_user[0] ?? "";
 
 $array_privileges = array(
     "admin" => array(
-        "view_file" => false,
+        "view_file" => true,
         "preview" => array("file" => true, "dir" => true),
         "create" => array("file" => true, "dir" => true),
         "rename" => true,
