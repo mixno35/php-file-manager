@@ -4,7 +4,6 @@ global $main_path, $settings, $privileges;
 session_start();
 
 include_once "php/data.php";
-include_once "php/settings.php";
 include_once "secure/user-privileges.php";
 
 include_once "lang/lang.php";

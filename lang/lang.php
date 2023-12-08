@@ -1,13 +1,16 @@
 <?php
-$languageID = substr(($_SERVER["HTTP_ACCEPT_LANGUAGE"] ?? "en"), 0, 2);
-$languageTAG = substr(($_SERVER["HTTP_ACCEPT_LANGUAGE"] ?? "en-US"), 0, 5);
+$lang_default_code = "en";
+$lang_default_tag = "en-US";
+
+$languageID = substr(($_SERVER["HTTP_ACCEPT_LANGUAGE"] ?? $lang_default_code), 0, 2);
+$languageTAG = substr(($_SERVER["HTTP_ACCEPT_LANGUAGE"] ?? $lang_default_tag), 0, 5);
 
 $path_main_lang = dirname(__FILE__);
 
-$content_default = file_get_contents("$path_main_lang/en.json");
+$content_default = file_get_contents("$path_main_lang/$lang_default_code.json");
 
 $content_setting = $content_default;
-$content_user_lang = trim(str_replace("/", "", substr(strval($_COOKIE["lang"] ?? "en"), 0, 2)));
+$content_user_lang = trim(str_replace("/", "", substr(strval($languageID ?? ($_COOKIE["lang"] ?? $lang_default_code)), 0, 2)));
 if (file_exists("$path_main_lang/$content_user_lang.json")) {
     $content_setting = file_get_contents("$path_main_lang/$content_user_lang.json");
 }
@@ -17,7 +20,7 @@ $string_setting = parse_json_decode($content_setting, true);
 
 $string = array_merge($string_default, $string_setting);
 
-$language_tag = strval($string["language_tag"] ?? ($languageTAG ?? "en-US")); // Для атрибута lang=""
+$language_tag = strval($string["language_tag"] ?? ($languageTAG ?? $lang_default_tag)); // Для атрибута lang=""
 
 $content = json_encode($string); // Для JS списка
 

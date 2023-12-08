@@ -6,7 +6,6 @@ include_once dirname(__FILE__, 2) . "/lang/lang.php";
 include_once dirname(__FILE__, 2) . "/secure/session.php";
 
 include_once dirname(__FILE__, 2) . "/php/data.php";
-include_once dirname(__FILE__, 2) . "/php/settings.php";
 
 $content = json_decode(file_get_contents(dirname(__FILE__, 2) . "/assets/settings.json"), true);
 ?>
@@ -22,6 +21,7 @@ $content = json_decode(file_get_contents(dirname(__FILE__, 2) . "/assets/setting
     <?php foreach ($content as $item) { ?>
         <?php
         $id = str_replace("%s", $uni_id, $item["id"] ?? "none");
+        $param = $item["param"] ?? "none";
         ?>
         <label>
             <span>
@@ -31,7 +31,7 @@ $content = json_decode(file_get_contents(dirname(__FILE__, 2) . "/assets/setting
                 <?php } ?>
             </span>
             <?php if ($item["type"] === "switch") { ?>
-                <input type="checkbox" class="switch" onchange="setSetting('<?= $id ?>', this.checked); eval(`<?= $item['callback'] ?? '' ?>`)" <?= $settings[$item["param"]] ? "checked" : "" ?>>
+                <input type="checkbox" class="switch" onchange="setSetting('<?= $id ?>', this.checked); eval(`<?= $item['callback'] ?? '' ?>`)" <?= $settings[$param] ? "checked" : "" ?>>
             <?php } ?>
             <?php if ($item["type"] === "dropdown") { ?>
                 <?php
@@ -39,7 +39,7 @@ $content = json_decode(file_get_contents(dirname(__FILE__, 2) . "/assets/setting
                 ?>
                 <select onchange="setSetting('<?= $id ?>', this.value); eval(`<?= $item['callback'] ?? '' ?>`)">
                     <?php foreach ($list as $dd_item) { ?>
-                        <option value="<?= $dd_item['key'] ?>" <?= (($_COOKIE[$id] ?? "none") === $dd_item["key"]) ? "selected" : "" ?>><?= str_get_string($dd_item["title"]) ?></option>
+                        <option value="<?= $dd_item['key'] ?>" <?= (($settings[$param] ?? "none") === $dd_item["key"]) ? "selected" : "" ?>><?= str_get_string($dd_item["title"]) ?></option>
                     <?php } ?>
                 </select>
             <?php } ?>

@@ -5,7 +5,6 @@ global $language_tag, $content, $main_path, $server_encoding, $default_avatar, $
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
-include_once "php/settings.php"; // Загружаем системные настройки
 
 include_once "class/FileManager.php";
 
