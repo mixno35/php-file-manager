@@ -10,11 +10,24 @@ let element_popup_sticky = null;
 
 let timer_search_main;
 
+const THEME = getCookie("theme") ?? "auto";
+
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("popstate", () => {
         const currentURL = window.location.href;
         loadMainFileManager(url_param(currentURL).get("p"));
     });
+
+    if (THEME === "auto") {
+        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.setAttribute("data-theme", "dark");
+        } else document.documentElement.setAttribute("data-theme", "light");
+    } else document.documentElement.setAttribute("data-theme", getCookie("theme"));
+});
+
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
+    if (THEME === "auto")
+        document.documentElement.setAttribute("data-theme", (event.matches ? "dark" : "light"));
 });
 
 document.addEventListener("keydown", (event) => {
@@ -42,7 +55,7 @@ loadNavDirectoryManager(serverDirectory, "list-directory-manager");
 loadMainFileManager((url_param().get("p") ?? serverDirectory));
 
 document.getElementById("action-dev-report")
-    .addEventListener("click", () => { window.open("//linkbox.su/r/mixno35") });
+    .addEventListener("click", () => { window.open("//t.me/mixno35") });
 document.getElementById("action-dev-paid").addEventListener("click", () => {
     dialog(DIALOG_STYLE_PATH, [getStringBy("tooltip_dev_paid"), "paid.php"]);
 });

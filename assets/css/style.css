@@ -49,6 +49,7 @@ header label.search-container {
 }
 header label.search-container input[type="search"] {
     color: var(--fm-color-text);
+    background-color: var(--fm-color-body);
 
     height: 100%;
 
@@ -176,6 +177,8 @@ header div.container-user h4 {
 
     text-transform: lowercase;
     letter-spacing: .02em;
+
+    color: var(--fm-color-text);
 }
 header div.container-user:hover {
     background-color: var(--fm-color-body-gray);
@@ -331,6 +334,8 @@ main nav.left-directory-manager section.list-manager ul li span span.folder {
 
     white-space: pre-wrap;
     word-break: break-all;
+
+    color: var(--fm-color-text);
 }
 main nav.left-directory-manager section.list-manager ul li.empty span span.folder {
     opacity: .6;
@@ -388,6 +393,7 @@ main nav.left-directory-manager section.details-manager h2 {
 
     display: flex;
     align-items: center;
+    color: var(--fm-color-text);
 
     padding: 0 12px;
 }
@@ -600,6 +606,8 @@ main article.main-file-manager nav.header div.manager-content button.item-nav-bu
     border: 1px solid var(--fm-color-divider);
 }
 main article.main-file-manager nav.header div.manager-content button.item-nav-button i {
+    color: var(--fm-color-text);
+
     font-size: 12px;
 }
 main article.main-file-manager nav.header div.manager-content button.item-nav-button:not(:disabled):hover {
@@ -748,6 +756,7 @@ main article.main-file-manager article ul.file-manager li span.first span.name {
 
     display: block;
     overflow: hidden;
+    color: var(--fm-color-text);
 
     width: 100%;
 }
@@ -979,6 +988,7 @@ main nav.file-detail header.header button span {
     position: relative;
     display: flex;
     top: -2px;
+    color: var(--fm-color-text);
 }
 
 main nav.file-detail h4.message-cont {
@@ -1803,6 +1813,9 @@ select {
     height: 30px;
 
     padding: 0 6px;
+
+    background-color: var(--fm-color-body);
+    color: var(--fm-color-text);
 
     border: 1px solid var(--fm-color-divider);
     border-radius: var(--radius-02);

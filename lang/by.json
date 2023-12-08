@@ -30,6 +30,7 @@
   "text_server_details": "Інфармацыя пра сервер",
   "text_default_list_type": "Тып спісу па змаўчанні",
   "text_language": "Мова",
+  "text_theme": "Тэма",
 
   "tooltip_close": "Закрыць",
   "tooltip_create_dir": "Стварыць новы каталёг (Ctrl + Alt + D)",
@@ -81,6 +82,9 @@
   "action_create_new_dir": "Стварыць каталёг",
   "action_copy_name": "Скапіяваць імя",
   "action_create": "Стварыць",
+  "action_theme_auto": "Аўтаматычная",
+  "action_theme_light": "Светлая",
+  "action_theme_dark": "Цёмная",
 
   "hint_auth_enter_login": "Увядзіце лагін",
   "hint_auth_enter_password": "Увядзіце пароль",

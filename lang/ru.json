@@ -30,6 +30,7 @@
   "text_server_details": "Информация о сервере",
   "text_default_list_type": "Тип списка по умолчанию",
   "text_language": "Язык",
+  "text_theme": "Тема",
 
   "tooltip_close": "Закрыть",
   "tooltip_create_dir": "Создать новую директорию (Ctrl + Alt + D)",
@@ -81,6 +82,9 @@
   "action_create_new_dir": "Создать директорию",
   "action_copy_name": "Копировать имя",
   "action_create": "Создать",
+  "action_theme_auto": "Как в системе",
+  "action_theme_light": "Светлая",
+  "action_theme_dark": "Темная",
 
   "hint_auth_enter_login": "Введите логин",
   "hint_auth_enter_password": "Введите пароль",

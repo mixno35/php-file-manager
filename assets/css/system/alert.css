@@ -165,6 +165,8 @@ div.user-container section span {
     white-space: nowrap;
     font-size: 13px;
     font-weight: 500;
+
+    color: var(--fm-color-text);
 }
 div.user-container section span b {
     font-weight: 600;

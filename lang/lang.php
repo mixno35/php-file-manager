@@ -10,7 +10,7 @@ $path_main_lang = dirname(__FILE__);
 $content_default = file_get_contents("$path_main_lang/$lang_default_code.json");
 
 $content_setting = $content_default;
-$content_user_lang = trim(str_replace("/", "", substr(strval($languageID ?? ($_COOKIE["lang"] ?? $lang_default_code)), 0, 2)));
+$content_user_lang = trim(str_replace("/", "", substr(strval($_COOKIE["lang"] ?? $languageID), 0, 2)));
 if (file_exists("$path_main_lang/$content_user_lang.json")) {
     $content_setting = file_get_contents("$path_main_lang/$content_user_lang.json");
 }

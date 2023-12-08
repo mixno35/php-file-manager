@@ -67,7 +67,7 @@ function isValidFName(name = "") {
     return !forbidden_chars.test(name);
 }
 
-function setCookie(name = "", value = "", days = 0) {
+function setCookie(name, value, days = 0) {
     let expires = "";
     if (days) {
         let date = new Date();
@@ -75,6 +75,22 @@ function setCookie(name = "", value = "", days = 0) {
         expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookieParts = cookies[i].split("=");
+        const cookieName = cookieParts[0];
+        const cookieValue = cookieParts[1];
+
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+
+    return null;
 }
 
 function isMobileDevice() {

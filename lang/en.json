@@ -36,6 +36,7 @@
   "text_server_details": "Server details",
   "text_default_list_type": "Default list type",
   "text_language": "Language",
+  "text_theme": "Theme",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",
@@ -87,6 +88,9 @@
   "action_create_new_dir": "Create directory",
   "action_copy_name": "Copy name",
   "action_create": "Create",
+  "action_theme_auto": "Auto",
+  "action_theme_light": "Light",
+  "action_theme_dark": "Dark",
 
   "hint_auth_enter_login": "Enter login",
   "hint_auth_enter_password": "Enter password",
