@@ -39,7 +39,7 @@ $content = json_decode(file_get_contents(dirname(__FILE__, 2) . "/assets/setting
                 ?>
                 <select onchange="setSetting('<?= $id ?>', this.value); eval(`<?= $item['callback'] ?? '' ?>`)">
                     <?php foreach ($list as $dd_item) { ?>
-                        <option value="<?= $dd_item['key'] ?>" <?= (($settings[$param] ?? "none") === $dd_item["key"]) ? "selected" : "" ?>><?= str_get_string($dd_item["title"]) ?></option>
+                        <option value="<?= $dd_item['key'] ?>" <?= ($settings[$param] === $dd_item["key"]) ? "selected" : "" ?>><?= str_get_string($dd_item["title"]) ?></option>
                     <?php } ?>
                 </select>
             <?php } ?>
