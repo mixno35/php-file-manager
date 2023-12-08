@@ -54,29 +54,16 @@ if (file_exists($f_path)) {
 }
 
 if ($path_manager->chmod_detect($path)) {
-    $file = fopen($f_path, "w");
-
-    if ($file) {
-        if (fwrite($file, "") !== false) {
-            echo json_encode([
-                "type" => "success",
-                "message_id" => "api_create_file_success",
-                "return" => [$name]
-            ], 128);
-
-            fclose($file);
-        } else {
-            echo json_encode([
-                "type" => "error",
-                "message_id" => "api_create_file_error"
-            ], 128);
-        }
-
-        exit();
+    if (file_put_contents($f_path, "Simple text.", LOCK_EX) !== false) {
+        echo json_encode([
+            "type" => "success",
+            "message_id" => "api_create_file_success",
+            "return" => [$name]
+        ], 128);
     } else {
         echo json_encode([
             "type" => "error",
-            "message_id" => "api_create_file_not_exist"
+            "message_id" => "api_create_file_error"
         ], 128);
     }
 } else {
@@ -84,11 +71,6 @@ if ($path_manager->chmod_detect($path)) {
         "type" => "error",
         "message_id" => "api_create_not_permission_777"
     ], 128);
-
-    exit();
 }
 
-echo json_encode([
-    "type" => "error",
-    "message_id" => "api_command_path_skip"
-], 128);
+exit();

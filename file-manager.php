@@ -1,20 +1,31 @@
 <?php
-global $main_path, $settings;
+global $main_path, $settings, $privileges;
+
+session_start();
 
 include_once "php/data.php";
 include_once "php/settings.php";
+include_once "secure/user-privileges.php";
 
 include_once "lang/lang.php";
 
 include_once "class/FileManager.php";
 include_once "class/FileParseManager.php";
+include_once "php/class/CheckSession.php";
+
+$check_session = new CheckSession();
+
+if (!$check_session->check()) {
+    http_response_code(403);
+    exit();
+}
 
 $file_manager = new FileManager();
 $file_parse = new FileParseManager();
 
 $path = $file_manager->parse_separator(trim(strval($_GET["path"]) ?? ""));
-$isGrid = intval($_GET["grid"]);
-$isGlobalSearch = intval($_GET["global_search"]);
+$isGrid = intval($_GET["grid"] ?? 0);
+$search_type = intval($_GET["search_type"] ?? 0);
 $search = trim(strval($_GET["search"] ?? ""));
 
 $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes($main_path["server"]));
@@ -95,7 +106,7 @@ $result = array_merge($directories, $files);
 if (strlen(trim($search)) > 0) {
     unset($result);
     $result = [];
-    $file_manager->search(($isGlobalSearch === 1 ? $main_path["server"] : $path), trim($search), $result);
+    $file_manager->search(($search_type >= 1 ? $main_path["server"] : $path), trim($search), $result);
 }
 ?>
 
@@ -122,7 +133,7 @@ if (strlen(trim($search)) > 0) {
                 ], this.getAttribute('data-isdir'))" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $liUniID ?>" data-path="<?= addslashes($item) ?>" data-isdir="<?= is_dir($item) ?>" data-href="<?= $file_manager->get_current_url($item, true) ?>">
                     <span class="first">
                         <span class="image-preview">
-                            <img loading="lazy" src="<?= $file_parse->get_icon($item, $settings["list_image_preview"], 48) ?>" alt="Image">
+                            <img loading="lazy" src="<?= $file_parse->get_icon($item, ($settings['list_image_preview'] and $privileges['view_file']), 48) ?>" alt="Image">
                         </span>
                         <span class="name">
                             <?= $name ?>

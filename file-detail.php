@@ -41,7 +41,7 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
 <div class="container custom-scroll">
     <div class="content">
         <div class="preview">
-            <img src="<?= $file_parse->get_icon($path, true, 256) ?>" alt="Image">
+            <img src="<?= $file_parse->get_icon($path, $privileges['view_file'], 256) ?>" alt="Image">
 
             <?php if (is_file($path) && strlen(trim($file_manager->get_file_format($path))) > 0) { ?>
                 <span class="format"><?= $file_manager->get_file_format($path) ?></span>

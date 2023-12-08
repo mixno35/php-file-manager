@@ -1,12 +1,21 @@
 <?php
-//include_once dirname(__FILE__, 2) . "/php/class/CheckSession.php";
-//
-//$check_session = new CheckSession();
-//
-//if (!$check_session->check()) {
-//    http_response_code(404);
-//    exit();
-//}
+include_once dirname(__FILE__, 2) . "/php/class/CheckSession.php";
+
+$check_session = new CheckSession();
+
+if (!$check_session->check()) {
+    http_response_code(403);
+    exit();
+}
+
+global $privileges;
+
+include_once dirname(__FILE__, 2) . "/secure/user-privileges.php"; // Загружаем привилегии пользователя
+
+if (!$privileges["view_file"]) {
+    http_response_code(403);
+    exit();
+}
 
 $blob_path = $_GET["p"] ?? "";
 

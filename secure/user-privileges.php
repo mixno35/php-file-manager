@@ -14,12 +14,13 @@ $up_login = $up_user[0] ?? "";
 
 $array_privileges = array(
     "admin" => array(
-        "view_file" => true,
+        "view_file" => false,
         "preview" => array("file" => true, "dir" => true),
         "create" => array("file" => true, "dir" => true),
         "rename" => true,
         "remove" => true,
-        "upload" => true
+        "upload" => true,
+        "edit" => true
     )
 );
 
@@ -35,5 +36,6 @@ $privileges = array(
     ),
     "rename" => $array_privileges[$up_login]["rename"] ?? false, // Переименование файлов и папок
     "remove" => $array_privileges[$up_login]["remove"] ?? false, // Удаление файлов и папок
-    "upload" => $array_privileges[$up_login]["upload"] ?? false // Загрузка файлов
+    "upload" => $array_privileges[$up_login]["upload"] ?? false, // Загрузка файлов
+    "edit" => $array_privileges[$up_login]["edit"] ?? false // Сохранение, редактирование файлов и редактирование папок
 );

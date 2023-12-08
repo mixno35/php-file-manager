@@ -142,7 +142,7 @@ function loadMainFileManager(_path = "", _update = false) {
             path: _path,
             grid: (isGrid ? 1 : 0),
             search: (url_param().get("s") ?? ""),
-            global_search: (isGlobalSearch ? 1 : 0)
+            search_type: Number(searchType)
         },
         success: function (result) {
             progress();
@@ -266,7 +266,7 @@ function uploadNewFile(file) {
 
     container_upload.appendChild(container_item);
 
-    command(COMMAND_UPLOAD_FILE, {blob: url, path: openedDirectory}, updateMainFileManager, () => {
+    command(COMMAND_UPLOAD_FILE, {blob: url, path: openedDirectory, file: JSON.stringify(form_data)}, updateMainFileManager, () => {
         const xhr = new window.XMLHttpRequest();
         xhr.upload.addEventListener("progress", (event) => {
             if (event.lengthComputable) {

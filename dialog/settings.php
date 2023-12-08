@@ -1,5 +1,5 @@
 <?php
-global $language_tag, $content, $main_path, $server_encoding, $default_avatar, $session_name, $settings, $uni_id;
+global $main_path, $server_encoding, $default_avatar, $session_name, $settings, $uni_id;
 
 include_once dirname(__FILE__, 2) . "/lang/lang.php";
 

@@ -63,6 +63,12 @@ const run_command = () => {
                     command(COMMAND_CREATE_DIRECTORY, {path: path, name: name}, updateMainFileManager);
                 },
                 file: () => {
+                    // dialog(DIALOG_STYLE_PATH, [
+                    //     getStringBy("action_create_new_file"),
+                    //     "create-file.php",
+                    //     {path: path}
+                    // ]);
+
                     const name = prompt(getStringBy("text_enter_a_name_file"));
 
                     if (name === null)

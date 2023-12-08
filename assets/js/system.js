@@ -1,8 +1,8 @@
 const PROGRESS_TYPE_FM = 2, PROGRESS_TYPE_NAV = 1, PROGRESS_TYPE_ALL = 0;
-const METHOD_POST = "POST";
-const METHOD_GET = "GET";
+const SEARCH_TYPE_LOCAL_PLUS = 2, SEARCH_TYPE_LOCAL = 1, SEARCH_TYPE_GLOBAL = 0;
+const METHOD_POST = "POST", METHOD_GET = "GET";
 
-let z_index_alert = 90;
+let z_index_alert = 79;
 
 const generate_text = (length = 6) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -34,6 +34,8 @@ const toast = () => {
                     toast_text.innerText = message;
 
             toast_container.appendChild(toast_text);
+
+            if (isMobileDevice()) document.getElementById("container-for-toast").innerHTML = "";
 
             document.getElementById("container-for-toast").appendChild(toast_container);
 

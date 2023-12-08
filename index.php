@@ -146,7 +146,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
         let serverDirectory = "<?= addslashes($main_path["server"]) ?>";
         let openedDirectory = serverDirectory;
         let isGrid = Boolean(<?= ($settings["default_list_type"] === "grid") ?>);
-        let isGlobalSearch = true;
+        let searchType = SEARCH_TYPE_GLOBAL; // SEARCH_TYPE_GLOBAL - искать везде, SEARCH_TYPE_LOCAL - искать в открытой папке, SEARCH_TYPE_LOCAL_PLUS - искать в открытой папке и вложенных папках
         let count_file_manager_items = 0;
         let clickCount = 0;
         let selectPaths = [];
@@ -155,7 +155,6 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
 
     <script src="assets/js/funcs.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index.js?v=<?= $resource_v ?>"></script>
-    <script src="assets/js/index-rezisable.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index-drag.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index-command.js?v=<?= $resource_v ?>"></script>
 </body>

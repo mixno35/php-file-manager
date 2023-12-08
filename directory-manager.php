@@ -1,7 +1,16 @@
 <?php
 include_once "php/data.php";
 include_once "lang/lang.php";
+
 include_once "class/FileManager.php";
+include_once "php/class/CheckSession.php";
+
+$check_session = new CheckSession();
+
+if (!$check_session->check()) {
+    http_response_code(403);
+    exit();
+}
 
 $file_manager = new FileManager();
 

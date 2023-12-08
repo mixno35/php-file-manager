@@ -1,5 +1,11 @@
 const DIALOG_STYLE_MESSAGE = 0, DIALOG_STYLE_PATH = 1
 
+/**
+ *
+ * @param style Указывает какой сейчас используется диалог. DIALOG_STYLE_MESSAGE - выводит только сообщение, DIALOG_STYLE_PATH - загружает любой файл, используется для кастомных диалогов.
+ * @param content Принимает в себя объект с данными: 1 - заголовок, 2 - сообщение или путь к файлу в зависимости от style, 3 - передаваемые данные, нужен если используется style - DIALOG_STYLE_PATH.
+ * @param close Показывать или скрывать кнопку скрытия диалога.
+ */
 const dialog = (style = DIALOG_STYLE_MESSAGE, content = [], close = true) => {
     let content_title = content[0] ?? getStringBy("title_information");
     let content_value = content[1] ?? "";

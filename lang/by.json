@@ -80,6 +80,7 @@
   "action_create_new_file": "Стварыць файл",
   "action_create_new_dir": "Стварыць каталёг",
   "action_copy_name": "Скапіяваць імя",
+  "action_create": "Стварыць",
 
   "hint_auth_enter_login": "Увядзіце лагін",
   "hint_auth_enter_password": "Увядзіце пароль",
@@ -107,6 +108,7 @@
   "message_server_details": "Праглядзайце кароткую інфармацыю пра сервер на галоўнай старонцы",
   "message_default_list_type": "Выберыце, як будзе адлюстроўвацца спіс па змаўчанні",
 
+  "api_unknown_error": "Невядомая памылка.",
   "api_command_unknown": "Невядомая каманда.",
   "api_command_path_skip": "Змест шляху не быў ідэнтыфікаваны, магчыма, шлях не карэктны.",
   "api_command_invalid_data_session": "Няправільны токен. Доступ забаронены.",

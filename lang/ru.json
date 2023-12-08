@@ -80,6 +80,7 @@
   "action_create_new_file": "Создать файл",
   "action_create_new_dir": "Создать директорию",
   "action_copy_name": "Копировать имя",
+  "action_create": "Создать",
 
   "hint_auth_enter_login": "Введите логин",
   "hint_auth_enter_password": "Введите пароль",
@@ -107,6 +108,7 @@
   "message_server_details": "Просматривайте краткую информацию о сервере на главной станице",
   "message_default_list_type": "Выберите, как будет отображаться список по умолчанию",
 
+  "api_unknown_error": "Неизвестная ошибка.",
   "api_command_unknown": "Неизвестная команда.",
   "api_command_path_skip": "Содержимое пути не было идентифицировано, возможно, путь указан неверно.",
   "api_command_invalid_data_session": "Неверный токен. Доступ запрещен.",

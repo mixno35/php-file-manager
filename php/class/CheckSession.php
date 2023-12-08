@@ -12,7 +12,7 @@ session_start();
 
 const SESSION_USERS = array(
     "admin" => "admin"
-);
+); // "login" => "password"
 
 class CheckSession {
 
