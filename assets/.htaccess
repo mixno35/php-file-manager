@@ -1,0 +1,12 @@
+<Files user_privileges.json>
+    Deny from all
+</Files>
+<Files settings.json>
+    Deny from all
+</Files>
+<Files paid.json>
+    Deny from all
+</Files>
+<Files users.json>
+    Deny from all
+</Files>

@@ -10,19 +10,9 @@ $crypt = new Crypt();
 
 $up_str_decrypt = $crypt->decrypt($_SESSION[$session_name] ?? "xx:xx");
 $up_user = explode(":", $up_str_decrypt);
-$up_login = $up_user[0] ?? "";
+$up_login = md5($up_user[0] ?? "");
 
-$array_privileges = array(
-    "admin" => array(
-        "view_file" => true,
-        "preview" => array("file" => true, "dir" => true),
-        "create" => array("file" => true, "dir" => true),
-        "rename" => true,
-        "remove" => true,
-        "upload" => true,
-        "edit" => true
-    )
-);
+$array_privileges = json_decode(file_get_contents(dirname(__FILE__, 2) . "/assets/user_privileges.json"), true);
 
 $privileges = array(
     "view_file" => $array_privileges[$up_login]["view_file"] ?? false, // Просмотр файлов (view.php)

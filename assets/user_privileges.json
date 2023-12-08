@@ -1,0 +1,11 @@
+{
+  "21232f297a57a5a743894a0e4a801fc3": {
+    "view_file": true,
+    "preview" : {"file": true, "dir": true},
+    "create": {"file": true, "dir": true},
+    "rename": true,
+    "remove": true,
+    "upload": true,
+    "edit": true
+  }
+}
