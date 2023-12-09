@@ -44,6 +44,15 @@ if (!is_readable($path)) {
 
 $f_path = $path . DIRECTORY_SEPARATOR . $name;
 
+if (file_exists($f_path)) {
+    echo json_encode([
+        "type" => "error",
+        "message_id" => "api_create_file_file_exist"
+    ], 128);
+
+    exit();
+}
+
 if (is_dir($f_path)) {
     echo json_encode([
         "type" => "error",

@@ -8,6 +8,7 @@
   "text_php_version": "Version PHP : %1s",
   "text_php_server": "Serveur : %1s",
   "text_php_total_size": "Taille : %1s",
+  "text_php_os": "SE : %1s",
   "text_about_file": "À propos du fichier",
   "text_about_dir": "À propos du répertoire",
   "text_about_file_name": "Nom du fichier",
@@ -71,6 +72,7 @@
   "tooltip_media_playback_rate": "Vitesse de lecture (S)",
   "tooltip_upload_content": "Télécharger",
   "tooltip_logout": "Se déconnecter",
+  "tooltip_download_archive": "Télécharger en tant qu'archive",
 
   "title_information": "Information",
 

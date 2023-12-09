@@ -1,35 +1,43 @@
 <?php
-$userAgent = ($_SERVER["HTTP_USER_AGENT"] ?? "StormGuardian/1.0 (Windows NT 10.0; Win64; x64)");
-$key = md5($userAgent);
 
 class Crypt {
 
-    public function encrypt($text):string {
-        global $key;
+    private string $key;
 
+    public function __construct(string $key) {
+        $this->setKey($key);
+    }
+
+    public function encrypt(string $text):string {
         $encryptedText = "";
         $textLength = strlen($text);
-        $keyLength = strlen($key);
+        $keyLength = strlen($this->getKey());
 
         for ($i = 0; $i < $textLength; $i++) {
-            $encryptedText .= $text[$i] ^ $key[$i % $keyLength];
+            $encryptedText .= $text[$i] ^ $this->getKey()[$i % $keyLength];
         }
 
         return base64_encode($encryptedText);
     }
 
-    public function decrypt($text):string {
-        global $key;
-
+    public function decrypt(string $text):string {
         $encryptedText = base64_decode($text);
         $decryptedText = "";
         $textLength = strlen($encryptedText);
-        $keyLength = strlen($key);
+        $keyLength = strlen($this->getKey());
 
         for ($i = 0; $i < $textLength; $i++) {
-            $decryptedText .= $encryptedText[$i] ^ $key[$i % $keyLength];
+            $decryptedText .= $encryptedText[$i] ^ $this->getKey()[$i % $keyLength];
         }
 
         return $decryptedText;
+    }
+
+    private function getKey():string {
+        return $this->key;
+    }
+
+    public function setKey(string $key):void {
+        $this->key = $key;
     }
 }

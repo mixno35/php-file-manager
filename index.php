@@ -104,8 +104,9 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
                 <section class="details-manager">
                     <h2><?= str_get_string("text_details_manager") ?></h2>
                     <ul>
-                        <li><?= str_get_string("text_php_version", false, [(PHP_VERSION ?? "NaN")]) ?></li>
+                        <li><?= str_get_string("text_php_version", false, [(PHP_VERSION ?? "0.0.0")]) ?></li>
                         <li><?= str_get_string("text_php_server", false, [($_SERVER["SERVER_SOFTWARE"] ?? "NaN")]) ?></li>
+                        <li><?= str_get_string("text_php_os", false, [(PHP_OS ?? "NaN")]) ?></li>
                         <li><?= str_get_string("text_php_total_size", false, [$file_manager->format_size($file_manager->get_directory_size($main_path["server"]), $array_units_size)]) ?></li>
                     </ul>
                 </section>
@@ -139,6 +140,12 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
                         <i class="fa fa-trash-can"></i>
                         <span><?= str_get_string("tooltip_delete_w") ?></span>
                     </li>
+                    <?php if (version_compare(PHP_VERSION, "8.1.0") !== -1) { ?>
+                        <li data-type="multiple" id="menu-selected-download-archive">
+                            <i class="fa-solid fa-file-zipper"></i>
+                            <span><?= str_get_string("tooltip_download_archive") ?></span>
+                        </li>
+                    <?php } ?>
                     <li data-type="multiple" id="menu-selected-select-all">
                         <i class="fa-regular fa-square-check"></i>
                         <span><?= str_get_string("tooltip_select_all") ?></span>

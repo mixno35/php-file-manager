@@ -10,6 +10,7 @@
   "text_php_version": "PHP संस्करण: %1s",
   "text_php_server": "सर्वर: %1s",
   "text_php_total_size": "आकार: %1s",
+  "text_php_os": "ऑपरेटिंग सिस्टम: %1s",
   "text_about_file": "फ़ाइल के बारे में",
   "text_about_dir": "डायरेक्टरी के बारे में",
   "text_about_file_name": "फ़ाइल का नाम",
@@ -74,6 +75,7 @@
   "tooltip_media_playback_rate": "प्लेबैक दर (S)",
   "tooltip_upload_content": "अपलोड करें",
   "tooltip_logout": "लॉगआउट",
+  "tooltip_download_archive": "आर्काइव के रूप में डाउनलोड करें",
 
   "title_information": "जानकारी",
 

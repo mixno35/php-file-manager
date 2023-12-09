@@ -9,6 +9,7 @@
   "text_php_version": "Версия PHP: %1s",
   "text_php_server": "Сервер: %1s",
   "text_php_total_size": "Размер: %1s",
+  "text_php_os": "ОС: %1s",
   "text_about_file": "О файле",
   "text_about_dir": "О директории",
   "text_about_file_name": "Имя файла",
@@ -73,6 +74,7 @@
   "tooltip_media_playback_rate": "Скорость воспроизведения (S)",
   "tooltip_upload_content": "Загрузить",
   "tooltip_logout": "Выйти",
+  "tooltip_download_archive": "Скачать архивом",
 
   "title_information": "Информация",
 

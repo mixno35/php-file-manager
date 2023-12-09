@@ -53,6 +53,15 @@ if (file_exists($f_path)) {
     exit();
 }
 
+if (is_dir($f_path)) {
+    echo json_encode([
+        "type" => "error",
+        "message_id" => "api_create_dir_dir_exist"
+    ], 128);
+
+    exit();
+}
+
 if ($path_manager->chmod_detect($path)) {
     if (file_put_contents($f_path, "Simple text.", LOCK_EX) !== false) {
         echo json_encode([

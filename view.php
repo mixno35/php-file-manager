@@ -96,7 +96,7 @@ function get_mode_codemirror(string $path = ""):string {
         ?>
         <div class="media-preview" oncontextmenu="return false;">
             <<?= $file_type ?> id="media-player">
-                <source src="view-content/blob.php?p=<?= urlencode($path) ?>">
+                <source src="content/blob.php?p=<?= rawurlencode($path) ?>">
             </<?= $file_type ?>>
             <?php if ($file_type === "audio") { ?>
                 <?php
@@ -366,7 +366,7 @@ function get_mode_codemirror(string $path = ""):string {
         <style>
             @font-face {
                 font-family: <?= $font_name ?>;
-                src: url("view-content/blob.php?p=<?= urlencode($path) ?>") format("<?= get_font_format($path) ?>");
+                src: url("content/blob.php?p=<?= rawurlencode($path) ?>") format("<?= get_font_format($path) ?>");
             }
 
             .font {
@@ -586,7 +586,7 @@ function get_mode_codemirror(string $path = ""):string {
                 </h1>
             </header>
 
-            <img class="preview" draggable="false" id="preview" loading="eager" src="view-content/blob.php?p=<?= urlencode($path) ?>" alt="Image">
+            <img class="preview" draggable="false" id="preview" loading="eager" src="content/blob.php?p=<?= urlencode($path) ?>" alt="Image">
         </div>
 
         <script>

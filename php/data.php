@@ -2,12 +2,14 @@
 $path1 = getcwd() ?? ""; // Путь к файловому менеджеру
 $path2 = dirname($path1); // Путь к сайту в котором находится файловый менеджер
 
-$host = $_SERVER["HTTP_HOST"] ?? "NaN";
+$host = $_SERVER["HTTP_HOST"] ?? "localhost";
 $user_agent = ($_SERVER["HTTP_USER_AGENT"] ?? "StormGuardian/1.0 (Windows NT 10.0; Win64; x64)");
+$your_key = "sdfjioertierntvuyeriutncirtmuirhnyieutyoietrmyiortiuyrtoirtioyutr"; // Ваш личный ключ, напишите любые символы как можно разнообразнее и длиннее, что усложнит доступ злоумышленникам.
 
 $server_encoding = mb_http_output() ?? "UTF-8";
 
-$session_name = substr(md5($host . date("d-m-Y")), 0, 10); // Сессия для авторизации
+if (!defined("SESSION_NAME"))
+    define("SESSION_NAME", substr(md5($host . $user_agent . (PHP_VERSION ?? "0.0.0") . (PHP_OS ?? "Linux") . (PHP_EXTRA_VERSION ?? "none") . $your_key . date("d-m-Y")), 0, 10)); // Сессия для авторизации
 
 $main_path = array(
     "file_manager" => $path1,

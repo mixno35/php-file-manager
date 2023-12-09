@@ -66,10 +66,12 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
                 <label><?= str_get_string("text_about_path") ?></label>
                 <var><?= $file_manager->parse_separator($path) ?></var>
             </span>
-            <span>
-                <label><?= str_get_string("text_about_url") ?></label>
-                <var><?= $file_manager->get_current_url($file_manager->parse_separator($path), true) ?></var>
-            </span>
+            <?php if ($privileges["view_file"]) { ?>
+                <span>
+                    <label><?= str_get_string("text_about_url") ?></label>
+                    <var><?= $file_manager->get_current_url($file_manager->parse_separator($path), true) ?></var>
+                </span>
+            <?php } ?>
             <span>
                 <label><?= str_get_string("text_about_size") ?></label>
                 <var><?= is_dir($path) ? $file_manager->format_size($file_manager->get_directory_size($path), $array_units_size) : $file_manager->format_size($file_manager->get_file_size($path), $array_units_size) ?></var>

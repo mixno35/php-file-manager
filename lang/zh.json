@@ -10,6 +10,7 @@
   "text_php_version": "PHP版本：%1s",
   "text_php_server": "服务器：%1s",
   "text_php_total_size": "大小：%1s",
+  "text_php_os": "操作系统：%1s",
   "text_about_file": "关于文件",
   "text_about_dir": "关于目录",
   "text_about_file_name": "文件名",
@@ -73,6 +74,7 @@
   "tooltip_media_playback_rate": "播放速度（S）",
   "tooltip_upload_content": "上传",
   "tooltip_logout": "退出",
+  "tooltip_download_archive": "下载为存档",
 
   "title_information": "信息",
 

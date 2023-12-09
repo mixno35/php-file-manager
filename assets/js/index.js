@@ -23,6 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.documentElement.setAttribute("data-theme", "dark");
         } else document.documentElement.setAttribute("data-theme", "light");
     } else document.documentElement.setAttribute("data-theme", getCookie("theme"));
+
+    document.querySelectorAll("#menu-selected-fd ul li").forEach((element) => {
+        element.setAttribute("title", element.childNodes[3].outerText);
+    });
 });
 
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
@@ -73,6 +77,11 @@ document.getElementById("menu-selected-info")
     .addEventListener("click", () => { openFileDetail(selectPaths[0]) });
 document.getElementById("menu-selected-delete")
     .addEventListener("click", () => { run_command().delete(selectPaths) });
+try {
+    document.getElementById("menu-selected-download-archive").addEventListener("click", () => {
+        window.open("content/archive-download.php?obj=" + encodeURIComponent(JSON.stringify(selectPaths)), "_blank");
+    });
+} catch (e) { console.log(e) }
 document.getElementById("menu-selected-select-all").addEventListener("click", () => {
     const items = document.querySelectorAll("ul#file-manager-list li.item-fm");
     if (items.length === selectPaths.length) {

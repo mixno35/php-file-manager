@@ -8,6 +8,7 @@
   "text_php_version": "Versión de PHP: %1s",
   "text_php_server": "Servidor: %1s",
   "text_php_total_size": "Tamaño: %1s",
+  "text_php_os": "SO: %1s",
   "text_about_file": "Acerca del archivo",
   "text_about_dir": "Acerca del directorio",
   "text_about_file_name": "Nombre del archivo",
@@ -32,6 +33,7 @@
   "text_default_list_type": "Tipo de lista predeterminado",
   "text_language": "Idioma",
   "text_theme": "Tema",
+  "tooltip_download_archive": "Descargar como archivo",
 
   "tooltip_close": "Cerrar",
   "tooltip_create_dir": "Crear nuevo directorio (Ctrl + Alt + D)",

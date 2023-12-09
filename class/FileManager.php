@@ -1,7 +1,10 @@
 <?php
 global $host, $main_path;
 
-include_once "./php/data.php";
+include_once dirname(__FILE__, 2) . "/php/data.php";
+include_once dirname(__FILE__, 2) . "/class/URLParse.php";
+
+$url_parse = new URLParse();
 
 const SEARCH_SORT_DIR_FILE = 2, SEARCH_SORT_FILE_DIR = 1, SEARCH_SORT_NONE = 0;
 
@@ -132,12 +135,12 @@ class FileManager {
     }
 
     public function get_current_url(string $path, bool $show_scheme = false):string {
-        global $host, $main_path;
+        global $host, $main_path, $url_parse;
 
         $currentPageUrl = ($show_scheme ? ((isset($_SERVER["HTTPS"]) ? "https" : "http") . "://") : "") . $host;
-        $relativePath = str_replace($main_path["server"], "", $path);
+        $relativePath = str_replace($main_path["server"], $currentPageUrl, $path);
 
-        return $this->parse_separator($currentPageUrl . $relativePath, "/");
+        return $url_parse->current_url($this->parse_separator($relativePath, "/"), true);
     }
 
     public function parse_separator(string $path, string $separator = DIRECTORY_SEPARATOR, string $pattern = "/\\\\+/"):string {

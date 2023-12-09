@@ -99,10 +99,12 @@ function updateSelectPathsContainer() {
     }
 
     if (selectPaths.length === count_file_manager_items) {
+        action_select_all.setAttribute("title", getStringBy("tooltip_unselect"));
         action_select_all.childNodes[3].innerText = getStringBy("tooltip_unselect");
         action_select_all.childNodes[1].classList.remove("fa-square-check");
         action_select_all.childNodes[1].classList.add("fa-square-minus");
     } else {
+        action_select_all.setAttribute("title", getStringBy("tooltip_select_all"));
         action_select_all.childNodes[3].innerText = getStringBy("tooltip_select_all");
         action_select_all.childNodes[1].classList.add("fa-square-check");
         action_select_all.childNodes[1].classList.remove("fa-square-minus");
