@@ -52,7 +52,7 @@ function get_mode_codemirror(string $path = ""):string {
 ?>
 <html lang="<?= $language_tag ?? "en-US" ?>">
 <head>
-    <title><?= str_get_string("document_name_view") ?> | <?= basename($path) ?></title>
+    <title><?= str_get_string("document_name") ?> <?= str_get_string("document_name_view") ?> | <?= basename($path) ?></title>
 
     <meta charset="<?= $server_encoding ?? 'UTF-8' ?>">
     <meta name="viewport"
@@ -331,7 +331,10 @@ function get_mode_codemirror(string $path = ""):string {
     <?php if ($file_type === "font" or $file_type_2 === "x-font-ttf") { ?>
         <header>
             <h1 class="title">
-                <?= str_get_string("document_name_view_2", true) ?>
+                <?= str_get_string("document_name") ?>
+                <span>
+                    <?= str_get_string("document_name_view") ?>
+                </span>
             </h1>
         </header>
 
@@ -442,7 +445,10 @@ function get_mode_codemirror(string $path = ""):string {
 
         <header>
             <h1 class="title">
-                <?= str_get_string("document_name_view_2", true) ?>
+                <?= str_get_string("document_name") ?>
+                <span>
+                    <?= str_get_string("document_name_view") ?>
+                </span>
             </h1>
         </header>
 
@@ -573,7 +579,10 @@ function get_mode_codemirror(string $path = ""):string {
         <div class="image-preview" id="image-preview">
             <header id="header">
                 <h1 class="title">
-                    <?= str_get_string("document_name_view_2", true) ?>
+                    <?= str_get_string("document_name") ?>
+                    <span>
+                        <?= str_get_string("document_name_view") ?>
+                    </span>
                 </h1>
             </header>
 

@@ -16,8 +16,8 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
 <form id="form-auth" method="post" action="secure/auth.php" target="_top" autocomplete="off" autocapitalize="off">
     <h1>
-        <?= str_get_string("document_name_short") ?>
-        <span><?= str_get_string("document_file_manager") ?></span>
+        <?= str_get_string("document_name") ?>
+        <span><?= str_get_string("document_name_file_manager") ?></span>
     </h1>
 
     <label>

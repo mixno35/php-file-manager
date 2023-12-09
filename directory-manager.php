@@ -34,7 +34,7 @@ asort($folders);
     <?php exit(); ?>
 <?php } ?>
 
-<ul style="max-height: 999999px;">
+<ul>
     <?php foreach ($folders as $folder) { ?>
         <?php
         $name = basename($folder);
@@ -52,7 +52,7 @@ asort($folders);
                     <i class="fa fa-chevron-down"></i>
                 <?php } ?>
             </span>
-            <section id="section-item-folder-id-<?= $uniID ?>"></section>
+            <section id="section-item-folder-id-<?= $uniID ?>" class="section-item-folder"></section>
         </li>
     <?php } ?>
 </ul>

@@ -68,7 +68,10 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
         <i class="fa fa-bars directory-menu" id="action-directory-menu"></i>
 
         <h1 class="title">
-            <?= str_get_string("document_name_2", true) ?>
+            <?= str_get_string("document_name") ?>
+            <span>
+                <?= str_get_string("document_name_files") ?>
+            </span>
         </h1>
 
         <label class="search-container">
@@ -86,15 +89,24 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
         <nav class="left-directory-manager" id="left-directory-manager">
             <section class="list-manager" id="list-directory-manager"></section>
 
-            <ul class="container-upload-content custom-scroll" id="container-upload-content"></ul>
+            <ul class="container-upload-content" id="container-upload-content"></ul>
 
             <?php if ($settings["server_details"]) { ?>
+                <?php
+                $array_units_size = array(
+                    str_get_string("text_size_b"),
+                    str_get_string("text_size_kb"),
+                    str_get_string("text_size_mb"),
+                    str_get_string("text_size_gb"),
+                    str_get_string("text_size_tb")
+                );
+                ?>
                 <section class="details-manager">
                     <h2><?= str_get_string("text_details_manager") ?></h2>
                     <ul>
                         <li><?= str_get_string("text_php_version", false, [(PHP_VERSION ?? "NaN")]) ?></li>
                         <li><?= str_get_string("text_php_server", false, [($_SERVER["SERVER_SOFTWARE"] ?? "NaN")]) ?></li>
-                        <li><?= str_get_string("text_php_total_size", false, [$file_manager->format_size($file_manager->get_directory_size($main_path["server"]))]) ?></li>
+                        <li><?= str_get_string("text_php_total_size", false, [$file_manager->format_size($file_manager->get_directory_size($main_path["server"]), $array_units_size)]) ?></li>
                     </ul>
                 </section>
             <?php } ?>

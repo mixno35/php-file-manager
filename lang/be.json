@@ -1,6 +1,8 @@
 {
   "language_tag": "be-BY",
 
+  "document_name_files": "Файлы",
+  "document_name_view": "Прагляд",
   "document_copyright": "&copy; Аляксандр Міхно 2023",
 
   "text_details_manager": "Пра сервер",
@@ -31,6 +33,11 @@
   "text_default_list_type": "Тып спісу па змаўчанні",
   "text_language": "Мова",
   "text_theme": "Тэма",
+  "text_size_b": "Б",
+  "text_size_kb": "КБ",
+  "text_size_mb": "МБ",
+  "text_size_gb": "ГБ",
+  "text_size_tb": "ТБ",
 
   "tooltip_close": "Закрыць",
   "tooltip_create_dir": "Стварыць новы каталёг (Ctrl + Alt + D)",

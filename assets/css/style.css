@@ -214,6 +214,7 @@ main nav.left-directory-manager {
     background-color: var(--fm-color-header);
     display: flex;
     flex-direction: column;
+    position: relative;
 
     border-right: 1px solid var(--fm-color-divider);
 
@@ -250,15 +251,17 @@ main nav.left-directory-manager section.list-manager {
     height: 100%;
     width: 100%;
 
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
 }
 main nav.left-directory-manager section.list-manager ul {
     width: 100%;
-    max-height: 0;
 
     padding: 6px 0;
 
-    overflow: hidden;
+    overflow-y: auto;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -269,6 +272,9 @@ main nav.left-directory-manager section.list-manager ul {
 }
 main nav.left-directory-manager section.list-manager ul li {
     padding: 6px 0 6px 12px;
+
+    display: flex;
+    flex-direction: column;
 
     user-select: none;
 }
@@ -332,9 +338,12 @@ main nav.left-directory-manager section.list-manager ul li span img {
 main nav.left-directory-manager section.list-manager ul li span span.folder {
     width: 100%;
 
-    white-space: pre-wrap;
+    white-space: nowrap;
     word-break: break-all;
+    text-overflow: ellipsis;
 
+    display: block;
+    overflow: hidden;
     color: var(--fm-color-text);
 }
 main nav.left-directory-manager section.list-manager ul li.empty span span.folder {
@@ -519,11 +528,21 @@ main article.main-file-manager nav.header ul.tree {
     flex-wrap: nowrap;
     gap: 4px;
     overflow: hidden;
+    overflow-x: auto;
 
     list-style: none;
 }
 main article.main-file-manager nav.header ul.tree li {
     width: fit-content;
+    max-width: 80px;
+
+    text-overflow: ellipsis;
+    text-align: left;
+    white-space: nowrap;
+
+    display: block;
+    overflow: hidden;
+    color: var(--fm-color-text-sub);
 }
 main article.main-file-manager nav.header ul.tree li span {
     font-weight: 500;
@@ -534,19 +553,19 @@ main article.main-file-manager nav.header ul.tree li span {
 
     padding: 2px 4px;
 
-    border-radius: var(--radius-02);
-
     color: var(--fm-color-text-sub);
     cursor: pointer;
+}
+main article.main-file-manager nav.header ul.tree li.last-child {
+    color: var(--fm-color-text);
 }
 main article.main-file-manager nav.header ul.tree li.last-child span {
     color: var(--fm-color-text);
 }
-main article.main-file-manager nav.header ul.tree li span:hover {
-    box-shadow: var(--shadow-01);
+main article.main-file-manager nav.header ul.tree li:hover span {
+    text-decoration: underline;
 
-    outline: 1px solid var(--fm-color-divider);
-    outline-offset: 0;
+    color: var(--fm-color-text);
 }
 
 main article.main-file-manager nav.header ul.tree i.divider {
@@ -1320,6 +1339,7 @@ main div.menu-selected-fd span.count {
 
     position: relative;
     right: 12px;
+    color: var(--fm-color-text);
 }
 
 main div.menu-selected-fd ul.list-menu-selected {
@@ -1367,8 +1387,9 @@ main div.menu-selected-fd ul.list-menu-selected li span {
     font-weight: 500;
 
     color: var(--fm-color-text-sub);
-    display: inline-block;
+    display: block;
     position: relative;
+    overflow: hidden;
 
     width: 55%;
 
@@ -1663,16 +1684,17 @@ ol.popup li:hover i.fa {
 ul.container-upload-content {
     display: flex;
     flex-direction: column;
-    align-items: end;
-    justify-content: end;
     position: relative;
     overflow: hidden;
     overflow-y: auto;
 
     width: 100%;
-    min-height: 100px;
-    max-height: 180px;
+    min-height: 48px;
+    max-height: 192px;
     height: fit-content;
+}
+ul.container-upload-content:not(:empty) {
+    border-top: 1px solid var(--fm-color-divider);
 }
 ul.container-upload-content li {
     display: flex;
@@ -1704,6 +1726,7 @@ ul.container-upload-content li div p {
 
     display: block;
     color: var(--fm-color-text);
+    overflow: hidden;
 
     z-index: 1;
 }
@@ -1736,9 +1759,6 @@ ul.container-upload-content li .progress {
 
     padding: 0;
     margin: 0;
-
-    border-top: 1px solid var(--fm-color-progress-upload-40);
-    border-bottom: 1px solid var(--fm-color-progress-upload-40);
 }
 
 input[type="checkbox"].switch {

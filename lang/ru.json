@@ -1,6 +1,8 @@
 {
   "language_tag": "ru-RU",
 
+  "document_name_files": "Файлы",
+  "document_name_view": "Просмотр",
   "document_copyright": "&copy; Александр Михно 2023",
 
   "text_details_manager": "О сервере",
@@ -31,6 +33,11 @@
   "text_default_list_type": "Тип списка по умолчанию",
   "text_language": "Язык",
   "text_theme": "Тема",
+  "text_size_b": "Б",
+  "text_size_kb": "КБ",
+  "text_size_mb": "МБ",
+  "text_size_gb": "ГБ",
+  "text_size_tb": "ТБ",
 
   "tooltip_close": "Закрыть",
   "tooltip_create_dir": "Создать новую директорию (Ctrl + Alt + D)",

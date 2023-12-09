@@ -13,11 +13,20 @@ $file_parse = new FileParseManager();
 
 $path = trim($_GET["path"]) ?? "";
 $id = trim($_GET["id"]) ?? "";
+
+$array_units_size = array(
+    str_get_string("text_size_b"),
+    str_get_string("text_size_kb"),
+    str_get_string("text_size_mb"),
+    str_get_string("text_size_gb"),
+    str_get_string("text_size_tb")
+);
 ?>
 
 <?php
 $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes($main_path["server"]));
 ?>
+
 
 <header class="header">
     <h4>
@@ -63,7 +72,7 @@ $file_manager->check_path($path, str_get_string("action_go_to_home"), addslashes
             </span>
             <span>
                 <label><?= str_get_string("text_about_size") ?></label>
-                <var><?= is_dir($path) ? $file_manager->format_size($file_manager->get_directory_size($path)) : $file_manager->format_size($file_manager->get_file_size($path)) ?></var>
+                <var><?= is_dir($path) ? $file_manager->format_size($file_manager->get_directory_size($path), $array_units_size) : $file_manager->format_size($file_manager->get_file_size($path), $array_units_size) ?></var>
             </span>
             <span>
                 <label><?= str_get_string("text_about_date_modified") ?></label>

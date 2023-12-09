@@ -1,7 +1,8 @@
 {
   "language_tag": "ja-JP",
 
-  "document_copyright": "&copy; アレクサンダー・ミノ 2023",
+  "document_name_files": "ファイル",
+  "document_name_view": "表示",
 
   "text_details_manager": "サーバーについて",
   "text_php_version": "PHPバージョン：%1s",

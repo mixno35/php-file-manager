@@ -1,12 +1,10 @@
 {
   "language_tag": "en-US",
 
-  "document_name_short": "StormGuardian",
-  "document_name": "StormGuardian Files",
-  "document_name_2": "StormGuardian <span>Files</span>",
-  "document_name_view": "StormGuardian View",
-  "document_name_view_2": "StormGuardian <span>View</span>",
-  "document_file_manager": "File manager",
+  "document_name": "StormGuardian",
+  "document_name_files": "Files",
+  "document_name_view": "View",
+  "document_name_file_manager": "File manager",
   "document_copyright": "&copy; Alexander Mikhno 2023",
 
   "text_details_manager": "Server details",
@@ -37,6 +35,11 @@
   "text_default_list_type": "Default list type",
   "text_language": "Language",
   "text_theme": "Theme",
+  "text_size_b": "B",
+  "text_size_kb": "KB",
+  "text_size_mb": "MB",
+  "text_size_gb": "GB",
+  "text_size_tb": "TB",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",

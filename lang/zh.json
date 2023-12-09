@@ -1,6 +1,11 @@
 {
   "language_tag": "zh-CN",
 
+  "document_name_files": "文件",
+  "document_name_view": "查看",
+  "document_name_file_manager": "文件管理器",
+  "document_copyright": "&copy; 亚历山大·米赫诺 2023",
+
   "text_details_manager": "关于服务器",
   "text_php_version": "PHP版本：%1s",
   "text_php_server": "服务器：%1s",
@@ -29,6 +34,10 @@
   "text_default_list_type": "默认列表类型",
   "text_language": "语言",
   "text_theme": "主题",
+  "text_size_kb": "千字节",
+  "text_size_mb": "兆字节",
+  "text_size_gb": "千兆字节",
+  "text_size_tb": "太字节",
 
   "tooltip_close": "关闭",
   "tooltip_create_dir": "创建新目录（Ctrl + Alt + D）",

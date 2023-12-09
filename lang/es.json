@@ -1,6 +1,9 @@
 {
   "language_tag": "es-ES",
 
+  "document_name_files": "Archivos",
+  "document_name_view": "Vista",
+
   "text_details_manager": "Acerca del servidor",
   "text_php_version": "Versión de PHP: %1s",
   "text_php_server": "Servidor: %1s",

@@ -63,7 +63,7 @@ $uniID = uniqid();
 
     <ul class="tree">
         <?php foreach ($tree as $item) { ?>
-            <li class="<?= ($path === $item) ? 'last-child' : '' ?>">
+            <li class="<?= ($path === $item) ? 'last-child' : '' ?>" title="<?= basename($item) ?>">
                 <span onclick="loadMainFileManager('<?= addslashes($item) ?>', true)">
                     <?= ($item === $rootDirectory) ? str_get_string("action_dir_home") : basename($item) ?>
                 </span>
@@ -160,8 +160,17 @@ if (strlen(trim($search)) > 0) {
                             <?php } ?>
                         <?php } ?>
                         <?php if (is_file($item)) { ?>
+                            <?php
+                            $array_units_size = array(
+                                str_get_string("text_size_b"),
+                                str_get_string("text_size_kb"),
+                                str_get_string("text_size_mb"),
+                                str_get_string("text_size_gb"),
+                                str_get_string("text_size_tb")
+                            );
+                            ?>
                             <span class="count">
-                                <?= $file_manager->format_size($file_manager->get_file_size($item)) ?>
+                                <?= $file_manager->format_size($file_manager->get_file_size($item), $array_units_size) ?>
                             </span>
                         <?php } ?>
                     </span>

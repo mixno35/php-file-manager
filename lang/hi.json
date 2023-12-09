@@ -1,6 +1,9 @@
 {
   "language_tag": "hi-IN",
 
+  "document_name_files": "फ़ाइलें",
+  "document_name_view": "दृश्य",
+  "document_name_file_manager": "फ़ाइल प्रबंधक",
   "document_copyright": "&copy; अलेक्जेंडर मिह्नो 2023",
 
   "text_details_manager": "सर्वर के बारे में",
@@ -31,6 +34,11 @@
   "text_default_list_type": "डिफ़ॉल्ट सूची प्रकार",
   "text_language": "भाषा",
   "text_theme": "थीम",
+  "text_size_b": "बी",
+  "text_size_kb": "केबी",
+  "text_size_mb": "एमबी",
+  "text_size_gb": "जीबी",
+  "text_size_tb": "टेराबाइट",
 
   "tooltip_close": "बंद करें",
   "tooltip_create_dir": "नई डायरेक्टरी बनाएं (Ctrl + Alt + D)",

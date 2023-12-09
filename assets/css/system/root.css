@@ -63,12 +63,12 @@
 }
 
 :root[data-theme="dark"] {
-    --fm-color-body: rgb(23, 24, 24);
-    --fm-color-body-gray: rgb(33, 33, 33);
-    --fm-color-body-gray-50: rgb(44, 44, 44);
-    --fm-color-header: rgb(23, 24, 24);
-    --fm-color-header-80: rgba(23, 24, 24, .8);
-    --fm-color-header-90: rgba(23, 24, 24, .9);
+    --fm-color-body: rgb(15, 15, 15);
+    --fm-color-body-gray: rgb(25, 25, 25);
+    --fm-color-body-gray-50: rgb(35, 35, 35);
+    --fm-color-header: rgb(15, 15, 15);
+    --fm-color-header-80: rgba(15, 15, 15, .8);
+    --fm-color-header-90: rgba(15, 15, 15, .9);
     --fm-color-divider: #6b6c6e;
     --fm-color-header-text: rgb(255, 255, 255);
     --fm-color-text: rgb(255, 255, 255);
@@ -76,10 +76,10 @@
     --fm-color-text-sub: rgb(147, 150, 152);
     --fm-color-text-sub-40: rgb(192, 193, 194);
     --fm-color-hint: rgb(169, 172, 174);
-    --fm-color-primary: rgb(30, 144, 255);
-    --fm-color-primary-20: rgba(30, 144, 255, 0.2);
-    --fm-color-primary-30: rgba(30, 144, 255, 0.3);
-    --fm-color-primary-hover: rgb(25, 136, 241);
+    --fm-color-primary: rgb(0, 173, 239);
+    --fm-color-primary-20: rgba(0, 173, 239, 0.2);
+    --fm-color-primary-30: rgba(0, 173, 239, 0.3);
+    --fm-color-primary-hover: rgb(0, 153, 219);
     --fm-color-shadow: rgba(255, 255, 255, 0.2);
     --fm-color-shadow-04: rgba(255, 255, 255, 0.04);
     --fm-color-shadow-05: rgba(255, 255, 255, 0.05);
@@ -88,9 +88,9 @@
     --fm-color-shadow-20: rgba(255, 255, 255, 0.20);
     --fm-color-shadow-25: rgba(255, 255, 255, 0.25);
     --fm-color-toast: rgba(255, 255, 255, 0.9);
-    --fm-color-toast-text: rgb(23, 24, 24);
+    --fm-color-toast-text: rgb(15, 15, 15);
     --fm-color-toast-border: rgba(255, 255, 255, 0);
-    --fm-color-progress-background: rgba(23, 24, 24, 0.7);
+    --fm-color-progress-background: rgba(15, 15, 15, 0.7);
     --fm-color-progress-item: rgb(255, 255, 255);
     --fm-color-progress-upload: rgba(45, 220, 45, 0.2);
     --fm-color-progress-upload-40: rgba(45, 220, 45, 0.4);
