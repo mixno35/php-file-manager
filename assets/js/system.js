@@ -4,6 +4,28 @@ const METHOD_POST = "POST", METHOD_GET = "GET";
 
 let z_index_alert = 79;
 
+function addslashes(str) {
+    return str.replace(/[\\'"]/g, "\\$&");
+}
+
+function validPath(path1, path2) {
+    const rPath1 = path1.replace(/\/+/g, "/");
+    const rPath2 = path2.replace(/\/+/g, "/");
+
+    const rrPath1 = rPath1.split("/");
+    const rrPath2 = rPath2.split("/");
+
+    const maxLength = Math.max(rrPath1.length, rrPath2.length);
+    for (let i = 0; i < maxLength; i++) {
+        const rrrPath1 = rrPath1[i] || "";
+        const rrrPath2 = rrPath2[i] || "";
+
+        if (rrrPath1 !== rrrPath2) return false;
+    }
+
+    return true;
+}
+
 const generate_text = (length = 6) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomText = '';

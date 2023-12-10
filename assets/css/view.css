@@ -100,6 +100,9 @@ div.image-preview img.preview {
 
     transition: left 0.05s, top 0.05s;
 }
+div.image-preview img.preview:not(.dragging) {
+    transition: transform .4s;
+}
 
 footer.view-footer {
     width: calc(100% - 24px);
@@ -226,4 +229,70 @@ input.input-text-preview:focus {
 
     text-transform: uppercase;
     letter-spacing: .04em;
+}
+
+div.image-preview div.explore-images {
+    width: fit-content;
+    height: 56px;
+    max-height: 56px;
+    min-height: 56px;
+
+    display: flex;
+    position: fixed;
+    gap: 6px;
+    bottom: 24px;
+
+    padding: 8px;
+
+    overflow: hidden;
+    background-color: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(30px);
+
+    border-radius: var(--radius-05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    z-index: 1;
+
+    transition: transform .2s;
+}
+div.image-preview div.explore-images.hide {
+    transform: translateY(150%) scale(.9);
+}
+div.image-preview div.explore-images div.item-explore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    border-radius: var(--radius-03);
+
+    opacity: .8;
+}
+div.image-preview div.explore-images div.item-explore:hover {
+    opacity: 1;
+}
+div.image-preview div.explore-images div.item-explore img {
+    display: flex;
+    box-sizing: border-box;
+
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+    object-position: center;
+
+    user-select: none;
+    pointer-events: none;
+
+    border-radius: var(--radius-03);
+}
+div.image-preview div.explore-images div.item-explore.active {
+    opacity: 1;
+
+    outline: 2px solid rgba(255, 255, 255, 1);
+    outline-offset: 0;
 }

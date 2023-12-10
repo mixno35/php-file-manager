@@ -575,11 +575,21 @@ function get_mode_codemirror(string $path = ""):string {
 
     <?php if ($file_type === "image") { ?>
         <div class="image-preview" id="image-preview">
-            <img class="preview" draggable="false" id="preview" loading="eager" src="content/blob.php?p=<?= urlencode($path) ?>" alt="Image">
+            <img class="preview" draggable="false" id="preview" src="" loading="eager" alt="Image">
 
-            <div class="explore-images">
+            <?php
+            $array_explore = $file_manager->get_files(dirname($path), "image");
+            ?>
 
-            </div>
+            <?php if (sizeof($array_explore) > 1) { ?>
+                <div class="explore-images">
+                    <?php foreach ($array_explore as $item) { ?>
+                        <div class="item-explore" title="<?= basename($item) ?>" onclick="event.stopPropagation(); event.preventDefault(); openImage(this.getAttribute('data-path'))" data-path="<?= addslashes($file_manager->parse_separator($item)) ?>">
+                            <img src="<?= $file_parse->get_icon($item, $privileges["view_file"], 86) ?>" alt="<?= basename($item) ?>">
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
         </div>
 
         <script>
@@ -595,9 +605,46 @@ function get_mode_codemirror(string $path = ""):string {
             let offsetX = 0;
             let offsetY = 0;
 
+            let time;
+
             if (isMobileDevice()) document.querySelector(".explore-images").remove();
 
-            image_preview.addEventListener("dblclick", (e) => {
+            openImage("<?= addslashes(addslashes($file_manager->parse_separator($path))) ?>");
+
+            document.addEventListener("mousemove", () => { try { showExploreImages() } catch (exx) {} });
+
+            function openImage(path) {
+                document.querySelectorAll(".item-explore").forEach((element) => {
+                    if (validPath(element.getAttribute("data-path"), path)) element.classList.add("active");
+                    else element.classList.remove("active");
+                });
+
+                image.style.opacity = "0";
+                image.src = "content/blob.php?p=" + encodeURIComponent(path);
+
+                image.addEventListener("load", () => {
+                    scale = 1;
+                    offsetX = 0;
+                    offsetY = 0;
+
+                    setTimeout(() => { image.style.opacity = "1" }, 100);
+
+                    updateTransform();
+                });
+            }
+
+            function showExploreImages() {
+                clearTimeout(time);
+
+                if (scale <= 1) document.querySelector(".explore-images").classList.remove("hide");
+
+                time = setTimeout(() => { hideExploreImages() }, 2000);
+            }
+            function hideExploreImages() {
+                document.querySelector(".explore-images").classList.add("hide");
+            }
+
+            image.addEventListener("dblclick", (e) => {
                 e.preventDefault();
                 const clickX = e.clientX;
                 const clickY = e.clientY;
@@ -618,6 +665,13 @@ function get_mode_codemirror(string $path = ""):string {
                 scale += wheelDelta * -0.004;
                 scale = Math.min(Math.max(1, scale), 6);
 
+                if (scale <= 1) {
+                    offsetX = 0;
+                    offsetY = 0;
+                }
+
+                if (scale > 1) try { hideExploreImages() } catch (exx) {}
+
                 updateTransform();
             });
 
@@ -626,6 +680,9 @@ function get_mode_codemirror(string $path = ""):string {
                 e.stopPropagation();
 
                 isDragging = true;
+
+                image.classList.add("dragging");
+
                 startX = e.clientX - offsetX;
                 startY = e.clientY - offsetY;
             });
@@ -635,6 +692,8 @@ function get_mode_codemirror(string $path = ""):string {
                 event.stopPropagation();
 
                 isDragging = false;
+
+                image.classList.remove("dragging");
             });
 
             document.addEventListener("mousemove", (e) => {
@@ -697,13 +756,6 @@ function get_mode_codemirror(string $path = ""):string {
                 const scaledOffsetY = offsetY / scale;
 
                 image.style.transform = `scale(${scale}) translate(${scaledOffsetX}px, ${scaledOffsetY}px)`;
-
-                requestAnimationFrame(() => {
-                    image.style.transition = "transform .1s"; // Добавляем небольшую анимацию
-                    image.style.transform = `scale(${scale}) translate(${scaledOffsetX}px, ${scaledOffsetY}px)`;
-                });
-
-                setTimeout(() => { image.style.transition = "none" }, 100);
             }
 
         </script>

@@ -57,31 +57,40 @@ class FileManager {
         return round($size, 2) . " " . $units[$unit];
     }
 
-    public function get_dirs($_path):array {
-        $_path = realpath($_path);
+    public function get_dirs(string $path): array {
+        $path = realpath($path);
 
-        if (!is_readable($_path)) return [];
-        $folders = array_filter(scandir($_path), function($item) use ($_path) {
-            $fullPath = $_path . DIRECTORY_SEPARATOR . $item;
-            return is_dir($fullPath) && $item != "." && $item != "..";
+        if (!is_readable($path) || !is_dir($path)) return [];
+
+        $dirs = array_filter(scandir($path), function ($item) use ($path) {
+            $fullPath = $path . DIRECTORY_SEPARATOR . $item;
+
+            if ($item === "." || $item === "..") return false;
+
+            return is_dir($fullPath);
         });
 
-        return array_map(function($folder) use ($_path) {
-            return $_path . DIRECTORY_SEPARATOR . $folder;
-        }, $folders);
+        return array_map(function ($dir) use ($path) {
+            return $path . DIRECTORY_SEPARATOR . $dir;
+        }, $dirs);
     }
 
-    public function get_files($_path):array {
-        $_path = realpath($_path);
+    public function get_files(string $path, string $mimetype = null): array {
+        $path = realpath($path);
 
-        if (!is_readable($_path)) return [];
-        $files = array_filter(scandir($_path), function($item) use ($_path) {
-            $fullPath = $_path . DIRECTORY_SEPARATOR . $item;
-            return is_file($fullPath) && $item != "." && $item != "..";
+        if (!is_readable($path) || !is_dir($path)) return [];
+
+        $files = array_filter(scandir($path), function ($item) use ($path, $mimetype) {
+            $fullPath = $path . DIRECTORY_SEPARATOR . $item;
+
+            if ($item === "." || $item === "..") return false;
+
+            if (isset($mimetype)) return is_file($fullPath) && (explode("/", $this->get_mime_type($fullPath))[0] === $mimetype);
+            else return is_file($fullPath);
         });
 
-        return array_map(function($file) use ($_path) {
-            return $_path . DIRECTORY_SEPARATOR . $file;
+        return array_map(function ($file) use ($path) {
+            return $path . DIRECTORY_SEPARATOR . $file;
         }, $files);
     }
 
@@ -119,10 +128,15 @@ class FileManager {
     }
 
     public function get_mime_type(string $path):string {
-        if (is_file($path) and file_exists($path))
-            return mime_content_type($path) ?? "NaN";
+        if (is_file($path) and file_exists($path)) {
+            $file_info = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($file_info, $path);
+            finfo_close($file_info);
 
-        return "NaN";
+            return $mime;
+        }
+
+        return "mime/type";
     }
 
     public function check_path(string $path = "", string $string = "", string $main_path = ""):void {
