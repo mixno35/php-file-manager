@@ -1,12 +1,10 @@
 <?php
-global $your_key;
-
 session_start();
 
 include_once dirname(__FILE__, 2) . "/php/data.php";
 include_once dirname(__FILE__, 2) . "/php/class/Crypt.php";
 
-$crypt = new Crypt(SESSION_NAME . $your_key);
+$crypt = new Crypt(READY_KEY);
 
 $up_str_decrypt = $crypt->decrypt($_SESSION[SESSION_NAME] ?? "xx:xx");
 $up_user = explode(":", $up_str_decrypt);

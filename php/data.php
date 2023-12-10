@@ -11,6 +11,8 @@ $server_encoding = mb_http_output() ?? "UTF-8";
 if (!defined("SESSION_NAME"))
     define("SESSION_NAME", substr(md5($host . $user_agent . (PHP_VERSION ?? "0.0.0") . (PHP_OS ?? "Linux") . (PHP_EXTRA_VERSION ?? "none") . $your_key . date("d-m-Y")), 0, 10)); // Сессия для авторизации
 
+if (!defined("READY_KEY")) define("READY_KEY", md5($your_key . SESSION_NAME));
+
 $main_path = array(
     "file_manager" => $path1,
     "server" => $path2,

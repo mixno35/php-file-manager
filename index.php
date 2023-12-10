@@ -44,16 +44,14 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script>const stringOBJ = <?= $content ?>;</script>
+
     <script src="assets/js/m35/parse-url.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/m35/alert.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/m35/popup-window.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/system.js?v=<?= $resource_v ?>"></script>
 
     <script src="assets/js/index-drag-upload.js?v=<?= $resource_v ?>"></script>
-
-    <script>
-        const stringOBJ = <?= $content ?>;
-    </script>
 </head>
 <body ondragover="drag_upload().over()" ondrop="drag_upload().drop()">
     <div class="progress" id="progress" style="display: none">

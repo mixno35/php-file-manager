@@ -1,11 +1,12 @@
 <?php
-include_once "php/data.php";
-include_once "lang/lang.php";
+include_once dirname(__FILE__) . "/php/data.php";
+include_once dirname(__FILE__) . "/lang/lang.php";
 
-include_once "class/FileManager.php";
-include_once "php/class/CheckSession.php";
+include_once dirname(__FILE__) . "/class/FileManager.php";
+include_once dirname(__FILE__) . "/php/class/CheckSession.php";
+include_once dirname(__FILE__) . "/php/class/Crypt.php";
 
-$check_session = new CheckSession();
+$check_session = new CheckSession(new Crypt(READY_KEY));
 
 if (!$check_session->check()) {
     http_response_code(403);

@@ -9,8 +9,9 @@ global $host;
 include_once dirname(__FILE__, 2) . "/php/data.php";
 
 include_once dirname(__FILE__, 2) . "/php/class/CheckSession.php";
+include_once dirname(__FILE__, 2) . "/php/class/Crypt.php";
 
-$check_session = new CheckSession();
+$check_session = new CheckSession(new Crypt(READY_KEY));
 
 if (!$check_session->check()) {
     http_response_code(403);
@@ -33,35 +34,35 @@ $archiveName = $host . "_" . date("Y-m-d_H-i-s") . "_" . sizeof($paths) . ".zip"
 use ZipStream\ZipStream, ZipStream\OperationMode, ZipStream\CompressionMethod, ZipStream\Exception\OverflowException,
     ZipStream\Exception\FileNotFoundException, ZipStream\Exception\FileNotReadableException;
 
-require dirname(__FILE__, 2) . "/class/ZipStream/ZipStream.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Version.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Time.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/PackField.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/OperationMode.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/LocalFileHeader.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/GeneralPurposeBitFlag.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/File.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/EndOfCentralDirectory.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/DataDescriptor.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/CompressionMethod.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/CentralDirectoryFileHeader.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Zs/ExtendedInformationExtraField.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Zip64/ExtendedInformationExtraField.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Zip64/EndOfCentralDirectoryLocator.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Zip64/EndOfCentralDirectory.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Zip64/DataDescriptor.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/StreamNotSeekableException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/StreamNotReadableException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/SimulationFileUnknownException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/ResourceActionException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/OverflowException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/FileSizeIncorrectException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/FileNotReadableException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/FileNotFoundException.php";
-require dirname(__FILE__, 2) . "/class/ZipStream/Exception/DosTimeOverflowException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/ZipStream.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Version.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Time.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/PackField.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/OperationMode.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/LocalFileHeader.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/GeneralPurposeBitFlag.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/File.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/EndOfCentralDirectory.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/DataDescriptor.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/CompressionMethod.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/CentralDirectoryFileHeader.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Zs/ExtendedInformationExtraField.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Zip64/ExtendedInformationExtraField.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Zip64/EndOfCentralDirectoryLocator.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Zip64/EndOfCentralDirectory.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Zip64/DataDescriptor.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/StreamNotSeekableException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/StreamNotReadableException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/SimulationFileUnknownException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/ResourceActionException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/OverflowException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/FileSizeIncorrectException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/FileNotReadableException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/FileNotFoundException.php";
+include_once dirname(__FILE__, 2) . "/class/ZipStream/Exception/DosTimeOverflowException.php";
 
-require dirname(__FILE__, 2) . "/class/FileManager.php";
+include_once dirname(__FILE__, 2) . "/class/FileManager.php";
 
 $file_manager = new FileManager();
 

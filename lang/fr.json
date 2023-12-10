@@ -1,9 +1,6 @@
 {
   "language_tag": "fr-FR",
 
-  "document_name_files": "Fichiers",
-  "document_name_view": "Affichage",
-
   "text_details_manager": "À propos du serveur",
   "text_php_version": "Version PHP : %1s",
   "text_php_server": "Serveur : %1s",

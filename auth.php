@@ -1,6 +1,4 @@
 <?php
-global $language_tag, $session_name, $main_path, $host;
-
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
 

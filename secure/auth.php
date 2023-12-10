@@ -8,14 +8,14 @@ if (($_SERVER["REQUEST_METHOD"] ?? "GET") !== "POST") {
     exit();
 }
 
-global $host, $your_key;
+global $host;
 
 session_start();
 
 include_once dirname(__FILE__, 2) . "/php/data.php";
 include_once dirname(__FILE__, 2) . "/php/class/Crypt.php";
 
-$crypt = new Crypt(SESSION_NAME . $your_key);
+$crypt = new Crypt(READY_KEY);
 
 $auth_login = $_POST["login"] ?? "login";
 $auth_password = password_hash($_POST["password"] ?? "password", PASSWORD_DEFAULT);
