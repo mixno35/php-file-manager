@@ -29,6 +29,8 @@
   "text_default_list_type": "デフォルトのリストの種類",
   "text_language": "言語",
   "text_theme": "テーマ",
+  "text_error": "エラー",
+  "text_success": "成功",
 
   "tooltip_close": "閉じる",
   "tooltip_create_dir": "新しいディレクトリを作成する（Ctrl + Alt + D）",
@@ -136,5 +138,7 @@
   "api_create_file_success": "ファイル\"%1s\"は正常に作成されました。",
   "api_create_file_not_exist": "書き込み用にファイルを開くことができませんでした。",
   "api_is_readable": "アクセスが拒否されました。",
-  "api_upload_file_blob_incorrect": "Blobリンクが正しくありません。"
+  "api_upload_file_blob_incorrect": "Blobリンクが正しくありません。",
+  "api_upload_file_success": "ファイル \"%1s\" がアップロードされました。",
+  "api_upload_max_size_limit": "最大ファイルアップロードサイズを超えています。最大サイズ：%1s。"
 }

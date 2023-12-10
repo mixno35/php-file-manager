@@ -280,7 +280,7 @@ function uploadNewFile(file) {
         if (json["type"] === "success") updateMainFileManager();
 
         item_progress.classList.add(json["type"]);
-        text_progress.setAttribute("title", getStringBy(json["message_id"]));
+        text_progress.setAttribute("title", getStringBy(json["message_id"], json["return"] ?? []));
     }, () => {
         const xhr = new window.XMLHttpRequest();
         xhr.upload.addEventListener("progress", (event) => {

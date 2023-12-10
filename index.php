@@ -167,9 +167,12 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
         let clickCount = 0;
         let selectPaths = [];
         let pathFileDetail = "";
+
+        const upload_max_filesize = <?= intval(ini_get("upload_max_filesize") ?? 0) ?>;
+        const post_max_size = <?= intval(ini_get("post_max_size") ?? 0) ?>
     </script>
 
-    <script src="assets/js/funcs.js?v=<?= $resource_v ?>"></script>
+    <script src="assets/js/index-funcs.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index-drag.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index-command.js?v=<?= $resource_v ?>"></script>

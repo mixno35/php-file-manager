@@ -611,8 +611,6 @@ function get_mode_codemirror(string $path = ""):string {
 
             openImage("<?= addslashes(addslashes($file_manager->parse_separator($path))) ?>");
 
-            document.addEventListener("mousemove", () => { try { showExploreImages() } catch (exx) {} });
-
             function openImage(path) {
                 document.querySelectorAll(".item-explore").forEach((element) => {
                     if (validPath(element.getAttribute("data-path"), path)) element.classList.add("active");
@@ -699,6 +697,8 @@ function get_mode_codemirror(string $path = ""):string {
             document.addEventListener("mousemove", (e) => {
                 event.preventDefault();
                 event.stopPropagation();
+
+                try { showExploreImages() } catch (exx) {}
 
                 if (!isDragging) return;
 

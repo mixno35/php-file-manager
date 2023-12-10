@@ -156,5 +156,6 @@
   "api_create_file_not_exist": "The file could not be opened for writing.",
   "api_is_readable": "Access denied.",
   "api_upload_file_blob_incorrect": "The blob link is incorrect.",
-  "api_upload_file_success": "File uploaded."
+  "api_upload_file_success": "File \"%1s\" uploaded.",
+  "api_upload_max_size_limit": "You have exceeded the maximum file upload size. Maximum size: %1s."
 }

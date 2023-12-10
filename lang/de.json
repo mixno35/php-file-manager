@@ -32,6 +32,8 @@
   "text_default_list_type": "Standardlistenansicht",
   "text_language": "Sprache",
   "text_theme": "Thema",
+  "text_error": "Fehler",
+  "text_success": "Erfolg",
 
   "tooltip_close": "Schließen",
   "tooltip_create_dir": "Neues Verzeichnis erstellen (Strg + Alt + D)",
@@ -139,5 +141,7 @@
   "api_create_file_success": "Die Datei \"%1s\" wurde erfolgreich erstellt.",
   "api_create_file_not_exist": "Die Datei konnte nicht zum Schreiben geöffnet werden.",
   "api_is_readable": "Zugriff verweigert.",
-  "api_upload_file_blob_incorrect": "Die Blob-URL ist inkorrekt."
+  "api_upload_file_blob_incorrect": "Die Blob-URL ist inkorrekt.",
+  "api_upload_file_success": "Datei \"%1s\" hochgeladen.",
+  "api_upload_max_size_limit": "Sie haben die maximale Dateigröße überschritten. Maximale Größe: %1s."
 }

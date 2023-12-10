@@ -37,6 +37,8 @@
   "text_size_mb": "МБ",
   "text_size_gb": "ГБ",
   "text_size_tb": "ТБ",
+  "text_error": "Помилка",
+  "text_success": "Успіх",
 
   "tooltip_close": "Закрити",
   "tooltip_create_dir": "Створити нову директорію (Ctrl + Alt + D)",
@@ -144,5 +146,7 @@
   "api_create_file_success": "Файл \"%1s\" успішно створено.",
   "api_create_file_not_exist": "Не вдалося відкрити файл для запису.",
   "api_is_readable": "Доступ заборонено.",
-  "api_upload_file_blob_incorrect": "Посилання Blob неправильне."
+  "api_upload_file_blob_incorrect": "Посилання Blob неправильне.",
+  "api_upload_file_success": "Файл \"%1s\" завантажено.",
+  "api_upload_max_size_limit": "Ви перевищили максимальний розмір завантаження файлу. Максимальний розмір: %1s."
 }

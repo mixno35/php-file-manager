@@ -34,6 +34,8 @@
   "text_size_mb": "Mo",
   "text_size_gb": "Go",
   "text_size_tb": "To",
+  "text_error": "Erreur",
+  "text_success": "Succès",
 
   "tooltip_close": "Fermer",
   "tooltip_create_dir": "Créer un nouveau répertoire (Ctrl + Alt + D)",
@@ -141,5 +143,7 @@
   "api_create_file_success": "Fichier \"%1s\" créé avec succès.",
   "api_create_file_not_exist": "Impossible d'ouvrir le fichier en écriture.",
   "api_is_readable": "Accès refusé.",
-  "api_upload_file_blob_incorrect": "L'URL du blob est incorrecte."
+  "api_upload_file_blob_incorrect": "L'URL du blob est incorrecte.",
+  "api_upload_file_success": "Fichier \"%1s\" téléchargé.",
+  "api_upload_max_size_limit": "Vous avez dépassé la taille maximale de téléchargement de fichier. Taille maximale : %1s."
 }

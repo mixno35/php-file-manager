@@ -38,7 +38,7 @@
   "text_size_gb": "ГБ",
   "text_size_tb": "ТБ",
   "text_error": "Памылка",
-  "text_success": "Паспях",
+  "text_success": "Паспяхова",
 
   "tooltip_close": "Закрыць",
   "tooltip_create_dir": "Стварыць новы каталёг (Ctrl + Alt + D)",
@@ -146,5 +146,7 @@
   "api_create_file_success": "Файл \"%1s\" паспяхова створаны.",
   "api_create_file_not_exist": "Не ўдалося адкрыць файл для запісу.",
   "api_is_readable": "Доступ забаронены.",
-  "api_upload_file_blob_incorrect": "Спасылка на Blob няправільная."
+  "api_upload_file_blob_incorrect": "Спасылка на Blob няправільная.",
+  "api_upload_file_success": "Файл \"%1s\" загружаны.",
+  "api_upload_max_size_limit": "Вы перавысілі максімальны памер загрузкі файла. Максімальны памер: %1s."
 }

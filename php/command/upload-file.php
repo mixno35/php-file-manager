@@ -28,8 +28,24 @@ if (isset($_FILES["file"])) {
         exit();
     }
 
+    $maxSize = ini_get("upload_max_filesize");
+
     $tempFile = $_FILES["file"]["tmp_name"];
-    $destination = $path . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
+    $tempFileSize = $_FILES["file"]["size"];
+    $tempFileName = $_FILES["file"]["name"];
+    $destination = $path . DIRECTORY_SEPARATOR . $tempFileName;
+
+    if ($tempFileSize > convertToBytes($maxSize)) {
+        echo json_encode([
+            "type" => "error",
+            "message_id" => "api_upload_max_size_limit",
+            "return" => [
+                $maxSize
+            ]
+        ], 128);
+
+        exit();
+    }
 
     if (is_file($destination) or file_exists($destination)) {
         echo json_encode([
@@ -43,7 +59,10 @@ if (isset($_FILES["file"])) {
     if (move_uploaded_file($tempFile, $destination)) {
         echo json_encode([
             "type" => "success",
-            "message_id" => "api_upload_file_success"
+            "message_id" => "api_upload_file_success",
+            "return" => [
+                $tempFileName
+            ]
         ], 128);
 
         exit();

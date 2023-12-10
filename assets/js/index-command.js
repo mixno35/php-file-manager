@@ -7,12 +7,14 @@ const run_command = () => {
             if (!Array.isArray(object)) return toast().show(getStringBy("message_object_invalid"));
             if (object.length < 1) return toast().show(getStringBy("message_object_remove_empty"))
 
-            let paths = object.join(", ");
+            let path_object = [];
+
+            object.forEach((item) => { path_object.push(extractFileName(removeExtraSlashes(item))) });
 
             const formData = new FormData();
-            formData.append("path", paths);
+            formData.append("path", object.join(", "));
 
-            if (confirm(getStringBy("message_are_remove").replace("%1s", paths)))
+            if (confirm(getStringBy("message_are_remove").replace("%1s", path_object.join(", "))))
                 command(COMMAND_CREATE_REMOVE, formData, (() => {
                     updateMainFileManager();
                 }));

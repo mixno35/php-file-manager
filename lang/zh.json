@@ -37,6 +37,8 @@
   "text_size_mb": "兆字节",
   "text_size_gb": "千兆字节",
   "text_size_tb": "太字节",
+  "text_error": "错误",
+  "text_success": "成功",
 
   "tooltip_close": "关闭",
   "tooltip_create_dir": "创建新目录（Ctrl + Alt + D）",
@@ -144,5 +146,7 @@
   "api_create_file_success": "成功创建文件\"%1s\"。",
   "api_create_file_not_exist": "无法打开文件以进行写入。",
   "api_is_readable": "访问被拒绝。",
-  "api_upload_file_blob_incorrect": "Blob链接不正确。"
+  "api_upload_file_blob_incorrect": "Blob链接不正确。",
+  "api_upload_file_success": "文件 \"%1s\" 已上传。",
+  "api_upload_max_size_limit": "您已超过最大文件上传大小。最大大小：%1s。"
 }

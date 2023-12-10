@@ -146,5 +146,7 @@
   "api_create_file_success": "Файл \"%1s\" успешно создан.",
   "api_create_file_not_exist": "Не удалось открыть файл для записи.",
   "api_is_readable": "Access denied.",
-  "api_upload_file_blob_incorrect": "Blob ссылка некорректна."
+  "api_upload_file_blob_incorrect": "Blob ссылка некорректна.",
+  "api_upload_file_success": "Файл \"%1s\" загружен.",
+  "api_upload_max_size_limit": "Вы превысили максимальный размер файла. Максимальный размер: %1s."
 }

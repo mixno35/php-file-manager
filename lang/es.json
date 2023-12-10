@@ -30,8 +30,9 @@
   "text_default_list_type": "Tipo de lista predeterminado",
   "text_language": "Idioma",
   "text_theme": "Tema",
-  "tooltip_download_archive": "Descargar como archivo",
+  "text_success": "Éxito",
 
+  "tooltip_download_archive": "Descargar como archivo",
   "tooltip_close": "Cerrar",
   "tooltip_create_dir": "Crear nuevo directorio (Ctrl + Alt + D)",
   "tooltip_create_file": "Crear nuevo archivo (Ctrl + Alt + F)",
@@ -137,5 +138,7 @@
   "api_create_file_success": "Archivo \"%1s\" creado con éxito.",
   "api_create_file_not_exist": "No se pudo abrir el archivo para escribir.",
   "api_is_readable": "Acceso denegado.",
-  "api_upload_file_blob_incorrect": "Enlace de blob incorrecto."
+  "api_upload_file_blob_incorrect": "Enlace de blob incorrecto.",
+  "api_upload_file_success": "Archivo \"%1s\" subido.",
+  "api_upload_max_size_limit": "Ha excedido el tamaño máximo de carga de archivos. Tamaño máximo: %1s."
 }

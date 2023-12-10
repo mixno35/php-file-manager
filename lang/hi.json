@@ -38,6 +38,8 @@
   "text_size_mb": "एमबी",
   "text_size_gb": "जीबी",
   "text_size_tb": "टेराबाइट",
+  "text_error": "त्रुटि",
+  "text_success": "सफलता",
 
   "tooltip_close": "बंद करें",
   "tooltip_create_dir": "नई डायरेक्टरी बनाएं (Ctrl + Alt + D)",
@@ -146,5 +148,7 @@
   "api_create_file_success": "फ़ाइल \"%1s\" सफलतापूर्वक बनाई गई है।",
   "api_create_file_not_exist": "लेखन के लिए फ़ाइल खोलने में विफल हुआ।",
   "api_is_readable": "पहुंच निषेध है।",
-  "api_upload_file_blob_incorrect": "ब्लॉब लिंक अवैध है।"
+  "api_upload_file_blob_incorrect": "ब्लॉब लिंक अवैध है।",
+  "api_upload_file_success": "फ़ाइल \"%1s\" अपलोड की गई।",
+  "api_upload_max_size_limit": "आपने अधिकतम फ़ाइल अपलोड का आकार पार कर दिया है। अधिकतम आकार: %1s।"
 }

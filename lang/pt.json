@@ -30,6 +30,8 @@
   "text_default_list_type": "Tipo de lista padrão",
   "text_language": "Idioma",
   "text_theme": "Tema",
+  "text_error": "Erro",
+  "text_success": "Sucesso",
 
   "tooltip_close": "Fechar",
   "tooltip_create_dir": "Criar novo diretório (Ctrl + Alt + D)",
@@ -137,5 +139,7 @@
   "api_create_file_success": "Arquivo \"%1s\" criado com sucesso.",
   "api_create_file_not_exist": "Não foi possível abrir o arquivo para escrever.",
   "api_is_readable": "Acesso negado.",
-  "api_upload_file_blob_incorrect": "Link de blob incorreto."
+  "api_upload_file_blob_incorrect": "Link de blob incorreto.",
+  "api_upload_file_success": "Arquivo \"%1s\" enviado.",
+  "api_upload_max_size_limit": "Você excedeu o tamanho máximo de upload de arquivo. Tamanho máximo: %1s."
 }

@@ -7,6 +7,13 @@ let z_index_alert = 79;
 function addslashes(str) {
     return str.replace(/[\\'"]/g, "\\$&");
 }
+function removeExtraSlashes(path) {
+    path = path.replace(/\/{2,}/g, "/");
+    return path;
+}
+function extractFileName(fullPath) {
+    return fullPath.split("\\").pop().split("/").pop();
+}
 
 function validPath(path1, path2) {
     const rPath1 = path1.replace(/\/+/g, "/");
