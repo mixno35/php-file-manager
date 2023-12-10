@@ -1,5 +1,5 @@
 <?php
-include_once "secure/check-token.php";
+include_once dirname(__FILE__) . "/secure/check-token.php";
 
 global $data, $path_manager, $privileges;
 

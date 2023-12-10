@@ -15,9 +15,12 @@ if ($uni_token_data !== $uni_token_session) {
     exit();
 }
 
-include_once dirname(__FILE__, 4) . "/php/class/CheckSession.php";
+include_once dirname(__FILE__, 4) . "/php/data.php";
 
-$check_session = new CheckSession();
+include_once dirname(__FILE__, 4) . "/php/class/CheckSession.php";
+include_once dirname(__FILE__, 4) . "/php/class/Crypt.php";
+
+$check_session = new CheckSession(new Crypt(READY_KEY));
 
 if (!$check_session->check()) {
     echo json_encode([
