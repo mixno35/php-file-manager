@@ -421,6 +421,7 @@ main nav.left-directory-manager section.details-manager ul li {
     font-weight: 400;
     font-size: 13px;
     font-style: normal;
+    white-space: nowrap;
 
     text-transform: none;
 
@@ -765,6 +766,7 @@ main article.main-file-manager article ul.file-manager li span.first {
     position: relative;
 
     width: calc(100% - 80px);
+    height: 100%;
 
     white-space: nowrap;
 
@@ -781,16 +783,34 @@ main article.main-file-manager article ul.file-manager li span.first span.name {
 
     width: 100%;
 }
-main article.main-file-manager article ul.file-manager li span.first img {
+main article.main-file-manager article ul.file-manager li span.first span.image-preview img {
     --size-f-image-f: 30px;
+
+    width: fit-content;
+    max-width: 38px;
+    height: 60%;
+
+    object-position: center;
+    object-fit: cover;
+
+    user-select: none;
+    pointer-events: none;
+}
+main article.main-file-manager article ul.file-manager.grid li span.first span.image-preview img {
+    --size-f-image-f: 36px;
 
     width: var(--size-f-image-f);
     max-width: var(--size-f-image-f);
     min-width: var(--size-f-image-f);
     height: auto;
-
-    user-select: none;
-    pointer-events: none;
+}
+main article.main-file-manager article ul.file-manager.grid li span.first span.image-preview img.preview {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    height: 100%;
 }
 /* main article.main-file-manager article ul.file-manager li span.first img.preview {
     width: 100%;
@@ -802,6 +822,14 @@ main article.main-file-manager article ul.file-manager li span.first img {
 
     object-fit: cover;
 } */
+main article.main-file-manager article ul.file-manager li span.first span.image-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    height: 100%;
+}
 main article.main-file-manager article ul.file-manager li span.other {
     padding: 0 12px;
 
@@ -863,6 +891,9 @@ main article.main-file-manager article ul.file-manager.grid li {
 
     width: 117px;
     min-width: 117px;
+    height: auto;
+
+    padding: 12px;
 }
 main article.main-file-manager article ul.file-manager.grid li:hover {
     box-shadow: var(--shadow-03);
@@ -907,6 +938,7 @@ main article.main-file-manager article ul.file-manager.grid li span.first span.i
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 main article.main-file-manager article ul.file-manager.grid li.selected span.first span.image-preview {
     background-color: var(--fm-color-primary-30);

@@ -134,7 +134,8 @@ if (strlen(trim($search)) > 0) {
                 ], this.getAttribute('data-isdir'))" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $liUniID ?>" data-path="<?= addslashes($item) ?>" data-isdir="<?= is_dir($item) ?>" data-href="<?= $file_manager->get_current_url($item, true) ?>">
                     <span class="first">
                         <span class="image-preview">
-                            <img loading="lazy" src="<?= $file_parse->get_icon($item, ($settings['list_image_preview'] and $privileges['view_file']), 48) ?>" alt="Image">
+                            <?php $is_preview = (explode('/', $file_manager->get_mime_type($item))[0] === 'image' and $settings['list_image_preview'] and $privileges['view_file']); ?>
+                            <img class="<?= $is_preview ? 'preview' : '' ?>" loading="lazy" src="<?= $file_parse->get_icon($item, ($settings['list_image_preview'] and $privileges['view_file']), (($is_preview and $isGrid) ? 256 : 48 )) ?>" alt="Image">
                         </span>
                         <span class="name">
                             <?= $name ?>

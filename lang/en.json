@@ -12,6 +12,7 @@
   "text_php_server": "Server: %1s",
   "text_php_os": "OS: %1s",
   "text_php_total_size": "Total size: %1s",
+  "text_php_memory": "Memory:&nbsp;<span id=\"php-memory\">0</span>",
   "text_about_file": "About file",
   "text_about_dir": "About directory",
   "text_about_file_name": "File name",

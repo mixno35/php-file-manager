@@ -14,6 +14,22 @@ function removeExtraSlashes(path) {
 function extractFileName(fullPath) {
     return fullPath.split("\\").pop().split("/").pop();
 }
+function convertBytes(bytes, units = ["B", "KB", "MB", "GB"]) {
+    let size = bytes;
+    let unitIndex = 0;
+
+    while (size > 1024 && unitIndex < units.length - 1) {
+        size /= 1024;
+        unitIndex++;
+    }
+
+    const result = {
+        size: size.toFixed(2),
+        unit: units[unitIndex],
+    };
+
+    return `${result.size} ${result.unit}`;
+}
 
 function validPath(path1, path2) {
     const rPath1 = path1.replace(/\/+/g, "/");

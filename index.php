@@ -19,8 +19,40 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
 //} else {
 //    echo "Разрешение 777 не выдано.";
 //}
-?>
 
+function getTotalMemory():string {
+    $os = strtolower(PHP_OS);
+
+    if (strpos($os, "linux") !== false) {
+        $output = shell_exec("free -m");
+        $lines = explode("\n", $output);
+        $totalLine = explode(" ", trim($lines[1]));
+        $totalMemory = intval($totalLine[count($totalLine) - 2]);
+    } else if (strpos($os, "win") !== false) {
+        $output = shell_exec("wmic ComputerSystem get TotalPhysicalMemory /value");
+        $totalMemoryLine = explode("=", trim($output));
+        $totalMemory = intval($totalMemoryLine[1]);
+    } else if (strpos($os, "darwin") !== false) {
+        $output = shell_exec("sysctl -a | grep hw.memsize");
+        $lines = explode("\n", $output);
+        $totalMemoryLine = explode(" ", trim($lines[0]));
+        $totalMemory = intval($totalMemoryLine[count($totalMemoryLine) - 1]);
+    } else {
+        $totalMemory = -1;
+    }
+
+    return $totalMemory;
+}
+?>
+<?php
+$array_units_size = array(
+    str_get_string("text_size_b"),
+    str_get_string("text_size_kb"),
+    str_get_string("text_size_mb"),
+    str_get_string("text_size_gb"),
+    str_get_string("text_size_tb")
+);
+?>
 <html lang="<?= $language_tag ?? "en-US" ?>">
 <head>
     <title><?= str_get_string("document_name") ?></title>
@@ -44,7 +76,10 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>const stringOBJ = <?= $content ?>;</script>
+    <script>
+        const unitsOBJ = <?= json_encode($array_units_size, 128) ?>;
+        const stringOBJ = <?= $content ?>;
+    </script>
 
     <script src="assets/js/m35/parse-url.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/m35/alert.js?v=<?= $resource_v ?>"></script>
@@ -90,15 +125,6 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
             <ul class="container-upload-content" id="container-upload-content"></ul>
 
             <?php if ($settings["server_details"]) { ?>
-                <?php
-                $array_units_size = array(
-                    str_get_string("text_size_b"),
-                    str_get_string("text_size_kb"),
-                    str_get_string("text_size_mb"),
-                    str_get_string("text_size_gb"),
-                    str_get_string("text_size_tb")
-                );
-                ?>
                 <section class="details-manager">
                     <h2><?= str_get_string("text_details_manager") ?></h2>
                     <ul>
@@ -106,6 +132,7 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
                         <li><?= str_get_string("text_php_server", false, [($_SERVER["SERVER_SOFTWARE"] ?? "NaN")]) ?></li>
                         <li><?= str_get_string("text_php_os", false, [(PHP_OS ?? "NaN")]) ?></li>
                         <li><?= str_get_string("text_php_total_size", false, [$file_manager->format_size($file_manager->get_directory_size($main_path["server"]), $array_units_size)]) ?></li>
+                        <li><?= str_get_string("text_php_memory", true) ?></li>
                     </ul>
                 </section>
             <?php } ?>
@@ -169,8 +196,31 @@ $perms = octdec(substr(sprintf("%o", fileperms($main_path["file_manager"])), -4)
         let pathFileDetail = "";
 
         const upload_max_filesize = <?= intval(ini_get("upload_max_filesize") ?? 0) ?>;
-        const post_max_size = <?= intval(ini_get("post_max_size") ?? 0) ?>
+        const post_max_size = <?= intval(ini_get("post_max_size") ?? 0) ?>;
     </script>
+
+    <?php if ($settings["server_details"]) { ?>
+        <script>
+            const eventSourceMemory = new EventSource("secure/memory-info.php");
+            const totalPhpOSMemory = <?= getTotalMemory() ?>;
+
+            const containerPhpMemory = document.getElementById("php-memory");
+
+            eventSourceMemory.addEventListener("message", (event) => {
+                const data = JSON.parse(event.data);
+                const memoryUsage = data["memory_usage"];
+                const peakMemoryUsage = data["peak_usage"];
+
+                const generatedText = String(convertBytes(memoryUsage, unitsOBJ) + " (" + convertBytes(peakMemoryUsage, unitsOBJ) + ") / " + convertBytes(totalPhpOSMemory, unitsOBJ));
+
+                if (containerPhpMemory.outerText !== generatedText) containerPhpMemory.innerText = generatedText;
+            });
+
+            eventSourceMemory.addEventListener("error", (event) => {
+                console.error('Error occurred:', event);
+            });
+        </script>
+    <?php } ?>
 
     <script src="assets/js/index-funcs.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index.js?v=<?= $resource_v ?>"></script>
