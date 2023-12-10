@@ -48,6 +48,7 @@ foreach ($pathComponents as $index => $component) {
 foreach ($tree_pre as $item) if (strpos($item, $rootDirectory) === 0) $tree[] = $item;
 
 $uniID = uniqid();
+
 ?>
 <nav class="header">
     <div class="manager-content left">

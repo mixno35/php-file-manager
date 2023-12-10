@@ -73,6 +73,13 @@ if ($url_parse->is_blob_url($blob_path)) {
 
         while (!feof($handle)) {
             $chunk = fread($handle, 8192);
+
+            if ($chunk === false) {
+                fclose($handle);
+                http_response_code(500);
+                exit();
+            }
+
             echo $chunk;
             ob_flush();
             flush();

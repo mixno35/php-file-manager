@@ -17,8 +17,8 @@ include_once dirname(__FILE__, 2) . "/php/class/Crypt.php";
 
 $crypt = new Crypt(READY_KEY);
 
-$auth_login = $_POST["login"] ?? "login";
-$auth_password = password_hash($_POST["password"] ?? "password", PASSWORD_DEFAULT);
+$auth_login = trim($_POST["login"] ?? "login");
+$auth_password = password_hash(trim($_POST["password"] ?? "password"), PASSWORD_DEFAULT);
 
 if (!containsOnlyTextAndNumbers($auth_login)) die("Login incorrect.");
 

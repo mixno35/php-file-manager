@@ -41,7 +41,7 @@ class FileParseManager {
     }
 
     private function generate_image(string $path, int $size = 0):string {
-        if (file_exists($path)) {
+        if (file_exists($path) || is_readable($path)) {
             $file = fopen($path, "rb");
             $format = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
@@ -50,7 +50,6 @@ class FileParseManager {
                 fclose($file);
 
                 if ($size > 0) {
-                    // Изменение размера изображения
                     $image = imagecreatefromstring($fileContents);
                     $originalWidth = imagesx($image);
                     $originalHeight = imagesy($image);
