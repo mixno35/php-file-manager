@@ -53,13 +53,6 @@ if ($url_parse->is_blob_url($blob_path)) {
 
     $filename = basename($blob_path);
 
-    $handle = fopen($blob_path, "rb");
-
-    if ($handle === false) {
-        http_response_code(500);
-        exit();
-    }
-
     header("Content-Type: $blob_mime_type");
     header("Content-Length: " . filesize($blob_path));
     header("Content-Disposition: inline; filename=\"$filename\"");
@@ -68,12 +61,28 @@ if ($url_parse->is_blob_url($blob_path)) {
     header("Last-Modified: " . gmdate("D, d M Y H:i:s", $last_modified_time) . " GMT");
     header("Etag: $etag");
 
-    while (!feof($handle)) {
-        $chunk = fread($handle, 8192);
-        echo $chunk;
-        ob_flush();
-        flush();
-    }
+    $type = $_GET["type"] ?? "";
 
-    fclose($handle);
+    if ($type === "stream") {
+        $handle = fopen($blob_path, "rb");
+
+        if ($handle === false) {
+            http_response_code(500);
+            exit();
+        }
+
+        while (!feof($handle)) {
+            $chunk = fread($handle, 8192);
+            echo $chunk;
+            ob_flush();
+            flush();
+        }
+
+        fclose($handle);
+    } else {
+        if (!readfile($blob_path)) {
+            http_response_code(500);
+            exit();
+        }
+    }
 }

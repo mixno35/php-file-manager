@@ -10,7 +10,7 @@ if (($_SERVER["REQUEST_METHOD"] ?? "GET") !== "POST") {
 
 global $host;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 include_once dirname(__FILE__, 2) . "/php/data.php";
 include_once dirname(__FILE__, 2) . "/php/class/Crypt.php";

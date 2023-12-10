@@ -1,7 +1,7 @@
 <?php
 global $main_path, $settings, $privileges;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 include_once dirname(__FILE__) . "/php/data.php";
 include_once dirname(__FILE__) . "/secure/user-privileges.php";

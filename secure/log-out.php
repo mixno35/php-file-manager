@@ -1,11 +1,9 @@
 <?php
-global $session_name;
-
 include_once dirname(__FILE__, 2) . "/php/data.php";
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
 
-unset($_SESSION[$session_name]);
+unset($_SESSION[SESSION_NAME]);
 
 session_destroy();
 

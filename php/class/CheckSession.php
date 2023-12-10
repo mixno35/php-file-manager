@@ -12,7 +12,7 @@ class CheckSession {
     }
 
     public function check():bool {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
         if (empty(trim($_SESSION[SESSION_NAME] ?? ""))) return false;
 

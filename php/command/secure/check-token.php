@@ -15,6 +15,8 @@ if ($uni_token_data !== $uni_token_session) {
     exit();
 }
 
+unset($_SESSION["uni_token"], $data["uni_token"]);
+
 include_once dirname(__FILE__, 4) . "/php/data.php";
 
 include_once dirname(__FILE__, 4) . "/php/class/CheckSession.php";
