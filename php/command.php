@@ -2,7 +2,7 @@
 session_start();
 
 if (($_SERVER["REQUEST_METHOD"] ?? "GET") !== "POST") {
-    http_response_code(502);
+    http_response_code(405);
     exit();
 }
 
@@ -39,24 +39,19 @@ $data["uni_token"] = $token;
 
 $command = $data["command"] ?? ""; // Извлекаем название команды, которую надо выполнить
 
-if ($command === "remove") { // Удаление файла/папки
-    include_once "command/remove.php";
-    exit();
-} if ($command === "rename") { // Переименование файла/папки
-    include_once "command/rename.php";
-    exit();
-} if ($command === "create-dir") { // Создание папки
-    include_once "command/create-dir.php";
-    exit();
-} if ($command === "create-file") { // Создание файла
-    include_once "command/create-file.php";
-    exit();
-} if ($command === "upload-file") { // Загрузка файла
-    include_once "command/upload-file.php";
-    exit();
-}
+unset($data["command"]);
 
-echo json_encode([
-    "type" => "error",
-    "message_id" => "api_command_unknown"
-], 128);
+switch ($command) {
+    case "remove":
+        include_once dirname(__FILE__) . "/command/remove.php"; break;
+    case "rename":
+        include_once dirname(__FILE__) . "/command/rename.php"; break;
+    case "create-dir":
+        include_once dirname(__FILE__) . "/command/create-dir.php"; break;
+    case "create-file":
+        include_once dirname(__FILE__) . "/command/create-file.php"; break;
+    case "upload-file":
+        include_once dirname(__FILE__) . "/command/upload-file.php"; break;
+    default:
+        echo json_encode(["type" => "error", "message_id" => "api_command_unknown"], 128);
+}
