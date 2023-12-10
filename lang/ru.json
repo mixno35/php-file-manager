@@ -37,6 +37,8 @@
   "text_size_mb": "МБ",
   "text_size_gb": "ГБ",
   "text_size_tb": "ТБ",
+  "text_error": "Ошибка",
+  "text_success": "Успех",
 
   "tooltip_close": "Закрыть",
   "tooltip_create_dir": "Создать новую директорию (Ctrl + Alt + D)",

@@ -127,7 +127,7 @@ if (strlen(trim($search)) > 0) {
                 ], [
                     () => clickToPathDuo(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id),
                     () => run_command().rename(this.getAttribute('data-path')),
-                    () => download('view-content/blob.php?p=' + encodeURIComponent(this.getAttribute('data-path')), '<?= $name ?>'),
+                    () => download('content/blob.php?p=' + encodeURIComponent(this.getAttribute('data-path')), '<?= $name ?>'),
                     () => openFileDetail(this.getAttribute('data-path')),
                     () => run_command().delete([this.getAttribute('data-path')])
                 ], this.getAttribute('data-isdir'))" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $liUniID ?>" data-path="<?= addslashes($item) ?>" data-isdir="<?= is_dir($item) ?>" data-href="<?= $file_manager->get_current_url($item, true) ?>">

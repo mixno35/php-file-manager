@@ -16,37 +16,38 @@ include_once dirname(__FILE__, 3) . "/class/URLParse.php";
 
 $url_parse = new URLParse();
 
-$blob = strval($_POST["blob"] ?? "");
 $path = strval($_POST["path"] ?? "");
-$file = json_encode($_POST["file"] ?? "[]");
 
-if (!$url_parse->is_blob_url($blob)) {
-    echo json_encode([
-        "type" => "error",
-        "message_id" => "api_upload_file_blob_incorrect"
-    ], 128);
+if (isset($_FILES["file"])) {
+    if (!is_dir($path)) {
+        echo json_encode([
+            "type" => "error",
+            "message_id" => "api_create_is_not_dir"
+        ], 128);
 
-    exit();
-}
+        exit();
+    }
 
-if (!is_dir($path)) {
-    echo json_encode([
-        "type" => "error",
-        "message_id" => "api_create_is_not_dir"
-    ], 128);
+    $tempFile = $_FILES["file"]["tmp_name"];
+    $destination = $path . DIRECTORY_SEPARATOR . $_FILES["file"]["name"];
 
-    exit();
-}
+    if (is_file($destination) or file_exists($destination)) {
+        echo json_encode([
+            "type" => "error",
+            "message_id" => "api_create_file_file_exist"
+        ], 128);
 
-die(print_r($file, true));
+        exit();
+    }
 
-if ($decode !== false and file_put_contents($path, $decode)) {
-    echo json_encode([
-        "type" => "success",
-        "message_id" => "api_upload_file_success"
-    ], 128);
+    if (move_uploaded_file($tempFile, $destination)) {
+        echo json_encode([
+            "type" => "success",
+            "message_id" => "api_upload_file_success"
+        ], 128);
 
-    exit();
+        exit();
+    }
 }
 
 echo json_encode([

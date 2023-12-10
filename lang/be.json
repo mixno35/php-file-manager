@@ -37,6 +37,8 @@
   "text_size_mb": "МБ",
   "text_size_gb": "ГБ",
   "text_size_tb": "ТБ",
+  "text_error": "Памылка",
+  "text_success": "Паспях",
 
   "tooltip_close": "Закрыць",
   "tooltip_create_dir": "Стварыць новы каталёг (Ctrl + Alt + D)",

@@ -75,12 +75,10 @@ function get_mode_codemirror(string $path = ""):string {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
+    <script>const stringOBJ = <?= $content ?>;</script>
+
     <script src="assets/js/m35/parse-url.js"></script>
     <script src="assets/js/system.js?v=<?= $resource_v ?>"></script>
-
-    <script>
-        const stringOBJ = JSON.parse(JSON.stringify(<?= $content ?>));
-    </script>
 </head>
 <body>
     <?php if (!$privileges["view_file"]) { ?>
@@ -577,16 +575,11 @@ function get_mode_codemirror(string $path = ""):string {
 
     <?php if ($file_type === "image") { ?>
         <div class="image-preview" id="image-preview">
-            <header id="header">
-                <h1 class="title">
-                    <?= str_get_string("document_name") ?>
-                    <span>
-                        <?= str_get_string("document_name_view") ?>
-                    </span>
-                </h1>
-            </header>
-
             <img class="preview" draggable="false" id="preview" loading="eager" src="content/blob.php?p=<?= urlencode($path) ?>" alt="Image">
+
+            <div class="explore-images">
+
+            </div>
         </div>
 
         <script>
@@ -601,6 +594,8 @@ function get_mode_codemirror(string $path = ""):string {
             let scale = 1;
             let offsetX = 0;
             let offsetY = 0;
+
+            if (isMobileDevice()) document.querySelector(".explore-images").remove();
 
             image_preview.addEventListener("dblclick", (e) => {
                 e.preventDefault();
@@ -702,6 +697,13 @@ function get_mode_codemirror(string $path = ""):string {
                 const scaledOffsetY = offsetY / scale;
 
                 image.style.transform = `scale(${scale}) translate(${scaledOffsetX}px, ${scaledOffsetY}px)`;
+
+                requestAnimationFrame(() => {
+                    image.style.transition = "transform .1s"; // Добавляем небольшую анимацию
+                    image.style.transform = `scale(${scale}) translate(${scaledOffsetX}px, ${scaledOffsetY}px)`;
+                });
+
+                setTimeout(() => { image.style.transition = "none" }, 100);
             }
 
         </script>

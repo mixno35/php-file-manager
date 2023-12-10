@@ -235,10 +235,15 @@ function uploadNewFiles(object) {
     for(let i = 0; i < object.length; i++) { uploadNewFile(object[i]) }
 }
 function uploadNewFile(file) {
-    const url = window.URL.createObjectURL(file);
-    const form_data = new FormData();
+    // const url = window.URL.createObjectURL(file);
+    const blob = new Blob([file], { type: "application/octet-stream" });
+    const formData = new FormData();
 
-    form_data.append("file", file);
+    formData.append("file", file);
+    // formData.append("blob", url);
+    formData.append("path", openedDirectory);
+
+    console.log(formData);
 
     const container_upload = document.getElementById("container-upload-content");
 
@@ -256,6 +261,7 @@ function uploadNewFile(file) {
 
     const text_name = document.createElement("p");
     text_name.innerText = upload_content_name;
+    text_name.setAttribute("title", upload_content_name);
 
     const text_progress = document.createElement("span");
     text_progress.innerText = "0%";
@@ -268,17 +274,25 @@ function uploadNewFile(file) {
 
     container_upload.appendChild(container_item);
 
-    command(COMMAND_UPLOAD_FILE, {blob: url, path: openedDirectory, file: JSON.stringify(form_data)}, updateMainFileManager, () => {
+    command(COMMAND_UPLOAD_FILE, formData, (json) => {
+        if (json["type"] === "error") text_progress.innerText = getStringBy("text_error");
+        if (json["type"] === "success") text_progress.innerText = getStringBy("text_success");
+        if (json["type"] === "success") updateMainFileManager();
+
+        item_progress.classList.add(json["type"]);
+        text_progress.setAttribute("title", getStringBy(json["message_id"]));
+    }, () => {
         const xhr = new window.XMLHttpRequest();
         xhr.upload.addEventListener("progress", (event) => {
             if (event.lengthComputable) {
-                const percentComplete = ((event.loaded / event.total) * 100);
+                const percentComplete = Math.floor(((event.loaded / event.total) * 100));
                 item_progress.style.width = `${percentComplete}%`;
                 text_progress.innerText = `${percentComplete}%`;
+                text_progress.setAttribute("title", `${percentComplete}%`);
             }
         }, false);
         return xhr;
-    });
+    }, false, true);
 }
 
 function setSetting(name, value) {

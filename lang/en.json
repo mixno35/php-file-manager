@@ -41,6 +41,8 @@
   "text_size_mb": "MB",
   "text_size_gb": "GB",
   "text_size_tb": "TB",
+  "text_error": "Error",
+  "text_success": "Success",
 
   "tooltip_close": "Close",
   "tooltip_create_dir": "Create new directory (Ctrl + Alt + D)",

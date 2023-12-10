@@ -1693,6 +1693,26 @@ ul.container-upload-content {
     max-height: 192px;
     height: fit-content;
 }
+ul.container-upload-content:only-child {
+    min-height: 48px;
+    max-height: 48px;
+    height: 48px;
+}
+ul.container-upload-content:nth-child(2) {
+    min-height: 96px;
+    max-height: 96px;
+    height: 96px;
+}
+ul.container-upload-content:nth-child(3) {
+    min-height: 144px;
+    max-height: 144px;
+    height: 144px;
+}
+ul.container-upload-content:nth-child(4) {
+    min-height: 192px;
+    max-height: 192px;
+    height: 192px;
+}
 ul.container-upload-content:not(:empty) {
     border-top: 1px solid var(--fm-color-divider);
 }
@@ -1702,6 +1722,9 @@ ul.container-upload-content li {
     position: relative;
 
     width: 100%;
+    max-height: 48px;
+    min-height: 48px;
+    height: 48px;
 }
 ul.container-upload-content li div {
     display: flex;
@@ -1731,17 +1754,18 @@ ul.container-upload-content li div p {
     z-index: 1;
 }
 ul.container-upload-content li div span {
-    width: 24px;
-    height: auto;
+    width: fit-content;
+    height: 24px;
 
-    aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--fm-color-text-sub);
+    cursor: help;
 
     font-size: 13px;
     font-weight: 400;
+    text-transform: uppercase;
 
     border-radius: 100%;
 
@@ -1752,13 +1776,19 @@ ul.container-upload-content li .progress {
 
     position: absolute;
     left: 0;
-    background-color: var(--fm-color-progress-upload);
+    background-color: var(--fm-color-primary-20);
 
     height: 100%;
     width: auto;
 
     padding: 0;
     margin: 0;
+}
+ul.container-upload-content li .progress.success {
+    background-color: var(--fm-color-progress-upload);
+}
+ul.container-upload-content li .progress.error {
+    background-color: var(--fm-color-progress-upload-error);
 }
 
 input[type="checkbox"].switch {

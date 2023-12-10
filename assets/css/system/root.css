@@ -42,6 +42,7 @@
     --fm-color-progress-item: rgb(0, 0, 0);
     --fm-color-progress-upload: rgba(45, 220, 45, 0.2);
     --fm-color-progress-upload-40: rgba(45, 220, 45, 0.4);
+    --fm-color-progress-upload-error: rgba(220, 20, 60, 0.2);
 
     --fm-color-scroll-1: rgb(111, 114, 117);
     --fm-color-scroll-2: rgb(215, 219, 222);
@@ -94,6 +95,7 @@
     --fm-color-progress-item: rgb(255, 255, 255);
     --fm-color-progress-upload: rgba(45, 220, 45, 0.2);
     --fm-color-progress-upload-40: rgba(45, 220, 45, 0.4);
+    --fm-color-progress-upload-error: rgba(253, 47, 90, 0.2);
 
     --fm-color-scroll-1: rgb(111, 114, 117);
     --fm-color-scroll-2: rgb(215, 219, 222);
