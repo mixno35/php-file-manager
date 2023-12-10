@@ -25,7 +25,7 @@ __StormGuardian Files__ (название не окончательное) - э�
 - :ballot_box_with_check::white_check_mark: Медиаплеер (для воспроизведения аудио и видео файлов)
 - :ballot_box_with_check::white_check_mark: Предпросмотр шрифтов
 - :ballot_box_with_check: Мобильная версия
-- :ballot_box_with_check::green_square: Загрузка файлов
+- :ballot_box_with_check::white_check_mark: Загрузка файлов
 
 
 #### В РАЗРАБОТКЕ:
