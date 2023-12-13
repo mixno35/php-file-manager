@@ -1,5 +1,7 @@
 # StormGuardian Files
 
+![Preview](./photo_2023-12-13_08-48-36.jpg)
+
 ```All innovations are tested in Firefox, Chrome```
 
 Currently __StormGuardian Files__ is available in more than 6 languages, such as: ```English```, ```German```, ```Spanish```, ```French```, ```Portuguese```, ```Chinese (Simplified)```, ```Japanese```, ```Hindi```, ```Russian```, ```Belarusian```, ```Ukrainian```.
