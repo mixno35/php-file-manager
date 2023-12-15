@@ -19,7 +19,7 @@
   "text_enter_a_name_dir": "ディレクトリの名前を入力してください",
   "text_enter_a_name_file": "ファイルの名前を入力してください",
   "text_file_not_exists": "このファイルは存在しません。",
-  "text_unknown_type_file": "未知のファイルタイプ",
+  "text_unknown_type_file": "サポートされていないファイルタイプ",
   "text_privileges_forbidden": "アクセスが禁止されています",
   "text_access_denied": "アクセスが拒否されました",
   "text_media_unknown": "不明",
@@ -72,6 +72,9 @@
   "tooltip_upload_content": "アップロード",
   "tooltip_logout": "ログアウト",
   "tooltip_download_archive": "アーカイブとしてダウンロード",
+  "tooltip_choose_action": "アクションを選択...",
+  "tooltip_copy_type_1": "コピーして貼り付ける",
+  "tooltip_copy_type_2": "切り取って貼り付ける",
 
   "title_information": "情報",
 

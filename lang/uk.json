@@ -23,7 +23,7 @@
   "text_enter_a_name_dir": "Введіть ім'я для директорії",
   "text_enter_a_name_file": "Введіть ім'я для файлу",
   "text_file_not_exists": "Цього файлу не існує.",
-  "text_unknown_type_file": "Невідомий тип файлу",
+  "text_unknown_type_file": "Непідтримуваний тип файлу",
   "text_privileges_forbidden": "Заборонено",
   "text_access_denied": "Немає дозволу",
   "text_media_unknown": "Невідомо",
@@ -45,7 +45,6 @@
   "text_streaming": "Потоковий",
   "text_login_incorrect_authorization": "Непідтримуваний формат логіна",
   "text_incorrect_authorization": "Недійсна авторизація",
-
 
   "tooltip_close": "Закрити",
   "tooltip_create_dir": "Створити нову директорію (Ctrl + Alt + D)",
@@ -82,6 +81,9 @@
   "tooltip_upload_content": "Завантажити",
   "tooltip_logout": "Вийти",
   "tooltip_download_archive": "Завантажити як архів",
+  "tooltip_choose_action": "Виберіть дію...",
+  "tooltip_copy_type_1": "Копіювати і вставити",
+  "tooltip_copy_type_2": "Вирізати і вставити",
 
   "title_information": "Інформація",
 

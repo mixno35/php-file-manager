@@ -22,7 +22,7 @@
   "text_enter_a_name_dir": "Увядзіце імя для каталёгу",
   "text_enter_a_name_file": "Увядзіце імя для файла",
   "text_file_not_exists": "Гэтага файла не існуе.",
-  "text_unknown_type_file": "Невядомы тып файла",
+  "text_unknown_type_file": "Непадтрымлівы тып файла",
   "text_privileges_forbidden": "Забаронена",
   "text_access_denied": "Няма дазволу",
   "text_media_unknown": "Невядома",
@@ -80,6 +80,9 @@
   "tooltip_upload_content": "Загрузіць",
   "tooltip_logout": "Выйсці",
   "tooltip_download_archive": "Спампаваць як архіў",
+  "tooltip_choose_action": "Выберыце дзеянне...",
+  "tooltip_copy_type_1": "Капіраваць і ўставіць",
+  "tooltip_copy_type_2": "Выразаць і ўставіць",
 
   "title_information": "Інфармацыя",
 

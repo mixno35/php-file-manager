@@ -22,8 +22,6 @@ if (!file_exists($path)) die(str_get_string("text_file_not_exists"));
 $type_streaming = ($settings["blob_streaming"] === "yes-streaming") ? "stream" : "";
 
 $mime_type = $file_manager->get_mime_type($path);
-$file_type = explode("/", $mime_type)[0];
-$file_type_2 = explode("/", $mime_type)[1];
 
 function get_mode_codemirror(string $path = ""):string {
     $plain = strtolower(pathinfo($path, PATHINFO_EXTENSION));
@@ -85,7 +83,7 @@ function get_mode_codemirror(string $path = ""):string {
         <h4 class="file-viewer-unknown-file"><?= str_get_string("text_privileges_forbidden") ?></h4>
     <?php exit(); } ?>
 
-    <?php if ($file_type === "video" or $file_type === "audio") { ?>
+    <?php if ($file_parse->is_video($path) or $file_parse->is_music($path)) { ?>
         <?php
         $title = basename($path) ?? str_get_string("text_media_unknown");
         $artist = "";
@@ -93,10 +91,10 @@ function get_mode_codemirror(string $path = ""):string {
         $artwork = "";
         ?>
         <div class="media-preview" oncontextmenu="return false;">
-            <<?= $file_type ?> id="media-player">
+            <<?= $file_parse->get_file_type($path) ?> id="media-player">
                 <source src="content/blob.php?p=<?= rawurlencode($path) ?>&type=<?= $type_streaming ?>">
-            </<?= $file_type ?>>
-            <?php if ($file_type === "audio") { ?>
+            </<?= $file_parse->get_file_type($path) ?>>
+            <?php if ($file_parse->is_music($path)) { ?>
                 <?php
                 include_once "class/getid3/getid3.php";
                 $getID3 = new getID3();
@@ -166,7 +164,7 @@ function get_mode_codemirror(string $path = ""):string {
 
             let timer,
                 isHoveredMediaControls = false,
-                isAudio = Boolean(<?= $file_type === "audio" ? 1 : 0 ?>),
+                isAudio = Boolean(<?= $file_parse->is_music($path) ?>),
                 isDraggingSeek = false;
 
             if (isAudio) document.getElementById("action-fullscreen").style.display = "none";
@@ -326,7 +324,7 @@ function get_mode_codemirror(string $path = ""):string {
         </script>
     <?php exit(); } ?>
 
-    <?php if ($file_type === "font" or $file_type_2 === "x-font-ttf") { ?>
+    <?php if ($file_parse->is_font($path)) { ?>
         <header>
             <h1 class="title">
                 <?= str_get_string("document_name") ?>
@@ -415,7 +413,7 @@ function get_mode_codemirror(string $path = ""):string {
         </script>
     <?php exit(); } ?>
 
-    <?php if ($file_type === "text" or $file_type_2 === "json" or $file_type === "log") { ?>
+    <?php if ($file_parse->is_text($path) or $file_parse->is_text_code($path) or $file_parse->is_text_code_simple($path)) { ?>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js" integrity="sha512-8RnEqURPUc5aqFEN04aQEiPlSAdE0jlFS/9iGgUyNtwFnSKCXhmB6ZTNl7LnDtDWKabJIASzXrzD0K+LYexU9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/clike/clike.min.js" integrity="sha512-l8ZIWnQ3XHPRG3MQ8+hT1OffRSTrFwrph1j1oc1Fzc9UKVGef5XN9fdO0vm3nW0PRgQ9LJgck6ciG59m69rvfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js" integrity="sha512-I6CdJdruzGtvDyvdO4YsiAq+pkWf2efgd1ZUSK2FnM/u2VuRASPC7GowWQrWyjxCZn6CT89s3ddGI+be0Ak9Fg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -573,7 +571,7 @@ function get_mode_codemirror(string $path = ""):string {
         </script>
     <?php exit(); } ?>
 
-    <?php if ($file_type === "image") { ?>
+    <?php if ($file_parse->is_image($path)) { ?>
         <div class="image-preview" id="image-preview">
             <img class="preview" draggable="false" id="preview" src="" loading="eager" alt="Image">
 

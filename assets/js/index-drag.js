@@ -10,9 +10,11 @@ const drag = () => {
             isDragging = true;
             event.dataTransfer.setData("text/plain", "");
             movePathStart = event.target.getAttribute("data-path");
+            if (select_path().length() < 1) select_path(event.target.getAttribute("data-path")).add();
         },
         end: () => {
             isDragging = false;
+            select_path().clear();
         },
         enter: () => {
             if (isDragging) {
@@ -31,11 +33,14 @@ const drag = () => {
         },
         drop: () => {
             if (Boolean(draggedIsDir)) {
-                if (movePathStart !== movePath) run_command().move(movePathStart, movePath);
+                if (movePathStart !== movePath) run_command().move(select_path().getAll(), movePath);
             }
 
             movePath = "";
             movePathStart = "";
+            select_path(undefined, () => {
+                updateSelectPathsContainer(true);
+            }).clear();
 
             draggedIsDir = 0;
 

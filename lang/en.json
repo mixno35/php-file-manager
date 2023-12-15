@@ -85,6 +85,9 @@
   "tooltip_media_playback_rate": "Playback speed (S)",
   "tooltip_upload_content": "Upload",
   "tooltip_logout": "Log-out",
+  "tooltip_choose_action": "Choose action...",
+  "tooltip_copy_type_1": "Copy and paste",
+  "tooltip_copy_type_2": "Cut and paste",
 
   "title_information": "Information",
 
@@ -118,6 +121,7 @@
   "message_search_no_result": "No result",
 
   "message_are_remove": "You will not be able to recover deleted content. Are you sure you want to delete \"%1s\"?",
+  "message_are_move": "Do you really want %1s \"%2s\" in the \"%3s\" folder?",
 
   "message_file_detail_limit_window": "You have already opened the maximum number of windows.",
 

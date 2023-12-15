@@ -18,7 +18,7 @@ class URLParse {
                 $path = str_replace("%2F", "/", $path);
             }
 
-            return $parsedUrl["scheme"] . "://" . $parsedUrl["host"] . $path;
+            return ($parsedUrl["scheme"] ?? "") . "://" . ($parsedUrl["host"] ?? "") . $path;
         }
 
         return $text;

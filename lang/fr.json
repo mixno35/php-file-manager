@@ -20,7 +20,7 @@
   "text_enter_a_name_dir": "Entrez un nom pour le répertoire",
   "text_enter_a_name_file": "Entrez un nom pour le fichier",
   "text_file_not_exists": "Ce fichier n'existe pas.",
-  "text_unknown_type_file": "Type de fichier inconnu",
+  "text_unknown_type_file": "Type de fichier non pris en charge",
   "text_privileges_forbidden": "Interdit",
   "text_access_denied": "Accès refusé",
   "text_media_unknown": "Inconnu",
@@ -77,6 +77,9 @@
   "tooltip_upload_content": "Télécharger",
   "tooltip_logout": "Se déconnecter",
   "tooltip_download_archive": "Télécharger en tant qu'archive",
+  "tooltip_choose_action": "Choisir une action...",
+  "tooltip_copy_type_1": "Copier et coller",
+  "tooltip_copy_type_2": "Couper et coller",
 
   "title_information": "Information",
 

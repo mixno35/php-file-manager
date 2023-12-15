@@ -115,23 +115,24 @@ if (strlen(trim($search)) > 0) {
     <ul class="file-manager <?= ($isGrid === 1 && sizeof($result) > 0) ? 'grid' : '' ?>" id="file-manager-list">
         <?php if (sizeof($result) > 0) { ?>
             <?php foreach ($result as $item) { ?>
-                <?php
-                $liUniID = uniqid();
-                $name = basename($item);
-                ?>
-                <li title="<?= $name . ((strlen(trim($search)) > 0 and !$isGrid) ? " ($item)" : "") ?>" draggable="true" oncontextmenu="if ('vibrate' in navigator) navigator.vibrate(200); popup_window([
-                    {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square', for_dir: true, for_file: true},
-                    {name: getStringBy('tooltip_rename_w'), icon: 'fa-pen', for_dir: true, for_file: true},
-                    {name: getStringBy('tooltip_download_w'), icon: 'fa-download', for_dir: false, for_file: true},
-                    {name: getStringBy('tooltip_details_w'), icon: 'fa-info-circle', for_dir: true, for_file: true},
-                    {name: getStringBy('tooltip_delete_w'), icon: 'fa-trash-can', for_dir: true, for_file: true}
-                ], [
-                    () => clickToPathDuo(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id),
-                    () => run_command().rename(this.getAttribute('data-path')),
-                    () => download('content/blob.php?p=' + encodeURIComponent(this.getAttribute('data-path')), '<?= $name ?>'),
-                    () => openFileDetail(this.getAttribute('data-path')),
-                    () => run_command().delete([this.getAttribute('data-path')])
-                ], this.getAttribute('data-isdir'))" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $liUniID ?>" data-path="<?= addslashes($item) ?>" data-isdir="<?= is_dir($item) ?>" data-href="<?= $file_manager->get_current_url($item, true) ?>">
+                <?php if ($item !== $main_path["file_manager"]) { ?>
+                    <?php
+                    $liUniID = uniqid();
+                    $name = basename($item);
+                    ?>
+                    <li title="<?= $name . ((strlen(trim($search)) > 0 and !$isGrid) ? " ($item)" : "") ?>" draggable="true" oncontextmenu="if ('vibrate' in navigator) navigator.vibrate(200); popup_window([
+                            {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square', for_dir: true, for_file: true},
+                            {name: getStringBy('tooltip_rename_w'), icon: 'fa-pen', for_dir: true, for_file: true},
+                            {name: getStringBy('tooltip_download_w'), icon: 'fa-download', for_dir: false, for_file: true},
+                            {name: getStringBy('tooltip_details_w'), icon: 'fa-info-circle', for_dir: true, for_file: true},
+                            {name: getStringBy('tooltip_delete_w'), icon: 'fa-trash-can', for_dir: true, for_file: true}
+                            ], [
+                            () => clickToPathDuo(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id),
+                            () => run_command().rename(this.getAttribute('data-path')),
+                            () => download('content/blob.php?p=' + encodeURIComponent(this.getAttribute('data-path')), '<?= $name ?>'),
+                            () => openFileDetail(this.getAttribute('data-path')),
+                            () => run_command().delete([this.getAttribute('data-path')])
+                            ], this.getAttribute('data-isdir'))" ondragstart="drag().start()" class="item-fm" ondragend="drag().end()" ondrag="drag().live()" ondragenter="drag().enter()" ondragleave="drag().leave()" ondragover="drag().over()" ondrop="drag().drop()" onclick="clickToPath(this.getAttribute('data-path'), this.getAttribute('data-isdir'), this.id)" id="item-file-manager-<?= $liUniID ?>" data-path="<?= addslashes($item) ?>" data-isdir="<?= is_dir($item) ?>" data-href="<?= $file_manager->get_current_url($item, true) ?>">
                     <span class="first">
                         <span class="image-preview">
                             <?php $is_preview = (explode('/', $file_manager->get_mime_type($item))[0] === 'image' and $settings['list_image_preview'] and $privileges['view_file']); ?>
@@ -144,7 +145,7 @@ if (strlen(trim($search)) > 0) {
                             <?php } ?>
                         </span>
                     </span>
-                    <span class="other">
+                        <span class="other">
                         <?php if (is_dir($item)) { ?>
                             <?php
                             $count_dirs = sizeof($file_manager->get_dirs($item));
@@ -165,22 +166,23 @@ if (strlen(trim($search)) > 0) {
                                 <span class="count"><?= str_get_string("message_dir_empty_short") ?></span>
                             <?php } ?>
                         <?php } ?>
-                        <?php if (is_file($item)) { ?>
-                            <?php
-                            $array_units_size = array(
-                                str_get_string("text_size_b"),
-                                str_get_string("text_size_kb"),
-                                str_get_string("text_size_mb"),
-                                str_get_string("text_size_gb"),
-                                str_get_string("text_size_tb")
-                            );
-                            ?>
-                            <span class="count">
+                            <?php if (is_file($item)) { ?>
+                                <?php
+                                $array_units_size = array(
+                                    str_get_string("text_size_b"),
+                                    str_get_string("text_size_kb"),
+                                    str_get_string("text_size_mb"),
+                                    str_get_string("text_size_gb"),
+                                    str_get_string("text_size_tb")
+                                );
+                                ?>
+                                <span class="count">
                                 <?= $file_manager->format_size($file_manager->get_file_size($item), $array_units_size) ?>
                             </span>
-                        <?php } ?>
+                            <?php } ?>
                     </span>
-                </li>
+                    </li>
+                <?php } ?>
             <?php } ?>
         <?php } else { ?>
             <h5 class="message" oncontextmenu="document.getElementById('action-nav-create-fd').click(); return false;"><?= strlen(trim($search)) > 0 ? str_get_string("message_search_no_result") : str_get_string("message_dir_empty") ?></h5>

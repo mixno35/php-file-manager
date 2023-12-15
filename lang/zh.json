@@ -23,7 +23,7 @@
   "text_enter_a_name_dir": "输入目录名称",
   "text_enter_a_name_file": "输入文件名称",
   "text_file_not_exists": "该文件不存在。",
-  "text_unknown_type_file": "未知文件类型",
+  "text_unknown_type_file": "不支持的文件类型",
   "text_privileges_forbidden": "禁止",
   "text_access_denied": "拒绝访问",
   "text_media_unknown": "未知",
@@ -80,6 +80,9 @@
   "tooltip_upload_content": "上传",
   "tooltip_logout": "退出",
   "tooltip_download_archive": "下载为存档",
+  "tooltip_choose_action": "选择操作...",
+  "tooltip_copy_type_1": "复制并粘贴",
+  "tooltip_copy_type_2": "剪切并粘贴",
 
   "title_information": "信息",
 

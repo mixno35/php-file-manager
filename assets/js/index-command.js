@@ -1,3 +1,7 @@
+const MOVE_TYPE_NONE = 0,
+    MOVE_TYPE_COPY_PASTE = 1,
+    MOVE_TYPE_CUT_PASTE = 2;
+
 const run_command = () => {
     /**
      * Это обработчик всех команд, через него проходят все команды перед их выполнением. Можно конечно напрямую, но зачем изобретать велосипед...
@@ -45,14 +49,37 @@ const run_command = () => {
                 }
             }
         },
-        move: (object, path) => {
+        move: (object, path, type = MOVE_TYPE_NONE) => {
             /**
              * Object object - что перемещаем
              * String path - куда перемещаем
              */
             if (!Array.isArray(object)) return toast().show(getStringBy("message_object_invalid"));
 
-            toast().show(object + " перемещено в " + path);
+            if (type === MOVE_TYPE_NONE) {
+                toast().show(getStringBy("tooltip_choose_action"));
+
+                return popup_window([
+                    {name: getStringBy("tooltip_copy_type_1"), for_dir: true, for_file: true},
+                    {name: getStringBy("tooltip_copy_type_2"), for_dir: true, for_file: true}
+                ], [
+                    () => run_command().move(object, path, MOVE_TYPE_COPY_PASTE),
+                    () => run_command().move(object, path, MOVE_TYPE_CUT_PASTE)
+                ]);
+            }
+
+            let path_object = [];
+
+            object.forEach((item) => { path_object.push(extractFileName(removeExtraSlashes(item))) });
+
+            if (confirm(getStringBy("message_are_move", [getStringBy("tooltip_copy_type_" + type).toLowerCase(), path_object.join(", "), extractFileName(removeExtraSlashes(path))]))) {
+                const form_data = new FormData();
+                form_data.append("object", path_object.join(", "));
+                form_data.append("type", type);
+                form_data.append("path", path);
+
+                command(COMMAND_MOVE, form_data);
+            }
         },
         create: (path) => {
             return {

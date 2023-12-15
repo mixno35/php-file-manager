@@ -6,6 +6,7 @@
     "rename": true,
     "remove": true,
     "upload": true,
+    "move": true,
     "edit": true
   }
 }

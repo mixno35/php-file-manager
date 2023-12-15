@@ -81,7 +81,7 @@ function clickToPathDuo(_path = "", _is_dir = false, _element_id = null) {
     } else window.open("view.php?p=" + encodeURIComponent(_path), "_blank");
 }
 
-function updateSelectPathsContainer() {
+function updateSelectPathsContainer(clear = false) {
     const isSelected = select_path().length() > 0;
     const action_select_all = document.getElementById("menu-selected-select-all");
 
@@ -108,6 +108,10 @@ function updateSelectPathsContainer() {
         action_select_all.childNodes[1].classList.add("fa-square-check");
         action_select_all.childNodes[1].classList.remove("fa-square-minus");
     }
+
+    if (clear) document.querySelectorAll("ul#file-manager-list li.item-fm.selected").forEach((element) => {
+            element.classList.remove("selected");
+        });
 
     if (isSelected) document.getElementById("main-file-manager").classList.add("selected");
     else document.getElementById("main-file-manager").classList.remove("selected");
@@ -143,6 +147,8 @@ function loadMainFileManager(_path = "", _update = false) {
             document.getElementById("main-file-manager").innerHTML = result;
 
             console.log(document.querySelectorAll("ul#file-manager-list li.item-fm"));
+
+            if (_update) url_param().set("p", _path);
 
             select_path().clear();
             setTimeout(() => { updateSelectPathsContainer() }, 100);

@@ -3,7 +3,8 @@ const
     COMMAND_CREATE_DIRECTORY = "create-dir",
     COMMAND_CREATE_RENAME = "rename",
     COMMAND_CREATE_REMOVE = "remove",
-    COMMAND_UPLOAD_FILE = "upload-file";
+    COMMAND_UPLOAD_FILE = "upload-file",
+    COMMAND_MOVE = "move";
 
 let element_popup_dom = null;
 let element_popup_sticky = null;

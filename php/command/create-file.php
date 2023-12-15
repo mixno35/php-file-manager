@@ -42,32 +42,22 @@ if (!is_readable($path)) {
     exit();
 }
 
-$f_path = $path . DIRECTORY_SEPARATOR . $name;
-
-if (file_exists($f_path)) {
-    echo json_encode([
-        "type" => "error",
-        "message_id" => "api_create_file_file_exist"
-    ], 128);
-
-    exit();
-}
-
-if (is_dir($f_path)) {
-    echo json_encode([
-        "type" => "error",
-        "message_id" => "api_create_dir_dir_exist"
-    ], 128);
-
-    exit();
-}
-
 if ($path_manager->chmod_detect($path)) {
-    if (file_put_contents($f_path, "Simple text.", LOCK_EX) !== false) {
+    $array = strstr($name, ",") ? explode(",", $name) : array($name);
+    $result = 0;
+
+    foreach ($array as $item) {
+        $f_path = $path . DIRECTORY_SEPARATOR . trim($item);
+
+        if (!file_exists($f_path) or !is_dir($f_path))
+            if (file_put_contents($f_path, "Simple text.", LOCK_EX) !== false) $result++;
+    }
+
+    if ($result > 0) {
         echo json_encode([
             "type" => "success",
             "message_id" => "api_create_file_success",
-            "return" => [$name]
+            "return" => [$name, $result]
         ], 128);
     } else {
         echo json_encode([

@@ -23,7 +23,7 @@
   "text_enter_a_name_dir": "डायरेक्टरी के लिए नाम दर्ज करें",
   "text_enter_a_name_file": "फ़ाइल के लिए नाम दर्ज करें",
   "text_file_not_exists": "इस फ़ाइल का अस्तित्व नहीं है।",
-  "text_unknown_type_file": "अज्ञात फ़ाइल प्रकार",
+  "text_unknown_type_file": "समर्थित नहीं है फ़ाइल का प्रकार",
   "text_privileges_forbidden": "मना किया गया है",
   "text_access_denied": "पहुंच निरस्त की गई है",
   "text_media_unknown": "अज्ञात",
@@ -81,6 +81,9 @@
   "tooltip_upload_content": "अपलोड करें",
   "tooltip_logout": "लॉगआउट",
   "tooltip_download_archive": "आर्काइव के रूप में डाउनलोड करें",
+  "tooltip_choose_action": "क्रिया चुनें...",
+  "tooltip_copy_type_1": "कॉपी और पेस्ट करें",
+  "tooltip_copy_type_2": "कट और पेस्ट करें",
 
   "title_information": "जानकारी",
 

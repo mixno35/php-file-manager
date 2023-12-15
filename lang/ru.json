@@ -23,7 +23,7 @@
   "text_enter_a_name_dir": "Введите имя для директории",
   "text_enter_a_name_file": "Введите имя для файла",
   "text_file_not_exists": "Этого файла не существует.",
-  "text_unknown_type_file": "Неизвестный тип файла",
+  "text_unknown_type_file": "Неподдерживаемый тип файла",
   "text_privileges_forbidden": "Запрещено",
   "text_access_denied": "Нет разрешения",
   "text_media_unknown": "Неизвестно",
@@ -81,6 +81,9 @@
   "tooltip_upload_content": "Загрузить",
   "tooltip_logout": "Выйти",
   "tooltip_download_archive": "Скачать архивом",
+  "tooltip_choose_action": "Выберите действие...",
+  "tooltip_copy_type_1": "Копировать и вставить",
+  "tooltip_copy_type_2": "Вырезать и вставить",
 
   "title_information": "Информация",
 
@@ -114,6 +117,7 @@
   "message_search_no_result": "Ничего не удалось найти",
 
   "message_are_remove": "Вы действительно хотите безвозвратно удалить \"%1s\"?",
+  "message_are_move": "Вы действительно хотите %1s \"%2s\" в папку \"%3s\"?",
 
   "message_file_detail_limit_window": "Вы открыли максимум окон с информацией, закройте активное окно, чтобы открыть новое.",
 

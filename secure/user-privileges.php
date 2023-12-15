@@ -25,5 +25,6 @@ $privileges = array(
     "rename" => $array_privileges[$up_login]["rename"] ?? false, // Переименование файлов и папок
     "remove" => $array_privileges[$up_login]["remove"] ?? false, // Удаление файлов и папок
     "upload" => $array_privileges[$up_login]["upload"] ?? false, // Загрузка файлов
+    "move" => $array_privileges[$up_login]["move"] ?? false, // Перемещение файлов и папок
     "edit" => $array_privileges[$up_login]["edit"] ?? false // Сохранение, редактирование файлов и редактирование папок
 );

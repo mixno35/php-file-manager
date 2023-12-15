@@ -66,6 +66,8 @@ include_once dirname(__FILE__, 2) . "/class/FileManager.php";
 
 $file_manager = new FileManager();
 
+echo "Building archive $archiveName...";
+
 $zip = new ZipStream(
     OperationMode::NORMAL,
     "StormGuardian Files | $archiveName | by. ZipStream",

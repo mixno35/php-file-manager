@@ -74,6 +74,8 @@ switch ($command) {
         include_once dirname(__FILE__) . "/command/create-file.php"; break;
     case "upload-file":
         include_once dirname(__FILE__) . "/command/upload-file.php"; break;
+    case "move":
+        include_once dirname(__FILE__) . "/command/move.php"; break;
     default:
         echo json_encode(["type" => "error", "message_id" => "api_command_unknown"], 128);
 }

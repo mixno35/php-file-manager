@@ -22,7 +22,7 @@
   "text_enter_a_name_dir": "Geben Sie einen Namen für das Verzeichnis ein",
   "text_enter_a_name_file": "Geben Sie einen Namen für die Datei ein",
   "text_file_not_exists": "Diese Datei existiert nicht.",
-  "text_unknown_type_file": "Unbekannter Dateityp",
+  "text_unknown_type_file": "Nicht unterstützter Dateityp",
   "text_privileges_forbidden": "Verboten",
   "text_access_denied": "Zugriff verweigert",
   "text_media_unknown": "Unbekannt",
@@ -38,7 +38,6 @@
   "text_non_streaming": "Nicht Streaming",
   "text_login_incorrect_authorization": "Nicht unterstütztes Login-Format",
   "text_incorrect_authorization": "Ungültige Autorisierung",
-
 
   "tooltip_close": "Schließen",
   "tooltip_create_dir": "Neues Verzeichnis erstellen (Strg + Alt + D)",
@@ -75,6 +74,9 @@
   "tooltip_upload_content": "Hochladen",
   "tooltip_logout": "Abmelden",
   "tooltip_download_archive": "Als Archiv herunterladen",
+  "tooltip_choose_action": "Aktion auswählen...",
+  "tooltip_copy_type_1": "Kopieren und einfügen",
+  "tooltip_copy_type_2": "Ausschneiden und einfügen",
 
   "title_information": "Information",
 
