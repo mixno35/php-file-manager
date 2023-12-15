@@ -119,7 +119,7 @@ if (strlen(trim($search)) > 0) {
                 $liUniID = uniqid();
                 $name = basename($item);
                 ?>
-                <li title="<?= $name ?>" draggable="true" oncontextmenu="if ('vibrate' in navigator) navigator.vibrate(200); popup_window([
+                <li title="<?= $name . ((strlen(trim($search)) > 0 and !$isGrid) ? " ($item)" : "") ?>" draggable="true" oncontextmenu="if ('vibrate' in navigator) navigator.vibrate(200); popup_window([
                     {name: getStringBy('tooltip_open_view_w'), icon: 'fa-arrow-up-right-from-square', for_dir: true, for_file: true},
                     {name: getStringBy('tooltip_rename_w'), icon: 'fa-pen', for_dir: true, for_file: true},
                     {name: getStringBy('tooltip_download_w'), icon: 'fa-download', for_dir: false, for_file: true},
@@ -139,6 +139,9 @@ if (strlen(trim($search)) > 0) {
                         </span>
                         <span class="name">
                             <?= $name ?>
+                            <?php if (strlen(trim($search)) > 0 and !$isGrid) { ?>
+                                <span class="path"><?= $item ?></span>
+                            <?php } ?>
                         </span>
                     </span>
                     <span class="other">

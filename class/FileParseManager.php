@@ -2,7 +2,7 @@
 class FileParseManager {
 
     public function get_icon(string $path, bool $preview = false, int $size = 0):string {
-        $imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"]; // Изображение
+        $imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg", "ico"]; // Изображение
         $textCodeExtensions = ["html", "php", "js", "py", "xml", "svg"]; // Код
         $textExtensions = ["txt", "csv", "log", "json", "css", "scss", "md", "htaccess", "less"]; // Текст
         $videoExtensions = ["mp4", "3gp", "wav"]; // Видео
@@ -49,7 +49,7 @@ class FileParseManager {
                 $fileContents = fread($file, filesize($path));
                 fclose($file);
 
-                if ($size > 0) {
+                if ($size > 0 and $format !== "svg" and $format !== "ico") {
                     $image = imagecreatefromstring($fileContents);
                     $originalWidth = imagesx($image);
                     $originalHeight = imagesy($image);
