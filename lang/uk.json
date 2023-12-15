@@ -8,6 +8,7 @@
   "text_php_server": "Сервер: %1s",
   "text_php_total_size": "Розмір: %1s",
   "text_php_os": "ОС: %1s",
+  "text_php_memory": "ОЗУ:&nbsp;<span id=\"php-memory\">0</span>",
   "text_about_file": "Про файл",
   "text_about_dir": "Про директорію",
   "text_about_file_name": "Ім'я файлу",
@@ -31,6 +32,7 @@
   "text_server_details": "Інформація про сервер",
   "text_default_list_type": "Тип списку за замовчуванням",
   "text_language": "Мова",
+  "text_blob_streaming": "Метод передачі файлів",
   "text_theme": "Тема",
   "text_size_b": "Б",
   "text_size_kb": "КБ",
@@ -39,6 +41,11 @@
   "text_size_tb": "ТБ",
   "text_error": "Помилка",
   "text_success": "Успіх",
+  "text_non_streaming": "Не потоковий",
+  "text_streaming": "Потоковий",
+  "text_login_incorrect_authorization": "Непідтримуваний формат логіна",
+  "text_incorrect_authorization": "Недійсна авторизація",
+
 
   "tooltip_close": "Закрити",
   "tooltip_create_dir": "Створити нову директорію (Ctrl + Alt + D)",
@@ -120,6 +127,7 @@
   "message_list_preview_image": "Переглядайте зображення прямо в списку. Налаштування може вимагати більше часу для завантаження списку",
   "message_server_details": "Переглядайте коротку інформацію про сервер на головній сторінці",
   "message_default_list_type": "Виберіть, як буде відображатися список за замовчуванням",
+  "message_blob_streaming": "Метод передачі файлу в HTTP-відповіді",
 
   "api_unknown_error": "Невідома помилка.",
   "api_command_unknown": "Невідома команда.",

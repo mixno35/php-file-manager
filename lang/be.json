@@ -32,6 +32,7 @@
   "text_default_list_type": "Тып спісу па змаўчанні",
   "text_language": "Мова",
   "text_theme": "Тэма",
+  "text_blob_streaming": "Метад перадачы файлаў",
   "text_size_b": "Б",
   "text_size_kb": "КБ",
   "text_size_mb": "МБ",
@@ -39,6 +40,10 @@
   "text_size_tb": "ТБ",
   "text_error": "Памылка",
   "text_success": "Паспяхова",
+  "text_non_streaming": "Непатокавы",
+  "text_streaming": "Патокавы",
+  "text_login_incorrect_authorization": "Непадтрымлівы фармат лагіна",
+  "text_incorrect_authorization": "Нядзейснай аўтарызацыі",
 
   "tooltip_close": "Закрыць",
   "tooltip_create_dir": "Стварыць новы каталёг (Ctrl + Alt + D)",
@@ -120,6 +125,7 @@
   "message_list_preview_image": "Праглядзайце малюнкі проста ў спісе. Налада можа патрабаваць больш часу для загрузкі спісу",
   "message_server_details": "Праглядзайце кароткую інфармацыю пра сервер на галоўнай старонцы",
   "message_default_list_type": "Выберыце, як будзе адлюстроўвацца спіс па змаўчанні",
+  "message_blob_streaming": "Метад перадачы файла ў HTTP-адказе",
 
   "api_unknown_error": "Невядомая памылка.",
   "api_command_unknown": "Невядомая каманда.",

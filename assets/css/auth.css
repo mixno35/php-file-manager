@@ -112,3 +112,25 @@ form h4 {
     user-select: none;
     pointer-events: none;
 }
+
+p.error-auth {
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: crimson;
+
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+
+    width: 100%;
+    height: fit-content;
+
+    padding: 12px 0;
+
+    transition: transform .2s;
+}

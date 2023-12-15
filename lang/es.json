@@ -29,8 +29,13 @@
   "text_server_details": "Detalles del servidor",
   "text_default_list_type": "Tipo de lista predeterminado",
   "text_language": "Idioma",
+  "text_blob_streaming": "Método de transferencia de archivos",
   "text_theme": "Tema",
   "text_success": "Éxito",
+  "text_non_streaming": "No en streaming",
+  "text_streaming": "En streaming",
+  "text_login_incorrect_authorization": "Formato de inicio de sesión no compatible",
+  "text_incorrect_authorization": "Autorización no válida",
 
   "tooltip_download_archive": "Descargar como archivo",
   "tooltip_close": "Cerrar",
@@ -112,6 +117,7 @@
   "message_list_preview_image": "Vea las imágenes directamente en la lista. La configuración puede tardar más tiempo en cargar la lista.",
   "message_server_details": "Vea información breve sobre el servidor en la página de inicio",
   "message_default_list_type": "Seleccione cómo se mostrará la lista de forma predeterminada",
+  "message_blob_streaming": "Método de transferencia de archivos en la respuesta HTTP",
 
   "api_unknown_error": "Error desconocido.",
   "api_command_unknown": "Comando desconocido.",

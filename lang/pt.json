@@ -30,8 +30,13 @@
   "text_default_list_type": "Tipo de lista padrão",
   "text_language": "Idioma",
   "text_theme": "Tema",
+  "text_blob_streaming": "Método de transferência de arquivos",
   "text_error": "Erro",
   "text_success": "Sucesso",
+  "text_non_streaming": "Não em streaming",
+  "text_streaming": "Em streaming",
+  "text_login_incorrect_authorization": "Formato de login não suportado",
+  "text_incorrect_authorization": "Autorização inválida",
 
   "tooltip_close": "Fechar",
   "tooltip_create_dir": "Criar novo diretório (Ctrl + Alt + D)",
@@ -113,6 +118,7 @@
   "message_list_preview_image": "Veja as imagens diretamente na lista. A configuração pode levar mais tempo para carregar a lista.",
   "message_server_details": "Veja informações breves sobre o servidor na página inicial",
   "message_default_list_type": "Selecione como a lista deve ser exibida por padrão",
+  "message_blob_streaming": "Método de transferência de arquivo na resposta HTTP",
 
   "api_unknown_error": "Erro desconhecido.",
   "api_command_unknown": "Comando desconhecido.",

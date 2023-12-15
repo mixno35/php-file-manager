@@ -28,9 +28,14 @@
   "text_server_details": "サーバーの詳細",
   "text_default_list_type": "デフォルトのリストの種類",
   "text_language": "言語",
+  "text_blob_streaming": "ファイル転送メソッド",
   "text_theme": "テーマ",
   "text_error": "エラー",
   "text_success": "成功",
+  "text_non_streaming": "非ストリーミング",
+  "text_streaming": "ストリーミング",
+  "text_login_incorrect_authorization": "サポートされていないログイン形式",
+  "text_incorrect_authorization": "無効な認証",
 
   "tooltip_close": "閉じる",
   "tooltip_create_dir": "新しいディレクトリを作成する（Ctrl + Alt + D）",
@@ -112,6 +117,7 @@
   "message_list_preview_image": "リスト内で画像を直接プレビューします。設定にはリストの読み込みに時間がかかることがあります。",
   "message_server_details": "ホームページでサーバーの簡単な情報を確認できます",
   "message_default_list_type": "デフォルトのリスト表示方法を選択してください",
+  "message_blob_streaming": "HTTPレスポンスでのファイル転送メソッド",
 
   "api_unknown_error": "未知のエラーです。",
   "api_command_unknown": "未知のコマンドです。",

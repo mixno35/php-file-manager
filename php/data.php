@@ -29,6 +29,7 @@ $settings = array(
     "list_image_preview" => boolval($_COOKIE["lip_$uni_id"] ?? false),
     "server_details" => boolval($_COOKIE["sd_$uni_id"] ?? false),
     "default_list_type" => strval($_COOKIE["dlt_$uni_id"] ?? "linear"),
+    "blob_streaming" => strval($_COOKIE["bs_$uni_id"] ?? "non-streaming"),
     "language" => strval($_COOKIE["lang"] ?? $language_id),
     "theme" => strval($_COOKIE["theme"] ?? "auto")
 );

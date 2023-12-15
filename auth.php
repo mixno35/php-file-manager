@@ -3,6 +3,8 @@ include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
 
 $resource_v = time(); // Устанавливаем версию для ресурсов
+
+$mess = trim(strval($_GET["m"] ?? ""));
 ?>
 
 <link rel="stylesheet" type="text/css" href="assets/css/system/root.css?v=<?= $resource_v ?>">
@@ -11,6 +13,16 @@ $resource_v = time(); // Устанавливаем версию для ресу
 <meta name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<?php if (strlen($mess) > 0) { ?>
+    <p class="error-auth"><?= str_get_string($mess) ?></p>
+
+    <script>
+        setTimeout(() => {
+            document.querySelector("p.error-auth").style.transform = "translateY(-100%)";
+        }, 4000);
+    </script>
+<?php } ?>
 
 <form id="form-auth" method="post" action="secure/auth.php" target="_top" autocomplete="off" autocapitalize="off">
     <h1>

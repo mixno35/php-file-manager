@@ -31,9 +31,14 @@
   "text_server_details": "Serverinformationen",
   "text_default_list_type": "Standardlistenansicht",
   "text_language": "Sprache",
+  "text_blob_streaming": "Dateiübertragungsmethode",
   "text_theme": "Thema",
   "text_error": "Fehler",
   "text_success": "Erfolg",
+  "text_non_streaming": "Nicht Streaming",
+  "text_login_incorrect_authorization": "Nicht unterstütztes Login-Format",
+  "text_incorrect_authorization": "Ungültige Autorisierung",
+
 
   "tooltip_close": "Schließen",
   "tooltip_create_dir": "Neues Verzeichnis erstellen (Strg + Alt + D)",
@@ -115,6 +120,7 @@
   "message_list_preview_image": "Betrachten Sie Bilder direkt in der Liste. Die Anpassung kann beim Laden der Liste länger dauern.",
   "message_server_details": "Betrachten Sie kurz Informationen über den Server auf der Startseite",
   "message_default_list_type": "Wählen Sie aus, wie die Liste standardmäßig angezeigt werden soll",
+  "message_blob_streaming": "Dateiübertragungsmethode in HTTP-Antwort",
 
   "api_unknown_error": "Unbekannter Fehler.",
   "api_command_unknown": "Unbekannter Befehl.",

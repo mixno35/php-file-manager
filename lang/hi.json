@@ -33,6 +33,7 @@
   "text_default_list_type": "डिफ़ॉल्ट सूची प्रकार",
   "text_language": "भाषा",
   "text_theme": "थीम",
+  "text_blob_streaming": "फ़ाइल स्ट्रीमिंग का तरीका",
   "text_size_b": "बी",
   "text_size_kb": "केबी",
   "text_size_mb": "एमबी",
@@ -40,6 +41,10 @@
   "text_size_tb": "टेराबाइट",
   "text_error": "त्रुटि",
   "text_success": "सफलता",
+  "text_non_streaming": "नॉन-स्ट्रीमिंग",
+  "text_streaming": "स्ट्रीमिंग",
+  "text_login_incorrect_authorization": "असमर्थित लॉगिन प्रारूप",
+  "text_incorrect_authorization": "अवैध प्रमाणीकरण",
 
   "tooltip_close": "बंद करें",
   "tooltip_create_dir": "नई डायरेक्टरी बनाएं (Ctrl + Alt + D)",
@@ -120,6 +125,7 @@
   "message_welcome_back_user": "नमस्ते, <b>%1s</b>",
   "message_list_preview_image": "सूची में छवियों का सीधा पूर्वावलोकन करें। सूची लोड करने में अधिक समय लग सकता है।",
   "message_server_details": "मुख्य पृष्ठ पर सर्वर की संक्षेपित जानकारी देखें",
+  "message_blob_streaming": "HTTP जवाब में फ़ाइल स्ट्रीमिंग का तरीका",
 
   "message_default_list_type": "डिफ़ॉल्ट सूची प्रदर्शन प्रकार का चयन करें",
 

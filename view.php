@@ -1,7 +1,7 @@
 <?php
 include_once "secure/session.php"; // Проверка на авторизацию
 
-global $language_tag, $content, $login, $main_path, $privileges, $server_encoding;
+global $language_tag, $content, $login, $main_path, $privileges, $server_encoding, $settings;
 
 include_once "lang/lang.php"; // Загружаем языковой пакет
 include_once "php/data.php"; // Загружаем системные настройки
@@ -17,9 +17,9 @@ $resource_v = time(); // Устанавливаем версию для ресу
 
 $path = $_GET["p"] ?? "";
 
-if (!file_exists($path)) {
-    die(str_get_string("text_file_not_exists"));
-}
+if (!file_exists($path)) die(str_get_string("text_file_not_exists"));
+
+$type_streaming = ($settings["blob_streaming"] === "yes-streaming") ? "stream" : "";
 
 $mime_type = $file_manager->get_mime_type($path);
 $file_type = explode("/", $mime_type)[0];
@@ -94,7 +94,7 @@ function get_mode_codemirror(string $path = ""):string {
         ?>
         <div class="media-preview" oncontextmenu="return false;">
             <<?= $file_type ?> id="media-player">
-                <source src="content/blob.php?p=<?= rawurlencode($path) ?>">
+                <source src="content/blob.php?p=<?= rawurlencode($path) ?>&type=<?= $type_streaming ?>">
             </<?= $file_type ?>>
             <?php if ($file_type === "audio") { ?>
                 <?php
@@ -364,7 +364,7 @@ function get_mode_codemirror(string $path = ""):string {
         <style>
             @font-face {
                 font-family: <?= $font_name ?>;
-                src: url("content/blob.php?p=<?= rawurlencode($path) ?>") format("<?= get_font_format($path) ?>");
+                src: url("content/blob.php?p=<?= rawurlencode($path) ?>&type=<?= $type_streaming ?>") format("<?= get_font_format($path) ?>");
             }
 
             .font {
@@ -617,8 +617,10 @@ function get_mode_codemirror(string $path = ""):string {
                     else element.classList.remove("active");
                 });
 
+                const type_streaming = "&type=<?= $type_streaming ?>";
+
                 image.style.opacity = "0";
-                image.src = "content/blob.php?p=" + encodeURIComponent(path);
+                image.src = "content/blob.php?p=" + encodeURIComponent(path) + type_streaming;
 
                 image.addEventListener("load", () => {
                     scale = 1;
