@@ -43,8 +43,20 @@ if (!is_readable($path)) {
 }
 
 if ($path_manager->chmod_detect($path)) {
-    $array = strstr($name, ",") ? explode(",", $name) : array($name);
+    $array = strstr($name, ",") ? explode(",", $name) : [$name];
     $result = 0;
+
+    foreach ($array as $item) {
+        preg_match("/\[(.*?)]/", $item, $matches);
+
+        if (intval($matches[1] ?? 0) > 0) {
+            $array = array_diff($array, array($item));
+
+            for ($i = 1; $i <= $matches[1]; $i++) {
+                $array[] = str_replace($matches[0], $i, $item);
+            }
+        }
+    }
 
     foreach ($array as $item) {
         $f_path = $path . DIRECTORY_SEPARATOR . trim($item);
