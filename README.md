@@ -40,6 +40,10 @@ There will be functions that are in development here (It is being developed - :g
 
 [Suggest an idea](https://t.me/mixno35)
 
+### Changes for 15.12.2023:
+- Added a mobile version for search.
+- The file and folder allocation system has been changed.
+
 ### Changes for 09.12.2023 - 10.12.2023:
 - Now you can upload files.
 - Improved security.
@@ -50,10 +54,3 @@ There will be functions that are in development here (It is being developed - :g
 ### Changes for 08.12.2023:
 - Fixed known bugs.
 - New languages have been added, such as: German, Spanish, French, Portuguese, Chinese (Simplified), Japanese, Hindi.
-
-### Changes for 07.12.2023:
-- Improved security when interacting with teams (backend functions) and redesigned the authorization verification system.
-- Two new languages have been added: Russian and Belarusian.
-- Improved interaction with mobile devices.
-- Fixed some errors in the interface display.
-- User privileges have been improved; they now affect the availability of features.
