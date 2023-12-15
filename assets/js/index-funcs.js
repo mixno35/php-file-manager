@@ -82,12 +82,11 @@ function clickToPathDuo(_path = "", _is_dir = false, _element_id = null) {
 }
 
 function updateSelectPathsContainer() {
-    // console.log(selectPaths);
-    const isSelected = selectPaths.length > 0;
+    const isSelected = select_path().length() > 0;
     const action_select_all = document.getElementById("menu-selected-select-all");
 
     try {
-        document.getElementById("text-selected-count").innerText = getStringBy("text_selected_count", [selectPaths.length]);
+        document.getElementById("text-selected-count").innerText = getStringBy("text_selected_count", [select_path().length()]);
     } catch (exx) {}
 
     document.getElementById("menu-selected-fd").style.display = isSelected ? "flex" : "none";
@@ -95,10 +94,10 @@ function updateSelectPathsContainer() {
     const elements_single = document.querySelectorAll("div#menu-selected-fd ul.list-menu-selected li[data-type='single']");
 
     for(let i = 0; i < elements_single.length; i++) {
-        elements_single[i].style.display = (selectPaths.length > 1) ? "none" : "flex";
+        elements_single[i].style.display = (select_path().length() > 1) ? "none" : "flex";
     }
 
-    if (selectPaths.length === count_file_manager_items) {
+    if (select_path().length() === document.querySelectorAll("ul#file-manager-list li.item-fm").length) {
         action_select_all.setAttribute("title", getStringBy("tooltip_unselect"));
         action_select_all.childNodes[3].innerText = getStringBy("tooltip_unselect");
         action_select_all.childNodes[1].classList.remove("fa-square-check");
@@ -114,25 +113,16 @@ function updateSelectPathsContainer() {
     else document.getElementById("main-file-manager").classList.remove("selected");
 }
 
-function selectPathSolo(_path, _element_id) {
-    const index = selectPaths.indexOf(_path);
-    if (index === -1) {
-        add_selectPaths(_path);
-        document.getElementById(_element_id).classList.add("selected");
+function selectPathSolo(path, element_id) {
+    if (!select_path(path).contains()) {
+        select_path(path, () => {
+            document.getElementById(element_id).classList.add("selected");
+        }).add();
     } else {
-        remove_selectPaths(_path);
-        document.getElementById(_element_id).classList.remove("selected");
-    }
-    setTimeout(() => { updateSelectPathsContainer() }, 100);
-}
-
-function add_selectPaths(path) {
-    const index = selectPaths.indexOf(path);
-    if (index === -1) selectPaths.push(path);
-}
-function remove_selectPaths(path) {
-    const index = selectPaths.indexOf(path);
-    if (index !== -1) selectPaths.splice(index, 1);
+        select_path(path, () => {
+            document.getElementById(element_id).classList.remove("selected");
+        }).remove();
+    } setTimeout(() => { updateSelectPathsContainer() }, 100);
 }
 
 function loadMainFileManager(_path = "", _update = false) {
@@ -149,14 +139,12 @@ function loadMainFileManager(_path = "", _update = false) {
         success: function (result) {
             progress();
 
-            // openFileDetail(_path);
-
             openedDirectory = _path;
             document.getElementById("main-file-manager").innerHTML = result;
 
-            if (_update) url_param().set("p", _path);
+            console.log(document.querySelectorAll("ul#file-manager-list li.item-fm"));
 
-            selectPaths = [];
+            select_path().clear();
             setTimeout(() => { updateSelectPathsContainer() }, 100);
             setTimeout(() => {
                 count_file_manager_items = document.querySelectorAll("ul#file-manager-list li.item-fm").length;
@@ -236,7 +224,7 @@ function uploadNewFiles(object) {
 }
 function uploadNewFile(file) {
     // const url = window.URL.createObjectURL(file);
-    const blob = new Blob([file], { type: "application/octet-stream" });
+    // const blob = new Blob([file], { type: "application/octet-stream" });
     const formData = new FormData();
 
     formData.append("file", file);
@@ -297,4 +285,22 @@ function uploadNewFile(file) {
 
 function setSetting(name, value) {
     setCookie(name, value, 360);
+}
+
+const select_path = (path = openedDirectory, callback = () => {}) => {
+    const index = selectPaths.indexOf(path);
+
+    function runCallback() {
+        setTimeout(() => { if (callback !== null && typeof callback === "function") callback() },100)
+    }
+
+    return {
+        add: () => { if (index === -1) { selectPaths.push(path) } runCallback() },
+        remove: () => { if (index !== -1) { selectPaths.splice(index, 1) } runCallback() },
+        clear: () => { selectPaths = []; runCallback() },
+        contains: () => { return index !== -1 },
+        get: (key) => { return selectPaths[key] ?? null },
+        getAll: () => { return selectPaths },
+        length: () => { return selectPaths.length }
+    };
 }

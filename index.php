@@ -110,6 +110,7 @@ $array_units_size = array(
         <label class="search-container">
             <input type="search" id="main-search" value="<?= ($_GET['s'] ?? '') ?>" placeholder="<?= str_get_string('hint_search') ?>">
             <i class="fa-solid fa-magnifying-glass action-search"></i>
+            <i class="fa-solid fa-close action-search-close"></i>
         </label>
 
         <div class="container-user">
@@ -192,7 +193,7 @@ $array_units_size = array(
         let searchType = SEARCH_TYPE_GLOBAL; // SEARCH_TYPE_GLOBAL - искать везде, SEARCH_TYPE_LOCAL - искать в открытой папке, SEARCH_TYPE_LOCAL_PLUS - искать в открытой папке и вложенных папках
         let count_file_manager_items = 0;
         let clickCount = 0;
-        let selectPaths = [];
+        let selectPaths; selectPaths = [];
         let pathFileDetail = "";
 
         const upload_max_filesize = <?= intval(ini_get("upload_max_filesize") ?? 0) ?>;
@@ -201,24 +202,26 @@ $array_units_size = array(
 
     <?php if ($settings["server_details"]) { ?>
         <script>
-            const eventSourceMemory = new EventSource("secure/memory-info.php");
-            const totalPhpOSMemory = <?= getTotalMemory() ?>;
+            if (!isMobileDevice()) {
+                const eventSourceMemory = new EventSource("secure/memory-info.php");
+                const totalPhpOSMemory = <?= getTotalMemory() ?>;
 
-            const containerPhpMemory = document.getElementById("php-memory");
+                const containerPhpMemory = document.getElementById("php-memory");
 
-            eventSourceMemory.addEventListener("message", (event) => {
-                const data = JSON.parse(event.data);
-                const memoryUsage = data["memory_usage"];
-                const peakMemoryUsage = data["peak_usage"];
+                eventSourceMemory.addEventListener("message", (event) => {
+                    const data = JSON.parse(event.data);
+                    const memoryUsage = data["memory_usage"];
+                    const peakMemoryUsage = data["peak_usage"];
 
-                const generatedText = String(convertBytes(memoryUsage, unitsOBJ) + " (" + convertBytes(peakMemoryUsage, unitsOBJ) + ") / " + convertBytes(totalPhpOSMemory, unitsOBJ));
+                    const generatedText = String(convertBytes(memoryUsage, unitsOBJ) + " (" + convertBytes(peakMemoryUsage, unitsOBJ) + ") / " + convertBytes(totalPhpOSMemory, unitsOBJ));
 
-                if (containerPhpMemory.outerText !== generatedText) containerPhpMemory.innerText = generatedText;
-            });
+                    if (containerPhpMemory.outerText !== generatedText) containerPhpMemory.innerText = generatedText;
+                });
 
-            eventSourceMemory.addEventListener("error", (event) => {
-                console.error('Error occurred:', event);
-            });
+                eventSourceMemory.addEventListener("error", (event) => {
+                    console.error('Error occurred:', event);
+                });
+            } else document.querySelector(".details-manager").remove();
         </script>
     <?php } ?>
 

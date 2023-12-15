@@ -37,7 +37,7 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (ev
 document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.altKey && event.code === "KeyF") run_command().create(openedDirectory).file();
     if (event.ctrlKey && event.altKey && event.code === "KeyD") run_command().create(openedDirectory).dir();
-    if (event.ctrlKey && event.code === "Delete" && selectPaths.length > 0) run_command().delete(selectPaths);
+    if (event.ctrlKey && event.code === "Delete" && select_path().length() > 0) run_command().delete(select_path().getAll());
 });
 
 document.querySelector("input[type='search']#main-search").addEventListener("input", (event) => {
@@ -72,31 +72,49 @@ document.getElementById("menu-selected-open").addEventListener("click", () => {
     clickToPathDuo(container.getAttribute("data-path"), Boolean(Number(container.getAttribute("data-isdir"))), container.id);
 });
 document.getElementById("menu-selected-rename")
-    .addEventListener("click", () => { run_command().rename(selectPaths[0]) });
+    .addEventListener("click", () => { run_command().rename(select_path().get(0)) });
 document.getElementById("menu-selected-info")
-    .addEventListener("click", () => { openFileDetail(selectPaths[0]) });
+    .addEventListener("click", () => { openFileDetail(select_path().get(0)) });
 document.getElementById("menu-selected-delete")
-    .addEventListener("click", () => { run_command().delete(selectPaths) });
+    .addEventListener("click", () => { run_command().delete(select_path().getAll()) });
 try {
     document.getElementById("menu-selected-download-archive").addEventListener("click", () => {
-        window.open("content/archive-download.php?obj=" + encodeURIComponent(JSON.stringify(selectPaths)), "_blank");
+        window.open("content/archive-download.php?obj=" + encodeURIComponent(JSON.stringify(select_path().getAll())), "_blank");
     });
 } catch (e) { console.log(e) }
 document.getElementById("menu-selected-select-all").addEventListener("click", () => {
     const items = document.querySelectorAll("ul#file-manager-list li.item-fm");
-    if (items.length === selectPaths.length) {
+    if (items.length === select_path().length()) {
         items.forEach((element) => {
-            element.classList.remove("selected");
-            remove_selectPaths(element.getAttribute("data-path"));
+            select_path(element.getAttribute("data-path"), () => {
+                element.classList.remove("selected");
+            }).remove();
         });
     } else {
         items.forEach((element) => {
-            element.classList.add("selected");
-            add_selectPaths(element.getAttribute("data-path"));
+            select_path(element.getAttribute("data-path"), () => {
+                element.classList.add("selected");
+            }).add();
         });
     }
 
     setTimeout(updateSelectPathsContainer, 100)
+});
+
+document.querySelector(".action-search").addEventListener("click", () => {
+    document.querySelector(".search-container").classList.toggle("show");
+});
+document.querySelector(".action-search-close").addEventListener("click", () => {
+    const main_search = document.getElementById("main-search");
+
+    if (main_search.value.trim().length > 0) {
+        main_search.value = "";
+        url_param().delete("s");
+        updateMainFileManager();
+        return;
+    }
+
+    document.querySelector(".search-container").classList.toggle("show");
 });
 
 document.getElementById("action-directory-menu").addEventListener("click", () => {
