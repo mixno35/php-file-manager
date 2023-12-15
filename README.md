@@ -43,6 +43,7 @@ There will be functions that are in development here (It is being developed - :g
 ### Changes for 15.12.2023:
 - Added a mobile version for search.
 - The file and folder allocation system has been changed.
+- Multi file creation is available. In the file name field, specify several files separated by commas, for example: ```file_1.txt, file_2.txt``` or specify the number of files in square brackets, for example: ```file_[20].txt```.
 
 ### Changes for 09.12.2023 - 10.12.2023:
 - Now you can upload files.
