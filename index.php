@@ -1,4 +1,9 @@
 <?php
+if (($_SERVER["HTTP_HOST"] ?? "localhost") === "mixno35.github.io") {
+    include("index.html");
+    exit();
+}
+
 include_once "secure/session.php"; // Проверка на авторизацию
 
 global $language_tag, $content, $main_path, $server_encoding, $default_avatar, $settings;
@@ -62,7 +67,6 @@ $array_units_size = array(
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="assets/css/system/root.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/default.css?v=<?= $resource_v ?>">
     <link rel="stylesheet" href="assets/css/system/progress.css?v=<?= $resource_v ?>">

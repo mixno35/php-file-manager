@@ -26,9 +26,7 @@ $url_parse = new URLParse();
 
 $blob_path = $_GET["p"] ?? "";
 
-if ($url_parse->is_blob_url($blob_path)) {
-    header("Refresh: 0; URL=$blob_path");
-} else {
+if ($url_parse->is_blob_url($blob_path)) header("Refresh: 0; URL=$blob_path"); else {
     if (!file_exists($blob_path)) {
         http_response_code(404);
         exit();
