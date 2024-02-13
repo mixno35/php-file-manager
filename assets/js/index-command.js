@@ -25,7 +25,7 @@ const run_command = () => {
         },
         rename: (path) => {
             const name_path = path.replace(/^.*[\\\/]/, "").trim();
-            const renamed = prompt(getStringBy("hint_rename_enter_new_name").replace("%1s", path), name_path);
+            const renamed = prompt(getStringBy("hint_rename_enter_new_name").replace("%1s", removeExtraSlashes(path)), name_path);
 
             if (renamed !== null) {
                 if (renamed.length >= 1) {
@@ -38,15 +38,9 @@ const run_command = () => {
                             formData.append("new_path", new_path);
 
                             command(COMMAND_CREATE_RENAME, formData, updateMainFileManager);
-                        } else {
-                            toast().show(getStringBy("api_rename_different_from_old"));
-                        }
-                    } else {
-                        toast().show(getStringBy("api_rename_forbidden_chars"));
-                    }
-                } else {
-                    toast().show(getStringBy("api_rename_short_char"));
-                }
+                        } else toast().show(getStringBy("api_rename_different_from_old"));
+                    } else toast().show(getStringBy("api_rename_forbidden_chars"));
+                } else toast().show(getStringBy("api_rename_short_char"));
             }
         },
         move: (object, path, type = MOVE_TYPE_NONE) => {

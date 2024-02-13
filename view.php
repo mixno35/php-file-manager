@@ -583,7 +583,7 @@ function get_mode_codemirror(string $path = ""):string {
                 <div class="explore-images">
                     <?php foreach ($array_explore as $item) { ?>
                         <div class="item-explore" title="<?= basename($item) ?>" onclick="event.stopPropagation(); event.preventDefault(); openImage(this.getAttribute('data-path'))" data-path="<?= addslashes($file_manager->parse_separator($item)) ?>">
-                            <img src="<?= $file_parse->get_icon($item, $privileges["view_file"], 86) ?>" alt="<?= basename($item) ?>">
+                            <img src="<?= $file_parse->get_icon($item, $privileges["view_file"], 148) ?>" alt="<?= basename($item) ?>">
                         </div>
                     <?php } ?>
                 </div>

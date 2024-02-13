@@ -137,7 +137,6 @@ $array_units_size = array(
                         <li><?= str_get_string("text_php_server", false, [($_SERVER["SERVER_SOFTWARE"] ?? "NaN")]) ?></li>
                         <li><?= str_get_string("text_php_os", false, [(PHP_OS ?? "NaN")]) ?></li>
                         <li><?= str_get_string("text_php_total_size", false, [$file_manager->format_size($file_manager->get_directory_size($main_path["server"]), $array_units_size)]) ?></li>
-                        <li><?= str_get_string("text_php_memory", true) ?></li>
                     </ul>
                 </section>
             <?php } ?>
@@ -197,37 +196,12 @@ $array_units_size = array(
         let searchType = SEARCH_TYPE_GLOBAL; // SEARCH_TYPE_GLOBAL - искать везде, SEARCH_TYPE_LOCAL - искать в открытой папке, SEARCH_TYPE_LOCAL_PLUS - искать в открытой папке и вложенных папках
         let count_file_manager_items = 0;
         let clickCount = 0;
-        let selectPaths; selectPaths = [];
+        let selectPaths = [];
         let pathFileDetail = "";
 
         const upload_max_filesize = <?= intval(ini_get("upload_max_filesize") ?? 0) ?>;
         const post_max_size = <?= intval(ini_get("post_max_size") ?? 0) ?>;
     </script>
-
-    <?php if ($settings["server_details"]) { ?>
-        <script>
-            if (!isMobileDevice()) {
-                const eventSourceMemory = new EventSource("secure/memory-info.php");
-                const totalPhpOSMemory = <?= getTotalMemory() ?>;
-
-                const containerPhpMemory = document.getElementById("php-memory");
-
-                eventSourceMemory.addEventListener("message", (event) => {
-                    const data = JSON.parse(event.data);
-                    const memoryUsage = data["memory_usage"];
-                    const peakMemoryUsage = data["peak_usage"];
-
-                    const generatedText = String(convertBytes(memoryUsage, unitsOBJ) + " (" + convertBytes(peakMemoryUsage, unitsOBJ) + ") / " + convertBytes(totalPhpOSMemory, unitsOBJ));
-
-                    if (containerPhpMemory.outerText !== generatedText) containerPhpMemory.innerText = generatedText;
-                });
-
-                eventSourceMemory.addEventListener("error", (event) => {
-                    console.error('Error occurred:', event);
-                });
-            } else document.querySelector(".details-manager").remove();
-        </script>
-    <?php } ?>
 
     <script src="assets/js/index-funcs.js?v=<?= $resource_v ?>"></script>
     <script src="assets/js/index.js?v=<?= $resource_v ?>"></script>

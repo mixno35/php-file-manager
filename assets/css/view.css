@@ -244,7 +244,6 @@ div.image-preview div.explore-images {
 
     padding: 8px;
 
-    overflow: hidden;
     background-color: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(30px);
 
@@ -271,6 +270,10 @@ div.image-preview div.explore-images div.item-explore {
 }
 div.image-preview div.explore-images div.item-explore:hover {
     opacity: 1;
+
+    scale: 1.8;
+
+    z-index: 2;
 }
 div.image-preview div.explore-images div.item-explore img {
     display: flex;

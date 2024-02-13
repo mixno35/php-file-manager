@@ -62,7 +62,7 @@ loadMainFileManager((url_param().get("p") ?? serverDirectory));
 document.getElementById("action-dev-report")
     .addEventListener("click", () => { window.open("//t.me/mixno35") });
 document.getElementById("action-dev-paid").addEventListener("click", () => {
-    dialog(DIALOG_STYLE_PATH, [getStringBy("tooltip_dev_paid"), "paid.php"]);
+    window.open("//www.donationalerts.com/r/mixno35", "_blank");
 });
 document.getElementById("action-dev-settings").addEventListener("click", () => {
     dialog(DIALOG_STYLE_PATH, [getStringBy("tooltip_dev_settings"), "settings.php"]);
