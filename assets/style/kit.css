@@ -1,0 +1,234 @@
+input {
+    width: 100%;
+    height: 36px;
+    max-height: 36px;
+    min-height: 36px;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2);
+
+    outline: none;
+
+    color: var(--color-text);
+    background-color: var(--color-body);
+
+    font-weight: 500;
+    font-size: 13px;
+
+    letter-spacing: -.02em;
+
+    padding: 0 var(--padding-2);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: var(--color-text) !important;
+}
+input::placeholder { color: var(--color-text-50) }
+input:not(:disabled):hover { border-color: var(--color-text-50) }
+input:not(:disabled):focus {
+    border-color: var(--color-primary);
+
+    box-shadow: 0 0 0 var(--radius-2) var(--color-primary-20);
+}
+input:not(:disabled):user-invalid { border-color: var(--color-error) }
+input:not(:disabled):focus:user-invalid { box-shadow: 0 0 0 var(--radius-2) var(--color-error-20) }
+/*input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}*/
+
+button {
+    width: 100%;
+    height: 36px;
+    max-height: 36px;
+    min-height: 36px;
+
+    background-color: var(--color-primary);
+    color: var(--color-primary-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+
+    padding: 0 var(--padding-2);
+
+    font-weight: 500;
+    font-size: 13px;
+
+    letter-spacing: -.02em;
+
+    border: none;
+    border-radius: var(--radius-2);
+
+    outline: none;
+}
+button:not(:disabled) {
+    cursor: pointer;
+}
+button > i { color: var(--color-primary-text) }
+button:not(:disabled):hover { box-shadow: 0 0 0 var(--radius-2) var(--color-primary-20) }
+button:not(:disabled):active { background-color: var(--color-primary-dark) }
+button.border {
+    background-color: transparent;
+    color: var(--color-border-gray);
+
+    border: 1px solid var(--color-border-gray-30);
+}
+button.border.light-border { border-color: var(--color-border) }
+button.border.light-border:not(:disabled):hover {
+    background-color: transparent;
+
+    border-color: var(--color-text-50);
+}
+button.border.light-border:not(:disabled):active {
+    border-color: var(--color-primary);
+
+    box-shadow: 0 0 0 var(--radius-2) var(--color-primary-20);
+}
+button.border.dark {
+    color: var(--color-primary-text-gray);
+
+    border-color: var(--color-border-gray);
+}
+button.border > i { color: var(--color-primary-icon) }
+button.border:not(:disabled):hover {
+    box-shadow: unset;
+
+    background-color: var(--color-border-gray-5)
+}
+button.border.dark:not(:disabled):hover { background-color: var(--color-border-gray-20) }
+button.border:not(:disabled):active { background-color: var(--color-border-gray-10) }
+button.border.dark:not(:disabled):active { background-color: var(--color-border-gray-30) }
+button:disabled {
+    filter: grayscale(100%);
+    opacity: .4;
+}
+
+select {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2);
+
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+
+    outline: none;
+
+    color: var(--color-text);
+    background-color: var(--color-body);
+
+    font-weight: 500;
+    font-size: 13px;
+
+    letter-spacing: -.02em;
+
+    text-align: center;
+
+    height: 36px;
+
+    padding: 0 var(--padding-1);
+}
+select:not(:disabled) {
+    cursor: pointer;
+}
+select:disabled {
+    filter: grayscale(100%);
+    opacity: .4;
+}
+select:not(:disabled):hover { border-color: var(--color-text-50) }
+select:not(:disabled):focus {
+    border-color: var(--color-primary);
+
+    box-shadow: 0 0 0 var(--radius-2) var(--color-primary-20);
+}
+select.small { height: 28px }
+select:not(.un-arrow) {
+    text-align: left;
+
+    padding-right: var(--padding-4);
+
+    background-image: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%234E535E' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 0.45rem) center !important;
+}
+
+input[type="checkbox"].switch {
+    --size-switch-h: 22px;
+    --size-switch-w: 40px;
+
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    background-color: var(--color-body);
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    height: var(--size-switch-h);
+    min-height: var(--size-switch-h);
+    max-height: var(--size-switch-h);
+    width: var(--size-switch-w);
+    min-width: var(--size-switch-w);
+    max-width: var(--size-switch-w);
+
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+}
+input[type="checkbox"].switch:not(:disabled) {
+    cursor: pointer;
+}
+input[type="checkbox"].switch:not(:disabled):not(:checked):hover { border-color: var(--color-text-50) }
+input[type="checkbox"].switch:not(:disabled):active { border-color: var(--color-primary-dark) }
+input[type="checkbox"].switch::before {
+    content: "";
+
+    height: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    background-color: var(--color-border-gray-20);
+    box-sizing: content-box;
+    position: absolute;
+
+    left: 0;
+    right: unset;
+
+    border-radius: 999px;
+}
+input[type="checkbox"].switch:not(:disabled)::before { background-color: var(--color-text-50) }
+input[type="checkbox"]:checked.switch {
+    background-color: var(--color-primary);
+
+    border-color: var(--color-primary-dark);
+}
+input[type="checkbox"]:checked.switch::before {
+    background-color: var(--color-primary-text);
+
+    left: unset;
+    right: 0;
+}
+input:disabled {
+    filter: grayscale(100%);
+    opacity: .4;
+}
+label {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 4px;
+
+    font-weight: 500;
+    font-size: 13px;
+
+    letter-spacing: -.02em;
+}

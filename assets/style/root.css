@@ -1,0 +1,42 @@
+:root {
+    --color-body: #ffffff;
+    --color-body-gray: rgb(50, 53, 56);
+    --color-border: #e1e5e7;
+    --color-border-gray: rgb(85, 88, 94);
+    --color-border-gray-5: rgba(85, 88, 94, 5%);
+    --color-border-gray-10: rgba(85, 88, 94, 10%);
+    --color-border-gray-20: rgba(85, 88, 94, 20%);
+    --color-border-gray-30: rgba(85, 88, 94, 30%);
+    --color-primary: rgb(34, 96, 211);
+    --color-primary-dark: rgb(30, 84, 190);
+    --color-primary-20: rgba(34, 96, 211, 20%);
+    --color-primary-10: rgba(34, 96, 211, 10%);
+    --color-primary-text: #ffffff;
+    --color-primary-icon: rgb(85, 88, 94);
+    --color-primary-text-gray: rgb(115, 116, 126);
+    --color-primary-text-gray-light: rgb(165, 169, 180);
+    --color-text: #121313;
+    --color-text-50: rgba(18, 19, 19, 0.5);
+    --color-toast: #1d1f21;
+    --color-toast-text: #fff;
+    --color-success: rgb(0, 165, 125);
+    --color-success-20: rgba(0, 165, 125, 20%);
+    --color-error: rgb(220, 20, 60);
+    --color-error-20: rgba(220, 20, 60, 20%);
+    --color-shadow: rgba(0, 0, 0, 0.05);
+
+    --padding-1: 6px;
+    --padding-2: 12px;
+    --padding-3: 16px;
+    --padding-4: 24px;
+
+    --radius-1: 2px;
+    --radius-2: 4px;
+    --radius-3: 6px;
+    --radius-4: 8px;
+    --radius-5: 10px;
+    --radius-6: 12px;
+
+    --shadow-1: var(--color-shadow) 0px 4px 12px 0px;
+    --shadow-2: var(--color-shadow) 0px 6px 24px 0px;
+}

@@ -1,0 +1,16 @@
+{
+  "language_tag": "ru-RU",
+  "language_name": "Русский",
+
+  "document_title": "PHP File Manager",
+
+  "action_login": "Войти",
+
+  "text_enter_login": "Введите логин",
+  "text_enter_password": "Введите пароль",
+
+  "php_no_response_message": "Без комментариев...",
+  "php_version_not_support": "Текущая версия PHP %1s не поддерживается",
+  "php_file_manager_root": "Вы не можете изменить корень файлового менеджера",
+  "php_session_disabled": "Чтобы продолжить, включите сессии"
+}
