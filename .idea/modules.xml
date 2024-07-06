@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/file-manager-serv.iml" filepath="$PROJECT_DIR$/.idea/file-manager-serv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/file-manager-php.iml" filepath="$PROJECT_DIR$/.idea/file-manager-php.iml" />
     </modules>
   </component>
 </project>
